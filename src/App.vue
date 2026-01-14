@@ -8,36 +8,25 @@ import Household from './components/Household.vue';
 import ETransition from './components/ETransition.vue';
 import If from './components/If.vue';
 import Global from './components/Global.vue';
+import ConfigHeader from './components/ConfigHeader.vue';
 </script>
 
 <template>
   <div id="app-container">
     <Sidebar></Sidebar>
-    <main class="main-content">
-      <!-- <section id="consumption" class="page-section">
-        <h2>consumption</h2>
-      </section>
-      <section id="costs" class="page-section">
-        <h2>costs</h2>
-      </section>
-      <section id="availability" class="page-section">
-        <h2>availability</h2>
-        <p>Add your data sources content here...</p>
-      </section>
-      <section id="mix" class="page-section">
-        <h2>mix</h2>
-        <p>Add your contact content here...</p>
-      </section> -->
-
-      <Consumption></Consumption>
-      <Costs></Costs>
-      <Availability></Availability>
-      <Mix></Mix>
-      <Household></Household>
-      <ETransition></ETransition>
-      <If></If>
-      <Global></Global>
-    </main>
+    <div>
+      <ConfigHeader></ConfigHeader>
+      <main class="main-content">
+        <Consumption></Consumption>
+        <Costs></Costs>
+        <Availability></Availability>
+        <Mix></Mix>
+        <Household></Household>
+        <ETransition></ETransition>
+        <If></If>
+        <Global></Global>
+      </main>
+    </div>
   </div>
 </template>
 
