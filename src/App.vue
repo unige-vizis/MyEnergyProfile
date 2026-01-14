@@ -38,6 +38,7 @@ import ConfigHeader from './components/ConfigHeader.vue';
 
 .main-content {
   margin-left: 300px;
+  margin-top: 150px;
   flex: 1;
   padding: 2rem;
   overflow-y: auto;
