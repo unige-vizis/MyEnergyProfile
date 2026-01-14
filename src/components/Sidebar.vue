@@ -50,7 +50,7 @@ const scrollToSection = (sectionId) => {
     const containerRect = container.getBoundingClientRect()
     const elemRect = element.getBoundingClientRect()
     const offset = elemRect.top - containerRect.top + container.scrollTop
-    container.scrollTo({ top: offset, behavior: 'smooth' })
+    window.scrollTo({ top: offset, behavior: 'smooth' })
   } else if (element) {
     element.scrollIntoView({ behavior: 'smooth' })
   }

@@ -1,12 +1,20 @@
 <script setup>
 import Sidebar from './components/Sidebar.vue';
+import Consumption from './components/Consumption.vue';
+import Costs from './components/Costs.vue';
+import Availability from './components/Availability.vue';
+import Mix from './components/Mix.vue';
+import Household from './components/Household.vue';
+import ETransition from './components/ETransition.vue';
+import If from './components/If.vue';
+import Global from './components/Global.vue';
 </script>
 
 <template>
   <div id="app-container">
     <Sidebar></Sidebar>
     <main class="main-content">
-      <section id="consumption" class="page-section">
+      <!-- <section id="consumption" class="page-section">
         <h2>consumption</h2>
       </section>
       <section id="costs" class="page-section">
@@ -19,16 +27,16 @@ import Sidebar from './components/Sidebar.vue';
       <section id="mix" class="page-section">
         <h2>mix</h2>
         <p>Add your contact content here...</p>
-      </section>
+      </section> -->
 
-      <!-- <Consumption></Consumption>
+      <Consumption></Consumption>
       <Costs></Costs>
       <Availability></Availability>
       <Mix></Mix>
       <Household></Household>
       <ETransition></ETransition>
       <If></If>
-      <Global></Global> -->
+      <Global></Global>
     </main>
   </div>
 </template>
