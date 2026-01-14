@@ -7,7 +7,7 @@ import vueDevTools from "vite-plugin-vue-devtools";
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: "/my-energy-profile/",
+  base: "/MyEnergyProfile/",
   plugins: [vue(), vueJsx(), vueDevTools()],
   resolve: {
     alias: {
