@@ -1,27 +1,34 @@
 <script setup>
-import Header from './components/Sidebar.vue'
+import Sidebar from './components/Sidebar.vue';
 </script>
 
 <template>
   <div id="app-container">
-    <Header></Header>
+    <Sidebar></Sidebar>
     <main class="main-content">
-      <section id="features" class="page-section">
-        <h2>Features</h2>
-        <p>Add your features content here...</p>
+      <section id="consumption" class="page-section">
+        <h2>consumption</h2>
       </section>
-      <section id="about" class="page-section">
-        <h2>About</h2>
-        <p>Add your about content here...</p>
+      <section id="costs" class="page-section">
+        <h2>costs</h2>
       </section>
-      <section id="data" class="page-section">
-        <h2>Data Sources</h2>
+      <section id="availability" class="page-section">
+        <h2>availability</h2>
         <p>Add your data sources content here...</p>
       </section>
-      <section id="contact" class="page-section">
-        <h2>Contact</h2>
+      <section id="mix" class="page-section">
+        <h2>mix</h2>
         <p>Add your contact content here...</p>
       </section>
+
+      <!-- <Consumption></Consumption>
+      <Costs></Costs>
+      <Availability></Availability>
+      <Mix></Mix>
+      <Household></Household>
+      <ETransition></ETransition>
+      <If></If>
+      <Global></Global> -->
     </main>
   </div>
 </template>
@@ -29,12 +36,11 @@ import Header from './components/Sidebar.vue'
 <style scoped>
 #app-container {
   display: flex;
-  min-height: 100vh;
   background-color: #f8f9fa;
 }
 
 .main-content {
-  margin-left: 200px;
+  margin-left: 300px;
   flex: 1;
   padding: 2rem;
   overflow-y: auto;
@@ -48,6 +54,8 @@ import Header from './components/Sidebar.vue'
   border-radius: 8px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   scroll-margin-top: 2rem;
+  border-top: 3px solid #e0e0e0;
+  border-bottom: 3px solid #e0e0e0;
 }
 
 .page-section h2 {
