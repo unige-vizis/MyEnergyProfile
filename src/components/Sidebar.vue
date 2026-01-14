@@ -31,16 +31,16 @@
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const currentSection = ref('consumption')
-  const sections = ref([
-    { id: "consumption", name: "My energy consumption", icon: "battery_android_frame_5", },
-    { id: "costs", name: "Energy costs", icon: "euro", },
-    { id: "availability", name: "Availability of energy", icon: "location_on",},
-    { id: "mix", name: "My energy mix", icon: "instant_mix", },
-    { id: "household", name: "My household", icon: "home", },
-    { id: "transition", name: "Energy transition in context", icon: "energy",},
-    { id: "if", name: "What if?", icon: "question_mark", },
-    { id: "global", name: "Global comparison", icon: "globe", },
-  ]);
+const sections = ref([
+  { id: "consumption", name: "My energy consumption", icon: "battery_android_frame_5", },
+  { id: "costs", name: "Energy costs", icon: "euro", },
+  { id: "availability", name: "Availability of energy", icon: "location_on",},
+  { id: "mix", name: "My energy mix", icon: "instant_mix", },
+  { id: "household", name: "My household", icon: "home", },
+  { id: "transition", name: "Energy transition in context", icon: "energy",},
+  { id: "if", name: "What if?", icon: "question_mark", },
+  { id: "global", name: "Global comparison", icon: "globe", },
+]);
 
 const scrollToSection = (sectionId) => {
   const element = document.getElementById(sectionId)
@@ -59,59 +59,28 @@ const scrollToSection = (sectionId) => {
 const handleScroll = () => {
   const container = document.querySelector('.main-content')
 
-  if (container) {
-    const containerRect = container.getBoundingClientRect()
-    const viewportHeight = containerRect.height
+  // Use window scroll approach - this is what's actually scrolling
+  const scrollPosition = window.scrollY + window.innerHeight / 3
 
-    for (const section of sections.value) {
-      const element = document.getElementById(section.id)
-      if (element) {
-        const elemRect = element.getBoundingClientRect()
-        const topRelative = elemRect.top - containerRect.top
-        const bottomRelative = topRelative + elemRect.height
-
-        // consider the section active when its top is within the upper third
-        if (topRelative <= viewportHeight / 3 && bottomRelative > 0) {
-          currentSection.value = section.id
-          break
-        }
-      }
-    }
-  } else {
-    // fallback to window-based calculation
-    const scrollPosition = window.scrollY + window.innerHeight / 3
-
-    for (const section of sections.value) {
-      const element = document.getElementById(section.id)
-      if (element) {
-        const { offsetTop, offsetHeight } = element
-        if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-          currentSection.value = section.id
-          break
-        }
+  for (const section of sections.value) {
+    const element = document.getElementById(section.id)
+    if (element) {
+      const { offsetTop, offsetHeight } = element
+      if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+        currentSection.value = section.id
+        break
       }
     }
   }
 }
 
 onMounted(() => {
-  const container = document.querySelector('.main-content')
-  if (container) {
-    container.addEventListener('scroll', handleScroll, { passive: true })
-  } else {
-    window.addEventListener('scroll', handleScroll, { passive: true })
-  }
-  // initial check
-  setTimeout(handleScroll, 50)
+  window.addEventListener('scroll', handleScroll, { passive: true })
+  handleScroll()
 })
 
 onUnmounted(() => {
-  const container = document.querySelector('.main-content')
-  if (container) {
-    container.removeEventListener('scroll', handleScroll)
-  } else {
-    window.removeEventListener('scroll', handleScroll)
-  }
+  window.removeEventListener('scroll', handleScroll)
 })
 </script>
 
