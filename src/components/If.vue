@@ -7,6 +7,11 @@
       savings.
     </p>
   </section>
+  <div class="scroll-spacer" aria-hidden="true"></div>
 </template>
-
+<style scoped>
+  .scroll-spacer {
+    height: 50vh;
+  }
+  </style>
 <script setup></script>

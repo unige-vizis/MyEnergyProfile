@@ -3,7 +3,7 @@ import AppInput from './AppInput.vue';
 import AppSelect from './AppSelect.vue';
 import { ref } from 'vue';
 
-const country = ref('GE');
+const country = ref('');
 const countryOptions =
   [
         { value: 'GE', label: 'Germany' },
@@ -44,12 +44,23 @@ const countryOptions =
         { value: 'AM', label: 'Armenia' },
         { value: 'KZ', label: 'Kazakhstan' }
 ];
+
+const householdSize = [
+  {value:1, label:1},
+  {value:2, label:2},
+  {value:3, label:3},
+  {value:4, label:4},
+  {value:5, label:5},
+  {value:6, label:'6+'},
+];
 </script>
 
 <template>
   <div class="config-header">
-    <AppSelect :options="countryOptions" label="Country" v-model="country"> </AppSelect>
-    <AppInput label="Age" placeholder="Age" type="number"> </AppInput>
+    <AppSelect class="config-item" :options="countryOptions" label="Country" v-model="country" placeholder="Germany"> </AppSelect>
+    <AppInput class="config-item" label="Age" placeholder="Age" type="number"> </AppInput>
+    <AppSelect class="config-item" :options="householdSize" label="Household Size" placeholder="2"></AppSelect>
+    <AppInput class="config-item" label="Living Space" placeholder="Living Space" type="number" :min="10" :max="500"> </AppInput>
   </div>
 </template>
 
@@ -67,4 +78,38 @@ const countryOptions =
   box-shadow: 4px 0 12px rgba(0, 0, 0, 0.4);
   z-index: 100;
 }
+
+.config-item {
+  flex: 0 0 200px;
+  min-width: 200px;
+}
+
+.config-header :deep(input),
+.config-header :deep(select) {
+  width: 100%;
+  height: 42px;
+  box-sizing: border-box;
+  padding: 0 0.75rem;
+  border-radius: 10px;
+}
+
+.config-header :deep(label) {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.config-header :deep(input::placeholder) {
+  color: #9ca3af; /* grau */
+  opacity: 1;     /* wichtig für Firefox */
+}
+/* grauer Placeholder-Zustand */
+.config-header :deep(select:has(option:checked[value=""])) {
+  color: #9ca3af;
+}
+
+/* normale Farbe, sobald echte Auswahl */
+.config-header :deep(select) {
+  color: black;
+}
+
+
 </style>
