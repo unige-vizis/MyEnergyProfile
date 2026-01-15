@@ -33,13 +33,13 @@ import { ref, onMounted, onUnmounted } from 'vue'
 const currentSection = ref('consumption')
 const sections = ref([
   { id: "consumption", name: "My energy consumption", icon: "battery_android_frame_5", },
+  { id: "global", name: "Global comparison", icon: "globe", },
   { id: "costs", name: "Energy costs", icon: "euro", },
   { id: "availability", name: "Availability of energy", icon: "location_on",},
   { id: "mix", name: "My energy mix", icon: "instant_mix", },
   { id: "household", name: "My household", icon: "home", },
   { id: "transition", name: "Energy transition in context", icon: "energy",},
   { id: "if", name: "What if?", icon: "question_mark", },
-  { id: "global", name: "Global comparison", icon: "globe", },
 ]);
 
 const scrollToSection = (sectionId) => {
@@ -90,7 +90,7 @@ onUnmounted(() => {
   left: 0;
   top: 0;
   height: 100vh;
-  background-color: #1a1a1a;
+  background-color: black;
   color: white;
   box-shadow: 4px 0 12px rgba(0, 0, 0, 0.4);
   z-index: 1000;
