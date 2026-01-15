@@ -53,6 +53,7 @@ const householdSize = [
   {value:5, label:5},
   {value:6, label:'6+'},
 ];
+
 </script>
 
 <template>
@@ -61,6 +62,7 @@ const householdSize = [
     <AppInput class="config-item" label="Age" placeholder="Age" type="number"> </AppInput>
     <AppSelect class="config-item" :options="householdSize" label="Household Size" placeholder="2"></AppSelect>
     <AppInput class="config-item" label="Living Space" placeholder="Living Space" type="number" :min="10" :max="500"> </AppInput>
+    <AppInput class="config-item" label="Year" placeholder="Year" type="number" :min="1970" :max="2024"> </AppInput>
   </div>
 </template>
 
