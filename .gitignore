@@ -1,6 +1,16 @@
 # Claude
 claude.md
 .claude/
+tmpclaude-*
+nul
+
+# Data processing - ignore base data files but keep READMEs and folder structure
+data-processing/base-data/**/*.csv
+data-processing/base-data/**/*.xlsx
+data-processing/base-data/**/*.xlsb
+data-processing/base-data/**/*.tsv
+data-processing/base-data/**/*.tsv.gz
+data-processing/base-data/**/*.py
 
 # Logs
 logs
