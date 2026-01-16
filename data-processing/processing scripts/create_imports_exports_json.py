@@ -12,6 +12,7 @@ Output:
 import pandas as pd
 import numpy as np
 import json
+import time
 from pathlib import Path
 from datetime import datetime
 from collections import defaultdict
@@ -21,6 +22,9 @@ from collections import defaultdict
 # ============================================================================
 
 BASE_PATH = Path(__file__).parent.parent / 'base-data' / '05_Energy-Imports-Exports'
+
+# Estimated row counts for progress calculation (update if data changes)
+ESTIMATED_TRADE_ROWS = 31_800_000  # ~31.8M rows in combined_energy_trade.csv
 OUTPUT_PATH = Path(__file__).parent.parent / 'prepared-sets'
 
 DEPENDENCY_FILE = BASE_PATH / 'import_dependency_eurostat' / 'output' / 'combined_import_dependency.csv'
@@ -72,7 +76,7 @@ SIEC_TO_FUEL = {
     'C0360': 'coal_gas',
     'C0370': 'blast_furnace_gas',
     'C0390': 'other_coal_products',
-    'SFF_OTH': 'other_solid_fossil_fuels',
+    # Note: SFF_OTH (other_solid_fossil_fuels) excluded - only has third_countries data, no overall
 
     # Natural gas
     'G3000': 'natural_gas',
@@ -118,15 +122,13 @@ SIEC_TO_FUEL = {
     'R5220': 'biodiesel',
     'R5290': 'other_liquid_biofuels',
     'R5300': 'biogas',
-    'CF_R': 'renewable_fuels',
+    # Note: CF_R (renewable_fuels) excluded - only has third_countries data, no overall
 
     # Electricity and heat
     'E7000': 'electricity',
     'H8000': 'heat',
 
-    # Nuclear
-    'N900H': 'nuclear_heat',
-    'S2000': 'nuclear_fuels',
+    # Note: Nuclear (N900H, S2000) excluded - limited relevance for import dependency analysis
 
     # Peat
     'P1100': 'peat',
@@ -134,6 +136,14 @@ SIEC_TO_FUEL = {
 
     # Other
     'TOTAL': 'total'
+}
+
+# SIEC codes to explicitly exclude from output (no useful dependency data)
+EXCLUDED_SIEC_CODES = {
+    'SFF_OTH',   # other_solid_fossil_fuels - only has third_countries, no overall
+    'CF_R',      # renewable_fuels - only has third_countries, no overall
+    'S2000',     # nuclear_fuels - excluded per request
+    'N900H',     # nuclear_heat - excluded per request
 }
 
 # Energy type codes to readable names
@@ -156,33 +166,86 @@ ENERGY_TYPE_UNITS = {
 
 
 # ============================================================================
+# Progress Tracking Utilities
+# ============================================================================
+
+def format_time(seconds):
+    """Format seconds into human-readable string."""
+    if seconds < 60:
+        return f'{seconds:.0f}s'
+    elif seconds < 3600:
+        mins = int(seconds // 60)
+        secs = int(seconds % 60)
+        return f'{mins}m {secs}s'
+    else:
+        hours = int(seconds // 3600)
+        mins = int((seconds % 3600) // 60)
+        return f'{hours}h {mins}m'
+
+
+def print_progress(current, total, start_time, prefix='Progress', bar_length=40):
+    """Print a progress bar with ETA."""
+    elapsed = time.time() - start_time
+    percent = current / total if total > 0 else 0
+
+    # Calculate ETA
+    if percent > 0:
+        total_estimated = elapsed / percent
+        eta = total_estimated - elapsed
+        eta_str = format_time(eta)
+    else:
+        eta_str = 'calculating...'
+
+    # Build progress bar (ASCII compatible for Windows)
+    filled = int(bar_length * percent)
+    bar = '#' * filled + '-' * (bar_length - filled)
+
+    # Print progress (use \r to overwrite line)
+    print(f'\r  {prefix}: [{bar}] {percent*100:5.1f}% | {current:,}/{total:,} | Elapsed: {format_time(elapsed)} | ETA: {eta_str}    ', end='', flush=True)
+
+
+def print_phase_header(phase_num, title, total_phases=5):
+    """Print a phase header with overall progress."""
+    print()
+    print('=' * 60)
+    print(f'PHASE {phase_num}/{total_phases}: {title}')
+    print('=' * 60)
+
+
+# ============================================================================
 # Phase 1: Load and Process Dependency Data
 # ============================================================================
 
 def load_dependency_data():
     """Load and process import dependency indicators."""
-    print('=' * 60)
-    print('PHASE 1: Loading dependency data')
-    print('=' * 60)
+    print_phase_header(1, 'Loading dependency data')
+    phase_start = time.time()
 
+    print('  Loading CSV file...')
     df = pd.read_csv(DEPENDENCY_FILE)
-    print(f'Loaded {len(df):,} rows from dependency file')
+    print(f'  Loaded {len(df):,} rows from dependency file')
 
     # Report indicators present
-    print(f'Indicators: {df["indicator"].unique().tolist()}')
+    print(f'  Indicators: {df["indicator"].unique().tolist()}')
 
     # Build dependency lookup: {geo: {year: {metrics}}}
     dependency_data = defaultdict(lambda: defaultdict(dict))
 
     # Process overall dependency (ID with partner=TOTAL)
     overall = df[(df['indicator'] == 'ID') & (df['partner'] == 'TOTAL')]
-    print(f'  Overall dependency (ID): {len(overall):,} rows')
+    total_overall = len(overall)
+    print(f'  Processing overall dependency (ID): {total_overall:,} rows')
 
-    for _, row in overall.iterrows():
+    start_time = time.time()
+    for i, (_, row) in enumerate(overall.iterrows()):
         geo = row['geo']
         year = int(row['year'])
         siec = row['siec']
         value = row['value'] if pd.notna(row['value']) else None
+
+        # Skip excluded SIEC codes
+        if siec in EXCLUDED_SIEC_CODES:
+            continue
 
         fuel_name = SIEC_TO_FUEL.get(siec, siec)
 
@@ -195,15 +258,25 @@ def load_dependency_data():
                 dependency_data[geo][year]['by_fuel'][fuel_name] = {}
             dependency_data[geo][year]['by_fuel'][fuel_name]['overall'] = value
 
+        if (i + 1) % 5000 == 0 or i + 1 == total_overall:
+            print_progress(i + 1, total_overall, start_time, 'Overall dep')
+    print()  # New line after progress bar
+
     # Process third country dependency (ID3CF with partner=THRD)
     third_country = df[(df['indicator'] == 'ID3CF') & (df['partner'] == 'THRD')]
-    print(f'  Third country dependency (ID3CF): {len(third_country):,} rows')
+    total_third = len(third_country)
+    print(f'  Processing third country dependency (ID3CF): {total_third:,} rows')
 
-    for _, row in third_country.iterrows():
+    start_time = time.time()
+    for i, (_, row) in enumerate(third_country.iterrows()):
         geo = row['geo']
         year = int(row['year'])
         siec = row['siec']
         value = row['value'] if pd.notna(row['value']) else None
+
+        # Skip excluded SIEC codes
+        if siec in EXCLUDED_SIEC_CODES:
+            continue
 
         fuel_name = SIEC_TO_FUEL.get(siec, siec)
 
@@ -216,9 +289,14 @@ def load_dependency_data():
                 dependency_data[geo][year]['by_fuel'][fuel_name] = {}
             dependency_data[geo][year]['by_fuel'][fuel_name]['third_countries'] = value
 
+        if (i + 1) % 5000 == 0 or i + 1 == total_third:
+            print_progress(i + 1, total_third, start_time, 'Third country')
+    print()  # New line after progress bar
+
     # Note: IDOGAS and IDOOIL (gas/oil origins) are skipped as they have limited data coverage
 
-    print(f'Processed {len(dependency_data)} countries')
+    phase_elapsed = time.time() - phase_start
+    print(f'  Processed {len(dependency_data)} countries in {format_time(phase_elapsed)}')
     return dict(dependency_data)
 
 
@@ -228,10 +306,8 @@ def load_dependency_data():
 
 def process_trade_data(chunk_size=1_000_000):
     """Process trade data in chunks to manage memory."""
-    print()
-    print('=' * 60)
-    print('PHASE 2: Processing trade data (chunked)')
-    print('=' * 60)
+    print_phase_header(2, 'Processing trade data (chunked)')
+    phase_start = time.time()
 
     # Accumulators for aggregated data
     # {geo: {year: {energy_type: {partner: value}}}}
@@ -244,15 +320,23 @@ def process_trade_data(chunk_size=1_000_000):
 
     chunk_num = 0
     total_rows = 0
+    rows_processed_in_chunk = 0
+
+    print(f'  Reading {TRADE_FILE.name} in chunks of {chunk_size:,} rows...')
+    print(f'  Estimated total: ~{ESTIMATED_TRADE_ROWS:,} rows')
+    print()
 
     for chunk in pd.read_csv(TRADE_FILE, chunksize=chunk_size):
         chunk_num += 1
+        chunk_start = time.time()
         total_rows += len(chunk)
 
         # Filter out aggregates and invalid partners
         chunk = chunk[~chunk['geo'].isin(['EU27_2020', 'EA20'])]
         chunk = chunk[~chunk['partner'].isin(['TOTAL', 'THRD', 'NSP'])]
         chunk = chunk[chunk['value'].notna()]
+
+        rows_processed_in_chunk = len(chunk)
 
         # Process imports
         imports_chunk = chunk[chunk['flow'] == 'IMPORT']
@@ -278,10 +362,14 @@ def process_trade_data(chunk_size=1_000_000):
             exports_by_partner[geo][year][energy_type][partner] += value
             exports_totals[geo][year][energy_type] += value
 
-        if chunk_num % 5 == 0:
-            print(f'  Processed chunk {chunk_num}: {total_rows:,} rows so far')
+        # Print progress with ETA
+        print_progress(total_rows, ESTIMATED_TRADE_ROWS, phase_start, 'Trade data')
 
-    print(f'Finished processing {total_rows:,} rows in {chunk_num} chunks')
+    print()  # New line after progress bar
+
+    phase_elapsed = time.time() - phase_start
+    print(f'  Finished processing {total_rows:,} rows in {chunk_num} chunks')
+    print(f'  Phase completed in {format_time(phase_elapsed)}')
 
     return {
         'imports_by_partner': dict(imports_by_partner),
@@ -293,12 +381,15 @@ def process_trade_data(chunk_size=1_000_000):
 
 def calculate_shares_and_rankings(trade_data):
     """Calculate partner shares and identify top partners."""
-    print()
-    print('=' * 60)
-    print('PHASE 3: Calculating shares and rankings')
-    print('=' * 60)
+    print_phase_header(3, 'Calculating shares and rankings')
+    phase_start = time.time()
 
     results = defaultdict(lambda: defaultdict(dict))
+
+    # Count total geo-year combinations for progress
+    total_combinations = sum(len(years) for years in trade_data['imports_by_partner'].values())
+    processed = 0
+    start_time = time.time()
 
     for geo, years_data in trade_data['imports_by_partner'].items():
         for year, energy_types in years_data.items():
@@ -377,7 +468,14 @@ def calculate_shares_and_rankings(trade_data):
 
             results[geo][year] = year_data
 
-    print(f'Calculated shares for {len(results)} countries')
+            processed += 1
+            if processed % 100 == 0 or processed == total_combinations:
+                print_progress(processed, total_combinations, start_time, 'Shares')
+
+    print()  # New line after progress bar
+
+    phase_elapsed = time.time() - phase_start
+    print(f'  Calculated shares for {len(results)} countries in {format_time(phase_elapsed)}')
     return dict(results)
 
 
@@ -387,10 +485,8 @@ def calculate_shares_and_rankings(trade_data):
 
 def build_json_output(dependency_data, trade_results):
     """Combine all data into final JSON structure."""
-    print()
-    print('=' * 60)
-    print('PHASE 4: Building JSON output')
-    print('=' * 60)
+    print_phase_header(4, 'Building JSON output')
+    phase_start = time.time()
 
     # Get all countries and years
     all_countries = set(dependency_data.keys()) | set(trade_results.keys())
@@ -399,11 +495,15 @@ def build_json_output(dependency_data, trade_results):
         all_years.update(geo_data.keys())
 
     all_years = sorted([y for y in all_years if isinstance(y, int)])
-    print(f'Countries: {len(all_countries)}, Years: {all_years[0]}-{all_years[-1]}')
+    print(f'  Countries: {len(all_countries)}, Years: {all_years[0]}-{all_years[-1]}')
 
     # Build country data
     countries = {}
-    for geo in sorted(all_countries):
+    sorted_countries = sorted(all_countries)
+    total_countries = len(sorted_countries)
+    start_time = time.time()
+
+    for i, geo in enumerate(sorted_countries):
         # Skip aggregates
         if geo in ['EU27_2020', 'EA20']:
             continue
@@ -442,6 +542,11 @@ def build_json_output(dependency_data, trade_results):
         if country_entry['years']:
             countries[geo] = country_entry
 
+        if (i + 1) % 10 == 0 or i + 1 == total_countries:
+            print_progress(i + 1, total_countries, start_time, 'Building')
+
+    print()  # New line after progress bar
+
     # Build final output
     output = {
         'metadata': {
@@ -459,7 +564,8 @@ def build_json_output(dependency_data, trade_results):
         'country_lookup': {k: v for k, v in COUNTRY_NAMES.items() if k in all_countries}
     }
 
-    print(f'Built output with {len(countries)} countries')
+    phase_elapsed = time.time() - phase_start
+    print(f'  Built output with {len(countries)} countries in {format_time(phase_elapsed)}')
     return output
 
 
@@ -469,10 +575,7 @@ def build_json_output(dependency_data, trade_results):
 
 def verify_output(output):
     """Run verification checks on the output."""
-    print()
-    print('=' * 60)
-    print('PHASE 5: Verification')
-    print('=' * 60)
+    print_phase_header(5, 'Verification')
 
     issues = []
 
@@ -556,9 +659,13 @@ def verify_output(output):
 # ============================================================================
 
 def main():
+    overall_start = time.time()
+
     print('=' * 60)
     print('Energy Imports/Exports JSON Dataset Generator')
     print('=' * 60)
+    print()
+    print(f'Started at: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
     print()
 
     # Ensure output directory exists
@@ -586,14 +693,26 @@ def main():
     print('Saving output')
     print('=' * 60)
 
+    print('  Writing JSON file...')
+    save_start = time.time()
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(output, f, indent=2, ensure_ascii=False)
+    save_elapsed = time.time() - save_start
 
     file_size = output_file.stat().st_size / (1024 * 1024)
-    print(f'Saved to: {output_file}')
-    print(f'File size: {file_size:.2f} MB')
+    print(f'  Saved to: {output_file}')
+    print(f'  File size: {file_size:.2f} MB')
+    print(f'  Write time: {format_time(save_elapsed)}')
+
+    # Final summary
+    overall_elapsed = time.time() - overall_start
     print()
-    print('Done!')
+    print('=' * 60)
+    print('COMPLETE')
+    print('=' * 60)
+    print(f'  Total execution time: {format_time(overall_elapsed)}')
+    print(f'  Finished at: {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}')
+    print()
 
 
 if __name__ == '__main__':

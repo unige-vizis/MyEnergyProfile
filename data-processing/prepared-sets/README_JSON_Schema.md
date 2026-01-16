@@ -2,22 +2,26 @@
 
 ## Required Header Format
 
-All JSON files in `prepared-sets/` must include a header with a `sources` array that references:
+All JSON files in `prepared-sets/` must include a `metadata` object with a `sources` array that references:
 1. Our combined/intermediate datasets
 2. The original Eurostat dataset codes
 
-**Example header:**
+**Example metadata:**
 ```json
 {
-  "header": {
+  "metadata": {
+    "generated": "2026-01-16T18:22:25.838001",
     "sources": [
       "Eurostat energy trade (estat_nrg_ti_*, estat_nrg_te_*)",
       "Eurostat import dependency (estat_nrg_ind_id, estat_nrg_ind_id3cf)"
     ],
-    "generated": "2024-01-15T10:30:00Z",
-    "version": "1.0"
+    "time_range": [1990, 2024],
+    "energy_types": ["SFF", "OIL", "GAS", "BIO", "EH"],
+    "energy_type_names": { ... },
+    "energy_type_units": { ... }
   },
-  "data": { ... }
+  "countries": { ... },
+  "country_lookup": { ... }
 }
 ```
 
@@ -33,6 +37,80 @@ Each field includes an annotation describing its meaning and data source.
 ---
 
 ## Full JSON Structure (Annotated)
+
+### Root Structure
+
+```jsonc
+{
+  "metadata": {
+    "generated": "2026-01-16T18:22:25.838001",
+    // ISO timestamp when this file was generated
+
+    "sources": [
+      "Eurostat energy trade (estat_nrg_ti_*, estat_nrg_te_*)",
+      "Eurostat import dependency (estat_nrg_ind_id, estat_nrg_ind_id3cf)"
+    ],
+    // Original Eurostat dataset codes used
+
+    "time_range": [1990, 2024],
+    // [start_year, end_year] - full range of available data
+
+    "energy_types": ["SFF", "OIL", "GAS", "BIO", "EH"],
+    // Energy type codes used in the data
+
+    "energy_type_names": {
+      "SFF": "coal",
+      "OIL": "oil",
+      "GAS": "gas",
+      "BIO": "biofuels",
+      "EH": "electricity"
+    },
+    // Human-readable names for energy type codes
+
+    "energy_type_units": {
+      "SFF": "THS_T",
+      "OIL": "THS_T",
+      "GAS": "TJ_GCV",
+      "BIO": "THS_T",
+      "EH": "GWH"
+    }
+    // Units for each energy type
+  },
+
+  "countries": {
+    "DE": { ... },  // See country structure below
+    "FR": { ... },
+    // ... all countries
+  },
+
+  "country_lookup": {
+    "DE": "Germany",
+    "FR": "France",
+    // ISO code to full name mapping
+  }
+}
+```
+
+### Country Structure
+
+```jsonc
+{
+  "DE": {
+    "name": "Germany",
+    // Full country name
+
+    "years": {
+      "2023": {
+        // See year structure below
+      },
+      "2022": { ... },
+      // ... all years with data
+    }
+  }
+}
+```
+
+### Year Structure (Germany 2023 Example)
 
 ```jsonc
 {
@@ -76,43 +154,13 @@ Each field includes an annotation describing its meaning and data source.
         // Meaning: 44.9% of coal imports come from non-EU
       },
 
-      "anthracite": {
-        "overall": 100.0
-        // Source: indicator='ID', siec='C0110'
-        // Meaning: 100% of anthracite is imported (no domestic production)
-      },
-
-      "coking_coal": {
-        "overall": 100.0
-        // Source: indicator='ID', siec='C0121'
-      },
-
-      "other_bituminous": {
-        "overall": 103.165
-        // Source: indicator='ID', siec='C0129'
-        // Note: >100% indicates stock drawdown or statistical adjustments
-      },
-
-      "lignite": {
-        "overall": 0.0
-        // Source: indicator='ID', siec='C0210'
-        // Meaning: Germany produces all its lignite domestically
-      },
-
-      "C0220": {
-        "overall": 0.054
-        // Source: indicator='ID', siec='C0220' (sub-bituminous coal)
-        // Note: SIEC code not mapped to readable name in script
-      },
-
-      "gas": {
+      "natural_gas": {
         "overall": 93.66,
         // Source: indicator='ID', siec='G3000' (natural gas)
         // Meaning: Germany imports 93.7% of its natural gas
 
         "third_countries": 49.94
         // Source: indicator='ID3CF', siec='G3000'
-        // Meaning: ~50% of gas imports from non-EU (was much higher pre-2022)
       },
 
       "oil": {
@@ -123,78 +171,30 @@ Each field includes an annotation describing its meaning and data source.
         // Source: indicator='ID3CF', siec='O4000XBIO'
       },
 
-      "O4100_TOT": {
-        "overall": 97.638
-        // Source: indicator='ID', siec='O4100_TOT' (crude oil)
-      },
-
-      "O4200": {
+      "lignite": {
         "overall": 0.0
-        // Source: indicator='ID', siec='O4200' (NGL - natural gas liquids)
+        // Source: indicator='ID', siec='C0210'
+        // Meaning: Germany produces all its lignite domestically
       },
 
-      "P1100": {
-        "overall": 0.0
-        // Source: indicator='ID', siec='P1100' (oil shale)
-      },
+      "electricity": {
+        "overall": null,
+        // ┌─────────────────────────────────────────────────────────────────────┐
+        // │ ALWAYS NULL - Eurostat does not publish overall import dependency  │
+        // │ for electricity (E7000). See "Why No Electricity Dependency" below.│
+        // └─────────────────────────────────────────────────────────────────────┘
 
-      "S2000": {
-        "overall": 0.0
-        // Source: indicator='ID', siec='S2000' (nuclear fuels)
-      },
-
-      "CF_R": {
-        "third_countries": 6.1
-        // Source: indicator='ID3CF', siec='CF_R' (renewable fuels)
-      },
-
-      "E7000": {
         "third_countries": 8.14
-        // Source: indicator='ID3CF', siec='E7000' (electricity)
-        // Meaning: 8.1% of electricity imports from non-EU
-      },
-
-      "SFF_OTH": {
-        "third_countries": 0.0
-        // Source: indicator='ID3CF', siec='SFF_OTH' (other solid fossil fuels)
+        // Source: indicator='ID3CF', siec='E7000' (from Eurostat directly)
+        // This IS available - shows % of electricity imports from non-EU countries
       }
-    },
 
-    "gas_origins": {
-      // ═════════════════════════════════════════════════════════════════════
-      // GAS IMPORT ORIGINS BY COUNTRY (%)
-      // Source: indicator='IDOGAS' from estat_nrg_ind_idogas
-      // Note: Shows % share of gas imports from specific countries
-      // ═════════════════════════════════════════════════════════════════════
-
-      "DZ": null,  // Algeria - no data for 2023
-      "NG": null,  // Nigeria
-      "NO": null,  // Norway
-      "QA": null,  // Qatar
-      "RU": null,  // Russia
-      "UK": null,  // United Kingdom
-      "US": null   // United States
-      // Note: null values indicate data not available in source
-      // This indicator has limited coverage in Eurostat
-    },
-
-    "oil_origins": {
-      // ═════════════════════════════════════════════════════════════════════
-      // OIL IMPORT ORIGINS BY COUNTRY (%)
-      // Source: indicator='IDOOIL' from estat_nrg_ind_idooil
-      // ═════════════════════════════════════════════════════════════════════
-
-      "AZ": null,  // Azerbaijan
-      "DZ": null,  // Algeria
-      "IQ": null,  // Iraq
-      "KZ": null,  // Kazakhstan
-      "LY": null,  // Libya
-      "NG": null,  // Nigeria
-      "NO": null,  // Norway
-      "RU": null,  // Russia
-      "SA": null,  // Saudi Arabia
-      "UK": null,  // United Kingdom
-      "US": null   // United States
+      // Additional fuel types may include:
+      // anthracite, coking_coal, other_bituminous_coal, sub_bituminous_coal,
+      // crude_oil, ngl, peat, nuclear_fuels, etc.
+      //
+      // Note: renewable_fuels (CF_R) and other_solid_fossil_fuels (SFF_OTH) are
+      // excluded as they only have third_countries data with no overall dependency.
     }
   },
 
@@ -210,174 +210,83 @@ Each field includes an annotation describing its meaning and data source.
       // ═════════════════════════════════════════════════════════════════════
       // IMPORT VOLUMES BY ENERGY TYPE
       // Calculated: Sum of all partner imports per energy type
-      // Script location: process_trade_data() → imports_totals accumulator
       // ═════════════════════════════════════════════════════════════════════
 
       "SFF": {
         "value": 96128.47,
         "unit": "THS_T"
-        // ┌─────────────────────────────────────────────────────────────────┐
-        // │ SOLID FOSSIL FUELS (Coal)                                       │
-        // │ Source: estat_nrg_ti_sff                                        │
-        // │ Unit: Thousand tonnes                                           │
-        // │ Meaning: Germany imported 96.1 million tonnes of coal in 2023  │
-        // └─────────────────────────────────────────────────────────────────┘
+        // SOLID FOSSIL FUELS (Coal)
+        // Unit: Thousand tonnes
       },
 
       "OIL": {
         "value": 609290.0,
         "unit": "THS_T"
-        // ┌─────────────────────────────────────────────────────────────────┐
-        // │ OIL & PETROLEUM PRODUCTS                                        │
-        // │ Source: estat_nrg_ti_oil                                        │
-        // │ Unit: Thousand tonnes                                           │
-        // └─────────────────────────────────────────────────────────────────┘
+        // OIL & PETROLEUM PRODUCTS
+        // Unit: Thousand tonnes
       },
 
       "GAS": {
         "value": 2960810.36,
         "unit": "TJ_GCV"
-        // ┌─────────────────────────────────────────────────────────────────┐
-        // │ NATURAL GAS                                                     │
-        // │ Source: estat_nrg_ti_gas                                        │
-        // │ Unit: Terajoules (Gross Calorific Value)                       │
-        // │ Note: 1 TJ ≈ 27,778 cubic meters of natural gas                │
-        // └─────────────────────────────────────────────────────────────────┘
+        // NATURAL GAS
+        // Unit: Terajoules (Gross Calorific Value)
+        // Note: 1 TJ ≈ 27,778 cubic meters of natural gas
       },
 
       "BIO": {
         "value": 482.0,
         "unit": "THS_T"
-        // ┌─────────────────────────────────────────────────────────────────┐
-        // │ BIOFUELS                                                        │
-        // │ Source: estat_nrg_ti_bio                                        │
-        // │ Unit: Thousand tonnes                                           │
-        // └─────────────────────────────────────────────────────────────────┘
+        // BIOFUELS
+        // Unit: Thousand tonnes
       },
 
       "EH": {
         "value": 40624.0,
         "unit": "GWH"
-        // ┌─────────────────────────────────────────────────────────────────┐
-        // │ ELECTRICITY & HEAT                                              │
-        // │ Source: estat_nrg_ti_eh                                         │
-        // │ Unit: Gigawatt-hours                                            │
-        // └─────────────────────────────────────────────────────────────────┘
+        // ELECTRICITY & HEAT
+        // Unit: Gigawatt-hours
       }
     },
 
-    "top_partners": [
+    "partners": [
       // ═════════════════════════════════════════════════════════════════════
-      // TOP 10 IMPORT PARTNERS
-      // Calculated: Aggregated across all energy types, sorted by total value
-      // Script location: calculate_shares_and_rankings()
-      // Note: Shares are calculated from value sums, so gas (TJ) dominates
+      // ALL IMPORT PARTNERS
+      // Sorted by share percentage (descending)
+      // Calculated: Aggregated across all energy types
+      // Note: Shares are calculated from value sums, so gas (TJ) may dominate
       //       due to larger numeric values compared to coal (THS_T)
       // ═════════════════════════════════════════════════════════════════════
 
       {
         "geo": "NO",
-        // ┌─────────────────────────────────────────────────────────────────┐
-        // │ ISO 3166-1 alpha-2 country code                                │
-        // │ Source: 'partner' column in combined_energy_trade.csv          │
-        // └─────────────────────────────────────────────────────────────────┘
+        // ISO 3166-1 alpha-2 country code (or regional aggregate code)
+        // Source: 'partner' column in combined_energy_trade.csv
 
         "name": "Norway",
-        // ┌─────────────────────────────────────────────────────────────────┐
-        // │ Full country name                                               │
-        // │ Source: COUNTRY_NAMES lookup dict in script                    │
-        // └─────────────────────────────────────────────────────────────────┘
+        // Full country/region name from COUNTRY_NAMES lookup
 
-        "share_pct": 33.94,
-        // ┌─────────────────────────────────────────────────────────────────┐
-        // │ Percentage share of total imports                              │
-        // │ Calculated: (partner_value / grand_total) * 100                │
-        // │ Note: Aggregated across ALL energy types (not per-type)        │
-        // └─────────────────────────────────────────────────────────────────┘
-
-        "is_eu": false
-        // ┌─────────────────────────────────────────────────────────────────┐
-        // │ EU membership status                                            │
-        // │ Source: EU_MEMBERS list in script (EU27 as of 2020)            │
-        // │ Note: Norway is EEA but not EU, so is_eu=false                 │
-        // └─────────────────────────────────────────────────────────────────┘
+        "share_pct": 33.94
+        // Percentage share of total imports
+        // Calculated: (partner_value / grand_total) * 100
       },
       {
         "geo": "NL",
         "name": "Netherlands",
-        "share_pct": 22.61,
-        "is_eu": true
+        "share_pct": 22.61
       },
       {
         "geo": "BE",
         "name": "Belgium",
-        "share_pct": 17.2,
-        "is_eu": true
+        "share_pct": 17.2
       },
       {
         "geo": "US",
         "name": "United States",
-        "share_pct": 14.77,
-        "is_eu": false
-      },
-      {
-        "geo": "FR",
-        "name": "France",
-        "share_pct": 1.44,
-        "is_eu": true
-      },
-      {
-        "geo": "KZ",
-        "name": "Kazakhstan",
-        "share_pct": 1.24,
-        "is_eu": false
-      },
-      {
-        "geo": "LY",
-        "name": "Libya",
-        "share_pct": 1.2,
-        "is_eu": false
-      },
-      {
-        "geo": "UK",
-        "name": "United Kingdom",
-        "share_pct": 1.15,
-        "is_eu": false
-      },
-      {
-        "geo": "AU",
-        "name": "Australia",
-        "share_pct": 0.69,
-        "is_eu": false
-      },
-      {
-        "geo": "IQ",
-        "name": "Iraq",
-        "share_pct": 0.49,
-        "is_eu": false
+        "share_pct": 14.77
       }
-    ],
-
-    "by_partner_group": {
-      // ═════════════════════════════════════════════════════════════════════
-      // IMPORT SUMMARY BY PARTNER GROUP
-      // Calculated: Sum of shares for EU vs non-EU partners
-      // Script location: calculate_shares_and_rankings() → eu_total, third_total
-      // ═════════════════════════════════════════════════════════════════════
-
-      "eu": 42.24,
-      // ┌─────────────────────────────────────────────────────────────────────┐
-      // │ Percentage of imports from EU member states                        │
-      // │ Calculated: Sum of share_pct where is_eu=true                      │
-      // └─────────────────────────────────────────────────────────────────────┘
-
-      "third_countries": 57.76
-      // ┌─────────────────────────────────────────────────────────────────────┐
-      // │ Percentage of imports from non-EU countries                        │
-      // │ Calculated: Sum of share_pct where is_eu=false                     │
-      // │ Note: eu + third_countries = 100%                                  │
-      // └─────────────────────────────────────────────────────────────────────┘
-    }
+      // ... all partners with non-zero shares
+    ]
   },
 
   "exports": {
@@ -393,17 +302,14 @@ Each field includes an annotation describing its meaning and data source.
       "SFF": {
         "value": 5452.48,
         "unit": "THS_T"
-        // Germany exports 5.5 million tonnes of coal (mostly to neighbors)
       },
       "OIL": {
         "value": 148945.0,
         "unit": "THS_T"
-        // Refined petroleum products exported
       },
       "GAS": {
-        "value": 0.0,
+        "value": 115642.0,
         "unit": "TJ_GCV"
-        // Zero gas exports in 2023 (Germany is gas importer, not exporter)
       },
       "BIO": {
         "value": 771.0,
@@ -412,82 +318,22 @@ Each field includes an annotation describing its meaning and data source.
       "EH": {
         "value": 37309.0,
         "unit": "GWH"
-        // Electricity exports to neighboring countries
       }
     },
 
-    "top_partners": [
-      {
-        "geo": "NL",
-        "name": "Netherlands",
-        "share_pct": 22.78,
-        "is_eu": true
-      },
-      {
-        "geo": "AT",
-        "name": "Austria",
-        "share_pct": 18.33,
-        "is_eu": true
-      },
-      {
-        "geo": "PL",
-        "name": "Poland",
-        "share_pct": 12.79,
-        "is_eu": true
-      },
+    "partners": [
       {
         "geo": "CH",
         "name": "Switzerland",
-        "share_pct": 11.88,
-        "is_eu": false
-        // Switzerland is not EU (but has bilateral agreements)
-      },
-      {
-        "geo": "CZ",
-        "name": "Czechia",
-        "share_pct": 11.77,
-        "is_eu": true
-      },
-      {
-        "geo": "FR",
-        "name": "France",
-        "share_pct": 7.34,
-        "is_eu": true
+        "share_pct": 44.13
       },
       {
         "geo": "BE",
         "name": "Belgium",
-        "share_pct": 5.73,
-        "is_eu": true
-      },
-      {
-        "geo": "UK",
-        "name": "United Kingdom",
-        "share_pct": 1.56,
-        "is_eu": false
-        // UK left EU in 2020, so is_eu=false
-      },
-      {
-        "geo": "SE",
-        "name": "Sweden",
-        "share_pct": 1.1,
-        "is_eu": true
-      },
-      {
-        "geo": "HU",
-        "name": "Hungary",
-        "share_pct": 0.97,
-        "is_eu": true
+        "share_pct": 11.78
       }
-    ],
-
-    "by_partner_group": {
-      "eu": 84.01,
-      // 84% of German energy exports go to EU countries
-
-      "third_countries": 15.99
-      // Only 16% to non-EU (mainly Switzerland and UK)
-    }
+      // ... all export partners
+    ]
   }
 }
 ```
@@ -505,8 +351,8 @@ Each field includes an annotation describing its meaning and data source.
 │  ─────────────────────────            ─────────────────────                 │
 │  estat_nrg_ind_id      → ID           estat_nrg_ti_sff → IMPORT SFF         │
 │  estat_nrg_ind_id3cf   → ID3CF        estat_nrg_ti_oil → IMPORT OIL         │
-│  estat_nrg_ind_idogas  → IDOGAS       estat_nrg_ti_gas → IMPORT GAS         │
-│  estat_nrg_ind_idooil  → IDOOIL       estat_nrg_ti_bio → IMPORT BIO         │
+│                                        estat_nrg_ti_gas → IMPORT GAS         │
+│                                        estat_nrg_ti_bio → IMPORT BIO         │
 │                                        estat_nrg_ti_eh  → IMPORT EH          │
 │                                        estat_nrg_te_*   → EXPORT *           │
 │                                                                              │
@@ -520,7 +366,7 @@ Each field includes an annotation describing its meaning and data source.
 │  combined_import_dependency.csv        combined_energy_trade.csv             │
 │  ───────────────────────────────       ─────────────────────────             │
 │  Columns:                              Columns:                              │
-│  - indicator (ID, ID3CF, IDOGAS...)    - flow (IMPORT, EXPORT)              │
+│  - indicator (ID, ID3CF)               - flow (IMPORT, EXPORT)              │
 │  - siec (fuel type code)               - energy_type (SFF, OIL, GAS...)     │
 │  - partner (TOTAL, THRD, country)      - partner (country code)             │
 │  - geo (reporting country)             - geo (reporting country)            │
@@ -536,7 +382,7 @@ Each field includes an annotation describing its meaning and data source.
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
 │  Phase 1: load_dependency_data()                                            │
-│           → Parses dependency CSV, extracts ID/ID3CF/IDOGAS/IDOOIL          │
+│           → Parses dependency CSV, extracts ID/ID3CF indicators             │
 │           → Maps SIEC codes to fuel names using SIEC_TO_FUEL dict           │
 │                                                                              │
 │  Phase 2: process_trade_data()                                              │
@@ -546,8 +392,7 @@ Each field includes an annotation describing its meaning and data source.
 │                                                                              │
 │  Phase 3: calculate_shares_and_rankings()                                   │
 │           → Calculates partner shares as % of total                         │
-│           → Sorts partners by value, takes top 10                           │
-│           → Classifies partners as EU/non-EU using EU_MEMBERS list          │
+│           → Sorts partners by share descending                              │
 │                                                                              │
 │  Phase 4: build_json_output()                                               │
 │           → Combines dependency + trade data                                │
@@ -557,7 +402,6 @@ Each field includes an annotation describing its meaning and data source.
 │  Phase 5: verify_output()                                                   │
 │           → Validates country count, year range                             │
 │           → Spot-checks sample values                                       │
-│           → Verifies partner shares sum to 100%                             │
 │                                                                              │
 └───────────────────────────────┬─────────────────────────────────────────────┘
                                 │
@@ -568,16 +412,16 @@ Each field includes an annotation describing its meaning and data source.
 ├─────────────────────────────────────────────────────────────────────────────┤
 │                                                                              │
 │  {                                                                           │
-│    "metadata": { ... },                                                      │
+│    "metadata": { generated, sources, time_range, energy_types, ... },       │
 │    "countries": {                                                            │
 │      "DE": {                                                                 │
+│        "name": "Germany",                                                    │
 │        "years": {                                                            │
-│          "2023": { ... }  ← THIS DOCUMENT EXPLAINS THIS STRUCTURE           │
+│          "2023": { dependency, imports, exports }                           │
 │        }                                                                     │
 │      }                                                                       │
 │    },                                                                        │
-│    "country_lookup": { ... },                                               │
-│    "eu_members": [ ... ]                                                    │
+│    "country_lookup": { "DE": "Germany", ... }                               │
 │  }                                                                           │
 │                                                                              │
 └─────────────────────────────────────────────────────────────────────────────┘
@@ -592,43 +436,107 @@ Each field includes an annotation describing its meaning and data source.
 | `C0000X0350-0370` | coal | Hard coal (aggregate) |
 | `C0110` | anthracite | Anthracite |
 | `C0121` | coking_coal | Coking coal |
-| `C0129` | other_bituminous | Other bituminous coal |
+| `C0129` | other_bituminous_coal | Other bituminous coal |
 | `C0210` | lignite | Brown coal/lignite |
-| `G3000` | gas | Natural gas |
+| `C0220` | sub_bituminous_coal | Sub-bituminous coal |
+| `G3000` | natural_gas | Natural gas |
+| `G3200` | lng | Liquefied natural gas |
 | `O4000XBIO` | oil | Oil excluding biofuels |
+| `O4100_TOT` | crude_oil | Crude oil |
+| `O4200` | ngl | Natural gas liquids |
+| `E7000` | electricity | Electricity |
+| `S2000` | nuclear_fuels | Nuclear fuels |
+| `P1100` | peat | Peat |
 | `TOTAL` | total | All fuels combined |
-| Other codes | (unmapped) | Kept as raw SIEC code |
+
+Note: `CF_R` (renewable_fuels) and `SFF_OTH` (other_solid_fossil_fuels) are excluded from this dataset as they only have third_countries data with no overall dependency values.
 
 ---
 
-## Key Script Constants
+## Energy Type Units
 
-```python
-# EU member states (used for is_eu classification)
-EU_MEMBERS = [
-    'AT', 'BE', 'BG', 'CY', 'CZ', 'DE', 'DK', 'EE', 'EL', 'ES',
-    'FI', 'FR', 'HR', 'HU', 'IE', 'IT', 'LT', 'LU', 'LV', 'MT',
-    'NL', 'PL', 'PT', 'RO', 'SE', 'SI', 'SK'
-]
+| Code | Name | Unit | Description |
+|------|------|------|-------------|
+| `SFF` | coal | THS_T | Thousand tonnes |
+| `OIL` | oil | THS_T | Thousand tonnes |
+| `GAS` | gas | TJ_GCV | Terajoules (Gross Calorific Value) |
+| `BIO` | biofuels | THS_T | Thousand tonnes |
+| `EH` | electricity | GWH | Gigawatt-hours |
 
-# Energy type units
-ENERGY_TYPE_UNITS = {
-    'SFF': 'THS_T',    # Thousand tonnes
-    'OIL': 'THS_T',    # Thousand tonnes
-    'GAS': 'TJ_GCV',   # Terajoules (gross calorific value)
-    'BIO': 'THS_T',    # Thousand tonnes
-    'EH': 'GWH'        # Gigawatt-hours
-}
-```
+---
+
+## Regional Aggregate Codes
+
+Some partner codes represent regional aggregates rather than individual countries:
+
+| Code | Description |
+|------|-------------|
+| `EUR_OTH` | Other European countries |
+| `AFR_OTH` | Other African countries |
+| `AME_OTH` | Other American countries |
+| `ASI_OTH` | Other Asian countries |
+| `ASI_NME_OTH` | Other non-Middle Eastern Asian countries |
 
 ---
 
 ## Notes
 
-1. **Aggregated Partners**: The `top_partners` list aggregates across all energy types. Gas (TJ) values dominate the ranking due to larger numeric values.
+1. **All Partners Included**: The `partners` array includes all trading partners with non-zero shares, sorted by share percentage descending. Unlike some datasets, this is not limited to top N partners.
 
-2. **Null Values**: `gas_origins` and `oil_origins` often contain null values because the IDOGAS/IDOOIL indicators have limited coverage in Eurostat.
+2. **Null Values**: Fields may be `null` when data is not available in the source dataset for that country/year/indicator combination.
 
-3. **Negative Dependency**: Dependency values can be negative for net exporters (e.g., lignite in Germany = 0% because Germany produces all lignite domestically).
+3. **Negative Dependency**: Dependency values can be negative for net exporters. For example, a country that exports more of a fuel than it imports will have negative dependency for that fuel.
 
-4. **Values >100%**: Dependency values above 100% indicate stock changes or statistical adjustments in the source data.
+4. **Values >100%**: Dependency values above 100% indicate stock changes, statistical adjustments, or re-exports in the source data.
+
+5. **Share Aggregation**: Partner shares are calculated by aggregating trade values across all energy types. Since different energy types use different units (tonnes vs TJ vs GWh), gas values (in TJ) may dominate the aggregate ranking due to their larger numeric values.
+
+6. **Time Range**: Data spans 1990-2024, though not all countries have data for all years. Earlier years may have sparser coverage.
+
+---
+
+## Third Countries Definition
+
+In Eurostat and EU terminology, **"third countries"** refers to countries that are **not members of the European Union**. This includes:
+
+- Non-EU European countries (e.g., Norway, Switzerland, UK post-Brexit)
+- All countries outside Europe (e.g., Russia, USA, Saudi Arabia, China)
+
+The `ID3CF` indicator specifically measures what percentage of a country's energy imports come from these non-EU sources. This is an important metric for assessing the EU's external energy vulnerability and strategic autonomy.
+
+**Data Availability**: Third country import dependency data (ID3CF) is only available from **2010 onwards**. Years before 2010 will have `null` values for all `third_countries` fields.
+
+For example, if Germany has:
+- `dependency.overall`: 66% (total import dependency)
+- `dependency.third_countries`: 48% (imports from non-EU countries)
+
+This means 66% of Germany's energy needs are met by imports, and 48% of total energy comes from countries outside the EU (i.e., roughly 73% of imports are from third countries).
+
+---
+
+## Why No Electricity Import Dependency
+
+Eurostat does not publish an overall import dependency rate (ID indicator) for electricity. The `electricity.overall` field is always `null`. Only `electricity.third_countries` is available.
+
+### Why Eurostat Doesn't Calculate It
+
+**Mixed Grids**: Once electricity enters the interconnected European grid, electrons from different sources (domestic production, imports, renewables) mix together. Unlike physical fuels that can be tracked from origin to destination, electricity flows are fungible and origin is difficult to define meaningfully.
+
+**Intra-EU Trade for Balancing**: The EU single electricity market treats cross-border electricity trade largely as internal grid balancing, not external dependency. The EU collectively generates enough electricity, but individual countries import/export to manage supply and demand fluctuations throughout the day.
+
+**Focus on Primary Fuels**: The standard energy dependency metric is designed to measure reliance on imported **primary fuels** (coal, oil, gas) that enter the country and are consumed or transformed. These represent clearer indicators of external vulnerability and strategic dependence.
+
+### What Eurostat Does Provide
+
+- **Overall Energy Dependency**: The aggregate rate (e.g., 63% for EU in 2022) shows reliance on net imports for all energy needs
+- **Energy Balances**: They track electricity production, consumption, and trade (imports/exports) for each country
+- **Fuel-Specific Imports**: They show import dependency for specific fuels like natural gas or crude oil, highlighting true external reliance
+- **Third Country Electricity**: The `ID3CF` indicator IS available for electricity, showing what percentage of electricity imports come from non-EU countries
+
+### Data Available in This Dataset
+
+For electricity, you can still find:
+- `dependency.by_fuel.electricity.third_countries`: % of electricity imports from non-EU
+- `imports.total_by_type.EH`: Total electricity imports (GWh)
+- `exports.total_by_type.EH`: Total electricity exports (GWh)
+- `imports.partners` / `exports.partners`: Trading partners (includes electricity trade)
