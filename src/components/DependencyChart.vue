@@ -53,9 +53,9 @@
             <span class="note-icon">*</span>
             <span>Non-EU breakdown (hatched line) only available for main aggregates (Coal, Gas, Oil, Electricity). Subcategories (indented, lighter colors) show total import dependency only.</span>
           </p>
-          <p class="chart-note" v-if="year === 2024 || year === '2024'">
+          <p class="chart-note">
             <span class="note-icon">*</span>
-            <span>2024: Non-EU data not yet published by Eurostat.</span>
+            <span>Non-EU (third country) import dependency data is only available from 2010 to 2023.</span>
           </p>
           <p class="chart-note">
             <span class="note-icon electricity-mark">!</span>
