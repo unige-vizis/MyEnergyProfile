@@ -103,7 +103,7 @@
             <div class="chart-notes">
               <p class="chart-note">
                 <span class="note-icon">*</span>
-                <span>EU-reported data only; non-EU partner volumes may be incomplete.</span>
+                <span>EU-reported data only; non-EU partner volumes data may be incomplete or reflect only the EU perspective of the trade relationship.</span>
               </p>
               <p class="chart-note">
                 <span class="note-icon">*</span>
@@ -116,13 +116,6 @@
       </div>
 
       <div class="map-info">
-        <div class="info-section data-hint-note">
-          <div class="info-title">Data Hint</div>
-          <p class="info-text">
-            Trade data is based on reports submitted by Eurostat member countries. As a result, data for non-EU trading partners may be incomplete or reflect only the EU perspective of the trade relationship.
-          </p>
-        </div>
-
         <div class="info-section placeholder-content">
           <div class="info-title placeholder-title">[Example] European Import Profile</div>
           <p class="info-text placeholder-text">
@@ -499,19 +492,24 @@ async function renderMap() {
   }
   for (const type of energyTypes) {
     for (const direction of Object.keys(directionColors)) {
-      // Main marker (energy type color) - arrowhead
+      // Wide, short arrowhead at line end - with outline matching line
+      const outlineColor = directionColors[direction]
       defs.append('marker')
         .attr('id', `arrow-${type.code}-${direction}`)
         .attr('viewBox', '0 0 10 10')
         .attr('refX', 0)
         .attr('refY', 5)
         .attr('markerWidth', 3)
-        .attr('markerHeight', 3)
+        .attr('markerHeight', 4)
         .attr('markerUnits', 'strokeWidth')
         .attr('orient', 'auto')
         .append('path')
-        .attr('d', 'M 0 2 L 6 5 L 0 8 z')
+        .attr('d', 'M 0 1 L 3 5 L 0 9 z')
         .attr('fill', type.color)
+        .attr('fill-opacity', 0.6)
+        .attr('stroke', outlineColor)
+        .attr('stroke-opacity', 0.5)
+        .attr('stroke-width', 0.5)
     }
   }
 
@@ -652,8 +650,9 @@ async function renderMap() {
       hideTooltip()
     })
 
-  // Calculate centroids for countries
+  // Calculate centroids and dimensions for countries
   const centroids = {}
+  const countryRadii = {}
   countries.features.forEach(feature => {
     const numericId = String(feature.id).padStart(3, '0')
     const alpha2 = getAlpha2Code(numericId)
@@ -661,6 +660,11 @@ async function renderMap() {
       const centroid = d3.geoCentroid(feature)
       if (centroid && !isNaN(centroid[0]) && !isNaN(centroid[1])) {
         centroids[alpha2] = projection(centroid)
+        // Calculate country radius from projected bounds
+        const bounds = pathGenerator.bounds(feature)
+        const width = bounds[1][0] - bounds[0][0]
+        const height = bounds[1][1] - bounds[0][1]
+        countryRadii[alpha2] = Math.min(width, height) / 2
       }
     }
   })
@@ -759,6 +763,7 @@ async function renderMap() {
 
     // Draw import flows (partner -> selected) - only if imports direction is active
     if (activeDirections.value.has('imports')) {
+      const selectedRadius = countryRadii[selectedGeo] || 10
       importFlows.forEach((flow) => {
         const partnerCentroid = centroids[flow.partnerGeo]
         if (!partnerCentroid) return
@@ -772,7 +777,8 @@ async function renderMap() {
           widthScale,
           offset,
           flow.typeCode,
-          flow.color
+          flow.color,
+          selectedRadius
         )
       })
     }
@@ -784,6 +790,7 @@ async function renderMap() {
         if (!partnerCentroid) return
 
         const offset = getPartnerOffset(flow.partnerGeo)
+        const partnerRadius = countryRadii[flow.partnerGeo] || 10
         drawFlowArrow(
           flowsGroup,
           selectedCentroid,
@@ -792,7 +799,8 @@ async function renderMap() {
           widthScale,
           offset,
           flow.typeCode,
-          flow.color
+          flow.color,
+          partnerRadius
         )
       })
     }
@@ -810,50 +818,64 @@ async function renderMap() {
   }
 }
 
-function drawFlowArrow(group, from, to, flow, widthScale, offset, typeCode, color) {
-  // Calculate control point for curved path
-  const midX = (from[0] + to[0]) / 2
-  const midY = (from[1] + to[1]) / 2
-
-  // Perpendicular offset for curve
+function drawFlowArrow(group, from, to, flow, widthScale, offset, typeCode, color, destRadius) {
+  // Calculate direction and distance
   const dx = to[0] - from[0]
   const dy = to[1] - from[1]
   const dist = Math.sqrt(dx * dx + dy * dy)
 
-  // Normalize and perpendicular
-  const perpX = -dy / dist
-  const perpY = dx / dist
+  // Normalize and perpendicular vectors
+  const normX = dx / dist
+  const normY = dy / dist
+  const perpX = -normY
+  const perpY = normX
 
-  // Curve amount: gentle curve, capped for visual cleanliness
-  const curveAmount = Math.min(dist * 0.08, 15)
+  // Start position:
+  // - Imports start at center of origin
+  // - Exports start almost at center but not quite (small offset)
+  const startSpacing = 1
+  const startOffset = offset * startSpacing
+  const exportStartGap = flow.direction === 'exports' ? 0.5 : 0
+  const offsetFromX = from[0] + normX * exportStartGap + perpX * startOffset
+  const offsetFromY = from[1] + normY * exportStartGap + perpY * startOffset
 
-  // Spread multiple arrows to same partner: each arrow gets more curve
-  // Spacing scales with distance for consistent visual separation
-  const arrowSpacing = Math.max(3, dist * 0.04)
-  const totalOffset = curveAmount + (offset * arrowSpacing)
+  // End position:
+  // - Imports arrive with spacing from center, scaled to country size (max 5)
+  // - Exports arrive at center (no spacing)
+  // - Skip arrival gap if distance is too short (close countries)
+  const arrivalSpacing = flow.direction === 'imports' ? 2 : 0
+  const arrivalOffset = offset * arrivalSpacing
+  const minDistForGap = 7
+  const scaledGap = Math.min(destRadius * 0.3, 5)
+  const arrivalGap = (flow.direction === 'imports' && dist > minDistForGap) ? scaledGap : 0
+  const offsetToX = to[0] - normX * arrivalGap + perpX * arrivalOffset
+  const offsetToY = to[1] - normY * arrivalGap + perpY * arrivalOffset
 
-  // Apply offset perpendicular to the line
-  const controlX = midX + perpX * totalOffset
-  const controlY = midY + perpY * totalOffset
+  // Curve amount: minimal for close countries, slightly more for distant ones
+  // This keeps arrows mostly straight while still showing directionality
+  const curveAmount = Math.min(dist * 0.05, 10)
+
+  // Control point for gentle curve (midpoint with small perpendicular offset)
+  const offsetMidX = (offsetFromX + offsetToX) / 2
+  const offsetMidY = (offsetFromY + offsetToY) / 2
+  const controlX = offsetMidX + perpX * curveAmount
+  const controlY = offsetMidY + perpY * curveAmount
 
   // Proportional width with minimum for visibility
   const strokeWidth = Math.max(0.2, widthScale(flow.sharePercent || 0))
   const outlineWidth = strokeWidth + 0.25
   const markerId = `arrow-${typeCode}-${flow.direction}`
 
-  // Arrowhead length: markerWidth(3) * (6/10) * strokeWidth (arrow is 6 units in 10-unit viewBox)
-  const arrowLength = 1.8 * strokeWidth
+  // Shorten line so it ends before the arrowhead
+  const arrowLength = 1.5 * strokeWidth
+  const lineLen = Math.sqrt((offsetToX - offsetFromX) ** 2 + (offsetToY - offsetFromY) ** 2)
+  const shorten = Math.min(arrowLength, lineLen * 0.5)
+  const dirX = (offsetToX - offsetFromX) / lineLen
+  const dirY = (offsetToY - offsetFromY) / lineLen
+  const endX = offsetToX - dirX * shorten
+  const endY = offsetToY - dirY * shorten
 
-  // Shorten the endpoint so arrowhead tip lands at target
-  // Direction from control point to target (tangent at endpoint)
-  const tangentDx = to[0] - controlX
-  const tangentDy = to[1] - controlY
-  const tangentDist = Math.sqrt(tangentDx * tangentDx + tangentDy * tangentDy)
-  const shortenedToX = to[0] - (tangentDx / tangentDist) * arrowLength
-  const shortenedToY = to[1] - (tangentDy / tangentDist) * arrowLength
-
-  // Create quadratic bezier path with shortened endpoint
-  const pathD = `M ${from[0]} ${from[1]} Q ${controlX} ${controlY} ${shortenedToX} ${shortenedToY}`
+  const pathD = `M ${offsetFromX} ${offsetFromY} Q ${controlX} ${controlY} ${endX} ${endY}`
 
   // Outline color based on direction (red for imports, green for exports)
   const outlineColor = flow.direction === 'imports' ? '#e53935' : '#43a047'
@@ -864,7 +886,7 @@ function drawFlowArrow(group, from, to, flow, widthScale, offset, typeCode, colo
     .attr('fill', 'none')
     .attr('stroke', outlineColor)
     .attr('stroke-width', outlineWidth)
-    .attr('stroke-opacity', 0.85)
+    .attr('stroke-opacity', 0.5)
     .attr('class', `flow-arrow-outline flow-${typeCode} flow-${flow.direction}`)
     .style('pointer-events', 'none')
 
@@ -874,14 +896,14 @@ function drawFlowArrow(group, from, to, flow, widthScale, offset, typeCode, colo
     .attr('fill', 'none')
     .attr('stroke', color)
     .attr('stroke-width', strokeWidth)
-    .attr('stroke-opacity', 0.9)
+    .attr('stroke-opacity', 0.6)
     .attr('marker-end', `url(#${markerId})`)
     .attr('class', `flow-arrow flow-${typeCode} flow-${flow.direction}`)
 
   mainPath
     .on('mouseenter', function(event) {
       d3.select(this)
-        .attr('stroke-opacity', 1)
+        .attr('stroke-opacity', 0.85)
 
       const directionLabel = flow.direction === 'imports' ? 'imports' : 'exports'
       const tooltipContent = `
@@ -894,7 +916,7 @@ function drawFlowArrow(group, from, to, flow, widthScale, offset, typeCode, colo
     })
     .on('mouseleave', function() {
       d3.select(this)
-        .attr('stroke-opacity', 0.9)
+        .attr('stroke-opacity', 0.6)
       hideTooltip()
     })
 }
