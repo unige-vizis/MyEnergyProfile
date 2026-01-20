@@ -1,7 +1,7 @@
 <script setup>
-import AppInput from './AppInput.vue';
-import AppSelect from './AppSelect.vue';
-import YearSlot from './YearSlot.vue';
+import AppInput from './inputElements/AppInput.vue';
+import AppSelect from './inputElements/AppSelect.vue';
+import YearSlot from './inputElements/YearSlot.vue';
 import { ref, computed, onMounted } from 'vue';
 import { useEnergyDataStore } from '@/stores/energyData';
 import { useGlobalConfigStore } from '@/stores/globalConfig';
@@ -50,10 +50,32 @@ onMounted(() => {
 
 <template>
   <div class="config-header">
-    <AppSelect class="config-item" :options="countryOptions" label="Country" v-model="selectedCountry" placeholder="Select country"> </AppSelect>
+    <AppSelect
+      class="config-item"
+      :options="countryOptions"
+      label="Country"
+      v-model="selectedCountry"
+      placeholder="Select country"
+    >
+    </AppSelect>
     <AppInput class="config-item" label="Age" placeholder="Age" type="number" v-model="age"> </AppInput>
-    <AppSelect class="config-item" :options="householdSizeOptions" label="Household Size" v-model="householdSizeValue" placeholder="Select size"></AppSelect>
-    <AppInput class="config-item" label="Living Space" placeholder="Living Space" type="number" :min="10" :max="500" v-model="livingSpace"> </AppInput>
+    <AppSelect
+      class="config-item"
+      :options="householdSizeOptions"
+      label="Household Size"
+      v-model="householdSizeValue"
+      placeholder="Select size"
+    ></AppSelect>
+    <AppInput
+      class="config-item"
+      label="Living Space"
+      placeholder="Living Space"
+      type="number"
+      :min="10"
+      :max="500"
+      v-model="livingSpace"
+    >
+    </AppInput>
     <YearSlot class="config-item" :years="globalConfig.yearsDescending" label="Year" v-model="selectedYear" />
   </div>
 </template>
@@ -104,6 +126,4 @@ onMounted(() => {
 .config-header :deep(select) {
   color: black;
 }
-
-
 </style>

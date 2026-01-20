@@ -4,13 +4,12 @@ claude.md
 tmpclaude-*
 nul
 
-# Data processing - ignore base data files but keep READMEs and folder structure
-data-processing/base-data/**/*.csv
-data-processing/base-data/**/*.xlsx
-data-processing/base-data/**/*.xlsb
-data-processing/base-data/**/*.tsv
-data-processing/base-data/**/*.tsv.gz
-data-processing/base-data/**/*.py
+# Data processing - ignore raw data files but keep READMEs and folder structure
+data-processing/raw-data/**/*.csv
+data-processing/raw-data/**/*.xlsx
+data-processing/raw-data/**/*.xlsb
+data-processing/raw-data/**/*.tsv
+data-processing/raw-data/**/*.tsv.gz
 
 # Logs
 logs

@@ -90,7 +90,7 @@ onUnmounted(() => {
   left: 0;
   top: 0;
   height: 100vh;
-  background-color: black;
+  background-color: #1a1a1a;
   color: white;
   box-shadow: 4px 0 12px rgba(0, 0, 0, 0.4);
   z-index: 1000;

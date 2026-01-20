@@ -1,13 +1,13 @@
 <script setup>
 import Sidebar from './components/Sidebar.vue';
-import Consumption from './components/Consumption.vue';
-import Global from './components/Global.vue';
-import Costs from './components/Costs.vue';
-import Availability from './components/Availability.vue';
-import Mix from './components/Mix.vue';
-import Household from './components/Household.vue';
-import ETransition from './components/ETransition.vue';
-import If from './components/If.vue';
+import Consumption from './components/sections/Consumption.vue';
+import Global from './components/sections/Global.vue';
+import Costs from './components/sections/Costs.vue';
+import Availability from './components/sections/Availability.vue';
+import Mix from './components/sections/Mix.vue';
+import Household from './components/sections/Household.vue';
+import ETransition from './components/sections/ETransition.vue';
+import If from './components/sections/If.vue';
 import ConfigHeader from './components/ConfigHeader.vue';
 </script>
 
@@ -29,5 +29,3 @@ import ConfigHeader from './components/ConfigHeader.vue';
     </div>
   </div>
 </template>
-
-
