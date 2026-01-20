@@ -27,8 +27,8 @@ BASE_PATH = Path(__file__).parent.parent / 'base-data' / '05_Energy-Imports-Expo
 ESTIMATED_TRADE_ROWS = 31_800_000  # ~31.8M rows in combined_energy_trade.csv
 OUTPUT_PATH = Path(__file__).parent.parent / 'prepared-sets'
 
-DEPENDENCY_FILE = BASE_PATH / 'import_dependency_eurostat' / 'output' / 'combined_import_dependency.csv'
-TRADE_FILE = BASE_PATH / 'energy_trade_eurostat' / 'output' / 'combined_energy_trade.csv'
+DEPENDENCY_FILE = BASE_PATH / 'output' / 'combined_import_dependency.csv'
+TRADE_FILE = BASE_PATH / 'output' / 'combined_energy_trade.csv'
 
 # Country name lookup (ISO 2-letter to full name)
 COUNTRY_NAMES = {

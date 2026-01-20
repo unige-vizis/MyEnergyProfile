@@ -1,6 +1,6 @@
 <script setup>
-import AppInput from './AppInput.vue';
-import AppSelect from './AppSelect.vue';
+import AppInput from './inputElements/AppInput.vue';
+import AppSelect from './inputElements/AppSelect.vue';
 import { ref } from 'vue';
 
 const country = ref('');
@@ -53,15 +53,16 @@ const householdSize = [
   {value:5, label:5},
   {value:6, label:'6+'},
 ];
-
 </script>
 
 <template>
   <div class="config-header">
-    <AppSelect class="config-item" :options="countryOptions" label="Country" v-model="country" placeholder="Germany"> </AppSelect>
+    <AppSelect class="config-item" :options="countryOptions" label="Country" v-model="country" placeholder="Germany">
+    </AppSelect>
     <AppInput class="config-item" label="Age" placeholder="Age" type="number"> </AppInput>
     <AppSelect class="config-item" :options="householdSize" label="Household Size" placeholder="2"></AppSelect>
-    <AppInput class="config-item" label="Living Space" placeholder="Living Space" type="number" :min="10" :max="500"> </AppInput>
+    <AppInput class="config-item" label="Living Space" placeholder="Living Space" type="number" :min="10" :max="500">
+    </AppInput>
     <AppInput class="config-item" label="Year" placeholder="Year" type="number" :min="1970" :max="2024"> </AppInput>
   </div>
 </template>
@@ -112,6 +113,4 @@ const householdSize = [
 .config-header :deep(select) {
   color: black;
 }
-
-
 </style>

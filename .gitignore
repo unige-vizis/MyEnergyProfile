@@ -10,7 +10,7 @@ data-processing/base-data/**/*.xlsx
 data-processing/base-data/**/*.xlsb
 data-processing/base-data/**/*.tsv
 data-processing/base-data/**/*.tsv.gz
-data-processing/base-data/**/*.py
+# data-processing/base-data/**/*.py
 
 # Logs
 logs

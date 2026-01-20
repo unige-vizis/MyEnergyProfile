@@ -1,0 +1,725 @@
+freq,nrg_bal,unit,geo\TIME_PERIOD	2005 	2006 	2007 	2008 	2009 	2010 	2011 	2012 	2013 	2014 	2015 	2016 	2017 	2018 	2019 	2020 	2021 	2022 	2023 	2024 
+A,FEC2020-2030,PC,AL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,AT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,BA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,BE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,BG	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,CY	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,CZ	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,DE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,DK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,EE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,EL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,ES	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,EU27_2020	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,FI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,FR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,GE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,HR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,HU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,IE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,IS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,IT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,LT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,LU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,LV	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,MD	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,ME	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,MK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,MT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,NL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,NO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,PL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,PT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,RO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,RS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,SE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,SI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,SK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,TR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,UA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,UK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC2020-2030,PC,XK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,AL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,AT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,BA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,BE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,BG	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,CY	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,CZ	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,DE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,DK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,EE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,EL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,ES	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,EU27_2020	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,FI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,FR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,GE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,HR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,HU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,IE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,IS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,IT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,LT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,LU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,LV	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,MD	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,ME	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,MK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,MT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,NL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,NO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,PL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,PT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,RO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,RS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,SE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,SI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,SK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,TR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,UA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,UK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,I05,XK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,AL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,AT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,BA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,BE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,BG	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,CY	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,CZ	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,DE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,DK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,EE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,EL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,ES	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,EU27_2020	58.18 	62.82 	45.34 	54.93 	6.14 	44.64 	6.25 	4.83 	2.84 	-39.10 	-18.64 	1.23 	12.72 	15.68 	10.23 	-66.06 	-10.42 	-37.72 	-65.00 	-58.86 
+A,FEC_DT2020,MTOE,FI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,FR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,GE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,HR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,HU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,IE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,IS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,IT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,LT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,LU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,LV	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,MD	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,ME	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,MK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,MT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,NL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,NO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,PL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,PT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,RO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,RS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,SE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,SI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,SK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,TR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,UA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,UK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,MTOE,XK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,AL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,AT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,BA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,BE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,BG	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,CY	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,CZ	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,DE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,DK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,EE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,EL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,ES	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,EU27_2020	6.07 	6.55 	4.73 	5.73 	0.64 	4.65 	0.65 	0.50 	0.30 	-4.08 	-1.94 	0.13 	1.33 	1.64 	1.07 	-6.89 	-1.09 	-3.93 	-6.78 	-6.14 
+A,FEC_DT2020,PC,FI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,FR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,GE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,HR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,HU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,IE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,IS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,IT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,LT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,LU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,LV	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,MD	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,ME	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,MK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,MT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,NL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,NO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,PL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,PT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,RO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,RS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,SE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,SI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,SK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,TR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,UA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,UK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2020,PC,XK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,AL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,AT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,BA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,BE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,BG	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,CY	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,CZ	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,DE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,DK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,EE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,EL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,ES	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,EU27_2020	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,FI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,FR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,GE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,HR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,HU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,IE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,IS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,IT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,LT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,LU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,LV	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,MD	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,ME	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,MK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,MT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,NL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,NO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,PL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,PT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,RO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,RS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,SE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,SI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,SK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,TR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,UA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,UK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,I05,XK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,AL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,AT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,BA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,BE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,BG	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,CY	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,CZ	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,DE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,DK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,EE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,EL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,ES	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,EU27_2020	254.18 	258.82 	241.34 	250.93 	202.14 	240.64 	202.25 	200.83 	198.84 	156.90 	177.36 	197.23 	208.72 	211.68 	206.23 	129.94 	185.58 	158.28 	131.00 	137.14 
+A,FEC_DT2030,MTOE,FI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,FR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,GE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,HR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,HU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,IE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,IS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,IT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,LT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,LU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,LV	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,MD	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,ME	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,MK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,MT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,NL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,NO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,PL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,PT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,RO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,RS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,SE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,SI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,SK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,TR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,UA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,UK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,MTOE,XK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,AL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,AT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,BA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,BE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,BG	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,CY	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,CZ	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,DE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,DK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,EE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,EL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,ES	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,EU27_2020	33.31 	33.92 	31.63 	32.89 	26.49 	31.54 	26.51 	26.32 	26.06 	20.56 	23.24 	25.85 	27.35 	27.74 	27.03 	17.03 	24.32 	20.74 	17.17 	17.97 
+A,FEC_DT2030,PC,FI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,FR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,GE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,HR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,HU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,IE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,IS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,IT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,LT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,LU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,LV	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,MD	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,ME	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,MK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,MT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,NL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,NO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,PL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,PT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,RO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,RS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,SE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,SI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,SK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,TR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,UA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,UK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_DT2030,PC,XK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,FEC_EED,I05,AL	100.00 	91.09 	88.99 	92.95 	97.84 	100.74 	103.83 	95.26 	104.32 	108.71 	103.33 	100.23 	109.74 	112.61 	109.12 	97.67 	106.72 	105.02 	102.12 	: 
+A,FEC_EED,I05,AT	100.00 	100.30 	98.69 	98.81 	95.72 	100.69 	97.46 	97.72 	99.80 	95.77 	98.59 	101.13 	102.46 	100.95 	102.01 	94.53 	100.24 	96.12 	93.46 	92.54 
+A,FEC_EED,I05,BE	100.00 	98.81 	95.69 	99.84 	96.75 	103.97 	96.16 	97.00 	99.69 	92.88 	97.66 	98.30 	97.39 	98.23 	96.24 	91.13 	97.86 	90.57 	89.09 	91.31 
+A,FEC_EED,I05,BG	100.00 	103.45 	102.13 	100.33 	87.91 	90.33 	94.66 	94.33 	89.79 	91.94 	97.10 	98.73 	101.26 	101.51 	100.80 	97.46 	104.35 	101.52 	98.97 	101.20 
+A,FEC_EED,I05,CY	100.00 	101.70 	105.12 	107.70 	105.81 	105.20 	104.84 	96.48 	88.25 	88.28 	90.94 	96.30 	101.62 	101.32 	102.88 	85.76 	92.31 	99.44 	102.20 	91.26 
+A,FEC_EED,I05,CZ	100.00 	101.12 	98.99 	98.95 	95.67 	96.82 	93.65 	93.49 	92.63 	89.90 	92.45 	94.83 	97.88 	96.98 	97.05 	93.87 	99.97 	95.37 	89.76 	89.53 
+A,FEC_EED,I05,DE	100.00 	102.72 	96.69 	100.82 	95.25 	101.32 	96.19 	97.96 	100.51 	95.28 	96.55 	98.49 	99.27 	97.58 	97.55 	92.02 	94.13 	91.80 	87.12 	86.28 
+A,FEC_EED,I05,DK	100.00 	101.06 	101.42 	100.16 	95.45 	100.13 	95.59 	93.36 	92.31 	89.32 	91.91 	94.58 	95.21 	95.15 	93.51 	85.48 	90.27 	86.52 	86.43 	85.07 
+A,FEC_EED,I05,EE	100.00 	100.72 	107.75 	106.87 	96.52 	101.79 	98.82 	100.91 	100.95 	98.64 	97.88 	99.29 	100.22 	103.38 	101.18 	96.11 	99.02 	97.11 	91.36 	100.78 
+A,FEC_EED,I05,EL	100.00 	102.88 	105.12 	101.97 	97.92 	90.64 	90.02 	81.16 	72.98 	74.12 	78.80 	79.66 	78.04 	75.67 	76.94 	68.68 	72.16 	76.64 	74.83 	78.62 
+A,FEC_EED,I05,ES	100.00 	97.79 	100.47 	96.98 	90.26 	91.47 	88.89 	85.35 	82.30 	81.10 	82.80 	84.70 	87.10 	89.09 	89.01 	76.10 	82.62 	83.95 	83.43 	86.24 
+A,FEC_EED,I05,EU27_2020	100.00 	100.46 	98.74 	99.68 	94.88 	98.67 	94.89 	94.76 	94.56 	90.44 	92.45 	94.40 	95.53 	95.82 	95.29 	87.79 	93.26 	90.57 	87.89 	88.49 
+A,FEC_EED,I05,FI	100.00 	105.19 	105.66 	101.93 	95.37 	104.70 	99.72 	100.55 	99.03 	98.40 	96.95 	100.98 	101.54 	103.27 	102.60 	93.98 	99.70 	93.71 	90.91 	91.21 
+A,FEC_EED,I05,FR	100.00 	98.34 	95.90 	97.34 	94.02 	96.46 	93.85 	96.76 	98.43 	91.53 	93.41 	95.19 	94.38 	93.17 	92.18 	82.80 	89.78 	86.78 	83.56 	83.65 
+A,FEC_EED,I05,HR	100.00 	100.18 	100.57 	102.21 	99.07 	99.56 	96.13 	91.84 	90.73 	86.11 	90.91 	91.66 	95.58 	94.57 	95.40 	89.32 	96.20 	95.11 	98.12 	101.86 
+A,FEC_EED,I05,HU	100.00 	98.50 	92.96 	93.01 	91.14 	92.86 	93.08 	87.76 	89.11 	86.55 	92.29 	94.80 	98.18 	98.32 	98.97 	96.01 	102.52 	98.46 	90.97 	91.62 
+A,FEC_EED,I05,IE	100.00 	104.13 	104.65 	104.74 	93.45 	94.33 	87.39 	85.00 	86.05 	86.36 	89.65 	93.03 	93.79 	98.07 	97.98 	88.56 	90.39 	94.35 	94.92 	97.02 
+A,FEC_EED,I05,IS	100.00 	108.62 	117.81 	133.33 	133.27 	131.54 	132.45 	136.71 	142.94 	145.58 	152.93 	154.80 	160.77 	174.51 	161.87 	147.12 	156.44 	164.26 	167.28 	: 
+A,FEC_EED,I05,IT	100.00 	98.87 	98.47 	98.41 	92.86 	93.84 	89.79 	88.96 	87.03 	83.21 	85.70 	85.39 	85.04 	85.90 	85.19 	75.89 	84.47 	81.97 	80.03 	81.22 
+A,FEC_EED,I05,LT	100.00 	105.57 	111.64 	109.89 	99.43 	102.93 	102.46 	104.99 	102.43 	104.48 	104.12 	109.22 	114.48 	119.26 	119.04 	113.69 	121.25 	115.54 	113.94 	119.75 
+A,FEC_EED,I05,LU	100.00 	98.49 	96.97 	97.88 	91.09 	96.60 	95.84 	93.13 	92.14 	89.36 	89.12 	90.21 	93.34 	97.11 	98.00 	85.12 	90.62 	81.92 	78.48 	78.82 
+A,FEC_EED,I05,LV	100.00 	104.36 	108.37 	103.36 	100.53 	102.53 	96.28 	100.22 	95.94 	96.69 	94.26 	95.07 	99.90 	103.95 	101.55 	95.94 	100.97 	97.73 	96.94 	92.56 
+A,FEC_EED,I05,ME	100.00 	102.91 	112.63 	113.50 	95.03 	93.76 	95.47 	93.09 	85.64 	84.57 	89.16 	92.72 	98.10 	98.58 	102.80 	91.82 	105.82 	100.86 	103.06 	: 
+A,FEC_EED,I05,MK	100.00 	100.72 	106.63 	103.28 	95.98 	102.93 	109.24 	106.19 	104.54 	103.66 	106.08 	106.74 	107.67 	106.32 	112.59 	104.80 	113.73 	104.91 	102.77 	: 
+A,FEC_EED,I05,MT	100.00 	100.42 	103.44 	107.93 	97.53 	108.33 	106.22 	109.16 	113.25 	117.94 	124.56 	125.56 	134.01 	142.28 	150.25 	117.47 	126.15 	150.65 	152.55 	159.85 
+A,FEC_EED,I05,NL	100.00 	99.72 	97.94 	99.77 	96.19 	102.82 	95.58 	95.67 	95.54 	87.12 	89.40 	91.38 	91.90 	92.54 	90.80 	83.17 	86.10 	79.19 	77.64 	77.83 
+A,FEC_EED,I05,NO	100.00 	99.75 	101.45 	101.75 	98.27 	106.58 	102.72 	103.95 	103.81 	101.40 	102.76 	104.48 	105.35 	105.95 	105.05 	101.31 	106.35 	104.22 	103.28 	: 
+A,FEC_EED,I05,PL	100.00 	104.38 	104.71 	106.60 	105.58 	113.68 	110.80 	110.23 	108.19 	104.96 	106.17 	113.58 	120.90 	127.73 	125.71 	121.67 	128.59 	123.37 	120.41 	120.57 
+A,FEC_EED,I05,PT	100.00 	98.59 	99.72 	97.02 	95.93 	95.46 	91.29 	84.34 	83.33 	82.89 	84.14 	85.14 	87.09 	88.72 	90.11 	78.70 	82.49 	87.90 	90.46 	91.59 
+A,FEC_EED,I05,RO	100.00 	100.97 	98.23 	101.54 	92.46 	93.64 	95.88 	95.99 	91.92 	91.42 	92.10 	93.73 	98.33 	99.45 	100.64 	99.19 	106.96 	101.27 	98.27 	98.46 
+A,FEC_EED,I05,RS	100.00 	100.51 	106.93 	98.09 	88.28 	93.71 	97.17 	89.95 	87.75 	82.50 	84.60 	88.59 	90.41 	91.25 	90.77 	93.59 	99.83 	102.60 	101.10 	: 
+A,FEC_EED,I05,SE	100.00 	100.11 	100.33 	98.60 	95.77 	102.53 	98.23 	98.75 	96.93 	94.47 	96.32 	97.64 	97.22 	96.79 	95.33 	92.41 	95.93 	93.32 	93.52 	96.08 
+A,FEC_EED,I05,SI	100.00 	99.79 	100.25 	107.22 	94.78 	98.73 	98.35 	95.76 	93.71 	89.90 	91.97 	95.31 	96.73 	96.81 	94.88 	85.98 	92.15 	92.15 	87.30 	89.38 
+A,FEC_EED,I05,SK	100.00 	97.22 	98.00 	101.46 	92.90 	106.58 	100.04 	95.64 	97.20 	87.62 	91.64 	95.14 	101.32 	100.06 	98.16 	91.83 	100.20 	94.47 	87.17 	85.78 
+A,FEC_EED,I05,TR	100.00 	109.34 	115.79 	111.65 	110.57 	115.90 	123.89 	128.63 	127.54 	133.96 	145.14 	150.51 	167.06 	164.45 	166.14 	165.27 	180.45 	179.99 	184.22 	: 
+A,FEC_EED,I05,XK	100.00 	103.31 	107.71 	118.93 	121.22 	123.03 	130.72 	126.16 	121.05 	126.02 	137.40 	146.91 	155.59 	150.69 	155.14 	156.08 	169.88 	152.36 	156.00 	: 
+A,FEC_EED,MTOE,AL	1.90 	1.73 	1.69 	1.77 	1.86 	1.92 	1.97 	1.81 	1.98 	2.07 	1.96 	1.91 	2.09 	2.14 	2.07 	1.86 	2.03 	2.00 	1.94 	: 
+A,FEC_EED,MTOE,AT	26.29 	26.37 	25.95 	25.98 	25.17 	26.47 	25.62 	25.69 	26.24 	25.18 	25.92 	26.59 	26.94 	26.54 	26.82 	24.85 	26.35 	25.27 	24.57 	24.33 
+A,FEC_EED,MTOE,BA	: 	: 	: 	: 	: 	: 	: 	: 	: 	3.11 	3.32 	3.55 	3.51 	4.22 	4.22 	4.03 	4.32 	4.32 	4.17 	: 
+A,FEC_EED,MTOE,BE	35.36 	34.94 	33.83 	35.30 	34.21 	36.76 	34.00 	34.30 	35.25 	32.84 	34.53 	34.76 	34.44 	34.73 	34.03 	32.22 	34.60 	32.02 	31.50 	32.29 
+A,FEC_EED,MTOE,BG	9.77 	10.11 	9.98 	9.81 	8.59 	8.83 	9.25 	9.22 	8.78 	8.99 	9.49 	9.65 	9.90 	9.92 	9.85 	9.53 	10.20 	9.92 	9.67 	9.89 
+A,FEC_EED,MTOE,CY	1.83 	1.87 	1.93 	1.98 	1.94 	1.93 	1.92 	1.77 	1.62 	1.62 	1.67 	1.77 	1.86 	1.86 	1.89 	1.57 	1.69 	1.82 	1.87 	1.67 
+A,FEC_EED,MTOE,CZ	25.19 	25.47 	24.94 	24.93 	24.10 	24.39 	23.59 	23.55 	23.33 	22.65 	23.29 	23.89 	24.66 	24.43 	24.45 	23.65 	25.18 	24.02 	22.61 	22.55 
+A,FEC_EED,MTOE,DE	214.54 	220.36 	207.44 	216.29 	204.34 	217.36 	206.36 	210.16 	215.64 	204.40 	207.14 	211.30 	212.97 	209.35 	209.29 	197.42 	201.95 	196.94 	186.90 	185.11 
+A,FEC_EED,MTOE,DK	15.50 	15.67 	15.72 	15.53 	14.80 	15.52 	14.82 	14.47 	14.31 	13.85 	14.25 	14.66 	14.76 	14.75 	14.50 	13.25 	13.99 	13.41 	13.40 	13.19 
+A,FEC_EED,MTOE,EE	2.86 	2.88 	3.08 	3.06 	2.76 	2.91 	2.83 	2.89 	2.89 	2.82 	2.80 	2.84 	2.87 	2.96 	2.89 	2.75 	2.83 	2.78 	2.61 	2.88 
+A,FEC_EED,MTOE,EL	21.02 	21.63 	22.10 	21.44 	20.58 	19.06 	18.92 	17.06 	15.34 	15.58 	16.56 	16.75 	16.41 	15.91 	16.17 	14.44 	15.17 	16.11 	15.73 	16.53 
+A,FEC_EED,MTOE,ES	96.89 	94.74 	97.35 	93.96 	87.45 	88.62 	86.13 	82.69 	79.74 	78.57 	80.22 	82.07 	84.39 	86.32 	86.25 	73.73 	80.05 	81.34 	80.84 	83.55 
+A,FEC_EED,MTOE,EU27_2020	1017.18 	1021.82 	1004.34 	1013.93 	965.14 	1003.64 	965.25 	963.83 	961.84 	919.90 	940.36 	960.23 	971.72 	974.68 	969.23 	892.94 	948.58 	921.28 	894.00 	900.14 
+A,FEC_EED,MTOE,FI	24.43 	25.70 	25.82 	24.91 	23.30 	25.58 	24.36 	24.57 	24.20 	24.04 	23.69 	24.67 	24.81 	25.23 	25.07 	22.96 	24.36 	22.90 	22.21 	22.29 
+A,FEC_EED,MTOE,FR	155.97 	153.38 	149.57 	151.82 	146.64 	150.45 	146.37 	150.92 	153.53 	142.76 	145.69 	148.47 	147.21 	145.33 	143.78 	129.14 	140.04 	135.36 	130.33 	130.48 
+A,FEC_EED,MTOE,GE	: 	: 	: 	: 	: 	: 	: 	: 	3.59 	3.88 	3.99 	4.24 	4.31 	4.26 	4.37 	4.25 	4.74 	5.04 	: 	: 
+A,FEC_EED,MTOE,HR	7.25 	7.26 	7.29 	7.41 	7.18 	7.21 	6.97 	6.65 	6.57 	6.24 	6.59 	6.64 	6.93 	6.85 	6.91 	6.47 	6.97 	6.89 	7.11 	7.38 
+A,FEC_EED,MTOE,HU	18.43 	18.15 	17.13 	17.14 	16.79 	17.11 	17.15 	16.17 	16.42 	15.95 	17.00 	17.47 	18.09 	18.12 	18.24 	17.69 	18.89 	18.14 	16.76 	16.88 
+A,FEC_EED,MTOE,IE	12.61 	13.14 	13.20 	13.21 	11.79 	11.90 	11.02 	10.72 	10.86 	10.89 	11.31 	11.74 	11.83 	12.37 	12.36 	11.17 	11.40 	11.90 	11.97 	12.24 
+A,FEC_EED,MTOE,IS	2.01 	2.18 	2.37 	2.68 	2.68 	2.64 	2.66 	2.75 	2.87 	2.93 	3.07 	3.11 	3.23 	3.51 	3.25 	2.96 	3.14 	3.30 	3.36 	: 
+A,FEC_EED,MTOE,IT	134.51 	132.99 	132.45 	132.37 	124.90 	126.22 	120.77 	119.66 	117.05 	111.92 	115.27 	114.85 	114.38 	115.54 	114.59 	102.08 	113.61 	110.25 	107.65 	109.25 
+A,FEC_EED,MTOE,LT	4.67 	4.93 	5.21 	5.13 	4.64 	4.81 	4.78 	4.90 	4.78 	4.88 	4.86 	5.10 	5.34 	5.57 	5.56 	5.31 	5.66 	5.39 	5.32 	5.59 
+A,FEC_EED,MTOE,LU	4.48 	4.41 	4.34 	4.38 	4.08 	4.33 	4.29 	4.17 	4.13 	4.00 	3.99 	4.04 	4.18 	4.35 	4.39 	3.81 	4.06 	3.67 	3.51 	3.53 
+A,FEC_EED,MTOE,LV	4.02 	4.19 	4.35 	4.15 	4.04 	4.12 	3.87 	4.03 	3.86 	3.89 	3.79 	3.82 	4.01 	4.18 	4.08 	3.86 	4.06 	3.93 	3.90 	3.72 
+A,FEC_EED,MTOE,MD	: 	: 	: 	: 	: 	2.29 	2.36 	2.29 	2.32 	2.32 	2.38 	2.49 	2.64 	2.74 	2.63 	2.50 	2.80 	2.49 	2.38 	: 
+A,FEC_EED,MTOE,ME	0.76 	0.79 	0.86 	0.87 	0.73 	0.72 	0.73 	0.71 	0.65 	0.65 	0.68 	0.71 	0.75 	0.75 	0.79 	0.70 	0.81 	0.77 	0.79 	: 
+A,FEC_EED,MTOE,MK	1.75 	1.76 	1.86 	1.80 	1.68 	1.80 	1.91 	1.85 	1.83 	1.81 	1.85 	1.86 	1.88 	1.86 	1.97 	1.83 	1.99 	1.83 	1.79 	: 
+A,FEC_EED,MTOE,MT	0.46 	0.47 	0.48 	0.50 	0.45 	0.50 	0.49 	0.51 	0.53 	0.55 	0.58 	0.58 	0.62 	0.66 	0.70 	0.55 	0.59 	0.70 	0.71 	0.74 
+A,FEC_EED,MTOE,NL	52.63 	52.48 	51.55 	52.50 	50.62 	54.11 	50.30 	50.35 	50.28 	45.85 	47.05 	48.09 	48.37 	48.70 	47.79 	43.77 	45.31 	41.67 	40.86 	40.96 
+A,FEC_EED,MTOE,NO	18.54 	18.50 	18.81 	18.87 	18.22 	19.76 	19.05 	19.27 	19.25 	18.80 	19.05 	19.37 	19.53 	19.65 	19.48 	18.79 	19.72 	19.32 	19.15 	: 
+A,FEC_EED,MTOE,PL	57.81 	60.34 	60.54 	61.62 	61.04 	65.72 	64.05 	63.73 	62.55 	60.68 	61.38 	65.66 	69.89 	73.84 	72.68 	70.34 	74.34 	71.32 	69.61 	69.70 
+A,FEC_EED,MTOE,PT	19.01 	18.74 	18.96 	18.45 	18.24 	18.15 	17.36 	16.03 	15.84 	15.76 	16.00 	16.19 	16.56 	16.87 	17.13 	14.96 	15.68 	16.71 	17.20 	17.41 
+A,FEC_EED,MTOE,RO	23.71 	23.94 	23.29 	24.08 	21.92 	22.20 	22.74 	22.76 	21.80 	21.68 	21.84 	22.23 	23.32 	23.58 	23.87 	23.52 	25.36 	24.01 	23.30 	23.35 
+A,FEC_EED,MTOE,RS	9.40 	9.45 	10.05 	9.22 	8.30 	8.81 	9.13 	8.45 	8.25 	7.75 	7.95 	8.33 	8.50 	8.58 	8.53 	8.80 	9.38 	9.64 	9.50 	: 
+A,FEC_EED,MTOE,SE	32.36 	32.39 	32.47 	31.91 	30.99 	33.18 	31.78 	31.95 	31.36 	30.57 	31.17 	31.59 	31.46 	31.32 	30.85 	29.90 	31.04 	30.20 	30.26 	31.09 
+A,FEC_EED,MTOE,SI	5.13 	5.12 	5.14 	5.50 	4.86 	5.07 	5.05 	4.91 	4.81 	4.61 	4.72 	4.89 	4.96 	4.97 	4.87 	4.41 	4.73 	4.73 	4.48 	4.59 
+A,FEC_EED,MTOE,SK	10.44 	10.15 	10.23 	10.59 	9.70 	11.13 	10.45 	9.99 	10.15 	9.15 	9.57 	9.93 	10.58 	10.45 	10.25 	9.59 	10.46 	9.86 	9.10 	8.96 
+A,FEC_EED,MTOE,TR	62.37 	68.20 	72.22 	69.63 	68.96 	72.28 	77.27 	80.23 	79.55 	83.55 	90.52 	93.87 	104.19 	102.57 	103.62 	103.07 	112.54 	112.26 	114.89 	: 
+A,FEC_EED,MTOE,XK	0.98 	1.01 	1.05 	1.16 	1.19 	1.20 	1.28 	1.23 	1.18 	1.23 	1.34 	1.44 	1.52 	1.47 	1.52 	1.53 	1.66 	1.49 	1.53 	: 
+A,PEC2020-2030,PC,AL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,AT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,BA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,BE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,BG	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,CY	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,CZ	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,DE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,DK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,EE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,EL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,ES	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,EU27_2020	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,FI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,FR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,GE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,HR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,HU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,IE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,IS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,IT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,LT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,LU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,LV	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,MD	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,ME	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,MK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,MT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,NL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,NO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,PL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,PT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,RO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,RS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,SE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,SI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,SK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,TR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,UA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,UK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC2020-2030,PC,XK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,AL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,AT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,BA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,BE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,BG	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,CY	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,CZ	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,DE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,DK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,EE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,EL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,ES	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,EU27_2020	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,FI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,FR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,GE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,HR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,HU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,IE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,IS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,IT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,LT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,LU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,LV	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,MD	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,ME	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,MK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,MT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,NL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,NO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,PL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,PT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,RO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,RS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,SE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,SI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,SK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,TR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,UA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,UK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,I05,XK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,AL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,AT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,BA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,BE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,BG	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,CY	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,CZ	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,DE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,DK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,EE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,EL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,ES	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,EU27_2020	185.76 	199.40 	178.17 	176.77 	91.31 	146.28 	98.76 	83.27 	71.24 	17.87 	40.70 	52.40 	72.38 	65.51 	42.07 	-74.73 	2.20 	-52.05 	-100.02 	-109.63 
+A,PEC_DT2020,MTOE,FI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,FR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,GE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,HR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,HU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,IE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,IS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,IT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,LT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,LU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,LV	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,MD	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,ME	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,MK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,MT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,NL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,NO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,PL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,PT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,RO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,RS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,SE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,SI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,SK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,TR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,UA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,UK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,MTOE,XK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,AL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,AT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,BA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,BE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,BG	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,CY	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,CZ	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,DE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,DK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,EE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,EL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,ES	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,EU27_2020	14.16 	15.20 	13.58 	13.47 	6.96 	11.15 	7.53 	6.35 	5.43 	1.36 	3.10 	3.99 	5.52 	4.99 	3.21 	-5.70 	0.17 	-3.97 	-7.62 	-8.36 
+A,PEC_DT2020,PC,FI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,FR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,GE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,HR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,HU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,IE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,IS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,IT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,LT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,LU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,LV	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,MD	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,ME	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,MK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,MT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,NL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,NO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,PL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,PT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,RO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,RS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,SE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,SI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,SK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,TR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,UA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,UK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2020,PC,XK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,AL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,AT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,BA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,BE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,BG	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,CY	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,CZ	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,DE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,DK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,EE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,EL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,ES	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,EU27_2020	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,FI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,FR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,GE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,HR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,HU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,IE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,IS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,IT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,LT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,LU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,LV	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,MD	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,ME	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,MK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,MT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,NL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,NO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,PL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,PT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,RO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,RS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,SE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,SI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,SK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,TR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,UA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,UK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,I05,XK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,AL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,AT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,BA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,BE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,BG	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,CY	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,CZ	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,DE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,DK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,EE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,EL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,ES	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,EU27_2020	505.26 	518.90 	497.67 	496.27 	410.81 	465.78 	418.26 	402.77 	390.74 	337.37 	360.20 	371.90 	391.88 	385.01 	361.57 	244.77 	321.70 	267.45 	219.48 	209.87 
+A,PEC_DT2030,MTOE,FI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,FR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,GE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,HR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,HU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,IE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,IS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,IT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,LT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,LU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,LV	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,MD	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,ME	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,MK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,MT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,NL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,NO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,PL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,PT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,RO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,RS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,SE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,SI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,SK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,TR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,UA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,UK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,MTOE,XK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,AL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,AT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,BA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,BE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,BG	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,CY	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,CZ	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,DE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,DK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,EE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,EL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,ES	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,EU27_2020	50.91 	52.28 	50.14 	50.00 	41.39 	46.93 	42.14 	40.58 	39.37 	33.99 	36.29 	37.47 	39.48 	38.79 	36.43 	24.66 	32.41 	26.95 	22.11 	21.15 
+A,PEC_DT2030,PC,FI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,FR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,GE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,HR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,HU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,IE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,IS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,IT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,LT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,LU	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,LV	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,MD	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,ME	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,MK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,MT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,NL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,NO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,PL	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,PT	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,RO	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,RS	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,SE	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,SI	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,SK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,TR	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,UA	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,UK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_DT2030,PC,XK	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m	: m
+A,PEC_EED,I05,AL	100.00 	96.33 	90.93 	96.34 	94.60 	95.97 	103.26 	93.31 	103.60 	106.35 	99.50 	101.91 	109.85 	110.37 	108.42 	101.16 	106.07 	102.14 	100.62 	: 
+A,PEC_EED,I05,AT	100.00 	99.73 	98.39 	99.23 	93.68 	100.45 	97.74 	96.82 	98.05 	94.16 	96.79 	97.96 	100.32 	97.29 	98.66 	91.10 	96.47 	93.17 	90.91 	89.54 
+A,PEC_EED,I05,BE	100.00 	99.69 	97.60 	99.15 	97.02 	103.39 	95.90 	91.19 	94.21 	87.63 	88.44 	93.86 	93.93 	90.02 	93.82 	85.47 	94.87 	87.89 	81.84 	82.79 
+A,PEC_EED,I05,BG	100.00 	103.31 	101.55 	98.97 	88.03 	90.55 	96.67 	92.78 	85.90 	89.81 	93.46 	91.93 	95.35 	94.86 	93.91 	88.82 	96.64 	98.58 	86.74 	86.15 
+A,PEC_EED,I05,CY	100.00 	104.01 	109.22 	115.23 	111.87 	108.04 	106.86 	100.98 	87.87 	89.72 	91.88 	97.95 	102.33 	102.88 	102.42 	88.78 	93.38 	100.27 	101.72 	92.90 
+A,PEC_EED,I05,CZ	100.00 	102.29 	102.68 	100.00 	94.45 	100.06 	96.14 	94.98 	95.67 	91.69 	92.77 	93.48 	94.92 	95.22 	93.48 	88.40 	92.98 	90.84 	83.49 	82.27 
+A,PEC_EED,I05,DE	100.00 	103.46 	98.19 	99.73 	93.25 	97.99 	92.59 	93.63 	95.86 	91.29 	92.01 	92.54 	92.69 	90.78 	88.69 	81.51 	84.41 	81.15 	73.74 	72.12 
+A,PEC_EED,I05,DK	100.00 	107.16 	104.73 	102.07 	98.03 	102.51 	95.17 	91.22 	91.67 	86.98 	86.50 	88.88 	89.50 	89.52 	86.82 	79.57 	83.95 	81.77 	80.29 	79.93 
+A,PEC_EED,I05,EE	100.00 	98.88 	116.52 	101.84 	81.93 	110.49 	107.74 	98.51 	108.39 	103.79 	90.13 	112.83 	109.38 	105.97 	90.80 	81.81 	84.30 	89.45 	77.87 	81.80 
+A,PEC_EED,I05,EL	100.00 	99.94 	100.06 	100.61 	97.17 	89.92 	87.99 	87.61 	77.31 	76.88 	77.21 	76.13 	76.71 	74.64 	73.58 	63.52 	67.13 	69.11 	65.62 	69.36 
+A,PEC_EED,I05,ES	100.00 	100.41 	102.06 	98.44 	90.43 	90.42 	90.17 	90.44 	85.03 	83.67 	86.86 	87.06 	91.83 	91.38 	88.67 	77.21 	81.90 	83.66 	81.12 	82.64 
+A,PEC_EED,I05,EU27_2020	100.00 	100.91 	99.49 	99.40 	93.69 	97.36 	94.19 	93.16 	92.35 	88.79 	90.31 	91.10 	92.43 	91.97 	90.41 	82.61 	87.74 	84.12 	80.92 	80.28 
+A,PEC_EED,I05,FI	100.00 	109.28 	107.37 	102.85 	96.35 	105.61 	101.90 	98.26 	95.31 	97.36 	92.96 	96.12 	95.88 	97.78 	95.57 	89.19 	93.87 	89.97 	92.85 	90.10 
+A,PEC_EED,I05,FR	100.00 	98.19 	96.86 	97.93 	94.44 	97.54 	94.69 	94.82 	95.43 	91.58 	93.42 	91.85 	91.46 	91.28 	90.14 	80.26 	86.54 	79.03 	81.72 	80.88 
+A,PEC_EED,I05,HR	100.00 	99.64 	103.18 	100.57 	97.86 	96.88 	94.59 	89.43 	87.51 	83.09 	87.04 	87.99 	91.11 	89.42 	89.78 	84.83 	90.39 	90.79 	93.43 	95.11 
+A,PEC_EED,I05,HU	100.00 	98.65 	96.28 	95.50 	90.92 	93.46 	92.60 	87.83 	85.06 	83.50 	88.45 	89.81 	92.87 	92.94 	93.28 	90.68 	94.64 	90.63 	83.95 	84.22 
+A,PEC_EED,I05,IE	100.00 	101.18 	106.91 	104.71 	99.71 	98.40 	90.69 	91.82 	86.91 	88.13 	93.15 	98.04 	97.37 	97.86 	98.29 	90.35 	92.56 	96.05 	94.08 	95.80 
+A,PEC_EED,I05,IS	100.00 	124.69 	147.76 	165.45 	170.90 	172.08 	184.41 	180.41 	188.54 	188.48 	180.71 	170.91 	181.71 	199.24 	193.17 	182.13 	183.93 	192.28 	194.46 	: 
+A,PEC_EED,I05,IT	100.00 	98.96 	98.80 	97.39 	90.74 	92.51 	89.59 	86.58 	84.08 	78.89 	82.46 	81.86 	82.40 	81.45 	80.70 	73.19 	80.44 	76.88 	73.97 	72.60 
+A,PEC_EED,I05,LT	100.00 	98.08 	100.63 	102.66 	98.27 	76.63 	73.38 	74.36 	72.11 	71.47 	71.99 	75.04 	76.55 	79.15 	78.01 	77.37 	82.34 	78.43 	78.79 	81.50 
+A,PEC_EED,I05,LU	100.00 	98.34 	96.55 	96.64 	90.93 	96.60 	94.96 	92.58 	90.12 	87.68 	86.81 	86.99 	89.94 	93.46 	94.34 	82.44 	87.69 	79.35 	75.85 	76.51 
+A,PEC_EED,I05,LV	100.00 	103.65 	106.23 	101.86 	98.70 	101.43 	95.28 	98.84 	97.04 	97.02 	94.98 	95.61 	99.40 	104.44 	101.45 	94.91 	99.44 	95.15 	95.10 	94.82 
+A,PEC_EED,I05,ME	100.00 	104.11 	107.15 	117.04 	90.88 	106.54 	106.93 	101.72 	94.91 	92.58 	96.97 	93.87 	97.98 	101.35 	104.87 	97.20 	104.33 	101.71 	105.44 	: 
+A,PEC_EED,I05,MK	100.00 	101.70 	106.44 	103.92 	96.41 	98.60 	105.78 	102.08 	94.52 	92.03 	90.01 	88.87 	92.92 	88.03 	97.09 	88.06 	91.11 	93.49 	92.02 	: 
+A,PEC_EED,I05,MT	100.00 	100.97 	103.64 	104.64 	96.51 	101.52 	101.32 	105.99 	95.54 	96.88 	82.11 	77.51 	87.92 	90.02 	95.35 	80.93 	83.82 	96.89 	98.24 	101.06 
+A,PEC_EED,I05,NL	100.00 	99.16 	98.95 	99.68 	96.46 	102.30 	95.65 	95.21 	94.44 	88.89 	91.38 	92.85 	93.22 	92.37 	90.90 	83.36 	86.71 	80.13 	76.75 	75.15 
+A,PEC_EED,I05,NO	100.00 	100.85 	93.06 	104.17 	102.80 	109.65 	94.58 	101.31 	106.18 	96.45 	85.11 	95.66 	100.79 	100.73 	95.05 	92.92 	96.74 	86.43 	91.74 	: 
+A,PEC_EED,I05,PL	100.00 	104.99 	104.48 	105.83 	101.79 	109.79 	109.77 	105.51 	106.19 	101.75 	102.39 	107.82 	112.64 	118.31 	113.92 	110.10 	118.18 	111.90 	105.96 	104.97 
+A,PEC_EED,I05,PT	100.00 	96.75 	96.02 	94.96 	95.08 	91.16 	88.58 	84.67 	84.65 	83.22 	87.12 	87.55 	91.81 	91.20 	88.81 	78.46 	78.59 	83.56 	83.34 	83.60 
+A,PEC_EED,I05,RO	100.00 	104.09 	103.82 	103.49 	90.54 	91.37 	92.98 	92.22 	84.33 	83.38 	85.27 	85.00 	90.01 	90.33 	88.93 	85.77 	91.76 	85.96 	83.05 	82.18 
+A,PEC_EED,I05,RS	100.00 	105.58 	103.19 	101.73 	93.36 	94.51 	98.87 	91.17 	91.84 	81.95 	90.73 	93.13 	95.10 	94.42 	93.97 	97.18 	99.05 	100.91 	98.41 	: 
+A,PEC_EED,I05,SE	100.00 	97.38 	96.77 	96.44 	87.90 	98.67 	97.03 	96.83 	94.75 	93.77 	89.44 	92.53 	94.56 	96.40 	93.43 	84.27 	88.38 	86.85 	84.52 	85.42 
+A,PEC_EED,I05,SI	100.00 	99.19 	100.46 	106.56 	94.13 	97.02 	97.97 	94.11 	91.74 	88.17 	87.62 	90.46 	93.01 	91.97 	90.25 	84.85 	87.50 	85.61 	81.65 	84.60 
+A,PEC_EED,I05,SK	100.00 	99.02 	94.34 	97.54 	89.13 	99.78 	95.55 	93.81 	94.09 	87.30 	90.75 	92.03 	96.38 	93.48 	91.75 	87.15 	94.38 	88.45 	87.63 	84.72 
+A,PEC_EED,I05,TR	100.00 	109.02 	118.31 	116.51 	115.01 	121.55 	131.93 	136.86 	132.11 	144.38 	155.06 	162.70 	180.00 	177.39 	179.13 	175.10 	193.09 	191.06 	193.93 	: 
+A,PEC_EED,I05,XK	100.00 	101.06 	105.11 	113.86 	126.05 	129.18 	128.16 	120.68 	116.82 	112.40 	127.45 	137.05 	130.14 	130.81 	134.77 	134.59 	145.40 	135.67 	129.24 	: 
+A,PEC_EED,MTOE,AL	2.13 	2.05 	1.93 	2.05 	2.01 	2.04 	2.20 	1.99 	2.20 	2.26 	2.12 	2.17 	2.34 	2.35 	2.31 	2.15 	2.26 	2.17 	2.14 	: 
+A,PEC_EED,MTOE,AT	32.71 	32.63 	32.18 	32.46 	30.65 	32.86 	31.97 	31.67 	32.07 	30.80 	31.66 	32.04 	32.82 	31.83 	32.27 	29.80 	31.56 	30.48 	29.74 	29.29 
+A,PEC_EED,MTOE,BA	: 	: 	: 	: 	: 	: 	: 	: 	: 	5.94 	6.11 	6.69 	6.69 	7.38 	7.14 	7.00 	7.28 	7.22 	6.85 	: 
+A,PEC_EED,MTOE,BE	51.62 	51.46 	50.38 	51.19 	50.08 	53.37 	49.50 	47.07 	48.63 	45.24 	45.66 	48.45 	48.49 	46.47 	48.43 	44.12 	48.97 	45.37 	42.25 	42.74 
+A,PEC_EED,MTOE,BG	19.22 	19.85 	19.51 	19.02 	16.91 	17.40 	18.57 	17.83 	16.51 	17.26 	17.96 	17.67 	18.32 	18.23 	18.04 	17.07 	18.57 	18.94 	16.67 	16.55 
+A,PEC_EED,MTOE,CY	2.48 	2.57 	2.70 	2.85 	2.77 	2.67 	2.65 	2.50 	2.18 	2.22 	2.27 	2.42 	2.53 	2.55 	2.54 	2.20 	2.31 	2.48 	2.52 	2.30 
+A,PEC_EED,MTOE,CZ	42.51 	43.49 	43.65 	42.51 	40.16 	42.54 	40.87 	40.38 	40.67 	38.98 	39.44 	39.74 	40.36 	40.48 	39.74 	37.58 	39.53 	38.62 	35.50 	34.97 
+A,PEC_EED,MTOE,DE	321.62 	332.75 	315.79 	320.76 	299.92 	315.15 	297.80 	301.12 	308.29 	293.60 	295.93 	297.63 	298.12 	291.95 	285.24 	262.15 	271.49 	261.00 	237.15 	231.96 
+A,PEC_EED,MTOE,DK	19.44 	20.83 	20.36 	19.85 	19.06 	19.93 	18.50 	17.74 	17.82 	16.91 	16.82 	17.28 	17.40 	17.41 	16.88 	15.47 	16.32 	15.90 	15.61 	15.54 
+A,PEC_EED,MTOE,EE	5.28 	5.22 	6.15 	5.38 	4.33 	5.83 	5.69 	5.20 	5.72 	5.48 	4.76 	5.96 	5.78 	5.60 	4.79 	4.32 	4.45 	4.72 	4.11 	4.32 
+A,PEC_EED,MTOE,EL	30.29 	30.27 	30.31 	30.48 	29.43 	27.24 	26.65 	26.54 	23.42 	23.29 	23.39 	23.06 	23.24 	22.61 	22.29 	19.24 	20.33 	20.94 	19.88 	21.01 
+A,PEC_EED,MTOE,ES	136.03 	136.59 	138.84 	133.92 	123.01 	123.01 	122.66 	123.03 	115.67 	113.82 	118.16 	118.43 	124.92 	124.30 	120.63 	105.03 	111.41 	113.81 	110.35 	112.42 
+A,PEC_EED,MTOE,EU27_2020	1497.76 	1511.40 	1490.17 	1488.77 	1403.31 	1458.28 	1410.76 	1395.27 	1383.24 	1329.87 	1352.70 	1364.40 	1384.38 	1377.51 	1354.07 	1237.27 	1314.20 	1259.95 	1211.98 	1202.37 
+A,PEC_EED,MTOE,FI	33.56 	36.67 	36.03 	34.52 	32.33 	35.44 	34.20 	32.98 	31.99 	32.67 	31.20 	32.26 	32.18 	32.82 	32.07 	29.93 	31.50 	30.20 	31.16 	30.24 
+A,PEC_EED,MTOE,FR	260.87 	256.14 	252.68 	255.46 	246.35 	254.46 	247.02 	247.36 	248.96 	238.90 	243.71 	239.60 	238.60 	238.13 	235.16 	209.37 	225.76 	206.16 	213.18 	211.00 
+A,PEC_EED,MTOE,GE	: 	: 	: 	: 	: 	: 	: 	: 	4.02 	4.29 	4.52 	4.69 	4.75 	4.70 	4.88 	4.70 	5.12 	5.58 	: 	: 
+A,PEC_EED,MTOE,HR	9.14 	9.11 	9.43 	9.20 	8.95 	8.86 	8.65 	8.18 	8.00 	7.60 	7.96 	8.05 	8.33 	8.18 	8.21 	7.76 	8.27 	8.30 	8.54 	8.70 
+A,PEC_EED,MTOE,HU	26.34 	25.98 	25.36 	25.16 	23.95 	24.62 	24.39 	23.13 	22.41 	21.99 	23.30 	23.66 	24.46 	24.48 	24.57 	23.89 	24.93 	23.87 	22.11 	22.18 
+A,PEC_EED,MTOE,IE	14.95 	15.12 	15.98 	15.65 	14.91 	14.71 	13.56 	13.73 	12.99 	13.17 	13.92 	14.66 	14.56 	14.63 	14.69 	13.51 	13.84 	14.36 	14.06 	14.32 
+A,PEC_EED,MTOE,IS	3.21 	4.00 	4.75 	5.31 	5.49 	5.53 	5.92 	5.79 	6.05 	6.05 	5.80 	5.49 	5.84 	6.40 	6.20 	5.85 	5.91 	6.17 	6.24 	: 
+A,PEC_EED,MTOE,IT	180.83 	178.95 	178.67 	176.12 	164.08 	167.28 	162.00 	156.56 	152.05 	142.66 	149.12 	148.04 	149.01 	147.29 	145.94 	132.35 	145.47 	139.03 	133.77 	131.29 
+A,PEC_EED,MTOE,LT	8.05 	7.89 	8.10 	8.26 	7.91 	6.17 	5.91 	5.98 	5.80 	5.75 	5.79 	6.04 	6.16 	6.37 	6.28 	6.23 	6.63 	6.31 	6.34 	6.56 
+A,PEC_EED,MTOE,LU	4.77 	4.69 	4.61 	4.61 	4.34 	4.61 	4.53 	4.42 	4.30 	4.19 	4.14 	4.15 	4.29 	4.46 	4.50 	3.94 	4.19 	3.79 	3.62 	3.65 
+A,PEC_EED,MTOE,LV	4.49 	4.66 	4.77 	4.58 	4.43 	4.56 	4.28 	4.44 	4.36 	4.36 	4.27 	4.29 	4.47 	4.69 	4.56 	4.26 	4.47 	4.27 	4.27 	4.26 
+A,PEC_EED,MTOE,MD	: 	: 	: 	: 	: 	2.51 	2.56 	2.49 	2.52 	2.54 	2.57 	2.67 	2.81 	2.92 	2.78 	2.64 	2.95 	2.64 	2.52 	: 
+A,PEC_EED,MTOE,ME	1.02 	1.06 	1.10 	1.20 	0.93 	1.09 	1.09 	1.04 	0.97 	0.95 	0.99 	0.96 	1.00 	1.04 	1.07 	0.99 	1.07 	1.04 	1.08 	: 
+A,PEC_EED,MTOE,MK	2.89 	2.94 	3.07 	3.00 	2.78 	2.85 	3.05 	2.95 	2.73 	2.66 	2.60 	2.57 	2.68 	2.54 	2.80 	2.54 	2.63 	2.70 	2.66 	: 
+A,PEC_EED,MTOE,MT	0.92 	0.92 	0.95 	0.96 	0.88 	0.93 	0.93 	0.97 	0.87 	0.89 	0.75 	0.71 	0.81 	0.82 	0.87 	0.74 	0.77 	0.89 	0.90 	0.93 
+A,PEC_EED,MTOE,NL	70.11 	69.52 	69.37 	69.88 	67.63 	71.72 	67.05 	66.75 	66.21 	62.32 	64.06 	65.10 	65.35 	64.76 	63.73 	58.44 	60.79 	56.18 	53.81 	52.68 
+A,PEC_EED,MTOE,NO	27.15 	27.38 	25.27 	28.28 	27.91 	29.77 	25.68 	27.51 	28.83 	26.19 	23.11 	25.97 	27.37 	27.35 	25.81 	25.23 	26.27 	23.47 	24.91 	: 
+A,PEC_EED,MTOE,PL	87.96 	92.34 	91.90 	93.09 	89.53 	96.56 	96.55 	92.80 	93.40 	89.49 	90.05 	94.83 	99.08 	104.06 	100.19 	96.84 	103.94 	98.42 	93.20 	92.32 
+A,PEC_EED,MTOE,PT	24.85 	24.04 	23.86 	23.60 	23.63 	22.65 	22.01 	21.04 	21.04 	20.68 	21.65 	21.76 	22.81 	22.66 	22.07 	19.50 	19.53 	20.77 	20.71 	20.78 
+A,PEC_EED,MTOE,RO	36.06 	37.53 	37.44 	37.32 	32.65 	32.95 	33.53 	33.26 	30.41 	30.07 	30.75 	30.65 	32.46 	32.57 	32.07 	30.93 	33.09 	31.00 	29.95 	29.63 
+A,PEC_EED,MTOE,RS	15.66 	16.53 	16.16 	15.93 	14.62 	14.80 	15.48 	14.28 	14.38 	12.83 	14.21 	14.58 	14.89 	14.79 	14.72 	15.22 	15.51 	15.80 	15.41 	: 
+A,PEC_EED,MTOE,SE	48.99 	47.71 	47.41 	47.25 	43.06 	48.34 	47.54 	47.44 	46.42 	45.94 	43.82 	45.34 	46.33 	47.23 	45.77 	41.28 	43.30 	42.55 	41.41 	41.85 
+A,PEC_EED,MTOE,SI	7.25 	7.19 	7.28 	7.73 	6.82 	7.03 	7.10 	6.82 	6.65 	6.39 	6.35 	6.56 	6.74 	6.67 	6.54 	6.15 	6.34 	6.21 	5.92 	6.13 
+A,PEC_EED,MTOE,SK	17.41 	17.24 	16.43 	16.99 	15.52 	17.38 	16.64 	16.34 	16.39 	15.20 	15.80 	16.03 	16.78 	16.28 	15.98 	15.18 	16.44 	15.40 	15.26 	14.75 
+A,PEC_EED,MTOE,TR	80.85 	88.13 	95.65 	94.19 	92.98 	98.27 	106.66 	110.64 	106.80 	116.72 	125.36 	131.54 	145.52 	143.42 	144.82 	141.56 	156.10 	154.46 	156.79 	: 
+A,PEC_EED,MTOE,XK	1.94 	1.96 	2.04 	2.21 	2.45 	2.51 	2.49 	2.34 	2.27 	2.18 	2.48 	2.66 	2.53 	2.54 	2.62 	2.61 	2.82 	2.64 	2.51 	: 
