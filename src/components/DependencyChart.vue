@@ -2,7 +2,14 @@
   <div class="dependency-chart">
     <div class="chart-header">
       <h4>Import Dependency by Energy Source</h4>
-      <p class="chart-subtitle">Share of imports vs domestic production · <span class="chart-formula">(<em>Imports</em> − <em>Exports</em>) ÷ <em>Gross Available Energy</em></span></p>
+      <p class="chart-subtitle">
+        Share of imports vs domestic production · <span class="chart-formula"><em>Net Imports</em> ÷ <em>Gross Available Energy</em></span>
+        <br>
+        <span class="formula-detail"><em>Net Imports</em> = Imports − Exports · <em>Gross Available Energy</em> ≈ Primary production + Net imports ± Stock changes</span>
+        <br>
+        <a href="https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Energy_dependency_rate" target="_blank" rel="noopener" class="source-link">https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Energy_dependency_rate</a>
+      </p>
+      
     </div>
 
     <div v-if="!hasData" class="no-data">
@@ -795,6 +802,32 @@ onUnmounted(() => {
   margin: 0;
   color: #666;
   font-size: 0.85rem;
+}
+
+.chart-subtitle .source-link {
+  display: block;
+  margin-top: 0.2rem;
+  color: #1a73e8;
+  text-decoration: none;
+  font-size: 0.7rem;
+}
+
+.chart-subtitle .source-link:hover {
+  text-decoration: underline;
+}
+
+.formula-detail {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 0.75rem;
+  color: #888;
+  font-family: 'Times New Roman', 'Georgia', serif;
+  font-style: italic;
+}
+
+.formula-detail em {
+  font-style: italic;
+  color: #777;
 }
 
 .chart-formula {
