@@ -412,7 +412,29 @@ def calculate_shares_and_rankings(trade_data):
 
             year_data['imports']['total_by_type'] = total_by_type
 
-            # Calculate partner shares
+            # Calculate per-type partner shares (for map arrows)
+            partners_by_type = {}
+            for energy_type, partners in energy_types.items():
+                type_total = trade_data['imports_totals'].get(geo, {}).get(year, {}).get(energy_type, 0)
+                if type_total > 0:
+                    type_partners = []
+                    for partner, value in partners.items():
+                        share = (value / type_total) * 100
+                        if share > 0:
+                            type_partners.append({
+                                'geo': partner,
+                                'name': COUNTRY_NAMES.get(partner, partner),
+                                'value': round(value, 2),
+                                'share_pct': round(share, 2)
+                            })
+                    type_partners.sort(key=lambda x: x['share_pct'], reverse=True)
+                    if type_partners:
+                        partners_by_type[energy_type] = type_partners
+
+            if partners_by_type:
+                year_data['imports']['partners_by_type'] = partners_by_type
+
+            # Calculate partner shares (aggregated across all types)
             grand_total = sum(all_partners.values())
             if grand_total > 0:
                 partner_shares = []
@@ -448,6 +470,28 @@ def calculate_shares_and_rankings(trade_data):
                         all_partners_exp[partner] += value
 
                 year_data['exports']['total_by_type'] = total_by_type_exp
+
+                # Calculate per-type partner shares for exports
+                partners_by_type_exp = {}
+                for energy_type, partners in exp_energy_types.items():
+                    type_total = trade_data['exports_totals'].get(geo, {}).get(year, {}).get(energy_type, 0)
+                    if type_total > 0:
+                        type_partners = []
+                        for partner, value in partners.items():
+                            share = (value / type_total) * 100
+                            if share > 0:
+                                type_partners.append({
+                                    'geo': partner,
+                                    'name': COUNTRY_NAMES.get(partner, partner),
+                                    'value': round(value, 2),
+                                    'share_pct': round(share, 2)
+                                })
+                        type_partners.sort(key=lambda x: x['share_pct'], reverse=True)
+                        if type_partners:
+                            partners_by_type_exp[energy_type] = type_partners
+
+                if partners_by_type_exp:
+                    year_data['exports']['partners_by_type'] = partners_by_type_exp
 
                 grand_total_exp = sum(all_partners_exp.values())
                 if grand_total_exp > 0:
