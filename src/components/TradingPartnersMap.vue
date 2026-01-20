@@ -820,8 +820,6 @@ function drawFlowArrow(group, from, to, flow, widthScale, offset, typeCode, colo
   const dy = to[1] - from[1]
   const dist = Math.sqrt(dx * dx + dy * dy)
 
-  if (dist < 10) return // Skip very short arrows
-
   // Normalize and perpendicular
   const perpX = -dy / dist
   const perpY = dx / dist
