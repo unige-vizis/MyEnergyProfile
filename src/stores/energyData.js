@@ -3,7 +3,8 @@ import { ref, computed } from 'vue'
 
 export const useEnergyDataStore = defineStore('energyData', () => {
   const rawData = ref(null)
-  const selectedCountryCode = ref('DE')
+  const selectedCountryCode = ref('IT')
+  const selectedYear = ref(2023)
   const isLoading = ref(false)
   const error = ref(null)
 
@@ -30,6 +31,32 @@ export const useEnergyDataStore = defineStore('energyData', () => {
 
   const metadata = computed(() => rawData.value?.metadata || null)
 
+  // Available years for the selected country (newest first)
+  const availableYears = computed(() => {
+    if (!selectedCountry.value?.years) return []
+    return Object.keys(selectedCountry.value.years)
+      .map(Number)
+      .sort((a, b) => b - a)
+  })
+
+  // Dependency data for the selected country and year
+  const dependencyData = computed(() => {
+    if (!selectedCountry.value?.years || !selectedYear.value) return null
+    const yearData = selectedCountry.value.years[selectedYear.value]
+    return yearData?.dependency || null
+  })
+
+  // Trade data (imports/exports with partners) for the selected country and year
+  const tradeData = computed(() => {
+    if (!selectedCountry.value?.years || !selectedYear.value) return null
+    const yearData = selectedCountry.value.years[selectedYear.value]
+    if (!yearData) return null
+    return {
+      imports: yearData.imports || null,
+      exports: yearData.exports || null
+    }
+  })
+
   async function loadData() {
     if (rawData.value) return
 
@@ -54,15 +81,24 @@ export const useEnergyDataStore = defineStore('energyData', () => {
     selectedCountryCode.value = code
   }
 
+  function setSelectedYear(year) {
+    selectedYear.value = year
+  }
+
   return {
     rawData,
     selectedCountryCode,
+    selectedYear,
     isLoading,
     error,
     countries,
     selectedCountry,
     metadata,
+    availableYears,
+    dependencyData,
+    tradeData,
     loadData,
-    setSelectedCountry
+    setSelectedCountry,
+    setSelectedYear
   }
 })
