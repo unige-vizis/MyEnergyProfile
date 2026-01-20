@@ -368,9 +368,7 @@ const totalExportVolume = computed(() => {
 
 function formatVolume(value) {
   if (value === null || value === undefined) return 'N/A'
-  if (value >= 1000000) return (value / 1000000).toFixed(1) + 'M'
-  if (value >= 1000) return (value / 1000).toFixed(1) + 'K'
-  return value.toFixed(1)
+  return String(Math.round(value)).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 }
 
 // Helper to check regional aggregate
