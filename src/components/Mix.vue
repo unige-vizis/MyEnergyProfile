@@ -1,71 +1,65 @@
 <template>
   <section id="mix" class="page-section">
     <h2>My energy mix</h2>
-    <p>
-      This section provides an overview of your energy mix over the past year. You can analyze your renewable and
-      non-renewable energy sources, peak consumption periods, and compare your data with average household consumption.
-    </p>
 
-    <div class="mix-controls">
-      <CountrySelector />
-      <YearPicker
-        v-model="selectedYear"
-        :years="availableYears"
-      />
-    </div>
+    <!-- Subsection: Where does my Energy Come from -->
+    <div class="mix-subsection">
+      <h3>Where does my Energy Come from</h3>
+      <p>
+        See how much of your country's energy is imported versus produced domestically.
+        Import dependency shows what share of each fuel type comes from abroad, helping
+        you understand your nation's energy security and reliance on foreign sources.
+      </p>
 
-    <div v-if="store.isLoading" class="loading">Loading energy data...</div>
-    <div v-else-if="store.error" class="error">{{ store.error }}</div>
-    <div v-else-if="dependencyData" class="chart-section">
-      <DependencyChart
-        :dependencyData="dependencyData"
-        :year="selectedYear"
-      />
+      <div v-if="store.isLoading" class="loading">Loading energy data...</div>
+      <div v-else-if="store.error" class="error">{{ store.error }}</div>
+      <template v-else>
+        <div v-if="store.dependencyData" class="chart-section">
+          <DependencyChart
+            :dependencyData="store.dependencyData"
+            :year="store.selectedYear"
+          />
+        </div>
+
+        <div class="chart-section">
+          <TradingPartnersMap
+            :tradeData="store.tradeData"
+            :country="store.selectedCountry"
+            :year="store.selectedYear"
+          />
+        </div>
+      </template>
     </div>
   </section>
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted } from 'vue'
 import { useEnergyDataStore } from '@/stores/energyData'
-import CountrySelector from './CountrySelector.vue'
 import DependencyChart from './DependencyChart.vue'
-import YearPicker from './YearPicker.vue'
+import TradingPartnersMap from './TradingPartnersMap.vue'
 
 const store = useEnergyDataStore()
-
-const selectedYear = ref(null)
-
-const availableYears = computed(() => {
-  if (!store.selectedCountry?.years) return []
-  return Object.keys(store.selectedCountry.years)
-    .map(Number)
-    .sort((a, b) => b - a)
-})
-
-const dependencyData = computed(() => {
-  if (!store.selectedCountry?.years || !selectedYear.value) return null
-  const yearData = store.selectedCountry.years[selectedYear.value]
-  return yearData?.dependency || null
-})
-
-watch(availableYears, (years) => {
-  if (years.length > 0 && !years.includes(selectedYear.value)) {
-    selectedYear.value = years[0]
-  }
-}, { immediate: true })
-
-onMounted(() => {
-  store.loadData()
-})
 </script>
 
 <style scoped>
-.mix-controls {
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  margin: 1.5rem 0;
+.mix-subsection {
+  margin-bottom: 3rem;
+}
+
+.mix-subsection:last-child {
+  margin-bottom: 0;
+}
+
+.mix-subsection h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.75rem;
+  color: #2c3e50;
+}
+
+.mix-subsection > p {
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1rem;
 }
 
 .loading,
