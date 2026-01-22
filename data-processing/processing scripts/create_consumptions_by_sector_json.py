@@ -5,6 +5,7 @@ Input files:
 - transport_energy.csv (1283 rows)
 - residential_energy.csv (856 rows)
 - industrial_energy.csv (917 rows)
+- service_energy.csv (673 rows)
 1283 + 856 + 917 - 6 = 3050 rows total
 
 Output:
@@ -23,7 +24,7 @@ from collections import defaultdict
 # Configuration
 # ============================================================================
 
-BASE_PATH = Path(__file__).parent.parent / 'base-data' / '02_Energy-Sector-Consumption' / 'end_uses_efficiency'
+BASE_PATH = Path(__file__).parent.parent / 'raw-data' / 'end_uses_efficiency'
 
 # Estimated row counts for progress calculation (update if data changes)
 ESTIMATED_TRADE_ROWS = 4_461
@@ -32,6 +33,7 @@ OUTPUT_PATH = Path(__file__).parent.parent / 'prepared-sets'
 ENERGY_FILE = BASE_PATH / 'industry_energy.csv'
 RESIDENTIAL_FILE = BASE_PATH / 'residential_energy.csv'
 TRANSPORT_FILE = BASE_PATH / 'transport_energy.csv'
+SERVICE_FILE = BASE_PATH / 'services_energy.csv'
 
 # Country name lookup (ISO 2-letter to full name)
 COUNTRY_NAMES = {
@@ -63,7 +65,7 @@ COUNTRY_NAMES = {
 ROWS = [
     'Country', 
     'End use', 
-    'Product/Activity',
+    'Product',
     '2000', 
     '2005', 
     '2010', 
@@ -137,6 +139,8 @@ def load_data():
             lines = f.readlines()
         if lines and lines[0].strip().startswith('Source:'):
             lines = lines[1:]
+        if lines and lines[0].strip().startswith('Country'):
+            lines = lines[1:]
         import io
         return pd.read_csv(io.StringIO(''.join(lines)), names=ROWS, header=None)
 
@@ -144,21 +148,19 @@ def load_data():
     ef = load_csv_clean(ENERGY_FILE)
     rf = load_csv_clean(RESIDENTIAL_FILE)
     tf = load_csv_clean(TRANSPORT_FILE)
+    sf = load_csv_clean(SERVICE_FILE)
 
     ef = ef.dropna(how='all')
     rf = rf.dropna(how='all')
     tf = tf.dropna(how='all')
+    sf = sf.dropna(how='all')
 
     ef['type'] = 'Industry'
     rf['type'] = 'Residential'
     tf['type'] = 'Transport'
+    sf['type'] = 'Service'
 
-    # Remove rows that do not contain 'total final use' in Product/Activity
-    ef = ef[ef['Product/Activity'].str.contains('Total final use', na=False)]
-    rf = rf[rf['Product/Activity'].str.contains('Total final use', na=False)]
-    tf = tf[tf['Product/Activity'].str.contains('Total final use', na=False)]
-    
-    data = pd.concat([ef, rf, tf], ignore_index=True)
+    data = pd.concat([ef, rf, tf, sf], ignore_index=True)
 
     print(f'  Loaded {len(data):,} rows from all files')
     return data
@@ -174,6 +176,7 @@ def get_meta_data(data):
     industry_end_uses = set()
     residential_end_uses = set()
     transport_end_uses = set()
+    services_end_uses = set()
     countries = set()
 
     for _, row in data.iterrows():
@@ -186,26 +189,30 @@ def get_meta_data(data):
             residential_end_uses.add(enduse)
         elif 'Transport' == type:
             transport_end_uses.add(enduse)
-        
+        elif 'Service' == type:
+            services_end_uses.add(enduse)
+
     country_codes = {
         code: country
         for code, country in COUNTRY_NAMES.items()
         if country.lower() in countries
     }
-    # remove doubled values
-
 
     print(f'  Industry end uses: {len(industry_end_uses)}')
     print(f'  Residential end uses: {len(residential_end_uses)}')
     print(f'  Transport end uses: {len(transport_end_uses)}')
+    print(f'  Service end uses: {len(services_end_uses)}')
+    print(f'  Countries: {len(countries)}')
     print(f'  Countries with Codes: {len(country_codes)}')
     if( len(countries) != len(country_codes)):
         print(f'  WARNING: Some countries are missing codes! {len(countries) - len(country_codes)} missing.')
+        print(f'  Missing countries: {[c for c in countries if c not in [v.lower() for v in country_codes.values()]]}')
 
     return {
         'industry_end_uses': industry_end_uses,
         'residential_end_uses': residential_end_uses,
         'transport_end_uses': transport_end_uses,
+        'service_end_uses': services_end_uses,
         'country_codes': country_codes,
     }
 
@@ -221,7 +228,7 @@ def build_json_output(data, meta_data):
     all_years = ['2000', '2005', '2010', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023']
     print(f'  Countries: {len(all_countries)}, Years: {all_years[0]}-{all_years[-1]}')
 
-    # Build country data 'AU' -> {residential: {'end_use': {'product': Total final use (PJ), 'years': {'2000': 59.74, ...}}}, industry: y, transport: z}
+    # Build country data 'AU' -> {residential: {'year': {'end_use': {'product': Total final use (PJ), 'value': 59.74}}}, industry: y, transport: z}
     countries = {}
     for country in all_countries:
         countries[country] = {}
@@ -231,13 +238,14 @@ def build_json_output(data, meta_data):
             end_use = row['End use']
             if type not in countries[country]:
                 countries[country][type] = {}
-            if end_use not in countries[country][type]:
-                countries[country][type][end_use] = {
-                    'product_activity': row['Product/Activity'],
-                    'years': {}
-                }
             for year in all_years:
-                countries[country][type][end_use]['years'][year] = None if pd.isna(row[str(year)]) or str(row[str(year)]).strip() == '..' else row[str(year)]
+                if year not in countries[country][type]:
+                    countries[country][type][year] = {}
+                val = None if pd.isna(row[str(year)]) or str(row[str(year)]).strip() == '..' else float(row[str(year)])
+                if end_use not in countries[country][type][year]:
+                    countries[country][type][year][end_use] = {'products': {}}
+                if val is not None:
+                    countries[country][type][year][end_use]['products'][row['Product']] = val
 
     sorted_countries = sorted(all_countries)
     total_countries = len(sorted_countries)
@@ -254,6 +262,7 @@ def build_json_output(data, meta_data):
             'industries_end_uses': list(meta_data['industry_end_uses']),
             'residential_end_uses': list(meta_data['residential_end_uses']),
             'transport_end_uses': list(meta_data['transport_end_uses']),
+            'service_end_uses': list(meta_data['service_end_uses']),
         },
         'countries': countries,
         'country_lookup': {k: v for k, v in meta_data['country_codes'].items() if k in meta_data['country_codes']},
