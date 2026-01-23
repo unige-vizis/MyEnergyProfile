@@ -3,7 +3,7 @@
     <h2>My energy consumption</h2>
     <div class="section-container">
       <div class="charts-container">
-        <PieChart :data="sectorTotalsData" :year="store.selectedYear" />
+        <SunburstChart :data="filteredData" :year="store.selectedYear" />
         <div class="interactive-graphic">
           <img
             src="../../assets/img/consumption_background.svg"
@@ -46,8 +46,8 @@
               class="interactive-image svg-glow"
             />
           </div>
+          <PieChart :data="sectorEnergyType" :year="store.selectedYear" :selectedSector="selectedSector" />
         </div>
-        <SunburstChart :data="filteredData" :year="store.selectedYear" />
       </div>
       <div class="text-container">
         <p>
@@ -82,7 +82,49 @@ onMounted(async () => {
   }
 })
 
-const sectorTotalsData = computed(() => {
+const sectorEnergyType = computed(() => {
+  if (!consumptionsData.value || !selectedCountry.value || !store.selectedYear) return []
+
+  const countryData = consumptionsData.value.countries[selectedCountry.value]
+  if (!countryData) return []
+
+  const sectors = ['Industry', 'Residential', 'Transport', 'Service']
+
+  return sectors.map(sector => {
+    const sectorData = countryData[sector]
+    if (!sectorData) return null
+
+    const yearData = sectorData[store.selectedYear]
+    if (!yearData) return null
+
+    const products = {}
+
+    Object.entries(yearData).forEach(([endUseName, endUseData]) => {
+      if (
+        endUseName.includes('Manufacturing') ||
+        endUseName.includes('Total residential') ||
+        endUseName.includes('Total passenger and freight transport') ||
+        endUseName.includes('Total services')
+      ) {
+        Object.entries(endUseData.products).forEach(([productName, productValue]) => {
+          if (!productName.includes('Total')) {
+            products[productName] = productValue || 0
+          }
+        })
+      }
+    })
+
+    return {
+      name: sector,
+      energyType: Object.entries(products).map(([name, value]) => ({
+        name,
+        value
+      }))
+    }
+  })
+})
+
+const filteredData = computed(() => {
   if (!consumptionsData.value || !selectedCountry.value || !store.selectedYear) return []
 
   const countryData = consumptionsData.value.countries[selectedCountry.value]
@@ -96,54 +138,53 @@ const sectorTotalsData = computed(() => {
     const yearData = sectorData[store.selectedYear]
     if (!yearData) return null
 
-    // Sum all end uses for this sector
+    // Collect children AND calculate total
+    const sectorChildren = []
     let total = 0
-    Object.values(yearData).forEach(endUseData => {
-      const products = endUseData.products || {}
-      total += products['Total final use (PJ)'] || 0
-    })
+
+    switch (sector) {
+      case 'Industry':
+        Object.entries(yearData).forEach(([endUseName, endUseData]) => {
+          if (!endUseName.includes('Manufacturing')) {
+            const products = endUseData.products || {}
+            const endUseTotal = products['Total final use (PJ)'] || 0
+            sectorChildren.push({ name: endUseName, value: endUseTotal })
+            total += endUseTotal
+          }
+        })
+        break
+      case 'Transport':
+        Object.entries(yearData).forEach(([endUseName, endUseData]) => {
+          if (!endUseName.includes('Total') || endUseName === "Total trains" || endUseName === "Total airplanes" || endUseName === "Total ships") {
+            const products = endUseData.products || {}
+            const endUseTotal = products['Total final use (PJ)'] || 0
+            sectorChildren.push({ name: endUseName, value: endUseTotal })
+            total += endUseTotal
+          }
+        })
+        break
+      default: // Residential, Service
+        Object.entries(yearData).forEach(([endUseName, endUseData]) => {
+          if (!endUseName.includes('Total residential') && !endUseName.includes('Total services')) {
+            const products = endUseData.products || {}
+            const endUseTotal = products['Total final use (PJ)'] || 0
+            sectorChildren.push({ name: endUseName, value: endUseTotal })
+            total += endUseTotal
+          }
+        })
+        break
+    }
 
     return {
       name: sector,
-      value: total
+      value: total,
+      children: sectorChildren
     }
-  }).filter(d => d && d.value > 0)
+  }).filter(sector => sector && sector.children.length > 0)
 
   return {
-    name: 'Sectors',
+    name: selectedCountry.value + ' ' + store.selectedYear,
     children: children
-  }
-})
-
-const filteredData = computed(() => {
-  if (!consumptionsData.value || !selectedCountry.value || !selectedSector.value || !store.selectedYear) return {}
-
-  const countryData = consumptionsData.value.countries[selectedCountry.value]
-  if (!countryData || !countryData[selectedSector.value]) return {}
-
-  const sectorData = countryData[selectedSector.value]
-  const yearData = sectorData[store.selectedYear]
-  if (!yearData) return {}
-
-  // Transform data for sunburst chart
-  const children = Object.entries(yearData).map(([endUse, endUseData]) => {
-    const products = endUseData.products || {}
-    const productChildren = Object.entries(products)
-      .filter(([key, value]) => key !== 'Total final use (PJ)' && value !== null && value !== 0)
-      .map(([product, value]) => ({
-        name: product.replace(' (PJ)', ''),
-        value: value
-      }))
-
-    return {
-      name: endUse,
-      children: productChildren.length > 0 ? productChildren : [{ name: 'Total', value: products['Total final use (PJ)'] || 0 }]
-    }
-  })
-
-  return {
-    name: selectedSector.value,
-    children: children.filter(child => child.children && child.children.length > 0)
   }
 })
 </script>

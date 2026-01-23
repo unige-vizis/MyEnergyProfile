@@ -1,6 +1,6 @@
 <template>
   <div class="chart">
-    <svg ref="svgRef" width="400" height="400"></svg>
+    <svg ref="svgRef" width="550" height="400"></svg>
   </div>
 </template>
 
@@ -16,13 +16,17 @@ const props = defineProps({
   year: {
     type: [String, Number],
     default: null
+  },
+  selectedSector: {
+    type: String,
+    default: "Residential"
   }
 })
 
 const svgRef = ref(null)
 
-const margin = { top: 20, right: 20, bottom: 20, left: 20 }
-const width = 400
+const margin = { top: 50, right: 80, bottom: 80, left: 50 }
+const width = 550
 const height = 400
 const radius = Math.min(width, height) / 2 - Math.max(margin.top, margin.right, margin.bottom, margin.left)
 const sectorColors = {
@@ -33,7 +37,9 @@ const sectorColors = {
 }
 
 function drawChart() {
-  if (!props.data || !props.data.children || props.data.children.length === 0) return
+  const selected = props.data.find(s => s?.name === props.selectedSector)?.energyType
+
+  if (!props.data || !selected || selected.length === 0) return
 
   const svg = d3.select(svgRef.value)
   svg.selectAll('*').remove()
@@ -55,7 +61,8 @@ function drawChart() {
     .outerRadius(radius)
 
   // Convert data to pie data
-  const pieData = pie(props.data.children)
+  // children = props.data
+  const pieData = pie(selected)
 
   // Create tooltip container outside SVG
   const tooltipDiv = d3.select('body').append('div')
@@ -67,7 +74,13 @@ function drawChart() {
     .enter()
     .append('path')
     .attr('d', arc)
-    .style('fill', (d, i) => sectorColors[d.data.name.toLowerCase()])
+    .style('fill', (d, i) => {
+      const baseColor = sectorColors[props.selectedSector.toLowerCase()];
+      const colorScale = d3.scaleSequential()
+          .domain([0, selected.length - 1])
+          .interpolator(d3.interpolateRgb(d3.color(baseColor).brighter(1), baseColor));
+      return colorScale(i);
+    })
     .style('stroke', '#fff')
     .style('stroke-width', '2px')
     .style('cursor', 'pointer')
@@ -96,17 +109,51 @@ function drawChart() {
   .innerRadius(radius * 0.7)
   .outerRadius(radius * 0.7)
 
-  g.selectAll('text')
-    .data(pieData)
-    .enter()
-    .append('text')
-    .attr('transform', d => `translate(${labelArc.centroid(d)})`)
-    .attr('text-anchor', 'middle')
-    .attr('dy', '0.35em')
-    .style('font-size', '15px')
-    .style('fill', '#fff')
-    .style('font-weight', 'bold')
-    .text(d => d.data.name)
+  const outerRadius = radius; // same as used for the pie slices
+  const labelOffset = 20;     // distance from the slice edge
+
+    g.selectAll('text')
+  .data(pieData)
+  .enter()
+  .append('text')
+  .attr('transform', d => {
+    const [x, y] = labelArc.centroid(d);  // centroid of slice
+    const angle = Math.atan2(y, x);
+    const r = outerRadius + labelOffset;  // move text outside the pie
+    const newX = r * Math.cos(angle);
+    const newY = r * Math.sin(angle);
+    return `translate(${newX}, ${newY})`;
+  })
+  .attr('text-anchor', d => {
+    const [x, y] = labelArc.centroid(d);
+    return x >= 0 ? 'start' : 'end'; // left/right alignment
+  })
+  .attr('dy', '0.35em')
+  .style('font-size', '15px')
+  .text(d => d.data.name);
+
+  g.selectAll('polyline')
+  .data(pieData)
+  .enter()
+  .append('polyline')
+  .attr('points', d => {
+    const [x, y] = labelArc.centroid(d); // slice centroid
+    const angle = Math.atan2(y, x);
+
+    const x1 = outerRadius * Math.cos(angle); // start at slice edge
+    const y1 = outerRadius * Math.sin(angle);
+
+    const x2 = (outerRadius + labelOffset / 2) * Math.cos(angle); // optional midpoint
+    const y2 = (outerRadius + labelOffset / 2) * Math.sin(angle);
+
+    const x3 = (outerRadius + labelOffset) * Math.cos(angle); // text position
+    const y3 = (outerRadius + labelOffset) * Math.sin(angle);
+
+    return [[x1, y1], [x2, y2], [x3, y3]];
+  })
+  .style('fill', 'none')
+  .style('stroke', 'black');
+
 }
 
 onMounted(() => {
@@ -115,7 +162,7 @@ onMounted(() => {
   })
 })
 
-watch(() => [props.data, props.year], () => {
+watch(() => [props.data, props.year, props.selectedSector], () => {
   nextTick(() => {
     drawChart()
   })

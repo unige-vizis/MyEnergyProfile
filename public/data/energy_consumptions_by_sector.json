@@ -1,9 +1,7 @@
 {
   "metadata": {
     "generated": "2026-01-22T12:07:34.516675",
-    "sources": [
-      "IEA Energy End-uses and Efficiency Indicators Database - Highlights"
-    ],
+    "sources": ["IEA Energy End-uses and Efficiency Indicators Database - Highlights"],
     "time_range": "2000 - 2023",
     "total_countries": 61,
     "industries_end_uses": [
@@ -38,12 +36,7 @@
       "Total freight transport",
       "Cars/light trucks"
     ],
-    "service_end_uses": [
-      "Lighting",
-      "Space heating",
-      "Total services",
-      "Space cooling"
-    ]
+    "service_end_uses": ["Lighting", "Space heating", "Total services", "Space cooling"]
   },
   "countries": {
     "Albania": {
@@ -72160,7 +72153,7 @@
               "Coal and coal products (PJ)": 0.064,
               "Biofuels and waste (PJ)": 0.632071,
               "Electricity (PJ)": 2.852,
-              "Other sources (PJ)": 2.9e-05,
+              "Other sources (PJ)": 2.9e-5,
               "Total final use (PJ)": 19.5126
             }
           }
@@ -73785,7 +73778,7 @@
           },
           "Basic metals [ISIC 24]": {
             "products": {
-              "Total final use (PJ)": 2.1e-05
+              "Total final use (PJ)": 2.1e-5
             }
           },
           "Manufacturing [ISIC 10-18, 20-32]": {

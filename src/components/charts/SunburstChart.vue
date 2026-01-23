@@ -21,7 +21,7 @@ const props = defineProps({
 
 const svgRef = ref(null)
 
-const margin = { top: 20, right: 20, bottom: 20, left: 20 }
+const margin = { top: 60, right: 20, bottom: 20, left: 60 }
 const width = 500
 const height = 500
 const radius = Math.min(width, height) / 2 - Math.max(margin.top, margin.right, margin.bottom, margin.left)
@@ -43,94 +43,50 @@ function drawChart() {
 
   // Create partition layout
   const partition = d3.partition()
-    .size([2 * Math.PI, radius])
+    .size([2 * Math.PI, radius * 1.2])
 
   // Create arc generator
   const arc = d3.arc()
     .startAngle(d => d.x0)
     .endAngle(d => d.x1)
     .innerRadius(d => d.y0)
-    .outerRadius(d => d.y1)
+    .outerRadius(d => d.y1);
 
   // Convert data to hierarchy
   const root = d3.hierarchy(props.data)
-    .sum(d => d.value || 0)
-    .sort((a, b) => b.value - a.value)
+    .sum(d => d.children ? 0 : d.value)
+    .sort((a, b) => b.value - a.value);
 
-  const filteredRoot = root.descendants().filter(d => {
-    if (d.depth > 1 && d.parent.children.length <= 1) {
-      return false;
-    }
-    return true;
-  })
-
-  // Apply partition layout
-  partition(root)
+  partition(root);
 
   // Precompute max depth once
-  const maxDepth = d3.max(filteredRoot, d => d.depth);
+  const maxDepth = d3.max(root.descendants(), d => d.depth);
 
   // Create tooltip container outside SVG
   const tooltipDiv = d3.select('body').append('div')
     .attr('class', 'tooltip-container')
 
-  // Hash function based on numeric value -> 0..1
-  function hashValue(val) {
-    const num = val || 0;
-    let h = 0;
-    const str = num.toString(); // convert number to string for hashing
-    for (let i = 0; i < str.length; i++) {
-      h = ((h << 5) - h + str.charCodeAt(i)) | 0;
-    }
-    return (Math.abs(h) % 1000) / 1000; // 0..0.999
-  }
-
-  // Draw segments
   const segments = g.selectAll('path')
-  .data(filteredRoot)
+  .data(root.descendants())
   .enter()
   .append('path')
   .attr('d', arc)
-  .style('fill', (d, i) => {
-    if (d.depth === 0) return '#ffffff';
-
-    // find sector name
-    const sectorName = d.parent && d.parent.parent
-      ? d.parent.parent.data.name.toLowerCase()
-      : d.parent.data.name.toLowerCase();
-
-    const baseHex = sectorColors[sectorName] || '#cccccc';
-    const base = d3.color(baseHex);
-
-    // depth-based brightness
-    const depthT = d.depth / maxDepth;
-
-    // SMALLER hue offset: ±20 degrees keeps it in family
-    const hueOffset = hashValue(i * 137.5) * 40 - 20;  // -20..+20 degrees
-
-    // Light saturation variation for subtle distinction
-    const satOffset = hashValue(i * 251) * 0.2;        // 0..0.2 boost
-
-    // convert to HSL, subtle changes
-    let hsl = d3.hsl(base);
-    hsl.h = (hsl.h + hueOffset + 360) % 360;           // Subtle hue variation
-    hsl.s = Math.min(1, hsl.s + satOffset);            // Slightly more vivid
-    hsl.l = 0.25 + 0.5 * depthT;                       // Depth contrast
-
-    return hsl.toString();
-  })
+  .style('fill', d => d.depth === 2 ? sectorColors[d.parent.data.name.toLowerCase()] : (d.depth === 1 ? sectorColors[d.data.name.toLowerCase()] : "none"))
   .style('stroke', '#fff')
   .style('stroke-width', '1px')
   .style('cursor', 'pointer')
   .on('mouseover', function(event, d) {
-    d3.select(this).style('opacity', 0.7)
-
-    // Tooltip
-    tooltipDiv.style('display', 'block')
+    d3.select(this).style('opacity', 0.7);
+    tooltipDiv
+      .style('display', 'block')
       .html(`
-        <div style="font-weight: bold;">${d.data.name}</div>
-        <div>${d.value ? d.value.toFixed(2) + ' PJ' : ''}</div>
-      `)
+        <div style="font-weight:bold">
+          ${d.data.name || 'Unknown'}
+        </div>
+        <div>
+          ${(d.value || 0).toFixed(2)} PJ
+        </div>
+      `);
   })
   .on('mousemove', function(event) {
     tooltipDiv
@@ -143,30 +99,26 @@ function drawChart() {
   })
 
   g.selectAll('text')
-  .data(filteredRoot.filter(d => d.depth > 0 && d.x1 - d.x0 > 0.05))
+  .data(root.descendants().filter(d => d.depth > 0 && d.x1 - d.x0 > 0.05))
   .enter()
   .append('text')
   .attr('transform', d => {
-    const x = (d.x0 + d.x1) / 2 * 180 / Math.PI;
-    const y = (d.y0 + d.y1) / 2;
-    const angle = x - 90;
+    const midAngleRad = (d.x0 + d.x1) / 2;
+    const midRadius = (d.y0 + d.y1) / 2;
+    const midAngleDeg = midAngleRad * 180 / Math.PI;
 
-    return `rotate(${angle},0,0)translate(${y + 12},0)${angle > 90 ? 'rotate(180)' : ''}`;
+    return `
+      rotate(${midAngleDeg - 90})
+      translate(${midRadius}, 0)
+      rotate(${midAngleDeg < 180 ? 0 : 180})
+    `;
   })
-  .attr('text-anchor', d => {
-    const angle = (d.x0 + d.x1) / 2 * 180 / Math.PI;
-    return angle > 90 && angle < 270 ? 'end' : 'start';
-  })
-  .attr('dy', '.35em')
-  .style('font-size', '13px')
+  .attr('text-anchor', 'middle')
+  .attr('dy', '0.35em')
+  .style('font-size', d => d.depth === 2 ? '10px' : '13px')
   .style('fill', '#333')
   .style('font-weight', 'bold')
   .text(d => d.data.name.length > 15 ? d.data.name.substring(0, 12) + '...' : d.data.name);
-}
-
-function getBranch(d) {
-  while (d.depth > 1) d = d.parent;
-  return d
 }
 
 onMounted(() => {
