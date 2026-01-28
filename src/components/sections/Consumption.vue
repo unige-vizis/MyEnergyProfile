@@ -8,7 +8,7 @@
           <img
             src="../../assets/img/consumption_background.svg"
             alt="Energy Consumption Background"
-            style="height: 200px; cursor: pointer;"
+            style="width: 100%; cursor: pointer;"
             @click="selectedSector = 'Residential'"
             :class="{ active: selectedSector === 'Residential' }"
           />
@@ -16,7 +16,7 @@
             <img
               src="../../assets/img/consumption_service.svg"
               alt="Energy Consumption Service"
-              style="height: 140px; cursor: pointer;"
+              style="width: 20%; cursor: pointer;"
               @click="selectedSector = 'Service'"
               :class="{ active: selectedSector === 'Service' }"
               class="interactive-image svg-glow"
@@ -24,7 +24,7 @@
             <img
               src="../../assets/img/consumption_residential.svg"
               alt="Energy Consumption Residential"
-              style="height: 100px; cursor: pointer;"
+              style="width: 15%; cursor: pointer;"
               @click="selectedSector = 'Residential'"
               :class="{ active: selectedSector === 'Residential' }"
               class="interactive-image svg-glow"
@@ -32,7 +32,7 @@
             <img
               src="../../assets/img/consumption_transport.svg"
               alt="Energy Consumption Transport"
-              style="height: 60px; cursor: pointer;"
+              style="width: 20%; cursor: pointer;"
               @click="selectedSector = 'Transport'"
               :class="{ active: selectedSector === 'Transport' }"
               class="interactive-image svg-glow"
@@ -40,14 +40,14 @@
             <img
               src="../../assets/img/consumption_industry.svg"
               alt="Energy Consumption Industry"
-              style="height: 140px; cursor: pointer;"
+              style="width: 30%; cursor: pointer;"
               @click="selectedSector = 'Industry'"
               :class="{ active: selectedSector === 'Industry' }"
               class="interactive-image svg-glow"
             />
           </div>
-          <PieChart :data="sectorEnergyType" :year="store.selectedYear" :selectedSector="selectedSector" />
         </div>
+        <PieChart :data="sectorEnergyType" :year="store.selectedYear" :selectedSector="selectedSector" />
       </div>
       <div class="text-container">
         <p>
@@ -108,7 +108,7 @@ const sectorEnergyType = computed(() => {
       ) {
         Object.entries(endUseData.products).forEach(([productName, productValue]) => {
           if (!productName.includes('Total')) {
-            products[productName] = productValue || 0
+            products[productName.replace('(PJ)','').trim()] = productValue || 0
           }
         })
       }
@@ -218,8 +218,8 @@ const filteredData = computed(() => {
 }
 
 .interactive-image-container {
-  margin-top: -143px;
-  width: 600px;
+  margin-top: -133px;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;

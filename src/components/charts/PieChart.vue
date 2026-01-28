@@ -1,6 +1,6 @@
 <template>
   <div class="chart">
-    <svg ref="svgRef" width="550" height="400"></svg>
+    <svg ref="svgRef" width="700" height="400"></svg>
   </div>
 </template>
 
@@ -26,14 +26,26 @@ const props = defineProps({
 const svgRef = ref(null)
 
 const margin = { top: 50, right: 80, bottom: 80, left: 50 }
-const width = 550
+const width = 700
 const height = 400
 const radius = Math.min(width, height) / 2 - Math.max(margin.top, margin.right, margin.bottom, margin.left)
-const sectorColors = {
-  residential: '#63b3df',
-  service: '#76d76b',
-  industry: '#898989',
-  transport: '#ffb56b'
+const energyColors = {
+  // Gasoline family - yellow/orange progression
+  motor: 'rgb(162, 158, 162)',                   // Your orange ✓
+  jet: 'rgb(109, 151, 214)',                     // Lighter yellow-orange
+  lpg: 'rgb(240, 220, 120)',
+
+  electricity: 'rgb(99, 179, 223)',     // Cool blue ✓
+  heat: 'rgb(255, 130, 130)',           // Pure coral red ✓
+  biofuel: 'rgb(144, 210, 125)',        // Fresh green ✓
+  gas: 'rgb(128, 128, 128)',            // Mid gray ✓
+  coal: 'rgb(70, 70, 70)',              // Darker charcoal (vs gas)
+  other: 'rgb(150, 180, 220)',          // Slate blue ✓
+
+  // Oil family - brown/orange progression
+  'Oil and oil products': 'rgb(236, 154, 111)',    // Rich brown
+  'Heavy fuel oil': 'rgb(139, 99, 11)',           // Darker brown
+  diesel: 'rgb(205, 149, 88)',                   // Saddle brown
 }
 
 function drawChart() {
@@ -74,15 +86,14 @@ function drawChart() {
     .enter()
     .append('path')
     .attr('d', arc)
-    .style('fill', (d, i) => {
-      const baseColor = sectorColors[props.selectedSector.toLowerCase()];
-      const colorScale = d3.scaleSequential()
-          .domain([0, selected.length - 1])
-          .interpolator(d3.interpolateRgb(d3.color(baseColor).brighter(1), baseColor));
-      return colorScale(i);
+    .style('fill', (d) => {
+      const colorMatch = Object.entries(energyColors).find(([colorLabel]) =>
+        d.data.name.toLowerCase().includes(colorLabel.toLowerCase())
+      );
+      return colorMatch ? colorMatch[1] : '#fff';
     })
     .style('stroke', '#fff')
-    .style('stroke-width', '2px')
+    .style('stroke-width', '1px')
     .style('cursor', 'pointer')
     .on('mouseover', function(event, d) {
       d3.select(this).style('opacity', 0.7)
@@ -112,48 +123,77 @@ function drawChart() {
   const outerRadius = radius; // same as used for the pie slices
   const labelOffset = 20;     // distance from the slice edge
 
-    g.selectAll('text')
-  .data(pieData)
-  .enter()
-  .append('text')
-  .attr('transform', d => {
-    const [x, y] = labelArc.centroid(d);  // centroid of slice
-    const angle = Math.atan2(y, x);
-    const r = outerRadius + labelOffset;  // move text outside the pie
-    const newX = r * Math.cos(angle);
-    const newY = r * Math.sin(angle);
-    return `translate(${newX}, ${newY})`;
-  })
-  .attr('text-anchor', d => {
-    const [x, y] = labelArc.centroid(d);
-    return x >= 0 ? 'start' : 'end'; // left/right alignment
-  })
-  .attr('dy', '0.35em')
-  .style('font-size', '15px')
-  .text(d => d.data.name);
+  // Array to track occupied label positions
+  const labelPositions = [];
 
+  // TEXT LABELS - Smart collision detection
+  g.selectAll('text')
+    .data(pieData)
+    .enter()
+    .append('text')
+    .attr('class', 'pie-label')
+    .attr('transform', function(d, i) {
+      const [x, y] = labelArc.centroid(d);
+      const angle = Math.atan2(y, x);
+      let r = outerRadius + labelOffset;
+
+      // Find best position avoiding collisions
+      let attempts = 0;
+      let newX, newY;
+      while (attempts < 5) { // max 5 reposition attempts
+        newX = r * Math.cos(angle);
+        newY = r * Math.sin(angle);
+
+        // Check if too close to existing labels (within 25px)
+        const tooClose = labelPositions.some(pos =>
+          Math.hypot(pos.x - newX, pos.y - newY) < 25
+        );
+
+        if (!tooClose) break;
+        // Nudge outward if collision
+        r += 12;
+        attempts++;
+      }
+
+      // Save this position
+      labelPositions.push({x: newX, y: newY});
+      return `translate(${newX}, ${newY})`;
+    })
+    .attr('text-anchor', d => {
+      const [x, y] = labelArc.centroid(d);
+      return x >= 0 ? 'start' : 'end';
+    })
+    .attr('dy', '0.35em')
+    .style('font-size', '15px')
+    .text(d => d.data.name);
+
+  // POLYLINES - Match adjusted text positions
   g.selectAll('polyline')
-  .data(pieData)
-  .enter()
-  .append('polyline')
-  .attr('points', d => {
-    const [x, y] = labelArc.centroid(d); // slice centroid
-    const angle = Math.atan2(y, x);
+    .data(pieData)
+    .enter()
+    .append('polyline')
+    .attr('points', function(d, i) {
+      const pos = labelPositions[i]; // Use saved position
+      if (!pos) return '';
 
-    const x1 = outerRadius * Math.cos(angle); // start at slice edge
-    const y1 = outerRadius * Math.sin(angle);
+      const [x, y] = labelArc.centroid(d);
+      const angle = Math.atan2(y, x);
 
-    const x2 = (outerRadius + labelOffset / 2) * Math.cos(angle); // optional midpoint
-    const y2 = (outerRadius + labelOffset / 2) * Math.sin(angle);
+      const x1 = outerRadius * Math.cos(angle);
+      const y1 = outerRadius * Math.sin(angle);
+      const x2 = (outerRadius + labelOffset / 2) * Math.cos(angle);
+      const y2 = (outerRadius + labelOffset / 2) * Math.sin(angle);
 
-    const x3 = (outerRadius + labelOffset) * Math.cos(angle); // text position
-    const y3 = (outerRadius + labelOffset) * Math.sin(angle);
+      // Polyline ends 15px BEFORE text position for bigger gap
+      const gap = 5;
+      const x3 = pos.x - gap * Math.cos(angle);
+      const y3 = pos.y - gap * Math.sin(angle);
 
-    return [[x1, y1], [x2, y2], [x3, y3]];
-  })
-  .style('fill', 'none')
-  .style('stroke', 'black');
-
+      return [[x1, y1], [x2, y2], [x3, y3]];
+    })
+    .style('fill', 'none')
+    .style('stroke', 'black')
+    .style('stroke-width', '1');
 }
 
 onMounted(() => {
