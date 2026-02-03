@@ -6,13 +6,19 @@ import PieChart from '../charts/PieChart.vue'
 
 const store = useEnergyDataStore()
 const selectedSector = ref('Residential')
+const hasData = computed(() => {
+  return store.sunburstData.name?.length > 0 && store.pieChartData[0]
+})
 </script>
 
 <template>
   <section id="consumption" class="page-section">
     <h2>My energy consumption</h2>
     <div class="section-container">
-      <div v-if="store.isLoading" class="loading">Loading energy data...</div>
+      <div v-if="!hasData" class="no-data">
+        <span>No consumption data available for this configuration.</span>
+      </div>
+      <div v-else-if="store.isLoading" class="loading">Loading energy data...</div>
       <div v-else-if="store.error" class="error">{{ store.error }}</div>
       <div v-else class="charts-container">
         <SunburstChart :data="store.sunburstData" :year="store.selectedYear" :country="store.selectedCountry" />
