@@ -16,6 +16,10 @@ const props = defineProps({
   year: {
     type: [String, Number],
     default: null
+  },
+  country: {
+    type: Object,
+    default: null
   }
 })
 
@@ -127,7 +131,7 @@ onMounted(() => {
   })
 })
 
-watch(() => [props.data, props.year], () => {
+watch(() => [props.data, props.year, props.country], () => {
   nextTick(() => {
     drawChart()
   })

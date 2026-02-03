@@ -20,7 +20,11 @@ const props = defineProps({
   selectedSector: {
     type: String,
     default: "Residential"
-  }
+  },
+  country:{
+    type: Object,
+    default: null
+  },
 })
 
 const svgRef = ref(null)
@@ -202,7 +206,7 @@ onMounted(() => {
   })
 })
 
-watch(() => [props.data, props.year, props.selectedSector], () => {
+watch(() => [props.data, props.year, props.selectedSector, props.country], () => {
   nextTick(() => {
     drawChart()
   })
