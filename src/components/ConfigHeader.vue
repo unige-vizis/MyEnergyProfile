@@ -85,12 +85,12 @@ onMounted(() => {
   position: fixed;
   display: flex;
   gap: 2rem;
-  left: 250px;
+  left: 300px;
   top: 0;
   width: 100%;
-  padding: 2rem 5rem;
-  background: linear-gradient(to right, #4c4c4c, #1a1a1a);
-  color: white;
+  padding: 2rem 2rem;
+  background: #acc278;
+  color: black;
   box-shadow: 4px 0 12px rgba(0, 0, 0, 0.4);
   z-index: 100;
 }
@@ -100,6 +100,15 @@ onMounted(() => {
   min-width: 200px;
 }
 
+.config-header :deep(label),
+.config-header :deep(input),
+.config-header :deep(select),
+.config-header :deep(button) {
+  font-family: "Inria Serif", serif;
+  font-weight: 500;
+}
+
+
 .config-header :deep(input),
 .config-header :deep(select) {
   width: 100%;
@@ -107,6 +116,7 @@ onMounted(() => {
   box-sizing: border-box;
   padding: 0 0.75rem;
   border-radius: 10px;
+  background-color: #fcf1e6;
 }
 
 .config-header :deep(label) {
