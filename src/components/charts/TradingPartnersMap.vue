@@ -1221,9 +1221,9 @@ onUnmounted(() => {
   width: 28px;
   height: 28px;
   padding: 0;
-  border: 1px solid var(--primary-color);
+  border: 1px solid #fff;
   border-radius: 4px;
-  background: var(--primary-color);
+  background: #fff;
   color: var(--text-color-gray);
   cursor: pointer;
   transition: all 0.15s ease;

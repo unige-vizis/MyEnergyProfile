@@ -1,37 +1,8 @@
 <template>
   <section id="mix" class="page-section">
-    <h2>My energy mix</h2>
-
-    <!-- Subsection: Where does my Energy Come from -->
-    <div class="mix-subsection">
-      <h3>Where does my Energy Come from</h3>
-      <p>
-        See how much of your country's energy is imported versus produced domestically. Import dependency shows what
-        share of each fuel type comes from abroad, helping you understand your nation's energy security and reliance on
-        foreign sources.
-      </p>
-
-      <div v-if="store.isLoading" class="loading">Loading energy data...</div>
-      <div v-else-if="store.error" class="error">{{ store.error }}</div>
-      <template v-else>
-        <div v-if="store.dependencyData" class="chart-section">
-          <DependencyChart :dependencyData="store.dependencyData" :year="store.selectedYear" />
-        </div>
-
-        <div class="chart-section">
-          <TradingPartnersMap
-            :tradeData="store.tradeData"
-            :country="store.selectedCountry"
-            :year="store.selectedYear"
-          />
-        </div>
-      </template>
-    </div>
-
+    <h2>Production &amp; Consumption by Resource Over Time</h2>
     <!-- Subsection: Production & Consumption by Resource -->
     <div class="mix-subsection">
-      <h3>Production &amp; Consumption by Resource Over Time</h3>
-
       <div v-if="store.isLoading" class="loading">Loading energy data...</div>
       <div v-else-if="store.error" class="error">{{ store.error }}</div>
       <div v-else class="chart-section">
@@ -48,8 +19,6 @@
 
 <script setup>
 import { useEnergyDataStore } from '@/stores/energyData'
-import DependencyChart from '../charts/DependencyChart.vue'
-import TradingPartnersMap from '../charts/TradingPartnersMap.vue'
 import SmallMultiplesChart from '../charts/SmallMultiplesChart.vue'
 
 const store = useEnergyDataStore()
