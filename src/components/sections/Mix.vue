@@ -27,6 +27,23 @@
         </div>
       </template>
     </div>
+
+    <!-- Subsection: Production & Consumption by Resource -->
+    <div class="mix-subsection">
+      <h3>Production &amp; Consumption by Resource Over Time</h3>
+      
+
+      <div v-if="store.isLoading" class="loading">Loading energy data...</div>
+      <div v-else-if="store.error" class="error">{{ store.error }}</div>
+      <div v-else class="chart-section">
+        <SmallMultiplesChart
+          :productionConsumptionData="store.productionConsumptionData"
+          :countryYears="store.selectedCountry?.years"
+          :selectedYear="store.selectedYear"
+          :countryName="store.selectedCountry?.name || ''"
+        />
+      </div>
+    </div>
   </section>
 </template>
 
@@ -34,6 +51,7 @@
 import { useEnergyDataStore } from '@/stores/energyData'
 import DependencyChart from '../charts/DependencyChart.vue'
 import TradingPartnersMap from '../charts/TradingPartnersMap.vue'
+import SmallMultiplesChart from '../charts/SmallMultiplesChart.vue'
 
 const store = useEnergyDataStore()
 </script>
