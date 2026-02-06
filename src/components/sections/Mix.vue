@@ -31,7 +31,6 @@
     <!-- Subsection: Production & Consumption by Resource -->
     <div class="mix-subsection">
       <h3>Production &amp; Consumption by Resource Over Time</h3>
-      
 
       <div v-if="store.isLoading" class="loading">Loading energy data...</div>
       <div v-else-if="store.error" class="error">{{ store.error }}</div>
