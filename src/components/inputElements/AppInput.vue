@@ -96,34 +96,33 @@ defineEmits(['update:modelValue', 'focus', 'blur']);
   border: 1px solid #d0d0d0;
   border-radius: 6px;
   background-color: white;
-  color: #333;
+  color: var(--text-color-dark-green);
   transition: all 0.2s ease;
-  font-family: inherit;
 }
 
 .app-input::placeholder {
-  color: #999;
+  color: var(--placeholder-color);
 }
 
 .app-input:hover:not(:disabled):not(:readonly) {
-  border-color: #b0b0b0;
+  border-color: var(--border-hover-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .app-input:focus {
   outline: none;
-  border-color: #4c4c4c;
+  border-color: var(--border-hover-color);
   box-shadow: 0 0 0 3px rgba(76, 76, 76, 0.1);
 }
 
 .app-input:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  background-color: #f5f5f5;
+  background-color: var(--placeholder-color);
 }
 
 .app-input:readonly {
-  background-color: #f9f9f9;
+  background-color: var(--placeholder-color);
   cursor: default;
 }
 
@@ -132,7 +131,7 @@ defineEmits(['update:modelValue', 'focus', 'blur']);
   right: 1rem;
   top: 50%;
   transform: translateY(-50%);
-  color: #999;
+  color: var(--text-color-dark-green);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -143,14 +142,14 @@ defineEmits(['update:modelValue', 'focus', 'blur']);
 .app-input-description {
   margin: 0;
   font-size: 0.85rem;
-  color: #666;
+  color: var(--text-color-gray);
   line-height: 1.4;
 }
 
 .app-input-error {
   margin: 0;
   font-size: 0.85rem;
-  color: #d32f2f;
+  color: var(--text-color-red);
   line-height: 1.4;
 }
 </style>

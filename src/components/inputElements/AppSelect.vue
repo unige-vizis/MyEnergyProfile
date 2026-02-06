@@ -81,30 +81,29 @@ defineEmits(['update:modelValue']);
   border: 1px solid #d0d0d0;
   border-radius: 6px;
   background-color: white;
-  color: #333;
+  color: var(--text-color-dark-green);
   cursor: pointer;
   transition: all 0.2s ease;
-  font-family: inherit;
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
 
 .app-select:hover:not(:disabled) {
-  border-color: #b0b0b0;
+  border-color: var(--border-hover-color);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .app-select:focus {
   outline: none;
-  border-color: #4c4c4c;
+  border-color: var(--border-hover-color);
   box-shadow: 0 0 0 3px rgba(76, 76, 76, 0.1);
 }
 
 .app-select:disabled {
   opacity: 0.6;
   cursor: not-allowed;
-  background-color: #f5f5f5;
+  background-color: var(--placeholder-color);
 }
 
 .app-select-icon {
@@ -113,7 +112,7 @@ defineEmits(['update:modelValue']);
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
-  color: #999;
+  color: var(--text-color-dark-green);
   display: flex;
   align-items: center;
   justify-content: center;

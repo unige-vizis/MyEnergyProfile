@@ -2,7 +2,7 @@
   <aside class="timeline-sidebar">
     <div class="sidebar-content">
       <div>
-        <h1>My Energy Profile</h1>
+        <h1 class="sidebar-title">My Energy Profile</h1>
       </div>
 
       <nav class="timeline-nav">
@@ -90,10 +90,16 @@ onUnmounted(() => {
   left: 0;
   top: 0;
   height: 100vh;
-  background-color: #1a1a1a;
-  color: white;
+  background-color: var(--secondary-color);
+  color: var(--text-color-dark-green);
   box-shadow: 4px 0 12px rgba(0, 0, 0, 0.4);
   z-index: 1000;
+}
+
+.sidebar-title {
+  margin-left: 1rem;
+  margin-top: 0;
+  margin-bottom: 2rem;
 }
 
 .sidebar-content {
@@ -114,38 +120,19 @@ onUnmounted(() => {
   position: relative;
 }
 
-.timeline-line {
-  position: absolute;
-  left: 32px;
-  top: 0.5rem;
-  bottom: 0.5rem;
-  width: 2px;
-  height: 85%;
-  background: linear-gradient(to bottom, #444, #333, #444);
-  transform: translateX(-50%);
-}
-
-.timeline-sections {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 90%;
-  z-index: 1;
-}
-
 .timeline-item {
   display: flex;
   align-items: center;
   gap: 1rem;
   padding: 0.75rem 1rem;
-  color: #aaa;
+  color: var(--text-color-dark-green);
   text-decoration: none;
   transition: all 0.3s ease;
   cursor: pointer;
   font-size: 0.9rem;
   font-weight: 500;
   position: relative;
-  background-color: #1a1a1a;
+  background-color: var(--secondary-color);
 }
 
 .timeline-dot {
@@ -155,7 +142,7 @@ onUnmounted(() => {
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background-color: #444;
+  background-color: var(--primary-color);
   transition: all 0.3s ease;
   position: relative;
   z-index: 2;
@@ -171,24 +158,40 @@ onUnmounted(() => {
   opacity: 0.7;
 }
 
+.timeline-sections {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%;
+  z-index: 1;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 32px;
+  top: 0.5rem;
+  bottom: 0.5rem;
+  width: 2px;
+  height: 85%;
+  background: linear-gradient(to bottom, #444, #333, #444);
+  transform: translateX(-50%);
+}
+
 .timeline-item:hover .timeline-dot {
-  border-color: #666;
-  background-color: #555;
+  border-color: var(--text-color-dark-green);
+  background-color: var(--primary-color);
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
   transform: translateY(-2px);
 }
 
 .timeline-item.active {
-  color: #ffffff;
+  color: var(--primary-color);
 }
 
 .timeline-item.active .timeline-dot {
-  color: #4e4e4e;
-}
-
-.timeline-item.active .timeline-dot {
-  background-color: #ffffff;
-  border-color: #ffffff;
+  color: var(--text-color-dark-green);
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
   width: 40px;
   height: 40px;
   margin-left: -4px;

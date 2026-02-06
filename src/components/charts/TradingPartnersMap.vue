@@ -1,10 +1,5 @@
 <template>
   <div class="trading-partners-map">
-    <div class="chart-header">
-      <h4>The Trading Partners</h4>
-      <p class="chart-subtitle">Import and export partners by energy type</p>
-    </div>
-
     <div v-if="!hasData" class="no-data">
       <span class="no-data-icon">?</span>
       <span>No trade data available for this year</span>
@@ -77,14 +72,7 @@
           </div>
           <div class="cutoff-slider">
             <label class="cutoff-label">Min trade %</label>
-            <input
-              type="range"
-              v-model.number="arrowCutoff"
-              min="0"
-              max="10"
-              step="1"
-              class="cutoff-range"
-            />
+            <input type="range" v-model.number="arrowCutoff" min="0" max="10" step="1" class="cutoff-range" />
             <span class="cutoff-value">{{ arrowCutoff }}%</span>
           </div>
         </div>
@@ -93,8 +81,16 @@
           <div class="meta-section">
             <span class="meta-label">Source:</span>
             <ul class="meta-list">
-              <li>Eurostat <a href="https://ec.europa.eu/eurostat/web/energy/database" target="_blank" rel="noopener">Energy Database</a> (European Commission)</li>
-              <li>Tables <code>nrg_ti_*</code> (imports) and <code>nrg_te_*</code> (exports) for sff, oil, gas, bio, eh</li>
+              <li>
+                Eurostat
+                <a href="https://ec.europa.eu/eurostat/web/energy/database" target="_blank" rel="noopener"
+                  >Energy Database</a
+                >
+                (European Commission)
+              </li>
+              <li>
+                Tables <code>nrg_ti_*</code> (imports) and <code>nrg_te_*</code> (exports) for sff, oil, gas, bio, eh
+              </li>
               <li>Derived: <code>share_pct</code> = partner value ÷ total × 100</li>
             </ul>
           </div>
@@ -103,38 +99,20 @@
             <div class="chart-notes">
               <p class="chart-note">
                 <span class="note-icon">*</span>
-                <span>EU-reported data only; non-EU partner volumes data may be incomplete or reflect only the EU perspective of the trade relationship.</span>
+                <span
+                  >EU-reported data only; non-EU partner volumes data may be incomplete or reflect only the EU
+                  perspective of the trade relationship.</span
+                >
               </p>
               <p class="chart-note">
                 <span class="note-icon">*</span>
-                <span>Regional aggregates (e.g., "Other Asian countries") excluded from map arrows but included in totals.</span>
+                <span
+                  >Regional aggregates (e.g., "Other Asian countries") excluded from map arrows but included in
+                  totals.</span
+                >
               </p>
             </div>
           </div>
-        </div>
-
-      </div>
-
-      <div class="map-info">
-        <div class="info-section placeholder-content">
-          <div class="info-title placeholder-title">[Example] European Import Profile</div>
-          <p class="info-text placeholder-text">
-            Placeholder for general overview of European energy import patterns. Most EU nations are net importers of fossil fuels, relying on external suppliers for oil, gas, and coal.
-          </p>
-        </div>
-
-        <div class="info-section placeholder-content">
-          <div class="info-title placeholder-title">[Example] Notable Exceptions</div>
-          <p class="info-text placeholder-text">
-            Placeholder for countries that break the typical pattern. Norway as a major exporter, the Netherlands with its gas production, France with nuclear electricity exports.
-          </p>
-        </div>
-
-        <div class="info-section placeholder-content">
-          <div class="info-title placeholder-title">[Example] Global Players</div>
-          <p class="info-text placeholder-text">
-            Placeholder for dominant energy exporters by fuel type. Russia and Norway as Europe's main gas suppliers, Saudi Arabia and Iraq for crude oil, Australia and Indonesia for coal, Canada for uranium. Their market share and geopolitical influence.
-          </p>
         </div>
       </div>
     </div>
@@ -1026,25 +1004,8 @@ onUnmounted(() => {
 <style scoped>
 .trading-partners-map {
   padding: 1.5rem;
-  border: 1px solid #e0e0e0;
   border-radius: 8px;
-  background: #fafafa;
-}
-
-.chart-header {
-  margin-bottom: 1rem;
-}
-
-.chart-header h4 {
-  margin: 0 0 0.25rem 0;
-  font-size: 1.1rem;
-  color: #2c3e50;
-}
-
-.chart-subtitle {
-  margin: 0;
-  font-size: 0.85rem;
-  color: #666;
+  width: 100%;
 }
 
 .volume-summary {
@@ -1058,20 +1019,12 @@ onUnmounted(() => {
   align-items: center;
 }
 
-.volume-row-label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: #666;
-  text-align: right;
-  padding-right: 0.75rem;
-}
-
 .imports-label {
-  color: #e53935;
+  color: var(--text-color-red);
 }
 
 .exports-label {
-  color: #43a047;
+  color: var(--secondary-color);
 }
 
 .direction-toggle {
@@ -1096,11 +1049,11 @@ onUnmounted(() => {
 }
 
 .direction-toggle.imports-label .checkbox-icon {
-  color: #e53935;
+  color: var(--text-color-red);
 }
 
 .direction-toggle.exports-label .checkbox-icon {
-  color: #43a047;
+  color: var(--secondary-color);
 }
 
 .volume-header-btn {
@@ -1164,13 +1117,13 @@ onUnmounted(() => {
   display: block;
   font-size: 1rem;
   font-weight: 600;
-  color: #2c3e50;
+  color: var(--text-color-dark-green);
 }
 
 .volume-unit {
   display: block;
   font-size: 0.65rem;
-  color: #888;
+  color: var(--text-color-gray);
   white-space: nowrap;
 }
 
@@ -1179,7 +1132,7 @@ onUnmounted(() => {
   flex-direction: column;
   align-items: center;
   padding: 3rem;
-  color: #888;
+  color: var(--text-color-gray);
 }
 
 .no-data-icon {
@@ -1194,7 +1147,7 @@ onUnmounted(() => {
 }
 
 .map-container {
-  width: 60%;
+  width: 100%;
   min-width: 400px;
   max-width: 700px;
   flex-shrink: 0;
@@ -1226,11 +1179,11 @@ onUnmounted(() => {
 }
 
 .map-svg-container :deep(.map-tooltip strong) {
-  color: #2c3e50;
+  color: var(--text-color-gray);
 }
 
 .map-svg-container :deep(.map-tooltip .tooltip-section) {
-  color: #666;
+  color: var(--text-color-gray);
   font-weight: 500;
 }
 
@@ -1243,7 +1196,7 @@ onUnmounted(() => {
   align-items: center;
   justify-content: center;
   height: 300px;
-  color: #888;
+  color: var(--text-color-gray);
   font-style: italic;
 }
 
@@ -1268,18 +1221,17 @@ onUnmounted(() => {
   width: 28px;
   height: 28px;
   padding: 0;
-  border: 1px solid #ccc;
+  border: 1px solid #fff;
   border-radius: 4px;
   background: #fff;
-  color: #666;
+  color: var(--text-color-gray);
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
 .reset-zoom-btn:hover {
-  background: #f0f0f0;
-  border-color: #999;
-  color: #333;
+  border-color: var(--border-hover-color);
+  color: var(--text-color-dark-green);
 }
 
 .reset-zoom-btn .material-symbols-outlined {
@@ -1288,7 +1240,7 @@ onUnmounted(() => {
 
 .map-hint {
   font-size: 0.75rem;
-  color: #999;
+  color: var(--text-color-gray);
   font-style: italic;
 }
 
@@ -1300,7 +1252,7 @@ onUnmounted(() => {
 
 .cutoff-label {
   font-size: 0.75rem;
-  color: #666;
+  color: var(--text-color-gray);
   white-space: nowrap;
 }
 
@@ -1308,12 +1260,12 @@ onUnmounted(() => {
   width: 80px;
   height: 4px;
   cursor: pointer;
-  accent-color: #2c3e50;
+  accent-color: var(--text-color-dark-green);
 }
 
 .cutoff-value {
   font-size: 0.75rem;
-  color: #333;
+  color: var(--text-color-dark-green);
   font-weight: 500;
   min-width: 28px;
   text-align: right;
@@ -1325,7 +1277,7 @@ onUnmounted(() => {
   flex-direction: column;
   gap: 0.25rem;
   padding-top: 0.5rem;
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--text-color-gray);
 }
 
 .meta-section {
@@ -1338,12 +1290,12 @@ onUnmounted(() => {
 
 .meta-label {
   font-weight: 600;
-  color: #555;
+  color: var(--text-color-gray);
   flex-shrink: 0;
 }
 
 .meta-text {
-  color: #666;
+  color: var(--text-color-gray);
 }
 
 .meta-text code {
@@ -1351,13 +1303,13 @@ onUnmounted(() => {
   padding: 0.05rem 0.25rem;
   border-radius: 2px;
   font-size: 0.65rem;
-  color: #495057;
+  color: var(--text-color-gray);
 }
 
 .meta-list {
   margin: 0.2rem 0 0 0;
   padding-left: 1.2rem;
-  color: #666;
+  color: var(--text-color-gray);
 }
 
 .meta-list li {
@@ -1365,11 +1317,11 @@ onUnmounted(() => {
 }
 
 .meta-list code {
-  background: #e9ecef;
+  background: var(--primary-color);
   padding: 0.05rem 0.25rem;
   border-radius: 2px;
   font-size: 0.65rem;
-  color: #495057;
+  color: var(--text-color-gray);
 }
 
 .chart-notes {
@@ -1385,14 +1337,14 @@ onUnmounted(() => {
   gap: 0.35rem;
   margin: 0;
   font-size: 0.7rem;
-  color: #777;
+  color: var(--text-color-gray);
   line-height: 1.4;
 }
 
 .note-icon {
   flex-shrink: 0;
   font-weight: 600;
-  color: #999;
+  color: var(--text-color-gray);
 }
 
 .map-info {
@@ -1424,48 +1376,41 @@ onUnmounted(() => {
 
 .info-section.data-hint-note .info-title {
   font-size: 0.8rem;
-  color: #666;
+  color: var(--text-color-gray);
 }
 
 .info-section.data-hint-note .info-text {
   font-size: 0.75rem;
-  color: #666;
+  color: var(--text-color-gray);
 }
 
 .info-title {
   font-weight: 600;
   font-size: 0.9rem;
-  color: #333;
+  color: var(--text-color-gray);
   margin-bottom: 0.4rem;
 }
 
 .info-text {
   margin: 0;
-  color: #555;
+  color: var(--text-color-gray);
   font-size: 0.8rem;
   line-height: 1.55;
 }
 
 .placeholder-content {
-  background: repeating-linear-gradient(
-    -45deg,
-    transparent,
-    transparent 10px,
-    rgba(255, 193, 7, 0.05) 10px,
-    rgba(255, 193, 7, 0.05) 20px
-  );
-  border-left: 3px solid #ffc107;
+  border-left: 3px solid var(--text-color-dark-green);
   padding-left: 0.75rem;
   border-radius: 0;
 }
 
 .placeholder-title {
-  color: #996600;
+  color: var(--text-color-dark-green);
   font-style: italic;
 }
 
 .placeholder-text {
-  color: #888;
+  color: var(--secondary-color);
   font-style: italic;
 }
 

@@ -60,6 +60,17 @@ export const useEnergyDataStore = defineStore("energyData", () => {
     };
   });
 
+  // Production/consumption data for the selected country and year
+  const productionConsumptionData = computed(() => {
+    if (!selectedCountry.value?.years || !selectedYear.value) return null;
+    const yearData = selectedCountry.value.years[selectedYear.value];
+    if (!yearData) return null;
+    return {
+      production: yearData.production || null,
+      consumption: yearData.consumption || null,
+    };
+  });
+
   const pieChartData = computed(() => {
     if (!consumptionsData.value || !selectedCountry.value?.name || !selectedYear.value) return [];
 
@@ -205,7 +216,7 @@ export const useEnergyDataStore = defineStore("energyData", () => {
     error.value = null;
 
     try {
-      const dependencyJSON = await fetch(`${import.meta.env.BASE_URL}data/energy_imports_exports_dependency.json`);
+      const dependencyJSON = await fetch(`${import.meta.env.BASE_URL}data/energy_mix.json`);
       const dependencyText = await dependencyJSON.text();
       // Handle NaN values in JSON (convert to null)
       const dependencyCleanedText = dependencyText.replace(/:\s*NaN/g, ": null");
@@ -255,6 +266,7 @@ export const useEnergyDataStore = defineStore("energyData", () => {
     availableYears,
     dependencyData,
     tradeData,
+    productionConsumptionData,
     pieChartData,
     sunburstData,
     loadData,

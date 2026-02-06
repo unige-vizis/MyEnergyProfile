@@ -58,24 +58,6 @@ onMounted(() => {
       placeholder="Select country"
     >
     </AppSelect>
-    <AppInput class="config-item" label="Age" placeholder="Age" type="number" v-model="age"> </AppInput>
-    <AppSelect
-      class="config-item"
-      :options="householdSizeOptions"
-      label="Household Size"
-      v-model="householdSizeValue"
-      placeholder="Select size"
-    ></AppSelect>
-    <AppInput
-      class="config-item"
-      label="Living Space"
-      placeholder="Living Space"
-      type="number"
-      :min="10"
-      :max="500"
-      v-model="livingSpace"
-    >
-    </AppInput>
     <YearSlot class="config-item" :years="globalConfig.yearsDescending" label="Year" v-model="selectedYear" />
   </div>
 </template>
@@ -85,12 +67,11 @@ onMounted(() => {
   position: fixed;
   display: flex;
   gap: 2rem;
-  left: 250px;
   top: 0;
   width: 100%;
-  padding: 2rem 5rem;
-  background: linear-gradient(to right, #4c4c4c, #1a1a1a);
-  color: white;
+  padding: 2rem 20rem;
+  background: var(--secondary-color);
+  color: black;
   box-shadow: 4px 0 12px rgba(0, 0, 0, 0.4);
   z-index: 100;
 }
@@ -107,6 +88,7 @@ onMounted(() => {
   box-sizing: border-box;
   padding: 0 0.75rem;
   border-radius: 10px;
+  background-color: var(--primary-color);
 }
 
 .config-header :deep(label) {
@@ -114,12 +96,12 @@ onMounted(() => {
   margin-bottom: 0.5rem;
 }
 .config-header :deep(input::placeholder) {
-  color: #9ca3af; /* grau */
+  color: var(--placeholder-color); /* grau */
   opacity: 1;     /* wichtig für Firefox */
 }
 /* grauer Placeholder-Zustand */
 .config-header :deep(select:has(option:checked[value=""])) {
-  color: #9ca3af;
+  color: var(--placeholder-color);
 }
 
 /* normale Farbe, sobald echte Auswahl */
