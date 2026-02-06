@@ -1,12 +1,15 @@
 """
-Create JSON dataset for D3 visualizations of energy imports/exports and dependency metrics.
+Create JSON dataset for D3 visualizations of energy mix: imports/exports,
+dependency metrics, and production/consumption by resource.
 
 Input files:
 - combined_import_dependency.csv (53K rows) - Dependency % metrics
 - combined_energy_trade.csv (31.8M rows) - Import/export volumes by partner
+- owid-energy-data.xlsx - Production/consumption by resource (OWID)
+- country_code_mastersheet.json - Country code mappings (Eurostat ↔ OWID)
 
 Output:
-- energy_imports_exports_dependency.json
+- energy_mix.json
 """
 
 import pandas as pd
@@ -164,6 +167,30 @@ ENERGY_TYPE_UNITS = {
     'EH': 'GWH'
 }
 
+# ============================================================================
+# OWID Production/Consumption Configuration
+# ============================================================================
+
+OWID_FILE = Path(__file__).parent.parent / 'raw-data' / 'energy_consumption' / 'owid-energy-data.xlsx'
+MASTERSHEET_FILE = Path(__file__).parent.parent / 'country_code_mastersheet.json'
+
+# OWID columns → internal energy type codes
+OWID_PRODUCTION_COLS = {
+    'coal_production': 'SFF',
+    'oil_production': 'OIL',
+    'gas_production': 'GAS',
+    'electricity_generation': 'EH',
+    # No biofuel_production in OWID
+}
+
+OWID_CONSUMPTION_COLS = {
+    'coal_consumption': 'SFF',
+    'oil_consumption': 'OIL',
+    'gas_consumption': 'GAS',
+    'biofuel_consumption': 'BIO',
+    'electricity_demand': 'EH',
+}
+
 
 # ============================================================================
 # Progress Tracking Utilities
@@ -298,6 +325,87 @@ def load_dependency_data():
     phase_elapsed = time.time() - phase_start
     print(f'  Processed {len(dependency_data)} countries in {format_time(phase_elapsed)}')
     return dict(dependency_data)
+
+
+# ============================================================================
+# Phase 1b: Load OWID Production/Consumption Data
+# ============================================================================
+
+def load_owid_data():
+    """Load production/consumption data from OWID energy dataset."""
+    print_phase_header(1, 'Loading OWID production/consumption data (Phase 1b)')
+    phase_start = time.time()
+
+    # Load country code mastersheet for ISO3 → Eurostat ISO2 mapping
+    print('  Loading country code mastersheet...')
+    with open(MASTERSHEET_FILE, 'r', encoding='utf-8') as f:
+        mastersheet = json.load(f)
+    owid_to_eurostat = mastersheet['owid_to_eurostat']
+    print(f'  Loaded {len(owid_to_eurostat)} country mappings')
+
+    # Load OWID dataset
+    print(f'  Loading OWID energy data from {OWID_FILE.name}...')
+    df = pd.read_excel(OWID_FILE)
+    print(f'  Loaded {len(df):,} rows, {len(df.columns)} columns')
+
+    # Filter to countries in our mastersheet
+    df_filtered = df[df['iso_code'].isin(owid_to_eurostat.keys())].copy()
+    df_filtered['geo'] = df_filtered['iso_code'].map(owid_to_eurostat)
+    print(f'  Matched {df_filtered["geo"].nunique()} countries from mastersheet')
+
+    # Report which project countries are missing from OWID
+    matched_geos = set(df_filtered['geo'].unique())
+    all_eurostat_geos = set(owid_to_eurostat.values())
+    missing = all_eurostat_geos - matched_geos
+    if missing:
+        print(f'  WARNING: {len(missing)} project countries not found in OWID: {sorted(missing)}')
+    else:
+        print(f'  All {len(all_eurostat_geos)} project countries found in OWID')
+
+    # Build lookup: {geo: {year: {production: {...}, consumption: {...}}}}
+    owid_data = defaultdict(lambda: defaultdict(lambda: {'production': {}, 'consumption': {}}))
+
+    all_owid_cols = list(OWID_PRODUCTION_COLS.keys()) + list(OWID_CONSUMPTION_COLS.keys())
+    existing_cols = [c for c in all_owid_cols if c in df_filtered.columns]
+    missing_cols = [c for c in all_owid_cols if c not in df_filtered.columns]
+    if missing_cols:
+        print(f'  WARNING: Missing OWID columns: {missing_cols}')
+    print(f'  Extracting columns: {existing_cols}')
+
+    total_rows = len(df_filtered)
+    start_time = time.time()
+
+    for i, (_, row) in enumerate(df_filtered.iterrows()):
+        geo = row['geo']
+        year = int(row['year'])
+
+        for owid_col, energy_type in OWID_PRODUCTION_COLS.items():
+            if owid_col in df_filtered.columns:
+                value = row[owid_col]
+                if pd.notna(value):
+                    owid_data[geo][year]['production'][energy_type] = round(float(value), 3)
+
+        for owid_col, energy_type in OWID_CONSUMPTION_COLS.items():
+            if owid_col in df_filtered.columns:
+                value = row[owid_col]
+                if pd.notna(value):
+                    owid_data[geo][year]['consumption'][energy_type] = round(float(value), 3)
+
+        if (i + 1) % 500 == 0 or i + 1 == total_rows:
+            print_progress(i + 1, total_rows, start_time, 'OWID data')
+
+    print()  # New line after progress bar
+
+    # Stats
+    countries_with_prod = sum(1 for geo_data in owid_data.values()
+                              if any(yr.get('production') for yr in geo_data.values()))
+    countries_with_cons = sum(1 for geo_data in owid_data.values()
+                              if any(yr.get('consumption') for yr in geo_data.values()))
+    phase_elapsed = time.time() - phase_start
+    print(f'  {len(owid_data)} countries, {countries_with_prod} with production, {countries_with_cons} with consumption')
+    print(f'  Phase completed in {format_time(phase_elapsed)}')
+
+    return dict(owid_data)
 
 
 # ============================================================================
@@ -527,15 +635,18 @@ def calculate_shares_and_rankings(trade_data):
 # Phase 4: Build JSON Structure
 # ============================================================================
 
-def build_json_output(dependency_data, trade_results):
+def build_json_output(dependency_data, trade_results, owid_data=None):
     """Combine all data into final JSON structure."""
     print_phase_header(4, 'Building JSON output')
     phase_start = time.time()
 
+    if owid_data is None:
+        owid_data = {}
+
     # Get all countries and years
-    all_countries = set(dependency_data.keys()) | set(trade_results.keys())
+    all_countries = set(dependency_data.keys()) | set(trade_results.keys()) | set(owid_data.keys())
     all_years = set()
-    for geo_data in list(dependency_data.values()) + list(trade_results.values()):
+    for geo_data in list(dependency_data.values()) + list(trade_results.values()) + list(owid_data.values()):
         all_years.update(geo_data.keys())
 
     all_years = sorted([y for y in all_years if isinstance(y, int)])
@@ -578,6 +689,14 @@ def build_json_output(dependency_data, trade_results):
                 if trade.get('exports'):
                     year_entry['exports'] = trade['exports']
 
+            # Add OWID production/consumption data
+            if geo in owid_data and year in owid_data[geo]:
+                owid_year = owid_data[geo][year]
+                if owid_year.get('production'):
+                    year_entry['production'] = owid_year['production']
+                if owid_year.get('consumption'):
+                    year_entry['consumption'] = owid_year['consumption']
+
             # Only add year if it has data
             if year_entry:
                 country_entry['years'][str(year)] = year_entry
@@ -597,12 +716,16 @@ def build_json_output(dependency_data, trade_results):
             'generated': datetime.now().isoformat(),
             'sources': [
                 'Eurostat energy trade (estat_nrg_ti_*, estat_nrg_te_*)',
-                'Eurostat import dependency (estat_nrg_ind_id, estat_nrg_ind_id3cf)'
+                'Eurostat import dependency (estat_nrg_ind_id, estat_nrg_ind_id3cf)',
+                'Our World in Data - Energy Dataset (production, consumption)'
             ],
             'time_range': [all_years[0], all_years[-1]],
             'energy_types': list(ENERGY_TYPE_NAMES.keys()),
             'energy_type_names': ENERGY_TYPE_NAMES,
-            'energy_type_units': ENERGY_TYPE_UNITS
+            'energy_type_units': ENERGY_TYPE_UNITS,
+            'production_consumption_unit': 'TWh',
+            'production_types': list(OWID_PRODUCTION_COLS.values()),
+            'consumption_types': list(OWID_CONSUMPTION_COLS.values())
         },
         'countries': countries,
         'country_lookup': {k: v for k, v in COUNTRY_NAMES.items() if k in all_countries}
@@ -718,6 +841,9 @@ def main():
     # Phase 1: Load dependency data
     dependency_data = load_dependency_data()
 
+    # Phase 1b: Load OWID production/consumption data
+    owid_data = load_owid_data()
+
     # Phase 2: Process trade data
     trade_data = process_trade_data(chunk_size=500_000)
 
@@ -725,13 +851,13 @@ def main():
     trade_results = calculate_shares_and_rankings(trade_data)
 
     # Phase 4: Build JSON output
-    output = build_json_output(dependency_data, trade_results)
+    output = build_json_output(dependency_data, trade_results, owid_data)
 
     # Phase 5: Verify
     verify_output(output)
 
     # Save output
-    output_file = OUTPUT_PATH / 'energy_imports_exports_dependency.json'
+    output_file = OUTPUT_PATH / 'energy_mix.json'
     print()
     print('=' * 60)
     print('Saving output')
