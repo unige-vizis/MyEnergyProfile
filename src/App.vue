@@ -27,24 +27,28 @@ import ConfigHeader from './components/ConfigHeader.vue';
         <If></If>
       </main>
   <footer class="site-footer">
-  <div class="footer-names">
-    <div class="name-with-tooltip">
-      <span class="footer-name">Matteo Gläser</span>
+
+    <div class="footer-names">
+      <div class="name-with-tooltip">
+        <span class="footer-name">Matteo Gläser</span>
       <div class="tooltip">Data research, development & data set management</div>
     </div>
 
     <div class="name-with-tooltip">
-      <span class="footer-name">Petula Arnold</span>
+        <span class="footer-name">Petula Arnold</span>
       <div class="tooltip">Concept, statistics & content structure</div>
     </div>
 
     <div class="name-with-tooltip">
-      <span class="footer-name">Maleah Leonie Kögler</span>
+        <span class="footer-name">Maleah Leonie Kögler</span>
       <div class="tooltip">Design, storytelling & content structure</div>
     </div>
-  </div>
 
-  <!-- RECHTS: VIZIS -->
+    <div class="name-with-tooltip">
+        <span class="footer-name">Methodology</span>
+      <div class="tooltip">Learn more about My Energy Profile</div>
+    </div>
+  </div>
   <div class="footer-right">
     <span class="footer-title">VIZIS</span>
   </div>

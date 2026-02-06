@@ -110,10 +110,10 @@ watch(showDropdown, (val) => {
 .year-slot-btn {
   height: 38px;
   width: 32px;
-  border: 1px solid #d0d0d0;
+  border: 1px solid #999;
   border-radius: 6px;
-  background: white;
-  color: #666;
+  background: #e5e5e5;
+  color: #555;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -137,12 +137,13 @@ watch(showDropdown, (val) => {
   gap: 0.5rem;
   height: 38px;
   padding: 0 0.75rem;
-  border: 1px solid #d0d0d0;
+  border: 1px solid #000;
   border-radius: 6px;
-  background: linear-gradient(to bottom, #3a3a3a, #2a2a2a);
+  background: #fcf1e6; /* beige */
   cursor: pointer;
   transition: all 0.2s ease;
 }
+
 
 .year-slot-display:hover {
   border-color: #4c4c4c;
@@ -150,10 +151,12 @@ watch(showDropdown, (val) => {
 
 .year-adj {
   font-size: 0.8rem;
-  color: rgba(255,255,255,0.3);
+  color: #000; /* schwarz */
+  opacity: 0.4; /* dezent */
   min-width: 2.5rem;
   text-align: center;
 }
+
 
 .year-drum {
   min-width: 2.5rem;
@@ -163,9 +166,10 @@ watch(showDropdown, (val) => {
   display: block;
   font-size: 0.95rem;
   font-weight: 600;
-  color: #fff;
+  color: #acc278; /* ausgewähltes Jahr */
   text-align: center;
 }
+
 
 .year-pop {
   animation: pop 0.2s ease-out;

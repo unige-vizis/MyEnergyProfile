@@ -167,6 +167,13 @@ h1 {
   transition: opacity 0.2s ease;
 }
 
+/* Tooltip für den ersten Namen (Matteo) nicht zentrieren, sondern nach rechts öffnen */
+.footer-names .name-with-tooltip:first-child .tooltip {
+  left: 0;
+  transform: none;
+}
+
+
 .name-with-tooltip:hover .tooltip {
   opacity: 1;
 }
