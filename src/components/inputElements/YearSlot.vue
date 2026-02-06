@@ -8,7 +8,6 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['update:modelValue'])
-const showDropdown = ref(false)
 const isAnimating = ref(false)
 const displayYear = ref(props.modelValue)
 
@@ -40,22 +39,6 @@ function changeTo(year) {
     isAnimating.value = false
   }, 200)
 }
-
-function selectYear(year) {
-  showDropdown.value = false
-  if (year !== props.modelValue) {
-    changeTo(year)
-  }
-}
-
-function onClickOutside(e) {
-  if (!e.target.closest('.year-slot')) showDropdown.value = false
-}
-
-watch(showDropdown, (val) => {
-  if (val) document.addEventListener('click', onClickOutside)
-  else document.removeEventListener('click', onClickOutside)
-})
 </script>
 
 <template>
@@ -63,9 +46,11 @@ watch(showDropdown, (val) => {
     <label v-if="label" class="year-slot-label">{{ label }}</label>
     <div class="year-slot-row">
       <button class="year-slot-btn" :disabled="!canGoUp" @click="go(-1)" type="button">
-        <svg width="10" height="10" viewBox="0 0 10 10"><path d="M7 1L3 5L7 9" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        <svg width="10" height="10" viewBox="0 0 10 10">
+          <path d="M7 1L3 5L7 9" stroke="currentColor" stroke-width="1.5" fill="none" />
+        </svg>
       </button>
-      <div class="year-slot-display" @click="showDropdown = !showDropdown">
+      <div class="year-slot-display">
         <span class="year-adj">{{ prevYear || '' }}</span>
         <div class="year-drum">
           <span class="year-current" :class="{ 'year-pop': isAnimating }">{{ displayYear }}</span>
@@ -73,17 +58,10 @@ watch(showDropdown, (val) => {
         <span class="year-adj">{{ nextYear || '' }}</span>
       </div>
       <button class="year-slot-btn" :disabled="!canGoDown" @click="go(1)" type="button">
-        <svg width="10" height="10" viewBox="0 0 10 10"><path d="M3 1L7 5L3 9" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        <svg width="10" height="10" viewBox="0 0 10 10">
+          <path d="M3 1L7 5L3 9" stroke="currentColor" stroke-width="1.5" fill="none" />
+        </svg>
       </button>
-    </div>
-    <div v-if="showDropdown" class="year-slot-dropdown">
-      <div
-        v-for="year in years"
-        :key="year"
-        class="year-slot-option"
-        :class="{ active: year === modelValue }"
-        @click.stop="selectYear(year)"
-      >{{ year }}</div>
     </div>
   </div>
 </template>
@@ -110,10 +88,10 @@ watch(showDropdown, (val) => {
 .year-slot-btn {
   height: 38px;
   width: 32px;
-  border: 1px solid #999;
+  border: 1px solid var(--primary-color);
   border-radius: 6px;
-  background: #e5e5e5;
-  color: #555;
+  background: var(--primary-color);
+  color: var(--text-color-dark-green);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -122,8 +100,7 @@ watch(showDropdown, (val) => {
 }
 
 .year-slot-btn:hover:not(:disabled) {
-  border-color: #b0b0b0;
-  color: #333;
+  border-color: var(--border-hover-color);
 }
 
 .year-slot-btn:disabled {
@@ -137,21 +114,16 @@ watch(showDropdown, (val) => {
   gap: 0.5rem;
   height: 38px;
   padding: 0 0.75rem;
-  border: 1px solid #000;
+  border: 1px solid var(--primary-color);
   border-radius: 6px;
-  background: #fcf1e6; /* beige */
+  background: var(--primary-color);
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-
-.year-slot-display:hover {
-  border-color: #4c4c4c;
-}
-
 .year-adj {
   font-size: 0.8rem;
-  color: #000; /* schwarz */
+  color: var(--text-color-dark-green);
   opacity: 0.4; /* dezent */
   min-width: 2.5rem;
   text-align: center;
@@ -166,7 +138,7 @@ watch(showDropdown, (val) => {
   display: block;
   font-size: 0.95rem;
   font-weight: 600;
-  color: #acc278; /* ausgewähltes Jahr */
+  color: var(--text-color-dark-green); /* ausgewähltes Jahr */
   text-align: center;
 }
 
@@ -187,35 +159,5 @@ watch(showDropdown, (val) => {
     transform: scale(1);
     opacity: 1;
   }
-}
-
-.year-slot-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  margin-top: 4px;
-  background: white;
-  border: 1px solid #d0d0d0;
-  border-radius: 6px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 100;
-}
-
-.year-slot-option {
-  padding: 0.5rem 1rem;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-
-.year-slot-option:hover {
-  background: #f0f0f0;
-}
-
-.year-slot-option.active {
-  background: #4c4c4c;
-  color: white;
 }
 </style>

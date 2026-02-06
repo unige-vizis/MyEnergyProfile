@@ -1,196 +1,83 @@
 <template>
-  <div class="dependency-chart">
-    <div class="chart-header">
-      <h4>Import Dependency by Energy Source</h4>
-      <p class="chart-subtitle">
-        Share of imports vs domestic production · <span class="chart-formula"><em>Net Imports</em> ÷ <em>Gross Available Energy</em></span>
-        <br>
-        <span class="formula-detail"><em>Net Imports</em> = Imports − Exports · <em>Gross Available Energy</em> ≈ Primary production + Net imports ± Stock changes</span>
-        <br>
-        <a href="https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Energy_dependency_rate" target="_blank" rel="noopener" class="source-link">https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Energy_dependency_rate</a>
-      </p>
-      
-    </div>
+  <div v-if="!hasData" class="no-data">
+    <span class="no-data-icon">?</span>
+    <span>No dependency data available for this year</span>
+  </div>
 
-    <div v-if="!hasData" class="no-data">
-      <span class="no-data-icon">?</span>
-      <span>No dependency data available for this year</span>
-    </div>
+  <div v-else class="chart-wrapper">
+    <div class="chart-container">
+      <div ref="chartRef" class="chart-svg"></div>
 
-    <div v-else class="chart-wrapper">
-      <div class="chart-container">
-        <div ref="chartRef" class="chart-svg"></div>
-
-        <!-- Electricity tooltip -->
-        <div
-          ref="tooltipRef"
-          class="electricity-tooltip"
-          :class="{ visible: tooltipVisible }"
-        >
-          <strong>Non-EU imports only.</strong> Eurostat doesn't calculate overall electricity dependency:
-          <ul>
-            <li><em>Origin:</em> Fuel dependency is counted at source (gas plant imports = gas dependency)</li>
-            <li><em>Losses:</em> ~33% of energy lost converting to electricity makes tracking difficult</li>
-            <li><em>Trade:</em> EU is near net-zero; grid constantly rebalances across borders</li>
-            <li><em>Focus:</em> Eurostat measures primary fuels (oil, gas) not transformed energy</li>
-            <li><em>Method:</em> Methodological complexities in how electricity trade interacts with primary fuels used to produce it</li>
-          </ul>
-        </div>
-
-        <div class="chart-legend">
-          <div class="legend-item">
-            <span class="legend-color" style="background: #e8a87c;"></span>
-            <span>Imports</span>
-          </div>
-          <div class="legend-item">
-            <span class="legend-color" style="background: #81b29a;"></span>
-            <span>Domestic</span>
-          </div>
-          <div class="legend-item">
-            <span class="legend-color" style="background: #8b2500;"></span>
-            <span>Reserve draw (&gt;100%)</span>
-          </div>
-          <div class="legend-item">
-            <span class="legend-color" style="background: #7b68ee;"></span>
-            <span>Net exporter (&lt;0%)</span>
-          </div>
-        </div>
-        <div class="chart-meta">
-          <div class="meta-section">
-            <span class="meta-label">Source:</span>
-            <ul class="meta-list">
-              <li>Eurostat <a href="https://ec.europa.eu/eurostat/web/energy/database" target="_blank" rel="noopener">Energy Database</a> (European Commission)</li>
-              <li>Tables <code>nrg_ind_id</code> (ID, overall dependency) and <code>nrg_ind_id3cf</code> (ID3CF, third country dependency)</li>
-              <li>Fuel breakdown via SIEC codes mapped to display names</li>
-            </ul>
-          </div>
-          <div class="meta-section">
-            <span class="meta-label">Data Hints:</span>
-            <div class="chart-notes">
-              <p class="chart-note">
-                <span class="note-icon">*</span>
-                <span>Non-EU breakdown (hatched line) only available for main aggregates (Coal, Gas, Oil, Electricity). Subcategories (indented, lighter colors) show total import dependency only.</span>
-              </p>
-              <p class="chart-note">
-                <span class="note-icon">*</span>
-                <span>Non-EU (third country) import dependency data is only available from 2010 to 2023.</span>
-              </p>
-              <p class="chart-note">
-                <span class="note-icon electricity-mark">!</span>
-                <span>Electricity: Eurostat does not calculate overall import dependency; showing non-EU imports only.</span>
-              </p>
-            </div>
-          </div>
-        </div>
+      <!-- Electricity tooltip -->
+      <div ref="tooltipRef" class="electricity-tooltip" :class="{ visible: tooltipVisible }">
+        <strong>Non-EU imports only.</strong> Eurostat doesn't calculate overall electricity dependency:
+        <ul>
+          <li><em>Origin:</em> Fuel dependency is counted at source (gas plant imports = gas dependency)</li>
+          <li><em>Losses:</em> ~33% of energy lost converting to electricity makes tracking difficult</li>
+          <li><em>Trade:</em> EU is near net-zero; grid constantly rebalances across borders</li>
+          <li><em>Focus:</em> Eurostat measures primary fuels (oil, gas) not transformed energy</li>
+          <li>
+            <em>Method:</em> Methodological complexities in how electricity trade interacts with primary fuels used to
+            produce it
+          </li>
+        </ul>
       </div>
 
-      <div class="chart-info">
-        <!-- Electricity -->
-        <div class="fuel-group">
-          <div class="fuel-group-title">Electricity</div>
-          <div class="fuel-group-content">
-            <img :src="`${baseUrl}images/fuel-electricity.jpg`" alt="Electricity" class="fuel-img-large" />
-            <p class="fuel-text">
-              Most versatile energy carrier for lighting, appliances, industry, and increasingly transport. Cannot be stored at scale, requiring real-time grid balancing. Non-EU dependency varies by geography (2022): Moldova (68%), Georgia (30%), Lithuania (25%) rely on non-EU sources; Western Europe imports almost exclusively from EU neighbors (Germany 6%, France 2%, non-EU). France is typically a net exporter thanks to its nuclear fleet.
+      <div class="chart-legend">
+        <div class="legend-item">
+          <span class="legend-color" style="background: #e8a87c;"></span>
+          <span>Imports</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: #81b29a;"></span>
+          <span>Domestic</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: #8b2500;"></span>
+          <span>Reserve draw (&gt;100%)</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-color" style="background: #7b68ee;"></span>
+          <span>Net exporter (&lt;0%)</span>
+        </div>
+      </div>
+      <div class="chart-meta">
+        <div class="meta-section">
+          <span class="meta-label">Source:</span>
+          <ul class="meta-list">
+            <li>
+              Eurostat
+              <a href="https://ec.europa.eu/eurostat/web/energy/database" target="_blank" rel="noopener"
+                >Energy Database</a
+              >
+              (European Commission)
+            </li>
+            <li>
+              Tables <code>nrg_ind_id</code> (ID, overall dependency) and <code>nrg_ind_id3cf</code> (ID3CF, third
+              country dependency)
+            </li>
+            <li>Fuel breakdown via SIEC codes mapped to display names</li>
+          </ul>
+        </div>
+        <div class="meta-section">
+          <span class="meta-label">Data Hints:</span>
+          <div class="chart-notes">
+            <p class="chart-note">
+              <span class="note-icon">*</span>
+              <span
+                >Non-EU breakdown (hatched line) only available for main aggregates (Coal, Gas, Oil, Electricity).
+                Subcategories (indented, lighter colors) show total import dependency only.</span
+              >
             </p>
-          </div>
-        </div>
-
-        <!-- Oil -->
-        <div class="fuel-group">
-          <div class="fuel-group-title">Oil &amp; Petroleum</div>
-          <div class="fuel-group-content">
-            <img :src="`${baseUrl}images/fuel-oil.jpg`" alt="Oil" class="fuel-img-large" />
-            <div class="fuel-text-wrapper">
-              <p class="fuel-text">
-                World's largest primary energy source (~30% of global consumption). Backbone of transportation and petrochemical feedstock. High energy density (45 MJ/kg). Nearly all European countries import 90%+ (2022): Germany (97%), France (99%), Italy (93%). Norway is a major net exporter. Non-EU dependency typically 75-90% across the EU (2022).
-              </p>
-            </div>
-          </div>
-          <div class="fuel-subresources">
-            <div class="fuel-subresource">
-              <img :src="`${baseUrl}images/fuel-crude-oil.jpg`" alt="Crude Oil" class="fuel-img-small" />
-              <div class="subresource-content">
-                <span class="subresource-name">Crude Oil</span>
-                <span class="subresource-desc">Unrefined petroleum sent to refineries for gasoline, diesel, jet fuel. Quality varies by sulfur (sweet/sour) and density (light/heavy). ~98% imported in most EU countries (2022).</span>
-              </div>
-            </div>
-            <div class="fuel-subresource">
-              <img :src="`${baseUrl}images/fuel-ngl.jpg`" alt="NGL" class="fuel-img-small" />
-              <div class="subresource-content">
-                <span class="subresource-name">NGL</span>
-                <span class="subresource-desc">Natural Gas Liquids (propane, butane, ethane). Extracted during gas processing. Typically 0% import dependency (2022) as they're separated domestically from imported gas.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Gas -->
-        <div class="fuel-group">
-          <div class="fuel-group-title">Natural Gas</div>
-          <div class="fuel-group-content">
-            <img :src="`${baseUrl}images/fuel-gas.jpg`" alt="Gas" class="fuel-img-large" />
-            <p class="fuel-text">
-              Primarily methane (CH₄). Burns 50% cleaner than coal. Critical for heating, electricity, and fertilizer production. Transported via pipelines or LNG tankers. Dependency above 100% indicates reserve drawdowns, observed during the 2022 energy crisis (Germany 106%, France 109%). In 2022: Netherlands (65%) has domestic production; Poland (78%) diversified via Baltic LNG. Norway is Europe's largest non-Russian supplier.
+            <p class="chart-note">
+              <span class="note-icon">*</span>
+              <span>Non-EU (third country) import dependency data is only available from 2010 to 2023.</span>
             </p>
-          </div>
-        </div>
-
-        <!-- Coal -->
-        <div class="fuel-group">
-          <div class="fuel-group-title">Coal</div>
-          <div class="fuel-group-content">
-            <img :src="`${baseUrl}images/fuel-coal.jpg`" alt="Coal" class="fuel-img-large" />
-            <p class="fuel-text">
-              Most carbon-intensive fossil fuel. Ranked by age: lignite → sub-bituminous → bituminous → anthracite. Still important for power and steel. Import dependency (2022): Germany ~50%; Poland (8%) and Czechia (14%) rely on domestic production. Values above 100% indicate stock usage. Being phased out across Europe due to climate commitments.
-            </p>
-          </div>
-          <div class="fuel-subresources">
-            <div class="fuel-subresource">
-              <img :src="`${baseUrl}images/fuel-anthracite.jpg`" alt="Anthracite" class="fuel-img-small" />
-              <div class="subresource-content">
-                <span class="subresource-name">Anthracite</span>
-                <span class="subresource-desc">Highest grade (86-97% carbon, 30-35 MJ/kg). Burns hot and clean. Geologically rare. Most countries import 100% (2022), but Poland (79%), Slovakia (56%), and Czechia (96%) retain some domestic production.</span>
-              </div>
-            </div>
-            <div class="fuel-subresource">
-              <img :src="`${baseUrl}images/fuel-coking-coal.jpg`" alt="Coking Coal" class="fuel-img-small" />
-              <div class="subresource-content">
-                <span class="subresource-name">Coking Coal</span>
-                <span class="subresource-desc">Essential for blast furnace steel production. Must have low ash/sulfur. ~100% imported in most EU countries (2022) from Australia, USA, Canada.</span>
-              </div>
-            </div>
-            <div class="fuel-subresource">
-              <img :src="`${baseUrl}images/fuel-bituminous.jpg`" alt="Other Bituminous" class="fuel-img-small" />
-              <div class="subresource-content">
-                <span class="subresource-name">Other Bituminous</span>
-                <span class="subresource-desc">Steam coal for power plants (45-86% carbon, 24-35 MJ/kg). Highest trade volume. Poland/Czechia have domestic reserves.</span>
-              </div>
-            </div>
-            <div class="fuel-subresource">
-              <img :src="`${baseUrl}images/fuel-sub-bituminous.jpg`" alt="Sub-bituminous" class="fuel-img-small" />
-              <div class="subresource-content">
-                <span class="subresource-name">Sub-bituminous</span>
-                <span class="subresource-desc">Grade between lignite and bituminous (35-45% carbon, 17-23 MJ/kg). Used mainly for power generation. Limited trade in Europe; most countries show 0% or no data (2013-2022).</span>
-              </div>
-            </div>
-            <div class="fuel-subresource">
-              <img :src="`${baseUrl}images/fuel-lignite.jpg`" alt="Lignite" class="fuel-img-small" />
-              <div class="subresource-content">
-                <span class="subresource-name">Lignite</span>
-                <span class="subresource-desc">Brown coal (25-35% carbon, up to 75% moisture). Rarely traded due to low energy density and crumbling when dried. Usually 0% import (2022), but Austria (100%), Slovenia, Hungary, and Lithuania import from neighbors. Germany is Europe's largest producer.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Peat -->
-        <div class="fuel-group">
-          <div class="fuel-group-title">Peat</div>
-          <div class="fuel-group-content">
-            <img :src="`${baseUrl}images/fuel-peat.jpg`" alt="Peat" class="fuel-img-large" />
-            <p class="fuel-text">
-              Partially decomposed organic matter from bogs. Lowest energy density (8-12 MJ/kg). Pre-coal stage fuel used historically in northern Europe for heating and power. Almost always sourced locally (0% import dependency, 2023) due to low energy density. Finland is the exception (~1%). Being phased out due to CO₂ emissions and ecosystem destruction. Most countries show no peat data.
+            <p class="chart-note">
+              <span class="note-icon electricity-mark">!</span>
+              <span
+                >Electricity: Eurostat does not calculate overall import dependency; showing non-EU imports only.</span
+              >
             </p>
           </div>
         </div>
@@ -203,7 +90,6 @@
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import * as d3 from 'd3'
 
-const baseUrl = import.meta.env.BASE_URL
 
 const props = defineProps({
   dependencyData: {
@@ -782,63 +668,29 @@ onUnmounted(() => {
 
 <style scoped>
 .dependency-chart {
-  background: #fff;
   border-radius: 8px;
-  padding: 1.5rem;
-  border: 1px solid #e8e8e8;
 }
 
 .chart-header {
   margin-bottom: 1rem;
 }
 
-.chart-header h4 {
-  margin: 0 0 0.25rem 0;
-  color: #333;
-  font-size: 1rem;
-}
-
 .chart-subtitle {
   margin: 0;
-  color: #666;
+  color: var(--placeholder-color);
   font-size: 0.85rem;
 }
 
 .chart-subtitle .source-link {
   display: block;
   margin-top: 0.2rem;
-  color: #1a73e8;
+  color: var(--text-color-dark-green);
   text-decoration: none;
   font-size: 0.7rem;
 }
 
 .chart-subtitle .source-link:hover {
   text-decoration: underline;
-}
-
-.formula-detail {
-  display: block;
-  margin-top: 0.2rem;
-  font-size: 0.75rem;
-  color: #888;
-  font-family: 'Times New Roman', 'Georgia', serif;
-  font-style: italic;
-}
-
-.formula-detail em {
-  font-style: italic;
-  color: #777;
-}
-
-.chart-formula {
-  color: #777;
-  font-family: 'Times New Roman', 'Georgia', serif;
-  font-style: italic;
-}
-
-.chart-formula em {
-  font-style: italic;
-  letter-spacing: 0.02em;
 }
 
 .no-data {
@@ -848,7 +700,6 @@ onUnmounted(() => {
   gap: 0.5rem;
   padding: 3rem;
   color: #999;
-  background: #f8f8f8;
   border-radius: 6px;
 }
 
@@ -872,11 +723,11 @@ onUnmounted(() => {
 }
 
 .chart-container {
+  width: 100%;
   position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  width: 45%;
   min-width: 350px;
   max-width: 500px;
   flex-shrink: 0;
@@ -888,8 +739,8 @@ onUnmounted(() => {
 
 .electricity-tooltip {
   position: absolute;
-  background: #fff;
-  border: 1px solid #c44536;
+  background: var(--primary-color);
+  border: 1px solid var(--text-color-red);
   border-radius: 6px;
   padding: 0.5rem 0.75rem;
   width: 400px;
@@ -1042,77 +893,6 @@ onUnmounted(() => {
   min-width: 0;
   font-size: 0.8rem;
   line-height: 1.5;
-}
-
-.fuel-group {
-  margin-bottom: 0.6rem;
-  padding-bottom: 0.6rem;
-  border-bottom: 1px solid #eee;
-}
-
-.fuel-group:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-
-.fuel-group-title {
-  font-weight: 600;
-  font-size: 0.9rem;
-  color: #333;
-  margin-bottom: 0.3rem;
-}
-
-.fuel-group-content {
-  display: flex;
-  gap: 0.6rem;
-  align-items: flex-start;
-}
-
-.fuel-img-large {
-  width: 72px;
-  height: 72px;
-  object-fit: contain;
-  background: #f5f5f5;
-  border-radius: 4px;
-  padding: 4px;
-  flex-shrink: 0;
-}
-
-.fuel-text {
-  margin: 0;
-  color: #555;
-  font-size: 0.8rem;
-  line-height: 1.5;
-}
-
-.fuel-text strong {
-  color: #333;
-}
-
-.fuel-subresources {
-  margin-top: 0.4rem;
-  margin-left: 78px;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.fuel-subresource {
-  display: flex;
-  gap: 0.4rem;
-  align-items: flex-start;
-  padding: 0.3rem 0;
-}
-
-.fuel-img-small {
-  width: 72px;
-  height: 72px;
-  object-fit: contain;
-  background: #f8f8f8;
-  border-radius: 3px;
-  padding: 4px;
-  flex-shrink: 0;
 }
 
 .subresource-content {

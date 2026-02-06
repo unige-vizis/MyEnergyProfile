@@ -74,21 +74,21 @@ const hasData = computed(() => {
       </div>
       <div class="text-container">
         <p>
-         The sunburst diagram on the left shows how energy consumption<br> 
-         is distributed across sectors and activities over the past year.<br>
-         It shows that the majority of the energy is beeing used for Space<br>
-         Heating and Cars. Within the transport sector, cars account for 51%<br> 
-         of total energy use, reflecting their widespread daily use. Air travel,<br>
-         while highly energy-intensive per trip, represents only 4% of<br>
-         total transport energy consumption.
-         <br> 
-         <br>
-         <br>
-         This visualization shows how different energy sources are used across<br>
-         sectors. It highlights that sectors such as transport and industry still<br>
-         rely heavily on fossil fuels, while electricity and renewable sources play<br>
-         a larger role in residential and service sectors. These structural differences<br> 
-         strongly influence how easily each sector can transition to low-carbon energy systems.
+          The sunburst diagram on the left shows how energy consumption<br />
+          is distributed across sectors and activities over the past year.<br />
+          It shows that the majority of the energy is beeing used for Space<br />
+          Heating and Cars. Within the transport sector, cars account for 51%<br />
+          of total energy use, reflecting their widespread daily use. Air travel,<br />
+          while highly energy-intensive per trip, represents only 4% of<br />
+          total transport energy consumption.
+          <br />
+          <br />
+          <br />
+          This visualization shows how different energy sources are used across<br />
+          sectors. It highlights that sectors such as transport and industry still<br />
+          rely heavily on fossil fuels, while electricity and renewable sources play<br />
+          a larger role in residential and service sectors. These structural differences<br />
+          strongly influence how easily each sector can transition to low-carbon energy systems.
         </p>
       </div>
     </div>
