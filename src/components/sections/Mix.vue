@@ -6,9 +6,8 @@
     <div class="mix-subsection">
       <h3>Where does my Energy Come from</h3>
       <p>
-        See how much of your country's energy is imported versus produced domestically. Import dependency shows what
-        share of each fuel type comes from abroad, helping you understand your nation's energy security and reliance on
-        foreign sources.
+        The stacked bar chart below shows how much of a country’s energy supply is produced domestically and how much is imported from abroad, broken down by energy source. Import dependency highlights the degree to which national energy systems rely on foreign suppliers and therefore reflects aspects of energy security, resilience, and exposure to geopolitical risks.
+        By comparing energy sources, it becomes clear that some fuels are structurally dependent on imports, while others are more closely tied to domestic resources. The detailed descriptions of each energy source below provide additional context on their role, availability, and typical dependency patterns.
       </p>
 
       <div v-if="store.isLoading" class="loading">Loading energy data...</div>
@@ -54,7 +53,7 @@ const store = useEnergyDataStore()
 }
 
 .mix-subsection > p {
-  color: #666;
+  color: black;
   line-height: 1.6;
   margin-bottom: 1rem;
 }

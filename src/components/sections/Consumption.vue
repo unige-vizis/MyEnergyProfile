@@ -72,24 +72,26 @@ const hasData = computed(() => {
           :selectedSector="selectedSector"
         />
       </div>
-      <div class="text-container">
+      <div class="text-container1">
         <p>
-         The sunburst diagram on the left shows how energy consumption<br> 
-         is distributed across sectors and activities over the past year.<br>
-         It shows that the majority of the energy is beeing used for Space<br>
-         Heating and Cars. Within the transport sector, cars account for 51%<br> 
-         of total energy use, reflecting their widespread daily use. Air travel,<br>
-         while highly energy-intensive per trip, represents only 4% of<br>
-         total transport energy consumption.
-         <br> 
-         <br>
-         <br>
-         This visualization shows how different energy sources are used across<br>
-         sectors. It highlights that sectors such as transport and industry still<br>
-         rely heavily on fossil fuels, while electricity and renewable sources play<br>
-         a larger role in residential and service sectors. These structural differences<br> 
-         strongly influence how easily each sector can transition to low-carbon energy systems.
+           This interactive sunburst diagram shows how total energy consumption is distributed across the four major sectors
+           and how it is further broken down into specific activities.<br><br>
+
+           A high share in <strong>residential</strong> energy use often reflects heating needs, building efficiency, and household size, while
+           a dominant transport sector can indicate high mobility demand or car-dependent infrastructures.<br>
+           Elevated consumption in <strong>industry</strong> typically points to an energy-intensive economic structure, whereas the service
+           sector is often associated with electricity use for buildings, lighting, and digital services.<br><br>
+
+           High consumption values should be interpreted in context: differences between countries and years are often driven
+           by climate, infrastructure, economic activity, and access to energy services rather than individual behavior alone.<br><br>
         </p>
+      </div>
+      <div class="text-container2">
+      <p>
+      The visualization below shows which <strong>energy sources</strong> are most commonly used in each sector.<br><br>
+      Different sectors rely on distinct energy carriers depending on their technical requirements: transport tends to
+      depend on oil-based fuels, while residential and service sectors use a higher share of electricity and heat.
+      </p>
       </div>
     </div>
   </section>
@@ -130,4 +132,37 @@ const hasData = computed(() => {
   justify-content: space-between;
   align-items: flex-end;
 }
+
+.section-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas:
+    "charts text1"
+    "charts text2";
+  column-gap: 0.75rem; /* vorher z. B. 2rem */
+  row-gap: 2rem;
+  align-items: start;
+}
+
+
+.charts-container {
+  grid-area: charts;
+}
+
+.text-container1 {
+  grid-area: text1;
+  max-width: 60ch;
+}
+
+.text-container2 {
+  grid-area: text2;
+  max-width: 60ch;
+}
+
+.text-container1,
+.text-container2 {
+  margin-left: -0.2rem;
+}
+
+
 </style>
