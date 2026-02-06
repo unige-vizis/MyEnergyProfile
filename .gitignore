@@ -4,6 +4,9 @@ claude.md
 tmpclaude-*
 nul
 
+# Temp folder (local notes, not for git)
+temp/
+
 # Data processing - ignore raw data files but keep READMEs and folder structure
 data-processing/raw-data/**/*.csv
 data-processing/raw-data/**/*.xlsx
