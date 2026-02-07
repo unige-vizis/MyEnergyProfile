@@ -5,11 +5,13 @@ export const useEnergyDataStore = defineStore("energyData", () => {
   const rawData = ref(null);
   const consumptionsData = ref(null);
   const pricesData = ref(null);
+  const ecoData = ref(null);
   const selectedCountryCode = ref("IT");
   const selectedYear = ref(2023);
   const isLoading = ref(false);
   const error = ref(null);
   const pricesLoaded = computed(() => Boolean(pricesData.value));
+  const ecoLoaded = computed(() => Boolean(ecoData.value));
 
   const countries = computed(() => {
     if (!rawData.value?.countries) return [];
@@ -184,6 +186,59 @@ export const useEnergyDataStore = defineStore("energyData", () => {
     };
   });
 
+  // Carbon intensity for selected country
+  const carbonIntensity = computed(() => {
+    if (!ecoData.value?.countries || !selectedCountryCode.value) return null;
+    const country = ecoData.value.countries[selectedCountryCode.value];
+    return country?.carbon_intensity || null;
+  });
+
+  // Carbon intensity ranking (all countries sorted ascending)
+  const carbonIntensityRanking = computed(() => {
+    if (!ecoData.value?.carbon_intensity_ranking) return [];
+    return ecoData.value.carbon_intensity_ranking;
+  });
+
+  // Per-capita emissions by sector for selected country
+  const emissionsPerCapita = computed(() => {
+    if (!ecoData.value?.countries || !selectedCountryCode.value) return null;
+    const country = ecoData.value.countries[selectedCountryCode.value];
+    return country?.emissions_per_capita || null;
+  });
+
+  // Total emissions (kt CO2) by sector for selected country
+  const emissionsTotal = computed(() => {
+    if (!ecoData.value?.countries || !selectedCountryCode.value) return null;
+    const country = ecoData.value.countries[selectedCountryCode.value];
+    return country?.emissions_total_kt || null;
+  });
+
+  // Emissions per capita ranking (all countries, sum of sectors, sorted ascending)
+  const emissionsPerCapitaRanking = computed(() => {
+    if (!ecoData.value?.countries) return [];
+
+    const ranking = [];
+    for (const [code, country] of Object.entries(ecoData.value.countries)) {
+      const epc = country.emissions_per_capita;
+      if (!epc) continue;
+
+      const total = (epc.residential || 0) + (epc.services || 0)
+                  + (epc.transport || 0) + (epc.industry || 0);
+
+      if (total > 0) {
+        ranking.push({
+          code,
+          name: country.name,
+          value: Math.round(total * 100) / 100,
+          year: epc.year
+        });
+      }
+    }
+
+    ranking.sort((a, b) => a.value - b.value);
+    return ranking;
+  });
+
   const electricitySeries = computed(() => {
     if (!pricesData.value || !selectedCountryCode.value) return [];
 
@@ -238,6 +293,16 @@ export const useEnergyDataStore = defineStore("energyData", () => {
         console.warn("Failed to load energy_prices.json", err);
         pricesData.value = null;
       }
+
+      // Load eco data (carbon intensity + emissions per capita)
+      try {
+        const ecoJSON = await fetch(`${import.meta.env.BASE_URL}data/eco_data.json`);
+        const ecoText = await ecoJSON.text();
+        ecoData.value = JSON.parse(ecoText.replace(/:\s*NaN/g, ": null"));
+      } catch (err) {
+        console.warn("eco_data.json not loaded", err);
+        ecoData.value = null;
+      }
     } catch (e) {
       error.value = e.message;
       console.error("Failed to load energy data:", e);
@@ -275,5 +340,12 @@ export const useEnergyDataStore = defineStore("energyData", () => {
     pricesData,
     pricesLoaded,
     electricitySeries,
+    ecoData,
+    ecoLoaded,
+    carbonIntensity,
+    carbonIntensityRanking,
+    emissionsPerCapita,
+    emissionsPerCapitaRanking,
+    emissionsTotal,
   };
 });
