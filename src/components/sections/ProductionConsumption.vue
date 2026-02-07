@@ -1,5 +1,5 @@
 <template>
-  <section id="mix" class="page-section">
+  <section id="productionconsumption" class="page-section">
     <h2>Production &amp; Consumption by Resource Over Time</h2>
     <!-- Subsection: Production & Consumption by Resource -->
     <div class="mix-subsection">
