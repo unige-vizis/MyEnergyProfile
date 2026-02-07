@@ -12,8 +12,11 @@
       </div>
       <div class="text-container">
         <p>
-          This section provides an overview of the availability of energy in your area over the past year. You can
-          analyze grid reliability, outage frequency, and compare your data with regional availability trends.
+        Which countries supply and receive energy, and how does this differ by energy type?<br>
+        This section shows the main import and export partners for different energy carriers such as coal, oil, gas, biofuels, and electricity.<br>
+        <br>
+        Trade patterns reflect resource availability, geographic proximity, and long-term infrastructure connections.<br>
+        High import shares often indicate structural dependency rather than short-term market decisions, while export flows highlight a country’s role within regional and global energy networks.
         </p>
       </div>
     </div>

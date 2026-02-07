@@ -2,8 +2,11 @@
   <section id="transition" class="page-section">
     <h2>Energy transition in context</h2>
     <p>
-      This section provides an overview of your energy transition over the past year. You can analyze your renewable and
-      non-renewable energy sources, peak consumption periods, and compare your data with average household consumption.
+    How is the energy system changing over time?<br>
+    This section places energy transition developments in a broader context by showing how energy sources, consumption patterns, and dependencies evolve across years.<br>
+    <br>
+    Changes in the energy mix often reflect long-term shifts driven by policy goals, technological progress, and economic conditions rather than short-term behavior.<br>
+    Viewing these trends over time helps distinguish gradual transition dynamics from temporary fluctuations.
     </p>
   </section>
 </template>

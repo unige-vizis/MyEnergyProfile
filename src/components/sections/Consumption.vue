@@ -24,11 +24,19 @@ const hasData = computed(() => {
         <SunburstChart :data="store.sunburstData" :year="store.selectedYear" :country="store.selectedCountry" />
       </div>
       <div class="text-container">
-        <p>
-          The sunburst diagram on the left shows how energy consumption is distributed across sectors and activities
-          over the past year. It shows that the majority of the energy is beeing used for Space Heating and Cars. Within
-          the transport sector, cars account for 51% of total energy use, reflecting their widespread daily use. Air
-          travel, while highly energy-intensive per trip, represents only 4% of total transport energy consumption.
+        <p class="text-left">
+          <strong>Have you ever wondered what sectors consume the most energy in your country?</strong><br><br>
+
+          Energy consumption differs across households, services, transport, and industry because each sector uses energy
+          for fundamentally different purposes.<br>
+          Industry consumes the most energy due to energy-intensive production processes and high-temperature heat
+          requirements. The transport sector is dominated by fossil fuels and internal combustion engines, which are
+          inherently inefficient and driven by growing mobility demand.<br>
+          Household energy use is mainly shaped by space heating, building characteristics, and everyday behavior.
+          The service sector consumes energy primarily for heating, lighting, cooling, and IT in large buildings with
+          long operating hours.<br>
+          Overall, sectoral differences in energy consumption are driven more by structural and technical factors than
+          by individual efficiency or waste.
         </p>
       </div>
     </div>
@@ -91,10 +99,8 @@ const hasData = computed(() => {
       </div>
       <div class="text-container">
         <p>
-          This visualization shows how different energy sources are used across sectors. It highlights that sectors such
-          as transport and industry still rely heavily on fossil fuels, while electricity and renewable sources play a
-          larger role in residential and service sectors. These structural differences strongly influence how easily
-          each sector can transition to low-carbon energy systems.
+          High consumption values should be interpreted in context: differences between countries and years are often<br>
+          driven by climate, infrastructure, economic activity, and access to energy services rather than individual behavior alone.
         </p>
         <p>
           The visualization below shows which <strong>energy sources</strong> are most commonly used in each sector.
@@ -142,4 +148,6 @@ const hasData = computed(() => {
   justify-content: space-between;
   align-items: flex-end;
 }
+
+
 </style>

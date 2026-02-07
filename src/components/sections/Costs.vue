@@ -1,6 +1,12 @@
 <template>
   <section id="costs" class="page-section">
     <h2>Energy costs</h2>
+    <p>
+    How have energy prices changed over time?<br>
+    The Energy Consumer Price Index (CPI) shows how the cost of energy for households evolves across years, reflecting broader economic and market conditions.<br>
+    Electricity prices are influenced by fuel costs, energy mix, infrastructure, and regulation.<br>
+    <br>
+    </p>
     <div class="section-container">
       <div v-if="store.isLoading" class="loading">Loading energy data...</div>
       <div v-else-if="store.error" class="error">{{ store.error }}</div>

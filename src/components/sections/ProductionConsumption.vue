@@ -1,6 +1,17 @@
 <template>
   <section id="productionconsumption" class="page-section">
     <h2>Production &amp; Consumption by Resource Over Time</h2>
+    <p class="text-left">
+      Energy systems change over time in response to economic growth, technological progress, and policy decisions.
+      This visualization shows how energy production and consumption evolve across different energy sources, such as
+      coal, oil, gas, biofuels, and electricity.<br>
+      Comparing production and consumption reveals structural patterns: some energy sources are largely produced
+      domestically, while others depend more strongly on imports or are gradually phased out. Rising or declining trends
+      often reflect broader shifts in energy systems rather than short-term behavior.<br>
+      These developments are shaped by resource availability, infrastructure, and long-term energy strategies,
+      offering insight into how national energy systems adapt and where transition dynamics become visible.
+    </p>
+
     <!-- Subsection: Production & Consumption by Resource -->
     <div class="mix-subsection">
       <div v-if="store.isLoading" class="loading">Loading energy data...</div>
