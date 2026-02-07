@@ -12,16 +12,16 @@ import ConfigHeader from './components/ConfigHeader.vue';
 <template>
   <div id="app-container">
     <Sidebar></Sidebar>
-    <div>
+    <main>
       <ConfigHeader></ConfigHeader>
-      <main class="main-content">
+      <div class="main-content">
         <Consumption></Consumption>
         <ProductionConsumption></ProductionConsumption>
         <Costs></Costs>
         <TradingPartner></TradingPartner>
         <Dependency></Dependency>
         <ETransition></ETransition>
-      </main>
+      </div>
       <footer class="site-footer">
         <div class="footer-names">
           <div class="name-with-tooltip">
@@ -48,6 +48,6 @@ import ConfigHeader from './components/ConfigHeader.vue';
           <span class="footer-title">VIZIS</span>
         </div>
       </footer>
-    </div>
+    </main>
   </div>
 </template>

@@ -11,6 +11,8 @@
   --text-color-gray: #666;
   --placeholder-color: #a4a4a4;
   --border-hover-color: #becfb6;
+
+  --sidebar-width: 300px;
 }
 
 body {
@@ -48,8 +50,12 @@ h1 {
   background-color: var(--primary-color);
 }
 
+main {
+  width: 100%;
+}
+
 .main-content {
-  margin-left: 300px;
+  margin-left: var(--sidebar-width);
   margin-top: 150px;
   flex: 1;
   padding: 2rem;

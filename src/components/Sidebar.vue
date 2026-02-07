@@ -87,6 +87,7 @@ onUnmounted(() => {
   position: fixed;
   left: 0;
   top: 0;
+  width: var(--sidebar-width);
   height: 100vh;
   background-color: var(--secondary-color);
   color: var(--text-color-dark-green);
