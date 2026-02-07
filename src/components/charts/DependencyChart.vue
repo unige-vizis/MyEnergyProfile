@@ -675,13 +675,7 @@ onUnmounted(() => {
   margin-bottom: 1rem;
 }
 
-.chart-subtitle {
-  margin: 0;
-  color: var(--placeholder-color);
-  font-size: 0.85rem;
-}
-
-.chart-subtitle .source-link {
+.source-link {
   display: block;
   margin-top: 0.2rem;
   color: var(--text-color-dark-green);
@@ -689,7 +683,7 @@ onUnmounted(() => {
   font-size: 0.7rem;
 }
 
-.chart-subtitle .source-link:hover {
+.source-link:hover {
   text-decoration: underline;
 }
 
@@ -788,7 +782,6 @@ onUnmounted(() => {
   gap: 1.5rem;
   justify-content: flex-start;
   flex-wrap: wrap;
-  padding-left: 100px;
 }
 
 .legend-item {
@@ -807,7 +800,6 @@ onUnmounted(() => {
 
 .chart-meta {
   margin-top: 0.75rem;
-  padding-left: 100px;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;

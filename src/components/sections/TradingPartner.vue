@@ -2,7 +2,7 @@
   <section id="tradingpartner" class="page-section">
     <div class="chart-header">
       <h2>The Trading Partners</h2>
-      <p class="chart-subtitle">Import and export partners by energy type</p>
+      <p>Import and export partners by energy type</p>
     </div>
     <div class="section-container">
       <div v-if="store.isLoading" class="loading">Loading energy data...</div>
