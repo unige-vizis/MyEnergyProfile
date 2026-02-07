@@ -37,7 +37,7 @@ const sections = ref([
   { id: "costs", name: "Energy costs", icon: "euro", },
   { id: "tradingpartner", name: "The Trading Partners", icon: "cycle",},
   { id: "dependency", name: "Dependency on imports", icon: "trending_up",},
-  { id: "transition", name: "Energy transition in context", icon: "energy",},
+  { id: "eco", name: "Ecological footprint", icon: "energy_savings_leaf",},
 ]);
 
 const scrollToSection = (sectionId) => {

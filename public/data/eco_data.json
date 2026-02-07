@@ -1,0 +1,1029 @@
+{
+  "metadata": {
+    "generated": "2026-02-07T19:15:06.671031",
+    "sources": [
+      "OWID Energy Data",
+      "IEA End-Uses & Efficiency Indicators"
+    ]
+  },
+  "countries": {
+    "AL": {
+      "name": "Albania",
+      "carbon_intensity": {
+        "latest_year": 2023,
+        "latest_value": 24.42
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.1062,
+        "services": 0.071,
+        "industry": 0.3192
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 291.5,
+        "services": 195.0,
+        "transport": 1961.1,
+        "industry": 897.4
+      }
+    },
+    "AT": {
+      "name": "Austria",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 102.62
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.9446,
+        "services": 0.3811,
+        "transport": 1.9558,
+        "industry": 1.521
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 8624.9,
+        "services": 3479.6,
+        "transport": 18781.5,
+        "industry": 13872.4
+      }
+    },
+    "BA": {
+      "name": "Bosnia and Herzegovina",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 638.04
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 1.9367,
+        "services": 1.0367,
+        "industry": 1.411
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 6218.6,
+        "services": 3328.9,
+        "transport": 4176.4,
+        "industry": 4464.8
+      }
+    },
+    "BE": {
+      "name": "Belgium",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 117.58
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 1.2544,
+        "services": 0.682,
+        "transport": 2.0184,
+        "industry": 1.8708
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 14776.6,
+        "services": 8033.9,
+        "transport": 25165.1,
+        "industry": 21960.6
+      }
+    },
+    "BG": {
+      "name": "Bulgaria",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 264.21
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.9785,
+        "services": 0.6278,
+        "transport": 1.4253,
+        "industry": 1.0352
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 6291.8,
+        "services": 4036.9,
+        "transport": 10324.7,
+        "industry": 6995.8
+      }
+    },
+    "CY": {
+      "name": "Cyprus",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 512.24
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 1.4356,
+        "services": 1.6988,
+        "transport": 1.9207,
+        "industry": 0.5016
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 1322.2,
+        "services": 1564.6,
+        "transport": 2040.8,
+        "industry": 681.3
+      }
+    },
+    "CZ": {
+      "name": "Czechia",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 413.86
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 1.6153,
+        "services": 1.0819,
+        "transport": 1.7478,
+        "industry": 2.3
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 17571.4,
+        "services": 11768.5,
+        "transport": 21765.5,
+        "industry": 24692.8
+      }
+    },
+    "DE": {
+      "name": "Germany",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 344.14
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 1.7577,
+        "services": 0.7193,
+        "transport": 1.7574,
+        "industry": 1.8231
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 148549.2,
+        "services": 60795.0,
+        "transport": 160835.0,
+        "industry": 154149.6
+      }
+    },
+    "DK": {
+      "name": "Denmark",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 143.3
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.6646,
+        "services": 0.3506,
+        "transport": 1.7574,
+        "industry": 0.5348
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 3953.1,
+        "services": 2085.2,
+        "transport": 12215.2,
+        "industry": 3196.4
+      }
+    },
+    "EE": {
+      "name": "Estonia",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 341.02
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 1.0532,
+        "services": 0.8093,
+        "industry": 0.7101
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 1438.6,
+        "services": 1105.5,
+        "transport": 2558.3,
+        "industry": 966.1
+      }
+    },
+    "EL": {
+      "name": "Greece",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 319.76
+      }
+    },
+    "ES": {
+      "name": "Spain",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 146.15
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.5246,
+        "services": 0.3704,
+        "transport": 1.6763,
+        "industry": 0.7675
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 25226.7,
+        "services": 17812.3,
+        "transport": 96345.8,
+        "industry": 36772.1
+      }
+    },
+    "FI": {
+      "name": "Finland",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 72.25
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.616,
+        "services": 0.533,
+        "transport": 1.7686,
+        "industry": 1.4288
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 3435.6,
+        "services": 2972.6,
+        "transport": 11047.0,
+        "industry": 8025.8
+      }
+    },
+    "FR": {
+      "name": "France",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 44.18
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.586,
+        "services": 0.3576,
+        "transport": 1.4908,
+        "industry": 0.6698
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 39992.7,
+        "services": 24408.1,
+        "transport": 109426.7,
+        "industry": 44577.1
+      }
+    },
+    "GE": {
+      "name": "Georgia",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 143.06
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.8102,
+        "services": 0.2495,
+        "industry": 0.4335
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 3010.4,
+        "services": 927.1,
+        "transport": 3994.0,
+        "industry": 1650.7
+      }
+    },
+    "HR": {
+      "name": "Croatia",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 174.48
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.6911,
+        "services": 0.4013,
+        "transport": 1.4488,
+        "industry": 0.6167
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 2662.7,
+        "services": 1546.1,
+        "transport": 6844.3,
+        "industry": 2389.8
+      }
+    },
+    "HU": {
+      "name": "Hungary",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 182.82
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.9351,
+        "services": 0.3276,
+        "transport": 1.4309,
+        "industry": 0.7633
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 8967.7,
+        "services": 3141.9,
+        "transport": 14661.9,
+        "industry": 7386.1
+      }
+    },
+    "IE": {
+      "name": "Ireland",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 279.7
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 1.3632,
+        "services": 0.9754,
+        "transport": 1.8746,
+        "industry": 0.8858
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 7219.6,
+        "services": 5165.8,
+        "transport": 10593.4,
+        "industry": 4654.6
+      }
+    },
+    "IS": {
+      "name": "Iceland",
+      "carbon_intensity": {
+        "latest_year": 2023,
+        "latest_value": 28.33
+      }
+    },
+    "IT": {
+      "name": "Italy",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 287.53
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.8682,
+        "services": 0.6289,
+        "transport": 1.631,
+        "industry": 0.9997
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 51218.0,
+        "services": 37103.0,
+        "transport": 111055.2,
+        "industry": 59327.4
+      }
+    },
+    "LT": {
+      "name": "Lithuania",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 139.34
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.4334,
+        "services": 0.196,
+        "transport": 2.1228,
+        "industry": 0.3849
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 1239.4,
+        "services": 560.6,
+        "transport": 6210.2,
+        "industry": 1100.6
+      }
+    },
+    "LU": {
+      "name": "Luxembourg",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 134.62
+      },
+      "emissions_per_capita": {
+        "year": 2022,
+        "residential": 1.4154,
+        "services": 0.903,
+        "transport": 1.8955,
+        "industry": 0.9859
+      },
+      "emissions_total_kt": {
+        "year": 2022,
+        "residential": 927.1,
+        "services": 591.5,
+        "transport": 1311.2,
+        "industry": 663.6
+      }
+    },
+    "LV": {
+      "name": "Latvia",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 136.22
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.4688,
+        "services": 0.3793,
+        "transport": 1.51,
+        "industry": 0.2762
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 886.9,
+        "services": 717.7,
+        "transport": 3071.5,
+        "industry": 517.1
+      }
+    },
+    "MD": {
+      "name": "Moldova",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 629.56
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.8218,
+        "services": 0.4513,
+        "industry": 0.2333
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 2048.2,
+        "services": 1124.8,
+        "transport": 2191.7,
+        "industry": 708.1
+      }
+    },
+    "ME": {
+      "name": "Montenegro",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 413.51
+      }
+    },
+    "MK": {
+      "name": "North Macedonia",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 568.97
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 1.2431,
+        "services": 0.5592,
+        "industry": 0.7909
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 2252.6,
+        "services": 1013.2,
+        "transport": 2437.0,
+        "industry": 1441.9
+      }
+    },
+    "MT": {
+      "name": "Malta",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 484.16
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.5916,
+        "services": 0.7239,
+        "industry": 0.317
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 327.2,
+        "services": 400.3,
+        "transport": 768.3,
+        "industry": 171.0
+      }
+    },
+    "NL": {
+      "name": "Netherlands",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 253.31
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.9858,
+        "services": 0.8907,
+        "transport": 1.3516,
+        "industry": 1.699
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 17688.1,
+        "services": 15982.0,
+        "transport": 28476.1,
+        "industry": 30971.4
+      }
+    },
+    "NO": {
+      "name": "Norway",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 30.75
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.0847,
+        "services": 0.2731,
+        "industry": 0.8983
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 469.6,
+        "services": 1513.3,
+        "transport": 13925.2,
+        "industry": 5009.5
+      }
+    },
+    "PL": {
+      "name": "Poland",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 614.98
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 1.6152,
+        "services": 1.1767,
+        "transport": 1.7618,
+        "industry": 1.3353
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 60789.5,
+        "services": 44288.0,
+        "transport": 72404.7,
+        "industry": 51461.5
+      }
+    },
+    "PT": {
+      "name": "Portugal",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 112.29
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.2708,
+        "services": 0.2327,
+        "transport": 1.5637,
+        "industry": 0.5772
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 2881.6,
+        "services": 2476.4,
+        "transport": 18064.4,
+        "industry": 6018.0
+      }
+    },
+    "RO": {
+      "name": "Romania",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 245.55
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.6753,
+        "services": 0.3023,
+        "transport": 0.5885,
+        "industry": 0.6187
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 12868.4,
+        "services": 5760.0,
+        "transport": 23296.3,
+        "industry": 11764.8
+      }
+    },
+    "RS": {
+      "name": "Serbia",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 670.8
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 2.1377,
+        "services": 0.8886,
+        "industry": 1.7499
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 14147.2,
+        "services": 5881.0,
+        "transport": 8195.7,
+        "industry": 11787.5
+      }
+    },
+    "SE": {
+      "name": "Sweden",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 35.82
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.315,
+        "services": 0.201,
+        "transport": 1.5017,
+        "industry": 0.6121
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 3337.3,
+        "services": 2128.7,
+        "transport": 18427.3,
+        "industry": 6492.6
+      }
+    },
+    "SI": {
+      "name": "Slovenia",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 227.65
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.8126,
+        "services": 0.5085,
+        "transport": 2.3351,
+        "industry": 1.1054
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 1723.5,
+        "services": 1078.6,
+        "transport": 4719.4,
+        "industry": 2342.0
+      }
+    },
+    "SK": {
+      "name": "Slovakia",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 96.49
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.7626,
+        "services": 0.4091,
+        "transport": 0.6409,
+        "industry": 1.9623
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 4161.4,
+        "services": 2232.6,
+        "transport": 5190.1,
+        "industry": 10805.8
+      }
+    },
+    "TR": {
+      "name": "Turkey",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 469.7
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.9301,
+        "services": 0.6829,
+        "transport": 0.5449,
+        "industry": 1.5612
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 79404.1,
+        "services": 58301.2,
+        "transport": 100143.2,
+        "industry": 136567.0
+      }
+    },
+    "UA": {
+      "name": "Ukraine",
+      "carbon_intensity": {
+        "latest_year": 2022,
+        "latest_value": 256.21
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.7691,
+        "services": 0.381,
+        "industry": 0.6984
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 28456.6,
+        "services": 14096.4,
+        "transport": 24158.9,
+        "industry": 26441.3
+      }
+    },
+    "UK": {
+      "name": "United Kingdom",
+      "carbon_intensity": {
+        "latest_year": 2024,
+        "latest_value": 210.89
+      },
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 0.9957,
+        "services": 0.4915,
+        "transport": 1.5705,
+        "industry": 0.7083
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 67968.5,
+        "services": 33551.2,
+        "transport": 117350.0,
+        "industry": 48970.3
+      }
+    },
+    "XK": {
+      "name": "Kosovo",
+      "emissions_per_capita": {
+        "year": 2023,
+        "residential": 1.7592,
+        "services": 0.781
+      },
+      "emissions_total_kt": {
+        "year": 2023,
+        "residential": 3089.1,
+        "services": 1371.5,
+        "transport": 1405.5,
+        "industry": 1689.0
+      }
+    }
+  },
+  "carbon_intensity_ranking": [
+    {
+      "code": "AL",
+      "name": "Albania",
+      "value": 24.42,
+      "year": 2023
+    },
+    {
+      "code": "IS",
+      "name": "Iceland",
+      "value": 28.33,
+      "year": 2023
+    },
+    {
+      "code": "NO",
+      "name": "Norway",
+      "value": 30.75,
+      "year": 2024
+    },
+    {
+      "code": "SE",
+      "name": "Sweden",
+      "value": 35.82,
+      "year": 2024
+    },
+    {
+      "code": "FR",
+      "name": "France",
+      "value": 44.18,
+      "year": 2024
+    },
+    {
+      "code": "FI",
+      "name": "Finland",
+      "value": 72.25,
+      "year": 2024
+    },
+    {
+      "code": "SK",
+      "name": "Slovakia",
+      "value": 96.49,
+      "year": 2024
+    },
+    {
+      "code": "AT",
+      "name": "Austria",
+      "value": 102.62,
+      "year": 2024
+    },
+    {
+      "code": "PT",
+      "name": "Portugal",
+      "value": 112.29,
+      "year": 2024
+    },
+    {
+      "code": "BE",
+      "name": "Belgium",
+      "value": 117.58,
+      "year": 2024
+    },
+    {
+      "code": "LU",
+      "name": "Luxembourg",
+      "value": 134.62,
+      "year": 2024
+    },
+    {
+      "code": "LV",
+      "name": "Latvia",
+      "value": 136.22,
+      "year": 2024
+    },
+    {
+      "code": "LT",
+      "name": "Lithuania",
+      "value": 139.34,
+      "year": 2024
+    },
+    {
+      "code": "GE",
+      "name": "Georgia",
+      "value": 143.06,
+      "year": 2024
+    },
+    {
+      "code": "DK",
+      "name": "Denmark",
+      "value": 143.3,
+      "year": 2024
+    },
+    {
+      "code": "ES",
+      "name": "Spain",
+      "value": 146.15,
+      "year": 2024
+    },
+    {
+      "code": "HR",
+      "name": "Croatia",
+      "value": 174.48,
+      "year": 2024
+    },
+    {
+      "code": "HU",
+      "name": "Hungary",
+      "value": 182.82,
+      "year": 2024
+    },
+    {
+      "code": "UK",
+      "name": "United Kingdom",
+      "value": 210.89,
+      "year": 2024
+    },
+    {
+      "code": "SI",
+      "name": "Slovenia",
+      "value": 227.65,
+      "year": 2024
+    },
+    {
+      "code": "RO",
+      "name": "Romania",
+      "value": 245.55,
+      "year": 2024
+    },
+    {
+      "code": "NL",
+      "name": "Netherlands",
+      "value": 253.31,
+      "year": 2024
+    },
+    {
+      "code": "UA",
+      "name": "Ukraine",
+      "value": 256.21,
+      "year": 2022
+    },
+    {
+      "code": "BG",
+      "name": "Bulgaria",
+      "value": 264.21,
+      "year": 2024
+    },
+    {
+      "code": "IE",
+      "name": "Ireland",
+      "value": 279.7,
+      "year": 2024
+    },
+    {
+      "code": "IT",
+      "name": "Italy",
+      "value": 287.53,
+      "year": 2024
+    },
+    {
+      "code": "EL",
+      "name": "Greece",
+      "value": 319.76,
+      "year": 2024
+    },
+    {
+      "code": "EE",
+      "name": "Estonia",
+      "value": 341.02,
+      "year": 2024
+    },
+    {
+      "code": "DE",
+      "name": "Germany",
+      "value": 344.14,
+      "year": 2024
+    },
+    {
+      "code": "ME",
+      "name": "Montenegro",
+      "value": 413.51,
+      "year": 2024
+    },
+    {
+      "code": "CZ",
+      "name": "Czechia",
+      "value": 413.86,
+      "year": 2024
+    },
+    {
+      "code": "TR",
+      "name": "Turkey",
+      "value": 469.7,
+      "year": 2024
+    },
+    {
+      "code": "MT",
+      "name": "Malta",
+      "value": 484.16,
+      "year": 2024
+    },
+    {
+      "code": "CY",
+      "name": "Cyprus",
+      "value": 512.24,
+      "year": 2024
+    },
+    {
+      "code": "MK",
+      "name": "North Macedonia",
+      "value": 568.97,
+      "year": 2024
+    },
+    {
+      "code": "PL",
+      "name": "Poland",
+      "value": 614.98,
+      "year": 2024
+    },
+    {
+      "code": "MD",
+      "name": "Moldova",
+      "value": 629.56,
+      "year": 2024
+    },
+    {
+      "code": "BA",
+      "name": "Bosnia and Herzegovina",
+      "value": 638.04,
+      "year": 2024
+    },
+    {
+      "code": "RS",
+      "name": "Serbia",
+      "value": 670.8,
+      "year": 2024
+    }
+  ]
+}
