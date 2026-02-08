@@ -16,7 +16,7 @@
       <div v-if="store.isLoading" class="loading">Loading energy data...</div>
       <div v-else-if="store.error" class="error">{{ store.error }}</div>
       <div class="charts-container" v-else>
-        <div v-if="store.dependencyData" class="chart-section">
+        <div v-if="store.dependencyData" class="charts-container">
           <DependencyChart :dependencyData="store.dependencyData" :year="store.selectedYear" />
         </div>
       </div>

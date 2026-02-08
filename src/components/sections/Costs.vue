@@ -8,7 +8,7 @@
       <template v-else class="charts-container">
         <div v-if="!store.pricesLoaded" class="no-data">Price data not available for this country.</div>
 
-        <div v-else class="chart-section">
+        <div v-else class="charts-container">
           <PricesFocusContext
             :data="store.electricitySeries"
             :focusYear="store.selectedYear"
@@ -78,10 +78,6 @@ function onFocusYear(year) {
 
 .kpi-sub {
   color: var(--text-color-gray);
-}
-
-.chart-section {
-  margin-top:1rem
 }
 
 .chart-footer {

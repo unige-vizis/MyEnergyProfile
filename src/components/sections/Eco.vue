@@ -99,6 +99,41 @@
           </ul>
         </div>
       </div>
+
+      <div class="chart-meta">
+        <div class="meta-section">
+          <span class="meta-label">Source</span>
+          <ul>
+            <li>
+              <strong>IEA</strong>
+              <a
+                href="https://www.iea.org/data-and-statistics/data-product/energy-efficiency-indicators-highlights"
+                target="_blank"
+                rel="noopener"
+              >
+                Energy End-Uses &amp; Efficiency
+              </a>
+              (per-capita CO&#x2082; by sector). Indicator: <code>Carbon intensity per capita (t CO2/capita)</code>. End
+              uses: <code>Total residential</code>, <code>Total services</code>, <code>Cars/light trucks</code> +
+              <code>Freight trucks</code> (transport)
+            </li>
+            <li>
+              Industry per-capita derived from IEA total emissions (indicator: <code>Total final use (kt CO2)</code>,
+              end use containing <code>Manufacturing</code>) divided by
+              <strong>OWID</strong>
+              <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener"> Energy Data </a>
+              <code>population</code> column. IEA provides per-capita indicators for residential, services, and
+              transport, but only per-value-added (gCO&#x2082;/USD) for industry.
+            </li>
+          </ul>
+        </div>
+        <div class="meta-section">
+          <span class="meta-label">Data Hints</span>
+          <ul>
+            <li>Some countries may lack transport data. The total shown is the sum of available sectors.</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <!-- Subsection 2: Carbon Intensity -->

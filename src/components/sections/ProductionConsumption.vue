@@ -5,7 +5,7 @@
     <div>
       <div v-if="store.isLoading" class="loading">Loading energy data...</div>
       <div v-else-if="store.error" class="error">{{ store.error }}</div>
-      <div v-else class="chart-section">
+      <div v-else>
         <SmallMultiplesChart
           :productionConsumptionData="store.productionConsumptionData"
           :countryYears="store.selectedCountry?.years"
@@ -34,9 +34,5 @@ const store = useEnergyDataStore()
 
 .error {
   color: var(--text-color-red);
-}
-
-.chart-section {
-  margin-top: 1.5rem;
 }
 </style>
