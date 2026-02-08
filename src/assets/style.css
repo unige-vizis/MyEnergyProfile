@@ -64,6 +64,10 @@ main {
   background-color: var(--primary-color);
 }
 
+.main-with-config {
+  margin-top: 150px;
+}
+
 .page-section {
   padding: 2rem;
   background-color: var(--primary-color);

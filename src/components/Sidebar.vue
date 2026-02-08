@@ -15,7 +15,7 @@
       <nav class="timeline-nav">
         <div class="timeline-line"></div>
         <div class="timeline-sections">
-          <div v-for="section in sections" :key="section.id">
+          <div v-for="section in props.sections" :key="section.id">
             <a
               :href="`#${section.id}`"
               @click.prevent="scrollToSection(section.id)"
@@ -37,15 +37,11 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
+const props = defineProps({
+  sections: Object
+})
 const currentSection = ref('consumption')
-const sections = ref([
-  { id: "consumption", name: "My energy consumption", icon: "battery_android_frame_5", },
-  { id: "productionconsumption", name: "Production & Consumption", icon: "instant_mix", },
-  { id: "costs", name: "Energy costs", icon: "euro", },
-  { id: "tradingpartner", name: "The Trading Partners", icon: "cycle",},
-  { id: "dependency", name: "Dependency on imports", icon: "trending_up",},
-  { id: "eco", name: "Ecological footprint", icon: "energy_savings_leaf",},
-]);
+
 
 const scrollToSection = (sectionId) => {
   const element = document.getElementById(sectionId)
@@ -67,7 +63,7 @@ const handleScroll = () => {
   // Use window scroll approach - this is what's actually scrolling
   const scrollPosition = window.scrollY + window.innerHeight / 3
 
-  for (const section of sections.value) {
+  for (const section of props.sections) {
     const element = document.getElementById(section.id)
     if (element) {
       const { offsetTop, offsetHeight } = element
@@ -93,6 +89,7 @@ onUnmounted(() => {
 .timeline-sidebar {
   position: fixed;
   left: 0;
+  width: 300px;
   top: 0;
   width: var(--sidebar-width);
   height: 100vh;
@@ -212,5 +209,9 @@ onUnmounted(() => {
 .timeline-item.active .timeline-label {
   opacity: 1;
   font-weight: 600;
+}
+
+.short-sidebar .timeline-nav{
+  max-height: 200px;
 }
 </style>

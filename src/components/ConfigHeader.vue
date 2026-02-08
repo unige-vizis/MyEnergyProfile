@@ -46,32 +46,65 @@ const householdSizeOptions = [
 onMounted(() => {
   energyStore.loadData();
 });
+import { useRoute, useRouter } from "vue-router";
+
+const router = useRouter();
+const route = useRoute();
+
+const isInfo = computed(() => route.path.startsWith("/info"));
+
+function openMethodology() {
+  router.push("/info");
+}
+
 </script>
 
 <template>
   <div class="config-header">
-    <AppSelect
-      class="config-item"
-      :options="countryOptions"
-      label="Country"
-      v-model="selectedCountry"
-      placeholder="Select country"
+    <template v-if="!isInfo">
+      <AppSelect
+        class="config-item"
+        :options="countryOptions"
+        label="Country"
+        v-model="selectedCountry"
+        placeholder="Select country"
+      />
+      <YearSlot class="config-item" :years="globalConfig.yearsDescending" label="Year" v-model="selectedYear" />
+    </template>
+
+    <!-- Button (immer sichtbar) -->
+    <button
+    class="methodology-button"
+    :class="{ active: isInfo }"
+    @click="openMethodology"
+    type="button"
+    aria-label="Info / Methodology"
+    title="Info / Methodology"
     >
-    </AppSelect>
-    <YearSlot class="config-item" :years="globalConfig.yearsDescending" label="Year" v-model="selectedYear" />
+    <span class="material-symbols-outlined">info</span>
+    </button>
   </div>
 </template>
 
+
 <style scoped>
-  .config-header {
+  .config-header{
   position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  box-sizing: border-box;
+
   display: flex;
   gap: 2rem;
-  top: 0;
-  width: 100%;
-  padding: 2rem 20rem;
+  align-items: flex-end;
+
+  padding-left: 20rem;   /* Platz für Sidebar */
+  padding-right: 2rem;   /* ✅ damit der Button fast ganz rechts sitzt */
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+
   background: var(--secondary-color);
-  color: black;
   box-shadow: 4px 0 12px rgba(0, 0, 0, 0.4);
   z-index: 100;
 }
@@ -108,4 +141,39 @@ onMounted(() => {
 .config-header :deep(select) {
   color: black;
 }
+
+.methodology-button {
+  margin-left: auto;
+  width: 42px;
+  height: 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--primary-color); /* ✅ weißer Kreis */
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 999px;
+  padding: 0;
+
+  color: rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12); /* wie Sidebar-Icon */
+  transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.methodology-button:hover {
+  transform: translateY(-1px);
+  background: white;
+}
+
+/* aktiv (wenn /info): z.B. dunkler Kreis + weißes Icon */
+.methodology-button.active {
+  background: rgba(0,0,0,0.25);
+  color: white;
+  border-color: rgba(255,255,255,0.25);
+}
+
+
 </style>
