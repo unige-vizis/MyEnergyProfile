@@ -180,29 +180,9 @@
             <summary>Data sources and assumptions</summary>
             <ul class="sources-list">
               <li>
-                <strong>Petrol car (166 gCO&#x2082;/km)</strong>: EU on-road fleet average for petrol ICEVs (all
-                registered cars, not just new).
-                <a
-                  href="https://www.eea.europa.eu/en/analysis/indicators/co2-performance-of-new-passenger"
-                  target="_blank"
-                  >EEA CO&#x2082; new cars indicator</a
-                >
-                reports 106 gCO&#x2082;/km for new registrations (2023). The 166 g figure reflects the older in-use
-                fleet average.
-              </li>
-              <li>
-                <strong>EV consumption (0.20 kWh/km)</strong>:
-                <a href="https://www.iea.org/reports/global-ev-outlook-2024" target="_blank"
-                  >IEA Global EV Outlook 2024</a
-                >, "Trends in electric vehicle charging" chapter, "Charging for electric light-duty vehicles" section,
-                footnote 2: assumes 20 kWh/100 km fuel economy.
-              </li>
-              <li>
-                <strong>Electric train (0.06 kWh/pkm)</strong>:
-                <a href="https://www.iea.org/energy-system/transport/rail" target="_blank">IEA Rail tracking page</a>.
-                The page states rail emissions are ~1/5 of air travel per pkm but does not list an explicit kWh/pkm
-                value. IEA/UIC data gives ~0.15 MJ/pkm (~0.042 kWh/pkm) globally; 0.06 is a conservative EU estimate
-                including older rolling stock.
+                <strong>Car, EV, Train &amp; Tram energy (MJ/pkm)</strong>:
+                <a href="https://ptua.org.au/myths/energy/" target="_blank">PTUA – Myth: Public transport doesn't really save energy</a>.
+                Total energy per passenger-km including vehicle manufacturing. Car (ICE): 3.0–4.4, EV: 1.2–2.0, Train: 0.05–0.2, Tram: 0.17–0.8 MJ/pkm. Ranges reflect occupancy assumptions (cars: 1.1–1.5 passengers; trains/trams: peak vs off-peak patronage).
               </li>
               <li>
                 <strong>Heat pump SCOP (3.0)</strong>:
@@ -212,18 +192,12 @@
                 figure accounting for cold-climate performance drops.
               </li>
               <li>
-                <strong>Gas heating (220 gCO&#x2082;/kWh_th)</strong>: Derived. Weighted average: 80% space heating (215
-                g) + 20% hot water (256 g), based on natural gas emission factor (~205 gCO&#x2082;/kWh) plus typical
-                boiler efficiency losses (~90%).
+                <strong>Gas heating (215 gCO&#x2082;/kWh_th)</strong>: Natural gas space heating. Based on emission factor ~205 gCO&#x2082;/kWh with typical boiler efficiency ~90%.
               </li>
               <li>
-                <strong>Household electricity (3,500 kWh/yr)</strong>:
-                <a
-                  href="https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Energy_consumption_in_households"
-                  target="_blank"
-                  >Eurostat household energy consumption</a
-                >. The page shows percentage breakdowns only. 3,500 kWh is the midpoint of the Eurostat "medium
-                household" band (2,500 to 5,000 kWh/yr) used in electricity price statistics.
+                <strong>Household electricity (3,600 kWh/yr)</strong>:
+                <a href="https://www.odyssee-mure.eu/publications/efficiency-by-sector/households/electricity-consumption-dwelling.html" target="_blank">Odyssee-MURE – Electricity consumption per dwelling</a>.
+                EU average of 3.6 MWh per dwelling, widely used as a median for medium-sized households. Varies greatly by country (from ~1.8 MWh in Romania to ~8.5 MWh in Sweden).
               </li>
               <li>
                 <strong>Data center: NTT Frankfurt 1 (77.4 MW IT)</strong>:
@@ -235,25 +209,9 @@
                 Specifications > Power (70.1 MW operational + 7.3 MW under construction).
               </li>
               <li>
-                <strong>PUE (1.55)</strong>:
-                <a
-                  href="https://uptimeinstitute.com/resources/research-and-reports/uptime-institute-global-data-center-survey-results-2024"
-                  target="_blank"
-                  >Uptime Institute 2024 Survey</a
-                >, executive summary (download required). The 2024 report states a global average of 1.56; 1.55 is
-                rounded.
-              </li>
-              <li>
-                <strong>Diesel truck (885 gCO&#x2082;/km)</strong>: Derived from 32.6 L/100 km (40t tractor-trailer,
-                Long Haul cycle) x 2.68 kgCO&#x2082;/L.
-                <a href="https://theicct.org/publication/lca-ghg-emissions-hdv-fuels-europe-feb23/" target="_blank"
-                  >ICCT Feb 2023 LCA</a
-                >, referencing the
-                <a
-                  href="https://theicct.org/wp-content/uploads/2021/06/HDV_fuel-consumption_comparison_fs_20180418.pdf"
-                  target="_blank"
-                  >ICCT April 2018 Fact Sheet</a
-                >, average tractor-trailer fuel consumption figure.
+                <strong>Diesel truck (885 gCO&#x2082;/km)</strong>: Derived from 32.6 L/100 km (40t tractor-trailer, Long Haul cycle) x 2.68 kgCO&#x2082;/L.
+                <a href="https://theicct.org/publication/lca-ghg-emissions-hdv-fuels-europe-feb23/" target="_blank">ICCT Feb 2023 LCA</a>, referencing the
+                <a href="https://theicct.org/wp-content/uploads/2021/06/HDV_fuel-consumption_comparison_fs_20180418.pdf" target="_blank">ICCT April 2018 Fact Sheet</a>, average tractor-trailer fuel consumption figure.
               </li>
               <li>
                 <strong>Electric truck (1.30 kWh/km)</strong>:
