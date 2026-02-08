@@ -151,7 +151,7 @@ function openMethodology() {
   align-items: center;
   justify-content: center;
 
-  background: rgba(255,255,255,0.95); /* ✅ weißer Kreis */
+  background: var(--primary-color); /* ✅ weißer Kreis */
   border: 1px solid rgba(0,0,0,0.08);
   border-radius: 999px;
   padding: 0;
