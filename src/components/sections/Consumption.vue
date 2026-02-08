@@ -45,7 +45,7 @@ const hasData = computed(() => {
             alt="Energy Consumption Background"
             style="width: 100%; cursor: pointer;"
             @click="selectedSector = 'Residential'"
-            :class="{ active: selectedSector === 'Residential' }"
+            class="bg-image"
           />
           <div class="interactive-image-container">
             <img
@@ -110,36 +110,51 @@ const hasData = computed(() => {
 <style scoped>
 .interactive-image {
   cursor: pointer;
+  width: 20%;
+  transform-origin: center bottom;
+  transition: transform 0.2s ease;
 }
 
 .interactive-image.active {
-  filter: drop-shadow(0 0 6px #ab61ff99)
-             drop-shadow(0 0 10px #ab61ff99);
+  filter: drop-shadow(0 0 6px var(--secondary-color))
+             drop-shadow(0 0 10px var(--secondary-color));
 }
 
-.interactive-image:hover {
-  scale: 1.1;
-  transition: all 0.2s ease;
+.interactive-image:hover,
+.interactive-image.active {
+  transform: scale(1.1);
 }
 
-.svg-glow:not(.active) {
-  filter: drop-shadow(0 0 3px #619dff99)
-          drop-shadow(0 0 6px #619dff99)
-          drop-shadow(0 0 12px #619dff99);
-  animation: subtle-svg-pulse 2s ease-in-out infinite;
+.interactive-graphic {
+  position: relative;
+  width: 100%;
 }
 
-@keyframes subtle-svg-pulse {
-  0%, 100% { filter: drop-shadow(0 0 2px #619dff99); }
-  50% { filter: drop-shadow(0 0 6px #619dff99)
-             drop-shadow(0 0 10px #619dff99); }
+.bg-image {
+  width: 100%;
+  display: block;
 }
 
 .interactive-image-container {
-  margin-top: -133px;
+  position: absolute;
+  bottom: 0.5%;
+  left: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+}
+
+.svg-glow:not(.active) {
+  filter: drop-shadow(0 0 1px var(--primary-color))
+          drop-shadow(0 0 3px var(--primary-color))
+          drop-shadow(0 0 5px var(--primary-color));
+  animation: subtle-svg-pulse 2s ease-in-out infinite;
+}
+
+@keyframes subtle-svg-pulse {
+  0%, 100% { filter: drop-shadow(0 0 2px var(--primary-color)); }
+  50% { filter: drop-shadow(0 0 8px var(--primary-color))
+             drop-shadow(0 0 12px var(--primary-color)); }
 }
 </style>

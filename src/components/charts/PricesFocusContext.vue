@@ -1,5 +1,5 @@
 <template>
-  <div class="prices-focus-chart" ref="containerRef">
+  <div class="prices-focus-chart" ref="containerRef" style="width:100%;">
     <div class="chart-header">
       <div class="kpi">
         <!-- show KPI for the currently selected series; do not fall back to the other series' value -->
@@ -30,7 +30,7 @@
 
 <script setup>
 import * as d3 from 'd3'
-import { ref, computed, watch, onMounted, nextTick } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 
 const props = defineProps({
   data: { type: Array, default: () => [] }, // [{year: 1996, electricity: 12.3, CPI0450: [60.3, 60.5, 57.9, 59.5]},...]
@@ -94,12 +94,15 @@ const ariaLabel = computed(() => {
   return `Electricity price ${latest.value} US cents per kilowatt hour in ${latest.year}. Use controls to zoom and focus.`
 })
 
+const svgWidth = ref(500)
+const svgHeight = ref(500)
+
 function draw() {
   if (!chartRef.value) return
   d3.select(chartRef.value).selectAll('*').remove()
 
-  const containerWidth = props.width || Math.max(420, (containerRef.value?.clientWidth || 720) - 0)
-  const height = props.height
+  const containerWidth = svgWidth.value || Math.max(420, (containerRef.value?.clientWidth || 720) - 0)
+  const height = svgHeight.value
   const innerW = containerWidth - M.left - M.right
   const innerH = height - M.top - M.bottom - 12
 
@@ -150,7 +153,7 @@ function draw() {
 
   // axis label (contextual)
   const yLabelText = props.activeSeries === 'energy' ? 'Energy CPI (index)' : 'US cents / kWh'
-  main.append('text').attr('class', 'y-label').attr('transform', 'rotate(-90)').attr('y', -44).attr('x', -innerH/2).attr('dy', '1em').style('text-anchor','middle').text(yLabelText)
+  main.append('text').attr('class', 'y-label').attr('transform', 'rotate(-90)').attr('y', -54).attr('x', -innerH/2).attr('dy', '1em').style('text-anchor','middle').text(yLabelText)
 
   // Helpers for quarterly expansion (for CPI)
   function expandCPIQuarterly(rows) {
@@ -548,7 +551,30 @@ function draw() {
 
 // REACTIVITY
 onMounted(() => {
-  nextTick(draw)
+  nextTick(() => {
+    // initial sizing based on container
+    const rect = containerRef.value ? containerRef.value.getBoundingClientRect() : { width: 500, height: 500 }
+    const size = Math.max(200, Math.min(rect.width, 500))
+    svgWidth.value = size
+    svgHeight.value = size
+
+    // observe container resize
+    const ro = new ResizeObserver(entries => {
+      for (const entry of entries) {
+        const r = entry.contentRect
+        const s = Math.max(200, Math.min(r.width, 500))
+        svgWidth.value = s
+        svgHeight.value = s
+        nextTick(() => draw())
+      }
+    })
+    if (containerRef.value) ro.observe(containerRef.value)
+    // keep ref for cleanup
+    resizeObserverRef.value = ro
+
+    draw()
+  })
+
   window.addEventListener('resize', draw)
 })
 
@@ -562,7 +588,15 @@ watch(() => props.focusYear, (ny) => {
   setTimeout(() => { if (typeof focusOnYear === 'function') focusOnYear(ny, { span: 2 }) }, 0)
 }, { immediate: true })
 
-// expose helpers to parent via DOM ref
+// Keep a reference to the observer so we can disconnect it
+const resizeObserverRef = ref(null)
+
+onUnmounted(() => {
+  if (resizeObserverRef.value) {
+    try { resizeObserverRef.value.disconnect() } catch (e) {}
+  }
+  d3.selectAll('.tooltip-container').remove()
+})
 </script>
 
 <style scoped>

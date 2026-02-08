@@ -11,6 +11,8 @@
   --text-color-gray: #666;
   --placeholder-color: #a4a4a4;
   --border-hover-color: #becfb6;
+
+  --sidebar-width: 300px;
 }
 
 body {
@@ -33,6 +35,7 @@ h5,
 h6 {
   font-family: "Inria Serif", serif;
   color: var(--color-heading);
+  font-weight: 600;
 }
 
 h1 {
@@ -48,8 +51,13 @@ h1 {
   background-color: var(--primary-color);
 }
 
+main {
+  width: 100%;
+}
+
 .main-content {
-  margin-left: 300px;
+  margin-left: var(--sidebar-width);
+  margin-top: 150px;
   flex: 1;
   padding: 2rem;
   overflow-y: auto;
@@ -107,6 +115,7 @@ h1 {
   gap: 2rem;
   align-items: center;
   min-height: 400px;
+  position: relative;
 }
 
 /* When .no-data or .loading replaces .charts-container inside a section,
@@ -207,4 +216,237 @@ h1 {
 
 .formula {
   font-style: italic;
+}
+
+.chart-meta {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid #eee;
+  margin-bottom: 0.5rem;
+  gap: 1rem;
+}
+
+.meta-section {
+  width: 50%;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  line-height: 1.4;
+  color: var(--text-color-gray);
+}
+
+.meta-label {
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+code {
+  background: #cdb6a04f;
+  padding: 0.05rem 0.25rem;
+  border-radius: 2px;
+  font-family: monospace;
+}
+
+.meta-list {
+  margin: 0.2rem 0 0 0;
+  padding-left: 1.2rem;
+}
+
+.meta-list li {
+  margin-bottom: 0.15rem;
+}
+
+.scroll-container {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-scroll-outer {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top and bottom fade masks */
+.chart-scroll-outer::before,
+.chart-scroll-outer::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.chart-scroll-outer::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--primary-color, #fcf1e6), transparent);
+}
+
+.chart-scroll-outer::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--primary-color, #fcf1e6), transparent);
+}
+
+.chart-scroll {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Scrollbar on the left side */
+  direction: rtl;
+}
+
+.chart-scroll > .chart-svg {
+  direction: ltr;
+}
+
+/* Thin scrollbar styling */
+.chart-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.chart-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chart-scroll::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 3px;
+}
+
+.chart-scroll::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* tablet-version */
+@media (max-width: 1024px) {
+  .timeline-sidebar {
+    width: 100px !important;
+  }
+  .sidebar-title {
+    display: none;
+  }
+  .sidebar-logo {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .sidebar-header {
+    padding: 0 !important;
+    padding-bottom: 2rem !important;
+    margin: auto;
+  }
+  .timeline-label {
+    display: none;
+  }
+  .main-content {
+    margin-left: 105px;
+    margin-top: 110px;
+    padding: 1rem;
+  }
+  .config-header {
+    margin-left: 100px;
+    padding: 1rem !important;
+  }
+  .section-container {
+    display: block;
+  }
+  .charts-container {
+    width: 100%;
+  }
+  .text-container {
+    width: 100%;
+  }
+  .site-footer {
+    margin-left: 105px;
+    padding: 1rem 2rem;
+  }
+}
+
+/* mobile-version */
+@media (max-width: 600px) {
+  .timeline-sidebar {
+    display: none;
+  }
+  .main-content {
+    margin-left: 0;
+    margin-top: 110px;
+    padding: 1rem;
+  }
+  .config-header {
+    padding: 1rem !important;
+  }
+  .section-container {
+    display: block;
+  }
+  .page-section {
+    padding: 1rem;
+  }
+  .config-item {
+    flex: 0 0 120px !important;
+    min-width: 120px !important;
+  }
+  .config-header {
+    margin-left: 0 !important;
+    gap: 1rem !important;
+  }
+  .config-header select {
+    padding: 0 2rem 0 0.75rem !important;
+  }
+  .config-header label {
+    margin-bottom: 0 !important;
+  }
+  .year-drum {
+    min-width: 1.5rem !important;
+  }
+  .year-adj {
+    min-width: 1.5rem !important;
+  }
+  .year-slot-display {
+    padding: 0 0.5rem !important;
+  }
+  .chart-legend {
+    gap: 1rem !important;
+  }
+  .right-arrow-right {
+    padding: 0 !important;
+  }
+  .left-arrow-left {
+    padding: 0 !important;
+  }
+  .site-footer {
+    margin-left: 0;
+    padding: 1rem 2rem;
+    display: block;
+  }
+  .footer-title {
+    text-align: center !important;
+  }
+  .cutoff-slider {
+    display: block !important;
+  }
+  .volume-grid {
+    grid-template-columns: auto repeat(2, 1fr) !important;
+  }
+  .chart-meta {
+    display: grid;
+  }
+  .meta-section {
+    width: 100%;
+  }
+  .chart-meta {
+    display: grid;
+  }
+  .stat-cards-grid {
+    display: grid !important;
+  }
 }

@@ -17,6 +17,32 @@
         </p>
       </div>
     </div>
+    <div class="chart-meta">
+      <div class="meta-section">
+        <span class="meta-label">Source</span>
+        <ul class="meta-list">
+          <li>
+            Eurostat
+            <a href="https://ec.europa.eu/eurostat/web/energy/database" target="_blank" rel="noopener"
+              >Energy Database</a
+            >
+            (European Commission)
+          </li>
+          <li>Tables <code>nrg_ti_*</code> (imports) and <code>nrg_te_*</code> (exports) for sff, oil, gas, bio, eh</li>
+          <li>Derived: <code>share_pct</code> = partner value ÷ total × 100</li>
+        </ul>
+      </div>
+      <div class="meta-section">
+        <span class="meta-label">Data Hints</span>
+        <ul class="meta-list">
+          <li>
+            EU-reported data only; non-EU partner volumes data may be incomplete or reflect only the EU perspective of
+            the trade relationship.
+          </li>
+          <li>Regional aggregates (e.g., "Other Asian countries") excluded from map arrows but included in totals.</li>
+        </ul>
+      </div>
+    </div>
   </section>
 </template>
 
