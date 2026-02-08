@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <img :src="props.imgSrc" alt="Card image" v-if="props.imgSrc" />
+    <img :src="getImageUrl(props.imgSrc)" alt="Card image" v-if="props.imgSrc" />
     <div class="content">
       <h4>{{ props.title }}</h4>
       <p>
@@ -12,6 +12,10 @@
 
 <script setup>
 import { onMounted } from 'vue'
+
+const getImageUrl = (filename) => {
+  return new URL(`../assets/img/${filename}`, import.meta.url).href
+}
 
 const props = defineProps({
   title: String,
