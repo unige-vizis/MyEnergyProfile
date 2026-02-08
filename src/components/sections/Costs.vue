@@ -25,8 +25,12 @@
           />
           <div class="chart-footer">
             <small
-              >Source: Energy CPI & World Bank electricity prices (prepared dataset). Missing years are shown
-              explicitly.</small
+              >Source: IMF/Eurostat <code>energycpiq.csv</code>. Columns: <code>country</code>, <code>year</code>,
+              <code>quarter</code>, CPI series <code>CPI0450</code> (Electricity, gas &amp; fuels),
+              <code>CPI0451</code> (Electricity), <code>CPI0452</code> (Gas), <code>CPI0453</code> (Liquid fuels),
+              <code>CPI0454</code> (Solid fuels), <code>CPI0722</code> (Transport fuels).
+              World Bank <code>Electric-Prices-by-Country.csv</code>. Columns: <code>Country Name</code>,
+              <code>Time</code>, electricity price (US cents/kWh). Missing years are shown explicitly.</small
             >
           </div>
         </div>

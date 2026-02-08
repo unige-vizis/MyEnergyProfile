@@ -109,6 +109,19 @@ main {
   flex-direction: column;
   gap: 2rem;
   align-items: center;
+  min-height: 400px;
+}
+
+/* When .no-data or .loading replaces .charts-container inside a section,
+   keep the same width and height so the page doesn't jump. */
+.section-container > .no-data,
+.section-container > .loading {
+  width: 50%;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #999;
 }
 
 .chart {

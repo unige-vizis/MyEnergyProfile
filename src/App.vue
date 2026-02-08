@@ -5,7 +5,7 @@ import Costs from './components/sections/Costs.vue';
 import TradingPartner from './components/sections/TradingPartner.vue';
 import Dependency from './components/sections/Dependency.vue';
 import ProductionConsumption from './components/sections/ProductionConsumption.vue';
-import ETransition from './components/sections/ETransition.vue';
+import Eco from './components/sections/Eco.vue';
 import ConfigHeader from './components/ConfigHeader.vue';
 </script>
 
@@ -20,7 +20,7 @@ import ConfigHeader from './components/ConfigHeader.vue';
         <Costs></Costs>
         <TradingPartner></TradingPartner>
         <Dependency></Dependency>
-        <ETransition></ETransition>
+        <Eco></Eco>
       </div>
       <footer class="site-footer">
         <div class="footer-names">
