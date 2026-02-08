@@ -22,10 +22,7 @@
               <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener"
                 >Our World in Data Energy Dataset</a
               >
-              · Fields: <code>coal_production</code>, <code>oil_production</code>, <code>gas_production</code>,
-              <code>electricity_generation</code>, <code>coal_consumption</code>, <code>oil_consumption</code>,
-              <code>gas_consumption</code>, <code>biofuel_consumption</code>, <code>electricity_demand</code> (all in
-              TWh)
+              · <code>*_production</code>, <code>*_consumption</code> fields (TWh)
             </li>
             <li>
               Underlying data compiled by the
