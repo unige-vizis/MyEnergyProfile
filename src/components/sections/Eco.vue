@@ -3,18 +3,20 @@
     <div class="chart-header">
       <h2>Ecological Footprint of Energy Use</h2>
       <p>
-        This section examines the carbon emissions tied to a country's energy system from two angles: how much CO2 each
-        person generates through different sectors of the economy, and how clean the electricity grid is compared to
-        other countries. Together, these views reveal both the scale of individual impact and the structural carbon
-        intensity of the power supply, which determines whether electrifying transport, heating, and industry actually
-        reduces emissions.
+        Of course no project about energy can be considered complete without a section dedicated to the
+        ecological aspects of energy use. While there are other important environmental impacts to consider,
+        we will focus on the most fundamental one: carbon emissions. First in a broad per capita breakdown, and
+        then through the lens of carbon intensity, which relates electricity to carbon emissions. This is a key
+        factor determining how much impact measures, that we consider as sustainable, will have in practice.
       </p>
     </div>
 
     <!-- Subsection 1: CO2 Emissions -->
     <div class="eco-subsection">
-      <h3>CO2 Emissions</h3>
-      <p>Total CO2 emissions per person from energy use across all sectors, measured in tonnes per year.</p>
+      <h3>CO2 Emissions - Europe Comparison</h3>
+      <p>
+        Total CO2 emissions per person from energy use across all sectors, measured in tonnes per year.
+      </p>
       <div class="section-container">
         <div v-if="store.isLoading" class="loading">Loading energy data...</div>
         <div v-else-if="store.error" class="error">{{ store.error }}</div>
@@ -39,20 +41,27 @@
           </h4>
           <h4 v-else>Where are the emissions in your country emitted?</h4>
           <p>
-            The chart below breaks down how much CO2 each person causes through four major sectors: residential energy
-            use (heating, appliances), services (commercial buildings, offices), transport (cars, trucks), and industry
-            (manufacturing). Slice sizes are proportional to emissions per capita in tonnes of CO2, making it easy to
-            see which sector dominates.
-          </p>
-          <p>
-            Transport tends to be the largest contributor in most European countries, reflecting the heavy reliance on
-            fossil fuels for road mobility. Residential emissions vary significantly depending on climate, building
-            insulation standards, and the share of gas versus electricity for heating.
+            The chart below breaks down how much CO2 each person causes through four major
+            sectors: residential energy use (heating, appliances), services (commercial buildings, offices),
+            transport (cars, trucks), and industry (manufacturing).
           </p>
           <EmissionsCloudPie
             :emissionsData="store.emissionsPerCapita"
             :countryName="store.selectedCountry?.name || ''"
           />
+          <p>
+            Transport tends to be the single largest contributor in most European countries, reflecting
+            heavy reliance on fossil fuels for road mobility. In Lithuania, transport accounts for
+            roughly two-thirds of per-capita emissions. In Denmark, Spain, and Portugal it exceeds half.
+            At the other extreme, industry dominates in Slovakia and Czechia, where steel production,
+            automotive manufacturing, and a heavy reliance on coal for heating, industry, and electricity
+            generation push totals above 4 tCO&#x2082; per person. Residential emissions vary depending on
+            climate, insulation standards, and the fuel mix for heating. Norway stands out with
+            residential emissions near zero (0.08 tCO&#x2082;/cap), thanks to a grid that is 98%
+            renewable (almost entirely hydropower), widespread use of heat pumps for heating, and
+            the world's highest EV adoption rate, keeping its overall footprint remarkably low for
+            a country with such a high standard of living.
+          </p>
         </div>
       </div>
 
@@ -94,12 +103,10 @@
 
     <!-- Subsection 2: Carbon Intensity -->
     <div class="eco-subsection">
-      <h3>Carbon Intensity of the Energy Grid</h3>
+      <h3>Carbon Intensity of the Energy Grid - Europe Comparison</h3>
       <p>
-        Average CO2 emitted per kilowatt-hour of electricity generated from all sources, indicating how clean the power
-        grid is in terms of emissions. Heavy reliance on nuclear power contributes to low carbon intensity levels for
-        electricity, as in the case of france for example, but refering to it as "clean energy" remains a topic of
-        discussion.
+        Average CO2 emitted per kilowatt-hour of electricity generated from all sources, indicating how clean the power grid is in terms of emissions. Heavy reliance on nuclear 
+        power contributes to low carbon intensity levels for electricity, as in the case of France for example, but referring to it as "clean energy" remains a topic of discussion. 
       </p>
       <div class="section-container">
         <div v-if="store.isLoading" class="loading">Loading energy data...</div>
@@ -125,12 +132,13 @@
           </h4>
           <h4 v-else>What does your grid intensity mean in practice?</h4>
           <p>
-            Reducing carbon emissions increasingly depends on electrification: replacing fossil fuels with electricity
-            for transport, heating, and cooking. However, the climate benefit of this switch is only as good as the
-            electricity itself. In countries with a clean grid, every electric car, heat pump, or induction stove
-            delivers substantial emission savings. Where the grid still relies heavily on coal or gas, the same switch
-            may yield only modest improvements or, in extreme cases, none at all. The cards below show exactly how much
-            difference the grid intensity makes for common real-world choices.
+            Most people are familiar with electrification as a fundamental part of decarbonization, 
+            where processes directly reliant on fossil fuels, if they cannot be done without, are
+            replaced by electric alternatives. The electric car being a prime example of this. A fact
+            that can be lost in this though, is that any benefits in terms of emissions through often
+            costly and disruptive switches, are only as beneficial as the electricity is clean. 
+            The cards below (based on broad averages and approximations) demonstrate how impactful the effect can be,
+            essentially highlighting the importance of electricity obtained from clean sources.
           </p>
           <StatCards :gridIntensity="store.carbonIntensity?.latest_value" />
           <details class="sources-details">
