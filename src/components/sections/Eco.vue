@@ -3,20 +3,18 @@
     <div class="chart-header">
       <h2>Ecological Footprint of Energy Use</h2>
       <p>
-        This section examines the carbon emissions tied to a country's energy system from two angles:
-        how much CO2 each person generates through different sectors of the economy, and how clean the
-        electricity grid is compared to other countries. Together, these views reveal both the scale of
-        individual impact and the structural carbon intensity of the power supply, which determines
-        whether electrifying transport, heating, and industry actually reduces emissions.
+        This section examines the carbon emissions tied to a country's energy system from two angles: how much CO2 each
+        person generates through different sectors of the economy, and how clean the electricity grid is compared to
+        other countries. Together, these views reveal both the scale of individual impact and the structural carbon
+        intensity of the power supply, which determines whether electrifying transport, heating, and industry actually
+        reduces emissions.
       </p>
     </div>
 
     <!-- Subsection 1: CO2 Emissions -->
     <div class="eco-subsection">
-      <h3 class="mini-title">CO2 Emissions</h3>
-      <p class="subsection-subtitle">
-        Total CO2 emissions per person from energy use across all sectors, measured in tonnes per year.
-      </p>
+      <h3>CO2 Emissions</h3>
+      <p>Total CO2 emissions per person from energy use across all sectors, measured in tonnes per year.</p>
       <div class="section-container">
         <div v-if="store.isLoading" class="loading">Loading energy data...</div>
         <div v-else-if="store.error" class="error">{{ store.error }}</div>
@@ -41,15 +39,15 @@
           </h4>
           <h4 v-else>Where are the emissions in your country emitted?</h4>
           <p>
-            The chart below breaks down how much CO2 each person causes through four major
-            sectors: residential energy use (heating, appliances), services (commercial buildings, offices),
-            transport (cars, trucks), and industry (manufacturing). Slice sizes are proportional to
-            emissions per capita in tonnes of CO2, making it easy to see which sector dominates.
+            The chart below breaks down how much CO2 each person causes through four major sectors: residential energy
+            use (heating, appliances), services (commercial buildings, offices), transport (cars, trucks), and industry
+            (manufacturing). Slice sizes are proportional to emissions per capita in tonnes of CO2, making it easy to
+            see which sector dominates.
           </p>
           <p>
-            Transport tends to be the largest contributor in most European countries, reflecting the heavy
-            reliance on fossil fuels for road mobility. Residential emissions vary significantly depending
-            on climate, building insulation standards, and the share of gas versus electricity for heating.
+            Transport tends to be the largest contributor in most European countries, reflecting the heavy reliance on
+            fossil fuels for road mobility. Residential emissions vary significantly depending on climate, building
+            insulation standards, and the share of gas versus electricity for heating.
           </p>
           <EmissionsCloudPie
             :emissionsData="store.emissionsPerCapita"
@@ -57,14 +55,51 @@
           />
         </div>
       </div>
+
+      <div class="chart-meta">
+        <div class="meta-section">
+          <span class="meta-label">Source</span>
+          <ul>
+            <li>
+              <strong>IEA</strong>
+              <a
+                href="https://www.iea.org/data-and-statistics/data-product/energy-efficiency-indicators-highlights"
+                target="_blank"
+                rel="noopener"
+              >
+                Energy End-Uses &amp; Efficiency
+              </a>
+              (per-capita CO&#x2082; by sector). Indicator: <code>Carbon intensity per capita (t CO2/capita)</code>. End
+              uses: <code>Total residential</code>, <code>Total services</code>, <code>Cars/light trucks</code> +
+              <code>Freight trucks</code> (transport)
+            </li>
+            <li>
+              Industry per-capita derived from IEA total emissions (indicator: <code>Total final use (kt CO2)</code>,
+              end use containing <code>Manufacturing</code>) divided by
+              <strong>OWID</strong>
+              <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener"> Energy Data </a>
+              <code>population</code> column. IEA provides per-capita indicators for residential, services, and
+              transport, but only per-value-added (gCO&#x2082;/USD) for industry.
+            </li>
+          </ul>
+        </div>
+        <div class="meta-section">
+          <span class="meta-label">Data Hints</span>
+          <ul>
+            <li>Some countries may lack transport data. The total shown is the sum of available sectors.</li>
+          </ul>
+        </div>
+      </div>
     </div>
 
     <!-- Subsection 2: Carbon Intensity -->
     <div class="eco-subsection">
-      <h3 class="mini-title">Carbon Intensity of the Energy Grid</h3>
-      <p class="subsection-subtitle">
-        Average CO2 emitted per kilowatt-hour of electricity generated from all sources, indicating how clean the power grid is in terms of emissions. Heavy reliance on nuclear 
-        power contributes to low carbon intensity levels for electricity, as in the case of france for example, but refering to it as "clean energy" remains a topic of discussion. 
+      <h3>Carbon Intensity of the Energy Grid</h3>
+      <p>
+        Average CO2 emitted per kilowatt-hour of electricity generated from all sources, indicating how clean the power
+        grid is in terms of emissions. Heavy reliance on nuclear power contributes to low carbon intensity levels for
+        electricity, as in the case of france for example, but refering to it as "clean energy" remains a topic of
+        discussion.
       </p>
       <div class="section-container">
         <div v-if="store.isLoading" class="loading">Loading energy data...</div>
@@ -90,86 +125,132 @@
           </h4>
           <h4 v-else>What does your grid intensity mean in practice?</h4>
           <p>
-            Reducing carbon emissions increasingly depends on electrification: replacing fossil fuels
-            with electricity for transport, heating, and cooking. However, the climate benefit of this
-            switch is only as good as the electricity itself. In countries with a clean grid, every
-            electric car, heat pump, or induction stove delivers substantial emission savings. Where
-            the grid still relies heavily on coal or gas, the same switch may yield only modest
-            improvements or, in extreme cases, none at all. The cards below show exactly how much
+            Reducing carbon emissions increasingly depends on electrification: replacing fossil fuels with electricity
+            for transport, heating, and cooking. However, the climate benefit of this switch is only as good as the
+            electricity itself. In countries with a clean grid, every electric car, heat pump, or induction stove
+            delivers substantial emission savings. Where the grid still relies heavily on coal or gas, the same switch
+            may yield only modest improvements or, in extreme cases, none at all. The cards below show exactly how much
             difference the grid intensity makes for common real-world choices.
           </p>
-          <StatCards
-            :gridIntensity="store.carbonIntensity?.latest_value"
-          />
+          <StatCards :gridIntensity="store.carbonIntensity?.latest_value" />
           <details class="sources-details">
             <summary>Data sources and assumptions</summary>
             <ul class="sources-list">
               <li>
-                <strong>Petrol car (166 gCO&#x2082;/km)</strong>: EU on-road fleet average for petrol ICEVs (all registered cars, not just new).
-                <a href="https://www.eea.europa.eu/en/analysis/indicators/co2-performance-of-new-passenger" target="_blank">EEA CO&#x2082; new cars indicator</a> reports 106 gCO&#x2082;/km for new registrations (2023). The 166 g figure reflects the older in-use fleet average.
+                <strong>Petrol car (166 gCO&#x2082;/km)</strong>: EU on-road fleet average for petrol ICEVs (all
+                registered cars, not just new).
+                <a
+                  href="https://www.eea.europa.eu/en/analysis/indicators/co2-performance-of-new-passenger"
+                  target="_blank"
+                  >EEA CO&#x2082; new cars indicator</a
+                >
+                reports 106 gCO&#x2082;/km for new registrations (2023). The 166 g figure reflects the older in-use
+                fleet average.
               </li>
               <li>
                 <strong>EV consumption (0.20 kWh/km)</strong>:
-                <a href="https://www.iea.org/reports/global-ev-outlook-2024" target="_blank">IEA Global EV Outlook 2024</a>,
-                "Trends in electric vehicle charging" chapter, "Charging for electric light-duty vehicles" section, footnote 2: assumes 20 kWh/100 km fuel economy.
+                <a href="https://www.iea.org/reports/global-ev-outlook-2024" target="_blank"
+                  >IEA Global EV Outlook 2024</a
+                >, "Trends in electric vehicle charging" chapter, "Charging for electric light-duty vehicles" section,
+                footnote 2: assumes 20 kWh/100 km fuel economy.
               </li>
               <li>
                 <strong>Electric train (0.06 kWh/pkm)</strong>:
                 <a href="https://www.iea.org/energy-system/transport/rail" target="_blank">IEA Rail tracking page</a>.
-                The page states rail emissions are ~1/5 of air travel per pkm but does not list an explicit kWh/pkm value. IEA/UIC data gives ~0.15 MJ/pkm (~0.042 kWh/pkm) globally; 0.06 is a conservative EU estimate including older rolling stock.
+                The page states rail emissions are ~1/5 of air travel per pkm but does not list an explicit kWh/pkm
+                value. IEA/UIC data gives ~0.15 MJ/pkm (~0.042 kWh/pkm) globally; 0.06 is a conservative EU estimate
+                including older rolling stock.
               </li>
               <li>
                 <strong>Heat pump SCOP (3.0)</strong>:
-                <a href="https://www.iea.org/reports/the-future-of-heat-pumps" target="_blank">IEA The Future of Heat Pumps</a>,
-                "How a heat pump works" section, opening paragraph states COP ~4. SCOP 3.0 is a conservative seasonal figure accounting for cold-climate performance drops.
+                <a href="https://www.iea.org/reports/the-future-of-heat-pumps" target="_blank"
+                  >IEA The Future of Heat Pumps</a
+                >, "How a heat pump works" section, opening paragraph states COP ~4. SCOP 3.0 is a conservative seasonal
+                figure accounting for cold-climate performance drops.
               </li>
               <li>
-                <strong>Gas heating (220 gCO&#x2082;/kWh_th)</strong>: Derived. Weighted average: 80% space heating (215 g) + 20% hot water (256 g), based on natural gas emission factor (~205 gCO&#x2082;/kWh) plus typical boiler efficiency losses (~90%).
+                <strong>Gas heating (220 gCO&#x2082;/kWh_th)</strong>: Derived. Weighted average: 80% space heating (215
+                g) + 20% hot water (256 g), based on natural gas emission factor (~205 gCO&#x2082;/kWh) plus typical
+                boiler efficiency losses (~90%).
               </li>
               <li>
                 <strong>Household electricity (3,500 kWh/yr)</strong>:
-                <a href="https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Energy_consumption_in_households" target="_blank">Eurostat household energy consumption</a>.
-                The page shows percentage breakdowns only. 3,500 kWh is the midpoint of the Eurostat "medium household" band (2,500 to 5,000 kWh/yr) used in electricity price statistics.
+                <a
+                  href="https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Energy_consumption_in_households"
+                  target="_blank"
+                  >Eurostat household energy consumption</a
+                >. The page shows percentage breakdowns only. 3,500 kWh is the midpoint of the Eurostat "medium
+                household" band (2,500 to 5,000 kWh/yr) used in electricity price statistics.
               </li>
               <li>
                 <strong>Data center: NTT Frankfurt 1 (77.4 MW IT)</strong>:
-                <a href="https://services.global.ntt/en-us/services-and-products/global-data-centers/global-locations/emea/frankfurt-1-data-center" target="_blank">NTT Frankfurt 1</a>,
-                Overview section ("Secure and flexible space built to your specifications" paragraph) and Specifications > Power (70.1 MW operational + 7.3 MW under construction).
+                <a
+                  href="https://services.global.ntt/en-us/services-and-products/global-data-centers/global-locations/emea/frankfurt-1-data-center"
+                  target="_blank"
+                  >NTT Frankfurt 1</a
+                >, Overview section ("Secure and flexible space built to your specifications" paragraph) and
+                Specifications > Power (70.1 MW operational + 7.3 MW under construction).
               </li>
               <li>
                 <strong>PUE (1.55)</strong>:
-                <a href="https://uptimeinstitute.com/resources/research-and-reports/uptime-institute-global-data-center-survey-results-2024" target="_blank">Uptime Institute 2024 Survey</a>,
-                executive summary (download required). The 2024 report states a global average of 1.56; 1.55 is rounded.
+                <a
+                  href="https://uptimeinstitute.com/resources/research-and-reports/uptime-institute-global-data-center-survey-results-2024"
+                  target="_blank"
+                  >Uptime Institute 2024 Survey</a
+                >, executive summary (download required). The 2024 report states a global average of 1.56; 1.55 is
+                rounded.
               </li>
               <li>
-                <strong>Diesel truck (885 gCO&#x2082;/km)</strong>: Derived from 32.6 L/100 km (40t tractor-trailer, Long Haul cycle) x 2.68 kgCO&#x2082;/L.
-                <a href="https://theicct.org/publication/lca-ghg-emissions-hdv-fuels-europe-feb23/" target="_blank">ICCT Feb 2023 LCA</a>, referencing the
-                <a href="https://theicct.org/wp-content/uploads/2021/06/HDV_fuel-consumption_comparison_fs_20180418.pdf" target="_blank">ICCT April 2018 Fact Sheet</a>, average tractor-trailer fuel consumption figure.
+                <strong>Diesel truck (885 gCO&#x2082;/km)</strong>: Derived from 32.6 L/100 km (40t tractor-trailer,
+                Long Haul cycle) x 2.68 kgCO&#x2082;/L.
+                <a href="https://theicct.org/publication/lca-ghg-emissions-hdv-fuels-europe-feb23/" target="_blank"
+                  >ICCT Feb 2023 LCA</a
+                >, referencing the
+                <a
+                  href="https://theicct.org/wp-content/uploads/2021/06/HDV_fuel-consumption_comparison_fs_20180418.pdf"
+                  target="_blank"
+                  >ICCT April 2018 Fact Sheet</a
+                >, average tractor-trailer fuel consumption figure.
               </li>
               <li>
                 <strong>Electric truck (1.30 kWh/km)</strong>:
-                <a href="https://theicct.org/publication/rw-use-cases-for-zet-heavy-tractor-trailers-for-goods-transport-in-the-eu-aug25/" target="_blank">ICCT Aug 2025</a>,
-                Key Findings section: real-world range of 92 to 150 kWh/100 km for 40t tractor-trailers. 1.30 kWh/km (130 kWh/100 km) is within this range.
+                <a
+                  href="https://theicct.org/publication/rw-use-cases-for-zet-heavy-tractor-trailers-for-goods-transport-in-the-eu-aug25/"
+                  target="_blank"
+                  >ICCT Aug 2025</a
+                >, Key Findings section: real-world range of 92 to 150 kWh/100 km for 40t tractor-trailers. 1.30 kWh/km
+                (130 kWh/100 km) is within this range.
               </li>
               <li>
                 <strong>PEM electrolysis (55 kWh/kgH&#x2082;)</strong>:
-                <a href="https://www.hydrogen.energy.gov/docs/hydrogenprogramlibraries/pdfs/24005-clean-hydrogen-production-cost-pem-electrolyzer.pdf" target="_blank">DOE H2 Program Record #24005</a> (May 2024),
-                main analysis section: beginning-of-life system electricity 55.2 kWh/kg (stack 51 + balance-of-plant 4.2). Lifetime average: 57.5 kWh/kg.
+                <a
+                  href="https://www.hydrogen.energy.gov/docs/hydrogenprogramlibraries/pdfs/24005-clean-hydrogen-production-cost-pem-electrolyzer.pdf"
+                  target="_blank"
+                  >DOE H2 Program Record #24005</a
+                >
+                (May 2024), main analysis section: beginning-of-life system electricity 55.2 kWh/kg (stack 51 +
+                balance-of-plant 4.2). Lifetime average: 57.5 kWh/kg.
               </li>
               <li>
                 <strong>Grey hydrogen SMR (9 kgCO&#x2082;/kgH&#x2082;)</strong>:
-                <a href="https://www.iea.org/reports/global-hydrogen-review-2024" target="_blank">IEA Global Hydrogen Review 2024</a>,
-                Ch. 8 "GHG emissions of hydrogen", Highlights, 1st bullet: unabated natural gas emits 10 to 12 kgCO&#x2082;-eq/kgH&#x2082; (lifecycle). The value 9 represents direct combustion emissions only, excluding upstream methane.
+                <a href="https://www.iea.org/reports/global-hydrogen-review-2024" target="_blank"
+                  >IEA Global Hydrogen Review 2024</a
+                >, Ch. 8 "GHG emissions of hydrogen", Highlights, 1st bullet: unabated natural gas emits 10 to 12
+                kgCO&#x2082;-eq/kgH&#x2082; (lifecycle). The value 9 represents direct combustion emissions only,
+                excluding upstream methane.
               </li>
               <li>
                 <strong>Blast furnace steel (2.2 tCO&#x2082;/t)</strong>:
                 <a href="https://www.iea.org/energy-system/industry/steel" target="_blank">IEA Steel tracking page</a>,
-                "Direct CO&#x2082; intensity of crude steel production" interactive chart. IEA reports ~2.0 to 2.3 tCO&#x2082;/t for BF-BOF globally; 2.2 is within this range.
+                "Direct CO&#x2082; intensity of crude steel production" interactive chart. IEA reports ~2.0 to 2.3
+                tCO&#x2082;/t for BF-BOF globally; 2.2 is within this range.
               </li>
               <li>
                 <strong>EAF steel (400 kWh/t + 50 kgCO&#x2082;/t process)</strong>:
-                <a href="https://www.iea.org/reports/iron-and-steel-technology-roadmap" target="_blank">IEA Iron &amp; Steel Roadmap</a>.
-                Industry literature (AIST) commonly cites 300 to 400 kWh/t for scrap-based EAF electricity. The 50 kgCO&#x2082;/t accounts for electrode and lime process emissions.
+                <a href="https://www.iea.org/reports/iron-and-steel-technology-roadmap" target="_blank"
+                  >IEA Iron &amp; Steel Roadmap</a
+                >. Industry literature (AIST) commonly cites 300 to 400 kWh/t for scrap-based EAF electricity. The 50
+                kgCO&#x2082;/t accounts for electrode and lime process emissions.
               </li>
             </ul>
           </details>
@@ -199,50 +280,6 @@ const totalEmissionsPerCapita = computed(() => {
 </script>
 
 <style scoped>
-.eco-subsection {
-  margin-bottom: 3rem;
-  padding-bottom: 3rem;
-  padding-top: 3rem;
-  border-bottom: 1px solid #ddd;
-  border-top: 1px solid #ddd;
-}
-
-.eco-subsection + .eco-subsection {
-  margin-top: -3rem;
-  border-top: none;
-}
-
-.eco-subsection:last-child {
-  margin-bottom: 0;
-  padding-bottom: 0;
-  border-bottom: none;
-}
-
-.mini-title {
-  font-size: 1.4rem;
-  margin-bottom: 0.75rem;
-  color: var(--text-color-basic);
-}
-
-.subsection-subtitle {
-  font-size: 0.95rem;
-  color: var(--text-color-gray);
-  margin-top: 0;
-  margin-bottom: 1rem;
-  line-height: 1.6;
-}
-
-.eco-subsection .section-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-}
-
-.eco-subsection .charts-container {
-  width: auto;
-  min-height: 0;
-  position: relative;
-}
-
 .charts-fill {
   position: absolute;
   top: 0;
@@ -252,10 +289,6 @@ const totalEmissionsPerCapita = computed(() => {
   overflow: hidden;
   display: flex;
   flex-direction: column;
-}
-
-.eco-subsection .text-container {
-  width: auto;
 }
 
 .highlight-value {
@@ -268,7 +301,6 @@ const totalEmissionsPerCapita = computed(() => {
 
 .sources-details {
   margin-top: 1.25rem;
-  font-size: 0.8rem;
   color: var(--text-color-gray);
 }
 

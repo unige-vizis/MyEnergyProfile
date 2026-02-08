@@ -10,17 +10,12 @@
         {{ group.label }}
       </h4>
       <div class="stat-cards-grid">
-        <div
-          v-for="card in group.cards"
-          :key="card.id"
-          class="stat-card"
-          :class="card.colorClass"
-        >
+        <div v-for="card in group.cards" :key="card.id" class="stat-card" :class="card.colorClass">
           <div class="card-icon">
             <span class="material-symbols-outlined">{{ card.icon }}</span>
           </div>
           <div class="card-content">
-            <h4 class="card-title">{{ card.title }}</h4>
+            <h5 class="card-title">{{ card.title }}</h5>
             <p class="card-result">{{ card.result }}</p>
             <p class="card-detail">{{ card.detail }}</p>
           </div>
@@ -238,14 +233,14 @@ const groupedCards = computed(() => {
 }
 
 .stat-cards-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  display: flex;
   gap: 0.75rem;
   width: 100%;
 }
 
 .stat-card {
   display: flex;
+  flex: 1;
   gap: 0.75rem;
   padding: 0.75rem;
   border-radius: 8px;
@@ -291,9 +286,6 @@ const groupedCards = computed(() => {
 
 .card-title {
   margin: 0 0 0.2rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-color-basic);
 }
 
 .card-result {
@@ -309,6 +301,4 @@ const groupedCards = computed(() => {
   color: #888;
   line-height: 1.3;
 }
-
-
 </style>

@@ -4,35 +4,28 @@
     <p>No carbon intensity ranking data available.</p>
   </div>
   <div v-else class="chart-wrapper">
-    <div class="chart-container">
+    <div class="chart-container scroll-container">
       <div v-if="thresholdLeft != null" class="threshold-label" :style="{ left: thresholdLeft + 'px' }">
         IEA / EU sustainable energy threshold (100 gCO&#x2082;/kWh)
       </div>
       <div class="chart-scroll-outer">
-        <div
-          v-if="thresholdLeft != null"
-          class="threshold-line-overlay"
-          :style="{ left: thresholdLeft + 'px' }"
-        ></div>
+        <div v-if="thresholdLeft != null" class="threshold-line-overlay" :style="{ left: thresholdLeft + 'px' }"></div>
         <div ref="scrollContainer" class="chart-scroll">
           <div ref="chartRef" class="chart-svg"></div>
         </div>
       </div>
       <div class="chart-meta">
         <div class="meta-section">
-          <span class="meta-label">Source:</span>
+          <span class="meta-label">Source</span>
           <ul>
             <li>
               <strong>OWID</strong>
-              <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener">
-                Energy Data
-              </a>
+              <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener"> Energy Data </a>
               . Column: <code>carbon_intensity_elec</code> (gCO2/kWh)
             </li>
           </ul>
         </div>
-        <div class="meta-section">
-        </div>
+        <div class="meta-section"></div>
       </div>
     </div>
   </div>
@@ -242,66 +235,6 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
 }
-.chart-container {
-  width: 100%;
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-}
-.chart-scroll-outer {
-  position: relative;
-  width: 100%;
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-}
-/* Top and bottom fade masks */
-.chart-scroll-outer::before,
-.chart-scroll-outer::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  height: 50px;
-  pointer-events: none;
-  z-index: 2;
-}
-.chart-scroll-outer::before {
-  top: 0;
-  background: linear-gradient(to bottom, var(--primary-color, #fcf1e6), transparent);
-}
-.chart-scroll-outer::after {
-  bottom: 0;
-  background: linear-gradient(to top, var(--primary-color, #fcf1e6), transparent);
-}
-.chart-scroll {
-  width: 100%;
-  flex: 1;
-  min-height: 0;
-  overflow-y: auto;
-  overflow-x: hidden;
-  /* Scrollbar on the left side */
-  direction: rtl;
-}
-.chart-scroll > .chart-svg {
-  direction: ltr;
-}
-/* Thin scrollbar styling */
-.chart-scroll::-webkit-scrollbar {
-  width: 5px;
-}
-.chart-scroll::-webkit-scrollbar-track {
-  background: transparent;
-}
-.chart-scroll::-webkit-scrollbar-thumb {
-  background: #bbb;
-  border-radius: 3px;
-}
-.chart-scroll::-webkit-scrollbar-thumb:hover {
-  background: #999;
-}
 .chart-svg {
   width: 100%;
 }
@@ -323,27 +256,5 @@ onUnmounted(() => {
   border-left: 1.5px dashed rgba(100, 100, 100, 0.55);
   z-index: 3;
   pointer-events: none;
-}
-.chart-meta {
-  margin-top: 0.75rem;
-  font-size: 0.7rem;
-  color: var(--text-color-gray);
-  line-height: 1.4;
-}
-.meta-section {
-  margin-bottom: 0.5rem;
-}
-.meta-label {
-  font-weight: 600;
-}
-.meta-section ul {
-  margin: 0.25rem 0 0 1.2rem;
-  padding: 0;
-}
-.meta-section li {
-  margin-bottom: 0.2rem;
-}
-.meta-section a {
-  color: var(--secondary-color);
 }
 </style>

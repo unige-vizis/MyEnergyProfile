@@ -35,6 +35,7 @@ h5,
 h6 {
   font-family: "Inria Serif", serif;
   color: var(--color-heading);
+  font-weight: 600;
 }
 
 h1 {
@@ -110,6 +111,7 @@ main {
   gap: 2rem;
   align-items: center;
   min-height: 400px;
+  position: relative;
 }
 
 /* When .no-data or .loading replaces .charts-container inside a section,
@@ -251,6 +253,77 @@ code {
   margin-bottom: 0.15rem;
 }
 
+.scroll-container {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-scroll-outer {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  min-height: 5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top and bottom fade masks */
+.chart-scroll-outer::before,
+.chart-scroll-outer::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 50px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.chart-scroll-outer::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--primary-color, #fcf1e6), transparent);
+}
+
+.chart-scroll-outer::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--primary-color, #fcf1e6), transparent);
+}
+
+.chart-scroll {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Scrollbar on the left side */
+  direction: rtl;
+}
+
+.chart-scroll > .chart-svg {
+  direction: ltr;
+}
+
+/* Thin scrollbar styling */
+.chart-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+
+.chart-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.chart-scroll::-webkit-scrollbar-thumb {
+  background: #bbb;
+  border-radius: 3px;
+}
+
+.chart-scroll::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
 /* tablet-version */
 @media (max-width: 1024px) {
   .timeline-sidebar {
@@ -365,5 +438,11 @@ code {
   }
   .meta-section {
     width: 100%;
+  }
+  .chart-meta {
+    display: grid;
+  }
+  .stat-cards-grid {
+    display: grid !important;
   }
 }
