@@ -32,21 +32,21 @@ const props = defineProps({
   gridIntensity: { type: Number, default: null }
 })
 
-// ── Shared constants (IPCC AR6 WGIII + IEA + Eurostat + EPA + ICCT + DOE) ──
+// ── Shared constants ──
 
-// Transport
-const PETROL_CAR_G_PER_KM = 166           // EU fleet avg (IPCC AR6 / EEA)
-const EV_KWH_PER_KM = 0.20               // IEA Global EV Outlook 2024
-const TRAIN_KWH_PER_PKM = 0.06           // IEA transport energy intensity (EU electric rail)
+// Transport – PTUA total energy incl. manufacturing (MJ per passenger-km)
+const ICE_CAR_MJ_PKM = 3.7               // PTUA mid-range (3.0–4.4)
+const EV_CAR_MJ_PKM = 1.6                // PTUA mid-range (1.2–2.0)
+const TRAIN_MJ_PKM = 0.125               // PTUA mid-range (0.05–0.2)
+const TRAM_MJ_PKM = 0.49                 // PTUA mid-range (0.17–0.8)
 
 // Household
 const HP_SCOP = 3.0                       // IEA Future of Heat Pumps (residential avg)
-const COMBINED_GAS_HEATING_G = 220        // Weighted avg: 80% space (215) + 20% water (256)
-const AVG_HOUSEHOLD_KWH = 3500           // Eurostat EU avg household electricity
+const GAS_HEATING_G = 215                 // Natural gas space heating (gCO2/kWh_th, ~90% boiler eff.)
+const AVG_HOUSEHOLD_KWH = 3600           // Odyssee-MURE EU avg electricity per dwelling
 
 // Services
 const DC_IT_LOAD_KW = 77400              // NTT Frankfurt 1: 77.4 MW IT load
-const DC_PUE = 1.55                      // Uptime Institute global avg (~2023-2024)
 const DIESEL_TRUCK_G_PER_KM = 885        // ICCT 2023: 33 L/100km x 2.68 kgCO2/L (40t long-haul)
 const ELECTRIC_TRUCK_KWH_PER_KM = 1.30   // ICCT 2025: real-world EU avg (40t tractor-trailer)
 
@@ -70,70 +70,64 @@ const cards = computed(() => {
 
   const results = []
 
-  // ── Transport ──
-  const evG = EV_KWH_PER_KM * gi
-  const evRatio = PETROL_CAR_G_PER_KM / evG
+  // ── Transport (PTUA energy comparison incl. manufacturing) ──
+  const evRatio = ICE_CAR_MJ_PKM / EV_CAR_MJ_PKM
   results.push({
     id: 'ev', group: 'transport',
     icon: 'electric_car',
-    title: 'EV vs Petrol Car',
-    result: evRatio >= 1
-      ? `${evRatio.toFixed(1)}x less CO\u2082 per km`
-      : `${(1 / evRatio).toFixed(1)}x more CO\u2082 per km`,
-    detail: `EV: ${Math.round(evG)} gCO\u2082/km (0.20 kWh/km). Petrol: ${PETROL_CAR_G_PER_KM} gCO\u2082/km.`,
-    colorClass: colorClass(evG, PETROL_CAR_G_PER_KM)
+    title: 'Electric Car vs Petrol Car',
+    result: `${evRatio.toFixed(1)}x less energy per passenger-km`,
+    detail: `EV: 1.2–2.0 MJ/pkm. Petrol: 3.0–4.4 MJ/pkm. Total energy incl. vehicle manufacturing.`,
+    colorClass: 'card-green'
   })
 
-  const trainG = TRAIN_KWH_PER_PKM * gi
-  const trainRatio = PETROL_CAR_G_PER_KM / trainG
+  const trainRatio = ICE_CAR_MJ_PKM / TRAIN_MJ_PKM
+  const tramRatio = ICE_CAR_MJ_PKM / TRAM_MJ_PKM
   results.push({
     id: 'train', group: 'transport',
     icon: 'train',
-    title: 'Electric Train vs Car',
-    result: trainRatio >= 1
-      ? `${trainRatio.toFixed(1)}x less CO\u2082 per passenger-km`
-      : `${(1 / trainRatio).toFixed(1)}x more CO\u2082 per passenger-km`,
-    detail: `Train: ${trainG.toFixed(1)} gCO\u2082/pkm (0.06 kWh/pkm). Car: ${PETROL_CAR_G_PER_KM} gCO\u2082/km.`,
-    colorClass: colorClass(trainG, PETROL_CAR_G_PER_KM)
+    title: 'Train & Tram vs Car',
+    result: `Train ~${Math.round(trainRatio)}x, Tram ~${Math.round(tramRatio)}x less energy`,
+    detail: `Train: 0.05–0.2 MJ/pkm. Tram: 0.17–0.8 MJ/pkm. Car: 3.0–4.4 MJ/pkm. Incl. manufacturing.`,
+    colorClass: 'card-green'
   })
 
   // ── Household ──
   const hpG = gi / HP_SCOP
-  const hpSaving = ((COMBINED_GAS_HEATING_G - hpG) / COMBINED_GAS_HEATING_G * 100)
+  const hpSaving = ((GAS_HEATING_G - hpG) / GAS_HEATING_G * 100)
   results.push({
     id: 'hp', group: 'household',
     icon: 'heat_pump',
-    title: 'Heat Pump vs Gas (Heating + Hot Water)',
+    title: 'Heat Pump vs Gas Heating',
     result: hpSaving > 0
       ? `${Math.round(hpSaving)}% less CO\u2082`
       : `${Math.round(-hpSaving)}% more CO\u2082`,
-    detail: `HP: ${Math.round(hpG)} gCO\u2082/kWh_th (SCOP ${HP_SCOP}). Gas: ${COMBINED_GAS_HEATING_G} gCO\u2082/kWh_th (weighted avg).`,
-    colorClass: colorClass(hpG, COMBINED_GAS_HEATING_G)
+    detail: `HP: ${Math.round(hpG)} gCO\u2082/kWh_th (SCOP ${HP_SCOP}). Gas boiler: ${GAS_HEATING_G} gCO\u2082/kWh_th.`,
+    colorClass: colorClass(hpG, GAS_HEATING_G)
   })
 
   const householdTonnes = (AVG_HOUSEHOLD_KWH * gi) / 1e6
-  const equivKm = (householdTonnes * 1e6) / PETROL_CAR_G_PER_KM
+  const householdMJ = AVG_HOUSEHOLD_KWH * 3.6
+  const equivPkm = Math.round(householdMJ / ICE_CAR_MJ_PKM)
   results.push({
     id: 'footprint', group: 'household',
     icon: 'home',
     title: 'Household Electricity Footprint',
-    result: `${householdTonnes.toFixed(2)} tCO\u2082/yr \u2248 ${Math.round(equivKm).toLocaleString()} km by petrol car`,
-    detail: `From ${AVG_HOUSEHOLD_KWH.toLocaleString()} kWh/yr (EU avg household). Car equivalent at ${PETROL_CAR_G_PER_KM} gCO\u2082/km.`,
+    result: `${householdTonnes.toFixed(2)} tCO\u2082/yr \u2248 ${equivPkm.toLocaleString()} passenger-km by car`,
+    detail: `From ${AVG_HOUSEHOLD_KWH.toLocaleString()} kWh/yr (EU avg). Energy equivalent at ${ICE_CAR_MJ_PKM} MJ/pkm (PTUA, incl. manufacturing).`,
     colorClass: householdTonnes < 0.5 ? 'card-green' : householdTonnes < 1.5 ? 'card-yellow' : 'card-red'
   })
 
   // ── Services ──
-  const dcTotalKw = DC_IT_LOAD_KW * DC_PUE
-  const dcKwhPerHour = Math.round(dcTotalKw)
-  const dcGCO2PerHour = dcKwhPerHour * gi
-  const dcKmPerHour = Math.round(dcGCO2PerHour / PETROL_CAR_G_PER_KM)
+  const dcMjPerHour = DC_IT_LOAD_KW * 3.6
+  const dcPkmPerHour = Math.round(dcMjPerHour / ICE_CAR_MJ_PKM)
   results.push({
     id: 'datacenter', group: 'services',
     icon: 'dns',
     title: 'Data Center (NTT Frankfurt 1)',
-    result: `1 hr of operation \u2248 ${dcKmPerHour.toLocaleString()} km by petrol car`,
-    detail: `Est. ${dcKwhPerHour.toLocaleString()} kWh/hr (77.4 MW IT, PUE ${DC_PUE}).`,
-    colorClass: dcKmPerHour < 30000 ? 'card-green' : dcKmPerHour < 120000 ? 'card-yellow' : 'card-red'
+    result: `1 hr of operation \u2248 ${dcPkmPerHour.toLocaleString()} passenger-km by car`,
+    detail: `Est. ${DC_IT_LOAD_KW.toLocaleString()} kWh/hr (77.4 MW IT load). Car: ${ICE_CAR_MJ_PKM} MJ/pkm (PTUA).`,
+    colorClass: dcPkmPerHour < 50000 ? 'card-green' : dcPkmPerHour < 150000 ? 'card-yellow' : 'card-red'
   })
 
   const eTruckG = ELECTRIC_TRUCK_KWH_PER_KM * gi
