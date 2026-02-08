@@ -8,7 +8,7 @@
       <nav class="timeline-nav">
         <div class="timeline-line"></div>
         <div class="timeline-sections">
-          <div v-for="section in sections" :key="section.id">
+          <div v-for="section in props.sections" :key="section.id">
             <a
               :href="`#${section.id}`"
               @click.prevent="scrollToSection(section.id)"
@@ -30,7 +30,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const props = defineProps({sections:Object})
+const props = defineProps({
+  sections: Object
+})
 const currentSection = ref('consumption')
 
 
@@ -54,7 +56,7 @@ const handleScroll = () => {
   // Use window scroll approach - this is what's actually scrolling
   const scrollPosition = window.scrollY + window.innerHeight / 3
 
-  for (const section of sections.value) {
+  for (const section of props.sections) {
     const element = document.getElementById(section.id)
     if (element) {
       const { offsetTop, offsetHeight } = element
@@ -80,6 +82,7 @@ onUnmounted(() => {
 .timeline-sidebar {
   position: fixed;
   left: 0;
+  width: 300px;
   top: 0;
   height: 100vh;
   background-color: var(--secondary-color);

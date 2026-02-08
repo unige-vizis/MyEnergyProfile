@@ -7,6 +7,7 @@ import Dependency from '../components/sections/Dependency.vue';
 import ProductionConsumption from '../components/sections/ProductionConsumption.vue';
 import Eco from '../components/sections/Eco.vue';
 import ConfigHeader from '../components/ConfigHeader.vue';
+import { ref } from 'vue'
 
 const sections = ref([
   { id: "consumption", name: "My energy consumption", icon: "battery_android_frame_5", },
@@ -20,10 +21,10 @@ const sections = ref([
 
 <template>
   <div id="app-container">
-    <Sidebar :sections="sections"></Sidebar> 
+    <Sidebar :sections="sections"></Sidebar>
     <div>
       <ConfigHeader></ConfigHeader>
-      <main class="main-content">
+      <main class="main-content main-with-config">
         <Consumption></Consumption>
         <ProductionConsumption></ProductionConsumption>
         <Costs></Costs>
