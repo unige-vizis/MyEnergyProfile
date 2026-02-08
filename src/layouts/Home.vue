@@ -22,16 +22,16 @@ const sections = ref([
 <template>
   <div id="app-container">
     <Sidebar :sections="sections"></Sidebar>
-    <div>
+    <main>
       <ConfigHeader></ConfigHeader>
-      <main class="main-content main-with-config">
+      <div class="main-content main-with-config">
         <Consumption></Consumption>
         <ProductionConsumption></ProductionConsumption>
         <Costs></Costs>
         <TradingPartner></TradingPartner>
         <Dependency></Dependency>
         <Eco></Eco>
-      </main>
+      </div>
       <footer class="site-footer">
         <div class="footer-names">
           <div class="name-with-tooltip">
@@ -54,6 +54,6 @@ const sections = ref([
           <span class="footer-title">VIZIS</span>
         </div>
       </footer>
-    </div>
+    </main>
   </div>
 </template>

@@ -288,12 +288,20 @@ code {
 
 .chart-scroll-outer::before {
   top: 0;
-  background: linear-gradient(to bottom, var(--primary-color, #fcf1e6), transparent);
+  background: linear-gradient(
+    to bottom,
+    var(--primary-color, #fcf1e6),
+    transparent
+  );
 }
 
 .chart-scroll-outer::after {
   bottom: 0;
-  background: linear-gradient(to top, var(--primary-color, #fcf1e6), transparent);
+  background: linear-gradient(
+    to top,
+    var(--primary-color, #fcf1e6),
+    transparent
+  );
 }
 
 .chart-scroll {
