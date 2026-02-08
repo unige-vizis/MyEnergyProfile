@@ -46,21 +46,37 @@ const householdSizeOptions = [
 onMounted(() => {
   energyStore.loadData();
 });
+import { useRoute, useRouter } from "vue-router";
+
+const router = useRouter();
+const route = useRoute();
+
+const isInfo = computed(() => route.path.startsWith("/info"));
+
+function openMethodology() {
+  router.push("/info/methodology");
+}
+
 </script>
 
 <template>
   <div class="config-header">
-    <AppSelect
-      class="config-item"
-      :options="countryOptions"
-      label="Country"
-      v-model="selectedCountry"
-      placeholder="Select country"
-    >
-    </AppSelect>
-    <YearSlot class="config-item" :years="globalConfig.yearsDescending" label="Year" v-model="selectedYear" />
+    <template v-if="!isInfo">
+      <AppSelect
+        class="config-item"
+        :options="countryOptions"
+        label="Country"
+        v-model="selectedCountry"
+        placeholder="Select country"
+      />
+      <YearSlot class="config-item" :years="globalConfig.yearsDescending" label="Year" v-model="selectedYear" />
+    </template>
+
+    <!-- Button (immer sichtbar) -->
+    <button @click="openMethodology">Methodology</button>
   </div>
 </template>
+
 
 <style scoped>
   .config-header {
