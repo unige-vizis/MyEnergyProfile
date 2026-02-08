@@ -1,6 +1,7 @@
 <template>
   <aside class="timeline-sidebar">
     <div class="sidebar-content">
+      <!-- TODO - Petula: zurück Button -->
       <div class="sidebar-header">
         <img
           class="sidebar-logo"
@@ -89,7 +90,6 @@ onUnmounted(() => {
 .timeline-sidebar {
   position: fixed;
   left: 0;
-  width: 300px;
   top: 0;
   width: var(--sidebar-width);
   height: 100vh;

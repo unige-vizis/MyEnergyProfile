@@ -2,7 +2,6 @@
   <section id="tradingpartner" class="page-section">
     <div class="chart-header">
       <h2>The Trading Partners</h2>
-      <p>Import and export partners by energy type</p>
     </div>
     <div class="section-container">
       <div v-if="store.isLoading" class="loading">Loading energy data...</div>
@@ -11,6 +10,11 @@
         <TradingPartnersMap :tradeData="store.tradeData" :country="store.selectedCountry" :year="store.selectedYear" />
       </div>
       <div class="text-container">
+        <!-- TODO - Mali -->
+        <!-- Ideen:
+          - allgemeines trade portrait eines westlichen landes 
+          - Große Player in einzelnen resourcen
+          -->
         <p>
           This section provides an overview of the availability of energy in your area over the past year. You can
           analyze grid reliability, outage frequency, and compare your data with regional availability trends.

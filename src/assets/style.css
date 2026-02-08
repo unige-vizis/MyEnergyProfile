@@ -103,6 +103,18 @@ main {
   white-space: nowrap;
 }
 
+.chart-header h2,
+.chart-header h3 {
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
+.chart-header p {
+  max-width: 40rem;
+  text-align: center;
+  margin: auto;
+}
+
 .section-container {
   display: flex;
   gap: 2rem;
@@ -288,20 +300,12 @@ code {
 
 .chart-scroll-outer::before {
   top: 0;
-  background: linear-gradient(
-    to bottom,
-    var(--primary-color, #fcf1e6),
-    transparent
-  );
+  background: linear-gradient(to bottom, var(--primary-color, #fcf1e6), transparent);
 }
 
 .chart-scroll-outer::after {
   bottom: 0;
-  background: linear-gradient(
-    to top,
-    var(--primary-color, #fcf1e6),
-    transparent
-  );
+  background: linear-gradient(to top, var(--primary-color, #fcf1e6), transparent);
 }
 
 .chart-scroll {
