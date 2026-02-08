@@ -1,17 +1,18 @@
 <template>
   <aside class="timeline-sidebar">
     <div class="sidebar-content">
-      <!-- TODO - Petula: zurück Button -->
-      <div class="sidebar-header">
-        <img
-          class="sidebar-logo"
-          src="../assets/img/logo.png"
-          alt="My Energy Profile Logo"
-          width="80px"
-          height="80px"
-        />
-        <h1 class="sidebar-title">My Energy Profile</h1>
-      </div>
+      <RouterLink to="/">
+        <div class="sidebar-header">
+          <img
+            class="sidebar-logo"
+            src="../assets/img/logo.png"
+            alt="My Energy Profile Logo"
+            width="80px"
+            height="80px"
+          />
+          <h1 class="sidebar-title">My Energy Profile</h1>
+        </div>
+      </RouterLink>
 
       <nav class="timeline-nav">
         <div class="timeline-line"></div>
@@ -87,6 +88,11 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.sidebar-content a {
+  text-decoration: none;
+  color: var(--text-color-basic);
+}
+
 .timeline-sidebar {
   position: fixed;
   left: 0;
