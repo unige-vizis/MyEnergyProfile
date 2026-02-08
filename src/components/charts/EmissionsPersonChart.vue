@@ -20,11 +20,10 @@
               <code>Total services</code>, <code>Cars/light trucks</code> + <code>Freight trucks</code> (transport)
             </li>
             <li>
-              Industry per-capita derived from IEA total emissions (indicator: <code>Total final use (kt CO2)</code>,
-              end use containing <code>Manufacturing</code>) divided by
+              Industry per-capita: IEA total industry emissions divided by
               <strong>OWID</strong>
-              <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener"> Energy Data </a>
-              <code>population</code> column
+              <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener">Energy Data</a>
+              population.
             </li>
           </ul>
         </div>
