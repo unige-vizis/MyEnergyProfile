@@ -106,31 +106,11 @@ const fuelTypes = [
 </script>
 
 <style scoped>
-.mix-subsection {
-  margin-bottom: 3rem;
-}
-
-.mix-subsection:last-child {
-  margin-bottom: 0;
-}
-
-.mix-subsection h3 {
-  font-size: 1.4rem;
-  margin-bottom: 0.75rem;
-  color: #2c3e50;
-}
-
-.mix-subsection > p {
-  color: #666;
-  line-height: 1.6;
-  margin-bottom: 1rem;
-}
-
 .loading,
 .error {
   padding: 2rem;
   text-align: center;
-  color: #666;
+  color: var(--text-color-gray);
 }
 
 .error {

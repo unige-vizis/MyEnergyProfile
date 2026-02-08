@@ -57,7 +57,6 @@ defineEmits([ 'focus', 'blur', 'click' ]);
 <style scoped>
 .app-btn {
   padding: 0.75rem 1rem;
-  font-size: 0.95rem;
   border: 1px solid #d0d0d0;
   border-radius: 6px;
   background-color: white;

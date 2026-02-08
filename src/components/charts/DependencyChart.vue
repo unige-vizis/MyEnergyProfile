@@ -634,18 +634,6 @@ onUnmounted(() => {
   margin-bottom: 1rem;
 }
 
-.source-link {
-  display: block;
-  margin-top: 0.2rem;
-  color: var(--text-color-dark-green);
-  text-decoration: none;
-  font-size: 0.7rem;
-}
-
-.source-link:hover {
-  text-decoration: underline;
-}
-
 .no-data {
   display: flex;
   align-items: center;
