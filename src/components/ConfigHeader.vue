@@ -54,7 +54,7 @@ const route = useRoute();
 const isInfo = computed(() => route.path.startsWith("/info"));
 
 function openMethodology() {
-  router.push("/info/methodology");
+  router.push("/info");
 }
 
 </script>

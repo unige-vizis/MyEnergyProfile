@@ -30,15 +30,9 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
+const props = defineProps({sections:Object})
 const currentSection = ref('consumption')
-const sections = ref([
-  { id: "consumption", name: "My energy consumption", icon: "battery_android_frame_5", },
-  { id: "productionconsumption", name: "Production & Consumption", icon: "instant_mix", },
-  { id: "costs", name: "Energy costs", icon: "euro", },
-  { id: "tradingpartner", name: "The Trading Partners", icon: "cycle",},
-  { id: "dependency", name: "Dependency on imports", icon: "trending_up",},
-  { id: "eco", name: "Ecological footprint", icon: "energy_savings_leaf",},
-]);
+
 
 const scrollToSection = (sectionId) => {
   const element = document.getElementById(sectionId)
@@ -199,5 +193,9 @@ onUnmounted(() => {
 .timeline-item.active .timeline-label {
   opacity: 1;
   font-weight: 600;
+}
+
+.short-sidebar .timeline-nav{
+  max-height: 200px;
 }
 </style>
