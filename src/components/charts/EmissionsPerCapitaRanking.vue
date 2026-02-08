@@ -4,6 +4,9 @@
     <p>No emissions per capita ranking data available.</p>
   </div>
   <div v-else class="chart-wrapper">
+    <h3>CO2 Emissions - Europe Comparison</h3>
+    <p>Total CO2 emissions per person from energy use across all sectors, measured in tonnes per year.</p>
+
     <div class="chart-container scroll-container">
       <div class="chart-scroll-outer">
         <div ref="scrollContainer" class="chart-scroll">

@@ -4,17 +4,15 @@
       <div class="kpi">
         <!-- show KPI for the currently selected series; do not fall back to the other series' value -->
         <div v-if="focusedPoint && props.activeSeries === 'electricity'">
-          <div class="kpi-value" v-if="focusedPoint.electricity != null">
+          <h3 v-if="focusedPoint.electricity != null">
             {{ focusedPoint.electricity }} <span class="unit">US¢/kWh</span>
-          </div>
-          <div class="kpi-value" v-else>No electricity data</div>
+          </h3>
+          <h3 v-else>No electricity data for this year</h3>
         </div>
 
         <div v-else-if="focusedPoint && props.activeSeries === 'energy'">
-          <div class="kpi-value" v-if="mean(focusedPoint.CPI0450) != null">
-            Energy CPI: {{ mean(focusedPoint.CPI0450).toFixed(1) }}
-          </div>
-          <div class="kpi-value" v-else>No CPI data</div>
+          <h3 v-if="mean(focusedPoint.CPI0450) != null">Energy CPI: {{ mean(focusedPoint.CPI0450).toFixed(1) }}</h3>
+          <h3 class="kpi-value" v-else>No CPI data</h3>
         </div>
 
         <div class="kpi-sub" v-if="focusedPoint">{{ props.focusYear || focusedPoint.year }}</div>
@@ -601,7 +599,6 @@ onUnmounted(() => {
 
 <style scoped>
 .prices-focus-chart { width: 100%; }
-.chart-header { display:flex; justify-content:space-between; align-items:center; gap:1rem }
 .kpi { display:flex; flex-direction:column }
 .kpi-value { font-size:1.6rem; font-weight:700 }
 .kpi-sub { color: #666; font-size:0.9rem }

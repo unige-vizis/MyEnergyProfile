@@ -2,6 +2,7 @@
   <div class="chart" ref="containerRef" style="width:100%;">
     <svg ref="svgRef" preserveAspectRatio="xMidYMid meet"></svg>
   </div>
+  <!-- TODO - Matteo: Data Sources -->
 </template>
 
 <script setup>

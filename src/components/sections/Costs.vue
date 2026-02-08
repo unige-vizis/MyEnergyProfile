@@ -1,6 +1,8 @@
 <template>
   <section id="costs" class="page-section">
-    <h2>Energy costs</h2>
+    <div class="chart-header">
+      <h2>Evolution of Energy and Electricity Prices</h2>
+    </div>
     <div class="section-container">
       <div v-if="store.isLoading" class="loading">Loading energy data...</div>
       <div v-else-if="store.error" class="error">{{ store.error }}</div>
@@ -35,10 +37,11 @@
           </div>
         </div>
       </template>
-
       <p class="text-container">
-        Explore electricity prices (US¢/kWh) and energy CPI for the selected country. Use the brush or mouse to zoom —
-        the selected year from the header will be auto-centered.
+        <!-- TODO - Mali -->
+        How have energy prices changed over time? The Energy Consumer Price Index (CPI) shows how the cost of energy for
+        households evolves across years, reflecting broader economic and market conditions. Electricity prices are
+        influenced by fuel costs, energy mix, infrastructure, and regulation.
       </p>
     </div>
   </section>
