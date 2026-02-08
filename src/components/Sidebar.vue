@@ -1,7 +1,14 @@
 <template>
   <aside class="timeline-sidebar">
     <div class="sidebar-content">
-      <div>
+      <div class="sidebar-header">
+        <img
+          class="sidebar-logo"
+          src="../assets/img/logo.png"
+          alt="My Energy Profile Logo"
+          width="80px"
+          height="80px"
+        />
         <h1 class="sidebar-title">My Energy Profile</h1>
       </div>
 
@@ -87,6 +94,7 @@ onUnmounted(() => {
   position: fixed;
   left: 0;
   top: 0;
+  width: var(--sidebar-width);
   height: 100vh;
   background-color: var(--secondary-color);
   color: var(--text-color-dark-green);
@@ -94,10 +102,15 @@ onUnmounted(() => {
   z-index: 1000;
 }
 
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1rem 1rem 1rem;
+}
+
 .sidebar-title {
-  margin-left: 1rem;
-  margin-top: 0;
-  margin-bottom: 2rem;
+  margin-left: 0.5rem;
 }
 
 .sidebar-content {

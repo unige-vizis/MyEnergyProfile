@@ -41,47 +41,6 @@
           <span>Net exporter (&lt;0%)</span>
         </div>
       </div>
-      <div class="chart-meta">
-        <div class="meta-section">
-          <span class="meta-label">Source:</span>
-          <ul class="meta-list">
-            <li>
-              Eurostat
-              <a href="https://ec.europa.eu/eurostat/web/energy/database" target="_blank" rel="noopener"
-                >Energy Database</a
-              >
-              (European Commission)
-            </li>
-            <li>
-              Tables <code>nrg_ind_id</code> (ID, overall dependency) and <code>nrg_ind_id3cf</code> (ID3CF, third
-              country dependency)
-            </li>
-            <li>Fuel breakdown via SIEC codes mapped to display names</li>
-          </ul>
-        </div>
-        <div class="meta-section">
-          <span class="meta-label">Data Hints:</span>
-          <div class="chart-notes">
-            <p class="chart-note">
-              <span class="note-icon">*</span>
-              <span
-                >Non-EU breakdown (hatched line) only available for main aggregates (Coal, Gas, Oil, Electricity).
-                Subcategories (indented, lighter colors) show total import dependency only.</span
-              >
-            </p>
-            <p class="chart-note">
-              <span class="note-icon">*</span>
-              <span>Non-EU (third country) import dependency data is only available from 2010 to 2023.</span>
-            </p>
-            <p class="chart-note">
-              <span class="note-icon electricity-mark">!</span>
-              <span
-                >Electricity: Eurostat does not calculate overall import dependency; showing non-EU imports only.</span
-              >
-            </p>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -722,8 +681,6 @@ onUnmounted(() => {
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
-  min-width: 350px;
-  max-width: 500px;
   flex-shrink: 0;
 }
 
@@ -796,119 +753,5 @@ onUnmounted(() => {
   width: 14px;
   height: 14px;
   border-radius: 3px;
-}
-
-.chart-meta {
-  margin-top: 0.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 0.5rem;
-}
-
-.meta-section {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-  font-size: 0.7rem;
-  line-height: 1.4;
-}
-
-.meta-label {
-  font-weight: 600;
-  color: #555;
-  flex-shrink: 0;
-}
-
-.meta-text {
-  color: #666;
-}
-
-.meta-text code {
-  background: #e9ecef;
-  padding: 0.05rem 0.25rem;
-  border-radius: 2px;
-  font-size: 0.65rem;
-  color: #495057;
-}
-
-.meta-list {
-  margin: 0.2rem 0 0 0;
-  padding-left: 1.2rem;
-  color: #666;
-}
-
-.meta-list li {
-  margin-bottom: 0.15rem;
-}
-
-.meta-list code {
-  background: #e9ecef;
-  padding: 0.05rem 0.25rem;
-  border-radius: 2px;
-  font-size: 0.65rem;
-  color: #495057;
-}
-
-.chart-notes {
-  margin-top: 0.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-}
-
-.chart-note {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.35rem;
-  margin: 0;
-  font-size: 0.7rem;
-  color: #777;
-  line-height: 1.4;
-}
-
-.note-icon {
-  flex-shrink: 0;
-  font-weight: 600;
-  color: #999;
-}
-
-.note-icon.electricity-mark {
-  color: #c44536;
-  font-weight: 700;
-}
-
-.chart-info {
-  flex: 1;
-  min-width: 0;
-  font-size: 0.8rem;
-  line-height: 1.5;
-}
-
-.subresource-content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-  align-items: baseline;
-}
-
-.subresource-name {
-  font-weight: 600;
-  font-size: 0.75rem;
-  color: #333;
-}
-
-.subresource-name::after {
-  content: ":";
-  font-weight: 400;
-  color: #999;
-}
-
-.subresource-desc {
-  font-size: 0.75rem;
-  line-height: 1.45;
-  color: #666;
 }
 </style>

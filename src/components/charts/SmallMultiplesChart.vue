@@ -1,27 +1,39 @@
 <template>
   <div class="small-multiples-chart">
-    <div v-if="!hasData" class="no-data">
-      No production/consumption data available
-    </div>
+    <div v-if="!hasData" class="no-data">No production/consumption data available</div>
 
     <div v-else class="chart-content">
       <div ref="chartRef" class="chart-grid"></div>
 
       <div class="chart-meta">
         <div class="meta-section">
-          <span class="meta-label">Data Hints:</span>
-          <div class="chart-notes">
-            <p class="chart-note">
-              <span class="note-icon">*</span>
-              <span>Y-axis scales differ between production and consumption rows. This is necessary because production and consumption volumes can differ by orders of magnitude for most countries.</span>
-            </p>
-          </div>
+          <span class="meta-label">Data Hints</span>
+          <ul class="meta-list">
+            <li>
+              Y-axis scales differ between production and consumption rows. This is necessary because production and
+              consumption volumes can differ by orders of magnitude for most countries.
+            </li>
+          </ul>
         </div>
         <div class="meta-section">
-          <span class="meta-label">Source:</span>
+          <span class="meta-label">Source</span>
           <ul class="meta-list">
-            <li><a href="https://github.com/owid/energy-data" target="_blank" rel="noopener">Our World in Data Energy Dataset</a> · Fields: <code>coal_production</code>, <code>oil_production</code>, <code>gas_production</code>, <code>electricity_generation</code>, <code>coal_consumption</code>, <code>oil_consumption</code>, <code>gas_consumption</code>, <code>biofuel_consumption</code>, <code>electricity_demand</code> (all in TWh)</li>
-            <li>Underlying data compiled by the <a href="https://www.energyinst.org/statistical-review" target="_blank" rel="noopener">Energy Institute</a> Statistical Review of World Energy</li>
+            <li>
+              <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener"
+                >Our World in Data Energy Dataset</a
+              >
+              · Fields: <code>coal_production</code>, <code>oil_production</code>, <code>gas_production</code>,
+              <code>electricity_generation</code>, <code>coal_consumption</code>, <code>oil_consumption</code>,
+              <code>gas_consumption</code>, <code>biofuel_consumption</code>, <code>electricity_demand</code> (all in
+              TWh)
+            </li>
+            <li>
+              Underlying data compiled by the
+              <a href="https://www.energyinst.org/statistical-review" target="_blank" rel="noopener"
+                >Energy Institute</a
+              >
+              Statistical Review of World Energy
+            </li>
           </ul>
         </div>
       </div>
@@ -95,8 +107,10 @@ function renderChart() {
   const container = chartRef.value
   const totalWidth = container.clientWidth || 700
 
-  const nCols = resources.length
-  const nRows = 2
+  // Determine columns based on screen width
+  const nCols = totalWidth < 600 ? 2 : resources.length
+  const resourceRows = Math.ceil(resources.length / nCols)
+  const nRows = 2 // production and consumption
   const rowLabels = ['Production', 'Consumption']
   const rowKeys = ['production', 'consumption']
 
@@ -125,29 +139,36 @@ function renderChart() {
   const plotW = cellWidth - margin.left - margin.right
   const plotH = cellHeight - margin.top - margin.bottom
 
+  const resGroupGap = 16 // space between resource groups
   const svgWidth = rowLabelWidth + nCols * cellWidth + (nCols - 1) * colGap
-  const svgHeight = nRows * cellHeight + (nRows - 1) * rowGap
+  const svgHeight = resourceRows * (nRows * cellHeight + (nRows - 1) * rowGap) + (resourceRows - 1) * resGroupGap
 
   const svg = d3.select(container)
     .append('svg')
     .attr('width', svgWidth)
     .attr('height', svgHeight)
 
-  for (let row = 0; row < nRows; row++) {
-    const rowKey = rowKeys[row]
-    const cy = row * (cellHeight + rowGap)
+  for (let resGroup = 0; resGroup < resourceRows; resGroup++) {
+    const groupOffsetY = resGroup * (nRows * cellHeight + (nRows - 1) * rowGap + resGroupGap)
 
-    // Row label — rotated 90° on the left side
-    svg.append('text')
-      .attr('transform', `translate(${12}, ${cy + cellHeight / 2}) rotate(-90)`)
-      .attr('text-anchor', 'middle')
-      .attr('fill', '#222')
-      .attr('font-size', '12px')
-      .attr('font-weight', '700')
-      .text(rowLabels[row])
+    for (let row = 0; row < nRows; row++) {
+      const rowKey = rowKeys[row]
+      const cy = groupOffsetY + row * (cellHeight + rowGap)
 
-    for (let col = 0; col < nCols; col++) {
-      const r = resources[col]
+      // Row label — rotated 90° on the left side (only for first group)
+      if (resGroup === 0) {
+        svg.append('text')
+          .attr('transform', `translate(${12}, ${cy + cellHeight / 2}) rotate(-90)`)
+          .attr('text-anchor', 'middle')
+          .attr('fill', '#222')
+          .attr('font-size', '12px')
+          .attr('font-weight', '700')
+          .text(rowLabels[row])
+      }
+
+      for (let col = 0; col < nCols && resGroup * nCols + col < resources.length; col++) {
+        const resourceIndex = resGroup * nCols + col
+        const r = resources[resourceIndex]
       const cx = rowLabelWidth + col * (cellWidth + colGap)
       const data = series[r.code][rowKey]
       const validData = data.filter(d => d.value != null)
@@ -187,8 +208,9 @@ function renderChart() {
       const yMax = d3.max(validData, d => d.value) || 1
       const y = d3.scaleLinear().domain([0, yMax * 1.1]).range([plotH, 0])
 
-      // Y axis — append TWh to the topmost tick label
-      const yAxis = d3.axisLeft(y).ticks(3).tickSize(-plotW).tickFormat(d => formatTick(d))
+      // Y axis — adjust ticks based on available height
+      const yTickCount = plotH < 100 ? 2 : 3
+      const yAxis = d3.axisLeft(y).ticks(yTickCount).tickSize(-plotW).tickFormat(d => formatTick(d))
       const yAxisG = g.append('g').call(yAxis)
       yAxisG.selectAll('.domain').remove()
       // Manual left axis line
@@ -206,8 +228,9 @@ function renderChart() {
         d3.select(lastTick).text(cur + ' TWh')
       }
 
-      // X axis on both rows
-      const xAxis = d3.axisBottom(x).ticks(4).tickFormat(d3.format('d'))
+      // X axis — adjust ticks based on available width
+      const xTickCount = plotW < 75 ? 3 : 4
+      const xAxis = d3.axisBottom(x).ticks(xTickCount).tickFormat(d3.format('d'))
       const xAxisG = g.append('g').attr('transform', `translate(0, ${plotH})`).call(xAxis)
       xAxisG.selectAll('.domain').attr('stroke', '#222')
       xAxisG.selectAll('.tick line').remove()
@@ -260,6 +283,7 @@ function renderChart() {
             .attr('stroke-width', 1.5)
         }
       }
+      }
     }
   }
 }
@@ -304,61 +328,5 @@ onUnmounted(() => {
 
 .chart-grid :deep(svg) {
   display: block;
-}
-
-.chart-meta {
-  margin-top: 0.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding-top: 0.5rem;
-  border-top: 1px solid #eee;
-}
-
-.meta-section {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-  font-size: 0.7rem;
-  line-height: 1.4;
-}
-
-.meta-label {
-  font-weight: 600;
-  color: #555;
-  flex-shrink: 0;
-}
-
-.meta-list {
-  margin: 0.2rem 0 0 0;
-  padding-left: 1.2rem;
-  color: #666;
-}
-
-.meta-list li {
-  margin-bottom: 0.15rem;
-}
-
-.chart-notes {
-  margin-top: 0.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.chart-note {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.35rem;
-  margin: 0;
-  font-size: 0.7rem;
-  color: #777;
-  line-height: 1.4;
-}
-
-.note-icon {
-  flex-shrink: 0;
-  font-weight: 600;
-  color: #999;
 }
 </style>

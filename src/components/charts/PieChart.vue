@@ -1,11 +1,11 @@
 <template>
-  <div class="chart">
-    <svg ref="svgRef" width="700" height="400"></svg>
+  <div class="chart" ref="containerRef" style="width:100%;">
+    <svg ref="svgRef" preserveAspectRatio="xMidYMid meet"></svg>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import * as d3 from 'd3'
 
 const props = defineProps({
@@ -28,11 +28,17 @@ const props = defineProps({
 })
 
 const svgRef = ref(null)
+const containerRef = ref(null)
+const svgWidth = ref(500)
+const svgHeight = ref(500)
+const margin = { top: 60, right: 20, bottom: 20, left: 60 }
+// Keep a reference to the observer so we can disconnect it
+const resizeObserverRef = ref(null)
 
-const margin = { top: 50, right: 80, bottom: 80, left: 50 }
-const width = 700
-const height = 400
-const radius = Math.min(width, height) / 2 - Math.max(margin.top, margin.right, margin.bottom, margin.left)
+function computedRadius(width, height) {
+  return Math.min(width, height) / 2 - Math.max(margin.top, margin.right, margin.bottom, margin.left)
+}
+
 const energyColors = {
   // Gasoline family - yellow/orange progression
   motor: 'rgb(162, 158, 162)',                   // Your orange ✓
@@ -55,16 +61,19 @@ const energyColors = {
 function drawChart() {
   const selected = props.data.find(s => s?.name === props.selectedSector)?.energyType
 
+  // determine current size
+  const width = svgWidth.value
+  const height = svgHeight.value
+  const radius = computedRadius(width, height)
+
   if (!props.data || !selected || selected.length === 0) return
 
   const svg = d3.select(svgRef.value)
   svg.selectAll('*').remove()
+  svg.attr('width', width).attr('height', height).attr('viewBox', `0 0 ${width} ${height}`)
 
   const g = svg.append('g')
     .attr('transform', `translate(${width / 2},${height / 2})`)
-
-  // Create color scale
-  const color = d3.scaleOrdinal(d3.schemeCategory10)
 
   // Create pie layout
   const pie = d3.pie()
@@ -202,6 +211,26 @@ function drawChart() {
 
 onMounted(() => {
   nextTick(() => {
+    // initial sizing based on container
+    const rect = containerRef.value ? containerRef.value.getBoundingClientRect() : { width: 500, height: 500 }
+    const size = Math.max(200, Math.min(rect.width, 400))
+    svgWidth.value = size * 1.5
+    svgHeight.value = size * 0.8
+
+    // observe container resize
+    const ro = new ResizeObserver(entries => {
+      for (const entry of entries) {
+        const r = entry.contentRect
+        const s = Math.max(200, Math.min(r.width, 400))
+        svgWidth.value = s * 1.5
+        svgHeight.value = s * 0.8
+        nextTick(() => drawChart())
+      }
+    })
+    if (containerRef.value) ro.observe(containerRef.value)
+    // keep ref for cleanup
+    resizeObserverRef.value = ro
+
     drawChart()
   })
 })
@@ -211,4 +240,11 @@ watch(() => [props.data, props.year, props.selectedSector, props.country], () =>
     drawChart()
   })
 }, { deep: true })
+
+onUnmounted(() => {
+  if (resizeObserverRef.value) {
+    try { resizeObserverRef.value.disconnect() } catch (e) {}
+  }
+  d3.selectAll('.tooltip-container').remove()
+})
 </script>

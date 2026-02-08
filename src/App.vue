@@ -12,16 +12,16 @@ import ConfigHeader from './components/ConfigHeader.vue';
 <template>
   <div id="app-container">
     <Sidebar></Sidebar>
-    <div>
+    <main>
       <ConfigHeader></ConfigHeader>
-      <main class="main-content">
+      <div class="main-content">
         <Consumption></Consumption>
         <ProductionConsumption></ProductionConsumption>
         <Costs></Costs>
         <TradingPartner></TradingPartner>
         <Dependency></Dependency>
         <Eco></Eco>
-      </main>
+      </div>
       <footer class="site-footer">
         <div class="footer-names">
           <div class="name-with-tooltip">
@@ -38,16 +38,11 @@ import ConfigHeader from './components/ConfigHeader.vue';
             <span class="footer-name">Maleah Leonie Kögler</span>
             <div class="tooltip">Design, storytelling & content structure</div>
           </div>
-
-          <div class="name-with-tooltip">
-            <span class="footer-name">Methodology</span>
-            <div class="tooltip">Learn more about My Energy Profile</div>
-          </div>
         </div>
         <div class="footer-right">
           <span class="footer-title">VIZIS</span>
         </div>
       </footer>
-    </div>
+    </main>
   </div>
 </template>
