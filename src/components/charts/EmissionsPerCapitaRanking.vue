@@ -25,15 +25,10 @@
               <code>Cars/light trucks</code> + <code>Freight trucks</code> (transport)
             </li>
             <li>
-              Industry per-capita derived from IEA total emissions
-              (indicator: <code>Total final use (kt CO2)</code>, end use containing <code>Manufacturing</code>)
-              divided by
+              Industry per-capita: IEA total industry emissions divided by
               <strong>OWID</strong>
-              <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener">
-                Energy Data
-              </a>
-              <code>population</code> column.
-              IEA provides per-capita indicators for residential, services, and transport, but only per-value-added (gCO&#x2082;/USD) for industry.
+              <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener">Energy Data</a>
+              population (IEA only provides per-value-added for industry).
             </li>
           </ul>
         </div>
