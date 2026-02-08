@@ -49,10 +49,6 @@ const sections = ref([
             <div class="tooltip">Design, storytelling & content structure</div>
           </div>
 
-          <div class="name-with-tooltip">
-            <span class="footer-name">Methodology</span>
-            <div class="tooltip">Learn more about My Energy Profile</div>
-          </div>
         </div>
         <div class="footer-right">
           <span class="footer-title">VIZIS</span>
