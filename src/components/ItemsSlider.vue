@@ -1,6 +1,6 @@
 <template>
   <div class="item-slider-container">
-    <h4 class="px-3 mb-3 item-title">{{ title }}</h4>
+    <h3 class="px-3 mb-3 item-title">{{ title }}</h3>
     <div class="item-slider">
       <div @click="slide(-slidewith)" :class="{ 'is-disabled-hide': scrollX < 1 }" class="left-arrow-left">
         <span class="timeline-icon material-symbols-outlined">chevron_left</span>
@@ -72,7 +72,6 @@ export default {
   margin-bottom: 20px;
 }
 .item-title {
-  font-size: 1.2em;
   font-weight: bold;
 }
 .item-slider {

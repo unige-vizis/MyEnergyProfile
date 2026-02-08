@@ -8,17 +8,16 @@
       <div ref="chartRef" class="chart-svg"></div>
       <div class="chart-meta">
         <div class="meta-section">
-          <span class="meta-label">Source:</span>
+          <span class="meta-label">Source</span>
           <ul>
             <li>
               <strong>IEA</strong>
               <a href="https://www.iea.org/data-and-statistics" target="_blank" rel="noopener">
                 Energy End-Uses &amp; Efficiency Indicators
               </a>
-              (per-capita carbon intensity by sector).
-              Indicator: <code>Carbon intensity per capita (t CO2/capita)</code>.
-              End uses: <code>Total residential</code>, <code>Total services</code>,
-              <code>Cars/light trucks</code> + <code>Freight trucks</code> (transport)
+              (per-capita carbon intensity by sector). Indicator:
+              <code>Carbon intensity per capita (t CO2/capita)</code>. End uses: <code>Total residential</code>,
+              <code>Total services</code>, <code>Cars/light trucks</code> + <code>Freight trucks</code> (transport)
             </li>
             <li>
               Industry per-capita: IEA total industry emissions divided by
@@ -248,27 +247,5 @@ onUnmounted(() => {
   width: 100%;
   display: flex;
   justify-content: center;
-}
-.chart-meta {
-  margin-top: 0.75rem;
-  font-size: 0.7rem;
-  color: var(--text-color-gray);
-  line-height: 1.4;
-}
-.meta-section {
-  margin-bottom: 0.5rem;
-}
-.meta-label {
-  font-weight: 600;
-}
-.meta-section ul {
-  margin: 0.25rem 0 0 1.2rem;
-  padding: 0;
-}
-.meta-section li {
-  margin-bottom: 0.2rem;
-}
-.meta-section a {
-  color: var(--secondary-color, #acc278);
 }
 </style>
