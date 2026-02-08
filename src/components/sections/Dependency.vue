@@ -22,13 +22,17 @@
       </div>
       <div class="text-container">
         <p>
-          Share of imports vs domestic production ·
-          <span class="formula">Net Imports ÷ Gross Available Energy</span>
+          Share of imports vs domestic production
           <br />
-          <span class="formula">
+          <code>Net Imports ÷ Gross Available Energy</code>
+          <br />
+          <br />
+          <code>
             Net Imports = Imports − Exports · Gross Available Energy ≈ Primary production + Net imports ± Stock changes
-          </span>
+          </code>
           <br />
+          <br />
+
           <a
             href="https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Energy_dependency_rate"
             target="_blank"
@@ -37,6 +41,36 @@
             >https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Energy_dependency_rate</a
           >
         </p>
+      </div>
+    </div>
+    <div class="chart-meta">
+      <div class="meta-section">
+        <span class="meta-label">Source</span>
+        <ul class="meta-list">
+          <li>
+            Eurostat
+            <a href="https://ec.europa.eu/eurostat/web/energy/database" target="_blank" rel="noopener"
+              >Energy Database</a
+            >
+            (European Commission)
+          </li>
+          <li>
+            Tables <code>nrg_ind_id</code> (ID, overall dependency) and <code>nrg_ind_id3cf</code> (ID3CF, third country
+            dependency)
+          </li>
+          <li>Fuel breakdown via SIEC codes mapped to display names</li>
+        </ul>
+      </div>
+      <div class="meta-section">
+        <span class="meta-label">Data Hints</span>
+        <ul class="meta-list">
+          <li>
+            Non-EU breakdown (hatched line) only available for main aggregates (Coal, Gas, Oil, Electricity).
+            Subcategories (indented, lighter colors) show total import dependency only.
+          </li>
+          <li>Non-EU (third country) import dependency data is only available from 2010 to 2023.</li>
+          <li>Electricity: Eurostat does not calculate overall import dependency; showing non-EU imports only.</li>
+        </ul>
       </div>
     </div>
     <ItemsSlider title="Types of Fuel">

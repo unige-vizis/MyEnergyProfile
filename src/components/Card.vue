@@ -25,8 +25,8 @@ onMounted(() => {
     const observer = new ResizeObserver(entries => {
             const width = entries[0].contentRect.width
             const gapWidth = 10
-            const itemsToShow = 2
-            const itemWidth = (width / itemsToShow) - gapWidth
+            const itemsToShow = document.documentElement.clientWidth < 600 ? 1 : 2
+            const itemWidth = (width / itemsToShow) - (document.documentElement.clientWidth < 600 ? 0 : gapWidth)
             document.documentElement.style.setProperty('--item-width', `${itemWidth}px`)
         })
         observer.observe(sliderContainer)

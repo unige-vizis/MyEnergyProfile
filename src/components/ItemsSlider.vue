@@ -31,7 +31,7 @@ export default {
         if (sliderContainer) {
         const sliderContainerWidth = sliderContainer.clientWidth
         const itemsToShow = document.documentElement.clientWidth < 600 ? 1 : 2
-        this.slidewith = sliderContainerWidth / itemsToShow
+        this.slidewith = sliderContainerWidth / itemsToShow + (document.documentElement.clientWidth < 600 ? 10 : 0)
         }
     })
   },

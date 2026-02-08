@@ -76,44 +76,6 @@
             <span class="cutoff-value">{{ arrowCutoff }}%</span>
           </div>
         </div>
-
-        <div class="chart-meta">
-          <div class="meta-section">
-            <span class="meta-label">Source:</span>
-            <ul class="meta-list">
-              <li>
-                Eurostat
-                <a href="https://ec.europa.eu/eurostat/web/energy/database" target="_blank" rel="noopener"
-                  >Energy Database</a
-                >
-                (European Commission)
-              </li>
-              <li>
-                Tables <code>nrg_ti_*</code> (imports) and <code>nrg_te_*</code> (exports) for sff, oil, gas, bio, eh
-              </li>
-              <li>Derived: <code>share_pct</code> = partner value ÷ total × 100</li>
-            </ul>
-          </div>
-          <div class="meta-section">
-            <span class="meta-label">Data Hints:</span>
-            <div class="chart-notes">
-              <p class="chart-note">
-                <span class="note-icon">*</span>
-                <span
-                  >EU-reported data only; non-EU partner volumes data may be incomplete or reflect only the EU
-                  perspective of the trade relationship.</span
-                >
-              </p>
-              <p class="chart-note">
-                <span class="note-icon">*</span>
-                <span
-                  >Regional aggregates (e.g., "Other Asian countries") excluded from map arrows but included in
-                  totals.</span
-                >
-              </p>
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -425,7 +387,7 @@ async function renderMap() {
 
   const container = mapContainerRef.value
   const containerWidth = container.clientWidth || 600
-  const containerHeight = Math.min(containerWidth * 0.5, 400)
+  const containerHeight = Math.min(containerWidth, 400)
 
   // Create SVG
   const svg = d3.select(container)
@@ -1148,9 +1110,8 @@ onUnmounted(() => {
 
 .map-container {
   width: 100%;
-  min-width: 400px;
-  max-width: 700px;
-  flex-shrink: 0;
+  min-width: 300px;
+  flex: 1;
 }
 
 .map-svg-container {
@@ -1269,82 +1230,6 @@ onUnmounted(() => {
   font-weight: 500;
   min-width: 28px;
   text-align: right;
-}
-
-.chart-meta {
-  margin-top: 0.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  padding-top: 0.5rem;
-  border-top: 1px solid var(--text-color-gray);
-}
-
-.meta-section {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.3rem;
-  font-size: 0.7rem;
-  line-height: 1.4;
-}
-
-.meta-label {
-  font-weight: 600;
-  color: var(--text-color-gray);
-  flex-shrink: 0;
-}
-
-.meta-text {
-  color: var(--text-color-gray);
-}
-
-.meta-text code {
-  background: #e9ecef;
-  padding: 0.05rem 0.25rem;
-  border-radius: 2px;
-  font-size: 0.65rem;
-  color: var(--text-color-gray);
-}
-
-.meta-list {
-  margin: 0.2rem 0 0 0;
-  padding-left: 1.2rem;
-  color: var(--text-color-gray);
-}
-
-.meta-list li {
-  margin-bottom: 0.15rem;
-}
-
-.meta-list code {
-  background: var(--primary-color);
-  padding: 0.05rem 0.25rem;
-  border-radius: 2px;
-  font-size: 0.65rem;
-  color: var(--text-color-gray);
-}
-
-.chart-notes {
-  margin-top: 0.2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.chart-note {
-  display: flex;
-  align-items: flex-start;
-  gap: 0.35rem;
-  margin: 0;
-  font-size: 0.7rem;
-  color: var(--text-color-gray);
-  line-height: 1.4;
-}
-
-.note-icon {
-  flex-shrink: 0;
-  font-weight: 600;
-  color: var(--text-color-gray);
 }
 
 .map-info {

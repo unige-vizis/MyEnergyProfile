@@ -1,11 +1,11 @@
 <template>
-  <div class="chart">
-    <svg ref="svgRef" width="500" height="500"></svg>
+  <div class="chart" ref="containerRef" style="width:100%;">
+    <svg ref="svgRef" preserveAspectRatio="xMidYMid meet"></svg>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, watch, nextTick } from 'vue'
+import { ref, onMounted, onUnmounted, watch, nextTick } from 'vue'
 import * as d3 from 'd3'
 
 const props = defineProps({
@@ -24,11 +24,14 @@ const props = defineProps({
 })
 
 const svgRef = ref(null)
-
+const containerRef = ref(null)
 const margin = { top: 60, right: 20, bottom: 20, left: 60 }
-const width = 500
-const height = 500
-const radius = Math.min(width, height) / 2 - Math.max(margin.top, margin.right, margin.bottom, margin.left)
+const svgWidth = ref(500)
+const svgHeight = ref(500)
+
+function computedRadius(width, height) {
+  return Math.min(width, height) / 2 - Math.max(margin.top, margin.right, margin.bottom, margin.left)
+}
 const sectorColors = {
   residential: '#63b3df',
   service: '#76d76b',
@@ -39,8 +42,14 @@ const sectorColors = {
 function drawChart() {
   if (!props.data || !props.data.children || props.data.children.length === 0) return
 
+  // determine current size
+  const width = svgWidth.value
+  const height = svgHeight.value
+  const radius = computedRadius(width, height)
+
   const svg = d3.select(svgRef.value)
   svg.selectAll('*').remove()
+  svg.attr('width', width).attr('height', height).attr('viewBox', `0 0 ${width} ${height}`)
 
   const g = svg.append('g')
     .attr('transform', `translate(${width / 2},${height / 2})`)
@@ -66,7 +75,8 @@ function drawChart() {
   // Precompute max depth once
   const maxDepth = d3.max(root.descendants(), d => d.depth);
 
-  // Create tooltip container outside SVG
+  // Ensure single tooltip container
+  d3.selectAll('.tooltip-container').remove()
   const tooltipDiv = d3.select('body').append('div')
     .attr('class', 'tooltip-container')
 
@@ -127,6 +137,26 @@ function drawChart() {
 
 onMounted(() => {
   nextTick(() => {
+    // initial sizing based on container
+    const rect = containerRef.value ? containerRef.value.getBoundingClientRect() : { width: 500, height: 500 }
+    const size = Math.max(200, Math.min(rect.width, 500))
+    svgWidth.value = size
+    svgHeight.value = size
+
+    // observe container resize
+    const ro = new ResizeObserver(entries => {
+      for (const entry of entries) {
+        const r = entry.contentRect
+        const s = Math.max(200, Math.min(r.width, 500))
+        svgWidth.value = s
+        svgHeight.value = s
+        nextTick(() => drawChart())
+      }
+    })
+    if (containerRef.value) ro.observe(containerRef.value)
+    // keep ref for cleanup
+    resizeObserverRef.value = ro
+
     drawChart()
   })
 })
@@ -136,4 +166,14 @@ watch(() => [props.data, props.year, props.country], () => {
     drawChart()
   })
 }, { deep: true })
+
+// Keep a reference to the observer so we can disconnect it
+const resizeObserverRef = ref(null)
+
+onUnmounted(() => {
+  if (resizeObserverRef.value) {
+    try { resizeObserverRef.value.disconnect() } catch (e) {}
+  }
+  d3.selectAll('.tooltip-container').remove()
+})
 </script>
