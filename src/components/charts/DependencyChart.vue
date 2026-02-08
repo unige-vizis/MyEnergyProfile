@@ -630,10 +630,6 @@ onUnmounted(() => {
   border-radius: 8px;
 }
 
-.chart-header {
-  margin-bottom: 1rem;
-}
-
 .no-data {
   display: flex;
   align-items: center;

@@ -1,6 +1,8 @@
 <template>
   <section id="productionconsumption" class="page-section">
-    <h2>Production &amp; Consumption by Resource Over Time</h2>
+    <div class="chart-header">
+      <h2>Production &amp; Consumption of the Main Energy Sources Over Time</h2>
+    </div>
     <!-- Subsection: Production & Consumption by Resource -->
     <div>
       <div v-if="store.isLoading" class="loading">Loading energy data...</div>

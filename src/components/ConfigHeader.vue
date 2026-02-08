@@ -1,5 +1,4 @@
 <script setup>
-import AppInput from './inputElements/AppInput.vue';
 import AppSelect from './inputElements/AppSelect.vue';
 import YearSlot from './inputElements/YearSlot.vue';
 import { ref, computed, onMounted } from 'vue';
@@ -56,7 +55,6 @@ const isInfo = computed(() => route.path.startsWith("/info"));
 function openMethodology() {
   router.push("/info");
 }
-
 </script>
 
 <template>
@@ -74,18 +72,17 @@ function openMethodology() {
 
     <!-- Button (immer sichtbar) -->
     <button
-    class="methodology-button"
-    :class="{ active: isInfo }"
-    @click="openMethodology"
-    type="button"
-    aria-label="Info / Methodology"
-    title="Info / Methodology"
+      class="methodology-button"
+      :class="{ active: isInfo }"
+      @click="openMethodology"
+      type="button"
+      aria-label="Info / Methodology"
+      title="Info / Methodology"
     >
-    <span class="material-symbols-outlined">info</span>
+      <span class="material-symbols-outlined">info</span>
     </button>
   </div>
 </template>
-
 
 <style scoped>
   .config-header{
@@ -99,7 +96,8 @@ function openMethodology() {
   gap: 2rem;
   align-items: flex-end;
 
-  padding-left: 20rem;   /* Platz für Sidebar */
+  margin-left: 2rem;
+  padding-left: var(--sidebar-width);   /* Platz für Sidebar */
   padding-right: 2rem;   /* ✅ damit der Button fast ganz rechts sitzt */
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -174,6 +172,4 @@ function openMethodology() {
   color: white;
   border-color: rgba(255,255,255,0.25);
 }
-
-
 </style>
