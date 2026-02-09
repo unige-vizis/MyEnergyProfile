@@ -10,17 +10,42 @@
         <div class="formula-stack">
           <code class="formula" :style="upperCellStyle">Production + Imports − Exports ± Stock Changes</code>
           <svg class="curly-brace" :style="upperBraceStyle" viewBox="0 0 100 12" preserveAspectRatio="none">
-            <path d="M 0,12 Q 0,5 10,5 L 44,5 Q 50,5 50,0 Q 50,5 56,5 L 90,5 Q 100,5 100,12" fill="none" stroke="var(--text-color-gray, #666)" stroke-width="1.5"/>
+            <path
+              d="M 0,12 Q 0,5 10,5 L 44,5 Q 50,5 50,0 Q 50,5 56,5 L 90,5 Q 100,5 100,12"
+              fill="none"
+              stroke="var(--text-color-gray, #666)"
+              stroke-width="1.5"
+            />
           </svg>
           <code class="formula" :style="lowerCellStyle">(Imports − Exports) / Gross Available Energy</code>
           <svg class="curly-brace" :style="lowerBraceStyle" viewBox="0 0 100 12" preserveAspectRatio="none">
-            <path d="M 0,12 Q 0,5 10,5 L 44,5 Q 50,5 50,0 Q 50,5 56,5 L 90,5 Q 100,5 100,12" fill="none" stroke="var(--text-color-gray, #666)" stroke-width="1.5"/>
+            <path
+              d="M 0,12 Q 0,5 10,5 L 44,5 Q 50,5 50,0 Q 50,5 56,5 L 90,5 Q 100,5 100,12"
+              fill="none"
+              stroke="var(--text-color-gray, #666)"
+              stroke-width="1.5"
+            />
           </svg>
         </div>
         <h3 v-if="countryName">
-          <span ref="countryNameRef">{{ countryName }}</span>'s <span class="highlight-import">Import Dependency</span> as Percentage by Fuel Type (<a class="heading-link" href="https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Energy_dependency_rate" target="_blank" rel="noopener">Eurostat methodology</a>)
+          <span ref="countryNameRef">{{ countryName }}</span
+          >'s <span class="highlight-import">Import Dependency</span> as Percentage by Fuel Type (<a
+            class="heading-link"
+            href="https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Energy_dependency_rate"
+            target="_blank"
+            rel="noopener"
+            >Eurostat methodology</a
+          >)
         </h3>
-        <h3 v-else><span class="highlight-import">Import Dependency</span> by Fuel Type (<a class="heading-link" href="https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Energy_dependency_rate" target="_blank" rel="noopener">Eurostat methodology</a>)</h3>
+        <h3 v-else>
+          <span class="highlight-import">Import Dependency</span> by Fuel Type (<a
+            class="heading-link"
+            href="https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Energy_dependency_rate"
+            target="_blank"
+            rel="noopener"
+            >Eurostat methodology</a
+          >)
+        </h3>
       </div>
       <div ref="chartRef" class="chart-svg"></div>
 
@@ -38,7 +63,6 @@
           </li>
         </ul>
       </div>
-
     </div>
   </div>
 </template>
@@ -316,7 +340,7 @@ function renderChart() {
   const container = chartRef.value
   const containerWidth = container.clientWidth || 600
 
-  const barHeight = 20
+  const barHeight = 30
   const otherRowHeight = 10
   const barGap = 4
   const groupGap = 24
@@ -401,6 +425,7 @@ function renderChart() {
   const colors = {
     third: { normal: '#c44536', soft: '#d4847a' },
     eu: { normal: '#e8a87c', soft: '#f0c9b0' },
+    noneu: { normal: '#333', soft: '#666' },
     domestic: { normal: '#d9d9d9', soft: '#e8e8e8' },
     reserve: { normal: '#8b2500', soft: '#b86347' },
     reserveEu: { normal: '#b86b3a', soft: '#d4a07a' },
@@ -420,7 +445,7 @@ function renderChart() {
     .attr('y1', 0)
     .attr('x2', 0)
     .attr('y2', 4)
-    .attr('stroke', '#c44536')
+    .attr('stroke', colors['noneu'].normal)
     .attr('stroke-width', 2)
 
   // Draw 100% reference line if scale exceeds 100
@@ -439,7 +464,7 @@ function renderChart() {
       .attr('y', -4)
       .attr('text-anchor', 'middle')
       .attr('fill', '#666')
-      .attr('font-size', '9px')
+      .attr('font-size', '11px')
       .text('100%')
   }
 
@@ -528,7 +553,7 @@ function renderChart() {
         .attr('dy', '0.35em')
         .attr('text-anchor', 'start')
         .attr('fill', '#888')
-        .attr('font-size', '9px')
+        .attr('font-size', '11px')
         .attr('font-style', 'italic')
         .text('not used')
       return
@@ -578,7 +603,7 @@ function renderChart() {
             .attr('dy', '0.35em')
             .attr('text-anchor', 'start')
             .attr('fill', '#7ab3e8')
-            .attr('font-size', '9px')
+            .attr('font-size', '11px')
             .attr('font-weight', '700')
             .text(`${rawOverall.toFixed(0)}%`)
 
@@ -599,7 +624,7 @@ function renderChart() {
               .attr('dy', '0.35em')
               .attr('text-anchor', 'middle')
               .attr('fill', '#fff')
-              .attr('font-size', '9px')
+              .attr('font-size', '11px')
               .attr('font-weight', '600')
               .text('Net Exporter')
           }
@@ -610,7 +635,7 @@ function renderChart() {
             .attr('dy', '0.35em')
             .attr('text-anchor', 'start')
             .attr('fill', '#3a7bc8')
-            .attr('font-size', '9px')
+            .attr('font-size', '11px')
             .attr('font-weight', '700')
             .text(`${rawOverall.toFixed(0)}%`)
         }
@@ -715,7 +740,7 @@ function renderChart() {
               .attr('y1', yPos)
               .attr('x2', x(clampedThirdPct))
               .attr('y2', yPos + barH)
-              .attr('stroke', '#8b2500')
+              .attr('stroke', getColor('noneu'))
               .attr('stroke-width', 2)
 
             if (nonEuWidth >= 35) {
@@ -724,8 +749,8 @@ function renderChart() {
                 .attr('y', yPos + barH / 2)
                 .attr('dy', '0.35em')
                 .attr('text-anchor', 'middle')
-                .attr('fill', '#8b2500')
-                .attr('font-size', '7px')
+                .attr('fill', getColor('noneu'))
+                .attr('font-size', '11px')
                 .attr('font-weight', '700')
                 .text('non-EU')
             }
@@ -743,7 +768,7 @@ function renderChart() {
           .attr('dy', '0.35em')
           .attr('text-anchor', 'start')
           .attr('fill', overallPct > 100 ? (isSubcat ? '#b86347' : '#8b2500') : '#444')
-          .attr('font-size', '9px')
+          .attr('font-size', '11px')
           .attr('font-weight', overallPct > 100 ? '700' : '500')
           .text(`${overallPct.toFixed(0)}%${overallPct > 100 ? ' (reserve draw)' : ''}`)
 
@@ -768,7 +793,7 @@ function renderChart() {
             .attr('dy', '0.35em')
             .attr('text-anchor', 'middle')
             .attr('fill', '#fff')
-            .attr('font-size', '9px')
+            .attr('font-size', '11px')
             .attr('font-weight', '700')
             .style('pointer-events', 'none')
             .text('!')
@@ -808,7 +833,7 @@ function renderChart() {
           .attr('dy', '0.35em')
           .attr('text-anchor', 'middle')
           .attr('fill', '#777')
-          .attr('font-size', '10px')
+          .attr('font-size', '11px')
           .text('No data')
       }
 
@@ -831,7 +856,7 @@ function renderChart() {
           .attr('dy', '0.35em')
           .attr('text-anchor', 'middle')
           .attr('fill', '#fff')
-          .attr('font-size', '9px')
+          .attr('font-size', '11px')
           .attr('font-weight', '700')
           .style('pointer-events', 'none')
           .text('!')
@@ -859,7 +884,7 @@ function renderChart() {
       .attr('dy', '0.35em')
       .attr('text-anchor', 'end')
       .attr('fill', d.isOtherRemainder ? '#777' : (isSubcat ? '#555' : '#222'))
-      .attr('font-size', d.isOtherRemainder ? '9px' : '11px')
+      .attr('font-size', d.isOtherRemainder ? '11px' : '11px')
       .attr('font-style', (isSubcat || d.isOtherRemainder) ? 'italic' : 'normal')
       .text(d.name)
   })
@@ -982,6 +1007,11 @@ onUnmounted(() => {
   border-radius: 4px;
 }
 
+h3 > *{
+  font-size: inherit;
+  font-family: inherit;
+}
+
 .highlight-import {
   color: #e8a87c;
 }
@@ -1031,5 +1061,4 @@ onUnmounted(() => {
   font-style: normal;
   font-weight: 600;
 }
-
 </style>

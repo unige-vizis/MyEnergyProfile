@@ -5,20 +5,30 @@
     <h3>Data Sources</h3>
     <p class="methodology-hint">
       The website focuses on 41 EU/EEA countries where Eurostat provides the richest and most granular data available.
-      Other sources supplement with global coverage where possible.
-      Specific table codes and indicators are listed in the "Source" section below each visualization.
+      Other sources supplement with global coverage where possible. Specific table codes and indicators are listed in
+      the "Source" section below each visualization.
     </p>
     <ul>
-      <li><strong>Eurostat</strong>: Trade volumes, import dependency, sector consumption. 41 EU/EEA countries, 1990&ndash;2024.</li>
-      <li><strong>Our World in Data (OWID)</strong>: Production, consumption (TWh), carbon intensity, population. 200+ countries, 1900&ndash;2024.</li>
-      <li><strong>International Energy Agency (IEA)</strong>: Sector-level consumption breakdowns, CO<sub>2</sub> emissions by sector. 50+ countries, 2000&ndash;2023.</li>
-      <li><strong>EnergyCPI</strong>: Quarterly energy CPI indices by sub-category, supplemented by World Bank electricity prices. 102 countries, 1996&ndash;2024.</li>
+      <li>
+        <strong>Eurostat</strong>: Trade volumes, import dependency, sector consumption. 41 EU/EEA countries,
+        1990&ndash;2024.
+      </li>
+      <li>
+        <strong>Our World in Data (OWID)</strong>: Production, consumption (TWh), carbon intensity, population. 200+
+        countries, 1900&ndash;2024.
+      </li>
+      <li>
+        <strong>International Energy Agency (IEA)</strong>: Sector-level consumption breakdowns, CO<sub>2</sub>
+        emissions by sector. 50+ countries, 2000&ndash;2023.
+      </li>
+      <li>
+        <strong>EnergyCPI</strong>: Quarterly energy CPI indices by sub-category, supplemented by World Bank electricity
+        prices. 102 countries, 1996&ndash;2024.
+      </li>
     </ul>
 
     <h3>Data Preparation</h3>
-    <p>
-      All data processing lives in the <code>data-processing/</code> folder and follows a three-stage pipeline:
-    </p>
+    <p>All data processing lives in the <code>data-processing/</code> folder and follows a three-stage pipeline:</p>
 
     <h4>1. Raw Data (<code>raw-data/</code>)</h4>
     <ul>
@@ -28,34 +38,76 @@
 
     <h4>2. Base Data (<code>base-data/</code>)</h4>
     <ul>
-      <li>Eurostat's raw tables use a non-standard format (comma-packed dimension codes, statistical flags, wide year columns) that requires dedicated parsing</li>
-      <li><code>base-data/03_Eurostat/combine_data.py</code> cleans and merges the many Eurostat tables into a unified base dataset</li>
-      <li>Statistical flags (<code>p</code>, <code>e</code>, <code>b</code>) are stripped, missing markers (<code>:</code>, <code>..</code>) converted to <code>null</code></li>
-      <li>Each source uses different identifiers: Eurostat uses non-standard 2-letter codes (<code>EL</code> for Greece, <code>UK</code> for United Kingdom), OWID uses ISO 3-letter codes, and IEA uses full country names. A central <code>country_code_mastersheet.json</code> maps between all formats, normalizing everything to ISO 3166-1 alpha-2.</li>
+      <li>
+        Eurostat's raw tables use a non-standard format (comma-packed dimension codes, statistical flags, wide year
+        columns) that requires dedicated parsing
+      </li>
+      <li>
+        <code>base-data/03_Eurostat/combine_data.py</code> cleans and merges the many Eurostat tables into a unified
+        base dataset
+      </li>
+      <li>
+        Statistical flags (<code>p</code>, <code>e</code>, <code>b</code>) are stripped, missing markers
+        (<code>:</code>, <code>..</code>) converted to <code>null</code>
+      </li>
+      <li>
+        Each source uses different identifiers: Eurostat uses non-standard 2-letter codes (<code>EL</code> for Greece,
+        <code>UK</code> for United Kingdom), OWID uses ISO 3-letter codes, and IEA uses full country names. A central
+        <code>country_code_mastersheet.json</code> maps between all formats, normalizing everything to ISO 3166-1
+        alpha-2.
+      </li>
       <li>Other base-data subfolders organize OWID, IEA, and consumption data into clean intermediate formats</li>
     </ul>
 
     <h4>3. Processing Scripts (<code>processing scripts/</code>)</h4>
     <p>
-      Each script reads from <code>base-data/</code> and produces a reduced, section-specific JSON in <code>prepared-sets/</code> containing only the information needed for that part of the website:
+      Each script reads from <code>base-data/</code> and produces a reduced, section-specific JSON in
+      <code>prepared-sets/</code> containing only the information needed for that part of the website:
     </p>
     <ul>
-      <li><code>create_imports_exports_json.py</code> &rarr; <code>energy_mix.json</code>: trade flows, dependency, production/consumption. 140+ SIEC fuel codes mapped to five categories. Bilateral flows only (aggregates removed).</li>
-      <li><code>augment_with_owid.py</code> &rarr; augments <code>energy_mix.json</code> with OWID production/consumption (TWh) and carbon intensity</li>
-      <li><code>create_consumptions_by_sector_json.py</code> &rarr; <code>energy_consumptions_by_sector.json</code>: IEA sector breakdowns by end-use and fuel</li>
-      <li><code>create_eco_data_json.py</code> &rarr; <code>eco_data.json</code>: emissions and carbon intensity from OWID + IEA</li>
-      <li><code>create_energy_prices_json.py</code> &rarr; <code>energy_prices.json</code>: CPI indices and electricity prices</li>
+      <li>
+        <code>create_imports_exports_json.py</code> &rarr; <code>energy_mix.json</code>: trade flows, dependency,
+        production/consumption. 140+ SIEC fuel codes mapped to five categories. Bilateral flows only (aggregates
+        removed).
+      </li>
+      <li>
+        <code>augment_with_owid.py</code> &rarr; augments <code>energy_mix.json</code> with OWID production/consumption
+        (TWh) and carbon intensity
+      </li>
+      <li>
+        <code>create_consumptions_by_sector_json.py</code> &rarr; <code>energy_consumptions_by_sector.json</code>: IEA
+        sector breakdowns by end-use and fuel
+      </li>
+      <li>
+        <code>create_eco_data_json.py</code> &rarr; <code>eco_data.json</code>: emissions and carbon intensity from OWID
+        + IEA
+      </li>
+      <li>
+        <code>create_energy_prices_json.py</code> &rarr; <code>energy_prices.json</code>: CPI indices and electricity
+        prices
+      </li>
     </ul>
     <p>
-      No imputation is applied. Missing values remain, and are to be expected with this sort of data. They are handled and clearly indicated at the visualization level.
+      No imputation is applied. Missing values remain, and are to be expected with this sort of data. They are handled
+      and clearly indicated at the visualization level.
     </p>
 
     <h3>Limitations</h3>
     <ul>
       <li>Trade/dependency covers 41 EU/EEA countries only. Global metrics (OWID, IEA) have broader coverage.</li>
-      <li>Eurostat does not publish overall electricity import dependency. Only third-country electricity dependency is available.</li>
+      <li>
+        Eurostat does not publish overall electricity import dependency. Only third-country electricity dependency is
+        available.
+      </li>
       <li>Kosovo (XK) and Liechtenstein (LI) lack OWID coverage.</li>
-      <li>Only the freely available Highlights Data from the IEA End-uses and Efficiency Indicators database was used, which has incomplete country coverage. EU countries are still included.</li>
+      <li>
+        Only the freely available Highlights Data from the IEA End-uses and Efficiency Indicators database was used,
+        which has incomplete country coverage. EU countries are still included.
+      </li>
+      <li>
+        Performance of the website approaching limit of what is acceptable, before adding anything additional,
+        improvementsw ould have to be made
+      </li>
     </ul>
   </section>
 </template>
