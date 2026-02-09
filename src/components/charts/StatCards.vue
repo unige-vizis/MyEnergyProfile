@@ -34,11 +34,12 @@ const props = defineProps({
 
 // ── Shared constants ──
 
-// Transport – PTUA total energy incl. manufacturing (MJ per passenger-km)
-const ICE_CAR_MJ_PKM = 3.7               // PTUA mid-range (3.0–4.4)
-const EV_CAR_MJ_PKM = 1.6                // PTUA mid-range (1.2–2.0)
-const TRAIN_MJ_PKM = 0.125               // PTUA mid-range (0.05–0.2)
-const TRAM_MJ_PKM = 0.49                 // PTUA mid-range (0.17–0.8)
+// Transport
+const ICE_CAR_MJ_PKM = 3.7               // PTUA mid-range total energy incl. manufacturing (MJ/pkm)
+const PETROL_CAR_G_PER_KM = 166           // EEA EU fleet avg (gCO₂/km)
+const EV_KWH_PER_KM = 0.20               // IEA Global EV Outlook 2024
+const TRAIN_KWH_PER_PKM = 0.06           // IEA transport energy intensity (EU electric rail)
+const TRAM_KWH_PER_PKM = 0.08            // EU avg urban tram (est. from UIC data)
 
 // Household
 const HP_SCOP = 3.0                       // IEA Future of Heat Pumps (residential avg)
@@ -70,26 +71,31 @@ const cards = computed(() => {
 
   const results = []
 
-  // ── Transport (PTUA energy comparison incl. manufacturing) ──
-  const evRatio = ICE_CAR_MJ_PKM / EV_CAR_MJ_PKM
+  // ── Transport ──
+  const evG = EV_KWH_PER_KM * gi
+  const evRatio = PETROL_CAR_G_PER_KM / evG
   results.push({
     id: 'ev', group: 'transport',
     icon: 'electric_car',
     title: 'Electric Car vs Petrol Car',
-    result: `${evRatio.toFixed(1)}x less energy per passenger-km`,
-    detail: `EV: 1.2–2.0 MJ/pkm. Petrol: 3.0–4.4 MJ/pkm. Total energy incl. vehicle manufacturing.`,
-    colorClass: 'card-green'
+    result: evRatio >= 1
+      ? `${evRatio.toFixed(1)}x less CO\u2082 per km`
+      : `${(1 / evRatio).toFixed(1)}x more CO\u2082 per km`,
+    detail: `EV: ${Math.round(evG)} gCO\u2082/km (${EV_KWH_PER_KM} kWh/km). Petrol: ${PETROL_CAR_G_PER_KM} gCO\u2082/km (EU fleet avg).`,
+    colorClass: colorClass(evG, PETROL_CAR_G_PER_KM)
   })
 
-  const trainRatio = ICE_CAR_MJ_PKM / TRAIN_MJ_PKM
-  const tramRatio = ICE_CAR_MJ_PKM / TRAM_MJ_PKM
+  const trainG = TRAIN_KWH_PER_PKM * gi
+  const tramG = TRAM_KWH_PER_PKM * gi
+  const trainRatio = PETROL_CAR_G_PER_KM / trainG
+  const tramRatio = PETROL_CAR_G_PER_KM / tramG
   results.push({
     id: 'train', group: 'transport',
     icon: 'train',
     title: 'Train & Tram vs Car',
-    result: `Train ~${Math.round(trainRatio)}x, Tram ~${Math.round(tramRatio)}x less energy`,
-    detail: `Train: 0.05–0.2 MJ/pkm. Tram: 0.17–0.8 MJ/pkm. Car: 3.0–4.4 MJ/pkm. Incl. manufacturing.`,
-    colorClass: 'card-green'
+    result: `Train ~${Math.round(trainRatio)}x, Tram ~${Math.round(tramRatio)}x less CO\u2082`,
+    detail: `Train: ${trainG.toFixed(1)} gCO\u2082/pkm (${TRAIN_KWH_PER_PKM} kWh/pkm). Tram: ${tramG.toFixed(1)} gCO\u2082/pkm. Car: ${PETROL_CAR_G_PER_KM} gCO\u2082/km.`,
+    colorClass: colorClass(trainG, PETROL_CAR_G_PER_KM)
   })
 
   // ── Household ──
@@ -119,15 +125,15 @@ const cards = computed(() => {
   })
 
   // ── Services ──
-  const dcMjPerHour = DC_IT_LOAD_KW * 3.6
-  const dcPkmPerHour = Math.round(dcMjPerHour / ICE_CAR_MJ_PKM)
+  const dcCO2PerHour = DC_IT_LOAD_KW * gi
+  const dcKmPerHour = Math.round(dcCO2PerHour / PETROL_CAR_G_PER_KM)
   results.push({
     id: 'datacenter', group: 'services',
     icon: 'dns',
     title: 'Data Center (NTT Frankfurt 1)',
-    result: `1 hr of operation \u2248 ${dcPkmPerHour.toLocaleString()} passenger-km by car`,
-    detail: `Est. ${DC_IT_LOAD_KW.toLocaleString()} kWh/hr (77.4 MW IT load). Car: ${ICE_CAR_MJ_PKM} MJ/pkm (PTUA).`,
-    colorClass: dcPkmPerHour < 50000 ? 'card-green' : dcPkmPerHour < 150000 ? 'card-yellow' : 'card-red'
+    result: `1 hr \u2248 ${dcKmPerHour.toLocaleString()} km by petrol car in CO\u2082`,
+    detail: `${DC_IT_LOAD_KW.toLocaleString()} kWh/hr (77.4 MW IT load) \u00d7 ${gi} gCO\u2082/kWh = ${(dcCO2PerHour / 1e6).toFixed(1)} tCO\u2082/hr.`,
+    colorClass: dcKmPerHour < 30000 ? 'card-green' : dcKmPerHour < 120000 ? 'card-yellow' : 'card-red'
   })
 
   const eTruckG = ELECTRIC_TRUCK_KWH_PER_KM * gi
