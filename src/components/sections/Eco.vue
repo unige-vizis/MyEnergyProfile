@@ -13,15 +13,6 @@
           <div v-if="!store.ecoLoaded" class="no-data">Eco data not available.</div>
           <div v-else class="charts-container">
             <div class="charts-fill">
-              <!-- TODO - Petula
-                find new structure -->
-              <p>
-                Of course no project about energy can be considered complete without a section dedicated to the
-                ecological aspects of energy use. While there are other important environmental impacts to consider, we
-                will focus on the most fundamental one: carbon emissions. First in a broad per capita breakdown, and
-                then through the lens of carbon intensity, which relates electricity to carbon emissions. This is a key
-                factor determining how much impact measures, that we consider as sustainable, will have in practice.
-              </p>
               <EmissionsPerCapitaRanking
                 :rankingData="store.emissionsPerCapitaRanking"
                 :selectedCountryCode="store.selectedCountryCode"
