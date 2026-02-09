@@ -38,10 +38,12 @@
         </div>
       </template>
       <p class="text-container">
-        <!-- TODO - Mali -->
-        How have energy prices changed over time? The Energy Consumer Price Index (CPI) shows how the cost of energy for
-        households evolves across years, reflecting broader economic and market conditions. Electricity prices are
-        influenced by fuel costs, energy mix, infrastructure, and regulation.
+        Was energy always this expensive? The line charts show how the Energy Consumer Price Index (CPI) has evolved
+        over time, reflecting broader economic developments and changing market conditions. Sharp increases in household
+        energy prices influence production decisions, consumption behaviour, and public perception. As prices rise,
+        energy becomes more visible in everyday life, as both households and industries directly feel the economic
+        impact. By exploring the data, it becomes clear that Germany, a country highly dependent on major energy
+        suppliers, has experienced some of the strongest increases in energy prices in recent years.
       </p>
     </div>
   </section>

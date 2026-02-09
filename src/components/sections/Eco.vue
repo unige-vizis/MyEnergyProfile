@@ -13,15 +13,6 @@
           <div v-if="!store.ecoLoaded" class="no-data">Eco data not available.</div>
           <div v-else class="charts-container">
             <div class="charts-fill">
-              <!-- TODO - Petula
-                find new structure -->
-              <p>
-                Of course no project about energy can be considered complete without a section dedicated to the
-                ecological aspects of energy use. While there are other important environmental impacts to consider, we
-                will focus on the most fundamental one: carbon emissions. First in a broad per capita breakdown, and
-                then through the lens of carbon intensity, which relates electricity to carbon emissions. This is a key
-                factor determining how much impact measures, that we consider as sustainable, will have in practice.
-              </p>
               <EmissionsPerCapitaRanking
                 :rankingData="store.emissionsPerCapitaRanking"
                 :selectedCountryCode="store.selectedCountryCode"
@@ -30,14 +21,14 @@
           </div>
         </template>
         <div class="text-container">
-          <h4 v-if="totalEmissionsPerCapita != null">
+          <h3 v-if="totalEmissionsPerCapita != null">
             Where are the
             <span class="highlight-value">{{ totalEmissionsPerCapita }} tCO&#x2082;</span>
             emissions in
             <span class="highlight-value">{{ store.selectedCountry?.name }}</span>
             emitted?
-          </h4>
-          <h4 v-else>Where are the emissions in your country emitted?</h4>
+          </h3>
+          <h3 v-else>Where are the emissions in your country emitted?</h3>
           <p>
             The chart below breaks down how much CO2 each person causes through four major sectors: residential energy
             use (heating, appliances), services (commercial buildings, offices), transport (cars, trucks), and industry
@@ -114,14 +105,14 @@
           </div>
         </template>
         <div class="text-container">
-          <h4 v-if="store.carbonIntensity?.latest_value != null">
+          <h3 v-if="store.carbonIntensity?.latest_value != null">
             What does a carbon intensity of
             <span class="highlight-value">{{ Math.round(store.carbonIntensity.latest_value) }} gCO&#x2082;/kWh</span>
             for
             <span class="highlight-value">{{ store.selectedCountry?.name }}</span>
             mean in practice?
-          </h4>
-          <h4 v-else>What does your grid intensity mean in practice?</h4>
+          </h3>
+          <h3 v-else>What does your grid intensity mean in practice?</h3>
           <p>
             Most people are familiar with electrification as a fundamental part of decarbonization, where processes
             directly reliant on fossil fuels, if they cannot be done without, are replaced by electric alternatives. The

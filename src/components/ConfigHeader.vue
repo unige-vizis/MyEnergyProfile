@@ -70,10 +70,8 @@ function openMethodology() {
       <YearSlot class="config-item" :years="globalConfig.yearsDescending" label="Year" v-model="selectedYear" />
     </template>
 
-    <!-- Button (immer sichtbar) -->
     <button
       class="methodology-button"
-      :class="{ active: isInfo }"
       @click="openMethodology"
       type="button"
       aria-label="Info / Methodology"
@@ -138,38 +136,5 @@ function openMethodology() {
 /* normale Farbe, sobald echte Auswahl */
 .config-header :deep(select) {
   color: black;
-}
-
-.methodology-button {
-  margin-left: auto;
-  width: 42px;
-  height: 42px;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  background: var(--primary-color); /* ✅ weißer Kreis */
-  border: 1px solid rgba(0,0,0,0.08);
-  border-radius: 999px;
-  padding: 0;
-
-  color: rgba(0, 0, 0, 0.75);
-  cursor: pointer;
-
-  box-shadow: 0 2px 6px rgba(0,0,0,0.12); /* wie Sidebar-Icon */
-  transition: transform 0.15s ease, background 0.2s ease, color 0.2s ease;
-}
-
-.methodology-button:hover {
-  transform: translateY(-1px);
-  background: white;
-}
-
-/* aktiv (wenn /info): z.B. dunkler Kreis + weißes Icon */
-.methodology-button.active {
-  background: rgba(0,0,0,0.25);
-  color: white;
-  border-color: rgba(255,255,255,0.25);
 }
 </style>

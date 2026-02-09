@@ -243,7 +243,7 @@ function renderChart() {
   const container = chartRef.value
   const containerWidth = container.clientWidth || 600
 
-  const barHeight = 20
+  const barHeight = 30
   const barGap = 4
   const numBars = chartData.value.length
   const maxWidth = Math.min(containerWidth, 500)
@@ -289,7 +289,7 @@ function renderChart() {
       .attr('y', -4)
       .attr('text-anchor', 'middle')
       .attr('fill', '#666')
-      .attr('font-size', '9px')
+      .attr('font-size', '10px')
       .text('100%')
   }
 
@@ -299,7 +299,7 @@ function renderChart() {
     eu: { normal: '#e8a87c', soft: '#f0c9b0' },
     domestic: { normal: '#81b29a', soft: '#aed0be' },
     reserve: { normal: '#8b2500', soft: '#b86347' },
-    reserveEu: { normal: '#b86b3a', soft: '#d4a07a' },
+    noneu: { normal: '#333', soft: '#555' },
     exporter: { normal: '#7b68ee', soft: '#a99cf3' }
   }
 
@@ -316,7 +316,7 @@ function renderChart() {
     .attr('y1', 0)
     .attr('x2', 0)
     .attr('y2', 4)
-    .attr('stroke', '#c44536')
+    .attr('stroke', colors['noneu'].normal)
     .attr('stroke-width', 2)
 
   // Draw horizontal bars for each fuel type
@@ -357,7 +357,7 @@ function renderChart() {
           .attr('dy', '0.35em')
           .attr('text-anchor', 'middle')
           .attr('fill', '#fff')
-          .attr('font-size', '9px')
+          .attr('font-size', '10px')
           .attr('font-weight', '600')
           .text('Net Exporter')
 
@@ -368,7 +368,7 @@ function renderChart() {
           .attr('dy', '0.35em')
           .attr('text-anchor', 'start')
           .attr('fill', isSubcat ? '#8a7fd4' : '#5a4fcf')
-          .attr('font-size', '9px')
+          .attr('font-size', '10px')
           .attr('font-weight', '700')
           .text(`${rawOverall.toFixed(0)}%`)
       } else {
@@ -439,7 +439,7 @@ function renderChart() {
               .attr('y1', yPos)
               .attr('x2', x(thirdCountriesPct))
               .attr('y2', yPos + barH)
-              .attr('stroke', '#8b2500')
+              .attr('stroke', getColor('noneu'))
               .attr('stroke-width', 2)
 
             // Add "non-EU" label inside the crosshatched area if wide enough
@@ -449,8 +449,8 @@ function renderChart() {
                 .attr('y', yPos + barH / 2)
                 .attr('dy', '0.35em')
                 .attr('text-anchor', 'middle')
-                .attr('fill', '#8b2500')
-                .attr('font-size', '7px')
+                .attr('fill', getColor('noneu'))
+                .attr('font-size', '10px')
                 .attr('font-weight', '700')
                 .text('non-EU')
             }
@@ -465,7 +465,7 @@ function renderChart() {
           .attr('dy', '0.35em')
           .attr('text-anchor', 'start')
           .attr('fill', overallPct > 100 ? (isSubcat ? '#b86347' : '#8b2500') : '#666')
-          .attr('font-size', '9px')
+          .attr('font-size', '10px')
           .attr('font-weight', overallPct > 100 ? '700' : '500')
           .text(`${overallPct.toFixed(0)}%`)
 
@@ -493,7 +493,7 @@ function renderChart() {
             .attr('dy', '0.35em')
             .attr('text-anchor', 'middle')
             .attr('fill', '#fff')
-            .attr('font-size', '9px')
+            .attr('font-size', '10px')
             .attr('font-weight', '700')
             .style('pointer-events', 'none')
             .text('!')
@@ -551,7 +551,7 @@ function renderChart() {
           .attr('dy', '0.35em')
           .attr('text-anchor', 'middle')
           .attr('fill', '#fff')
-          .attr('font-size', '9px')
+          .attr('font-size', '10px')
           .attr('font-weight', '700')
           .style('pointer-events', 'none')
           .text('!')
@@ -731,11 +731,5 @@ onUnmounted(() => {
   gap: 0.4rem;
   font-size: 0.8rem;
   color: #666;
-}
-
-.legend-color {
-  width: 14px;
-  height: 14px;
-  border-radius: 3px;
 }
 </style>

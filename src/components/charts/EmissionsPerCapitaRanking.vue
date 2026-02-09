@@ -5,8 +5,11 @@
   </div>
   <div v-else class="chart-wrapper">
     <h3>CO2 Emissions - Europe Comparison</h3>
-    <p>Total CO2 emissions per person from energy use across all sectors, measured in tonnes per year.</p>
-
+    <p>
+      No project about energy can be considered complete without a section dedicated to the ecological aspects of energy
+      use. We will focus on the most fundamental one: carbon emissions. First wee look at the total CO2 emissions per
+      person from energy use across all sectors (measured in tonnes per year).
+    </p>
     <div class="chart-container scroll-container">
       <div class="chart-scroll-outer">
         <div ref="scrollContainer" class="chart-scroll">
