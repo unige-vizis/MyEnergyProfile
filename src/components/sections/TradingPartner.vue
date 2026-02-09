@@ -11,34 +11,26 @@
       </div>
       <div class="text-container">
         <p>
-        Now that we understand how dependent countries are on
-        energy imports, the next step is to examine where this
-        energy originates.
-        <br><br>
-        Despite their economic strength, many Western countries
-        consume far more energy than they can produce themselves.
-        <br>
-        These energy dependencies arise from the uneven global
-        distribution of resources.
-        <br>
-        Most Western countries rely heavily on imports of fossil
-        energy sources such as oil, gas, and coal from a small
-        number of key suppliers, including Russia, the United
-        States, Saudi Arabia, and Australia.
-        <br>
-        Norway stands out as an exception, exporting significantly
-        more oil and natural gas than it imports.
-        <br><br>
-        In contrast, Germany and Italy import nearly all of their
-        natural gas from a limited set of suppliers — a pattern
-        that can be observed across many Western countries.
-        <br>
-        Electricity trade, however, is mainly regional.
-        <br>
-        Strong exchange between neighbouring Central European
-        countries is visible, with France playing a key role as
-        one of the most important electricity exporters due to its
-        large nuclear power capacity.
+          Now that we understand how dependent countries are on energy imports, the next step is to examine where this
+          energy originates.
+          <br /><br />
+          Despite their economic strength, many Western countries consume far more energy than they can produce
+          themselves.
+          <br />
+          These energy dependencies arise from the uneven global distribution of resources.
+          <br />
+          Most Western countries rely heavily on imports of fossil energy sources such as oil, gas, and coal from a
+          small number of key suppliers, including Russia, the United States, Saudi Arabia, and Australia.
+          <br />
+          Norway stands out as an exception, exporting significantly more oil and natural gas than it imports.
+          <br /><br />
+          In contrast, Germany and Italy import nearly all of their natural gas from a limited set of suppliers — a
+          pattern that can be observed across many Western countries.
+          <br />
+          Electricity trade, however, is mainly regional.
+          <br />
+          Strong exchange between neighbouring Central European countries is visible, with France playing a key role as
+          one of the most important electricity exporters due to its large nuclear power capacity.
         </p>
       </div>
     </div>
