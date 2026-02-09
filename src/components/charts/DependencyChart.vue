@@ -6,6 +6,22 @@
 
   <div v-else class="chart-wrapper">
     <div class="chart-container">
+      <div class="chart-heading">
+        <div class="formula-stack">
+          <code class="formula" :style="upperCellStyle">Production + Imports − Exports ± Stock Changes</code>
+          <svg class="curly-brace" :style="upperBraceStyle" viewBox="0 0 100 12" preserveAspectRatio="none">
+            <path d="M 0,12 Q 0,5 10,5 L 44,5 Q 50,5 50,0 Q 50,5 56,5 L 90,5 Q 100,5 100,12" fill="none" stroke="var(--text-color-gray, #666)" stroke-width="1.5"/>
+          </svg>
+          <code class="formula" :style="lowerCellStyle">(Imports − Exports) / Gross Available Energy</code>
+          <svg class="curly-brace" :style="lowerBraceStyle" viewBox="0 0 100 12" preserveAspectRatio="none">
+            <path d="M 0,12 Q 0,5 10,5 L 44,5 Q 50,5 50,0 Q 50,5 56,5 L 90,5 Q 100,5 100,12" fill="none" stroke="var(--text-color-gray, #666)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <h3 v-if="countryName">
+          <span ref="countryNameRef">{{ countryName }}</span>'s <span class="highlight-import">Import Dependency</span> as Percentage by Fuel Type (<a class="heading-link" href="https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Energy_dependency_rate" target="_blank" rel="noopener">Eurostat methodology</a>)
+        </h3>
+        <h3 v-else><span class="highlight-import">Import Dependency</span> by Fuel Type (<a class="heading-link" href="https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Energy_dependency_rate" target="_blank" rel="noopener">Eurostat methodology</a>)</h3>
+      </div>
       <div ref="chartRef" class="chart-svg"></div>
 
       <!-- Electricity tooltip -->
@@ -23,32 +39,23 @@
         </ul>
       </div>
 
-      <div class="chart-legend">
-        <div class="legend-item">
-          <span class="legend-color" style="background: #e8a87c;"></span>
-          <span>Imports</span>
-        </div>
-        <div class="legend-item">
-          <span class="legend-color" style="background: #81b29a;"></span>
-          <span>Domestic</span>
-        </div>
-        <div class="legend-item">
-          <span class="legend-color" style="background: #8b2500;"></span>
-          <span>Reserve draw (&gt;100%)</span>
-        </div>
-        <div class="legend-item">
-          <span class="legend-color" style="background: #7b68ee;"></span>
-          <span>Net exporter (&lt;0%)</span>
-        </div>
-      </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
+import { ref, reactive, computed, watch, onMounted, onUnmounted, nextTick } from 'vue'
 import * as d3 from 'd3'
 
+// ─── Formula diagram positioning config ───
+// All offsets are px from the left container border.
+// countryNameWidth is measured automatically and added to each leftOffset.
+const formulaConfig = reactive({
+  lowerBrace:  { width: 170, leftOffset: 20, yOffset: 0 },  // bracket above title
+  upperBrace:  { width: 150, leftOffset: 120, yOffset: 0 },  // bracket above lower cell
+  lowerCell:   { leftOffset: -50, yOffset: 0 },               // "(Imports − Exports) / GAE"
+  upperCell:   { leftOffset: 20, yOffset: 0 },               // "Production + Imports − ..."
+})
 
 const props = defineProps({
   dependencyData: {
@@ -58,13 +65,47 @@ const props = defineProps({
   year: {
     type: [String, Number],
     default: null
+  },
+  countryName: {
+    type: String,
+    default: ''
   }
 })
 
 const chartRef = ref(null)
 const tooltipRef = ref(null)
 const tooltipVisible = ref(false)
+const countryNameRef = ref(null)
+const countryNameWidth = ref(0)
 let resizeObserver = null
+
+function measureCountryName() {
+  countryNameWidth.value = countryNameRef.value?.offsetWidth ?? 0
+}
+
+// Computed inline styles for brackets and cells
+// marginLeft = countryNameWidth + fixed leftOffset (px from container left)
+const lowerBraceStyle = computed(() => ({
+  width: `${formulaConfig.lowerBrace.width}px`,
+  marginLeft: `${countryNameWidth.value + formulaConfig.lowerBrace.leftOffset}px`,
+  transform: `translateY(${formulaConfig.lowerBrace.yOffset}px)`,
+}))
+
+const upperBraceStyle = computed(() => ({
+  width: `${formulaConfig.upperBrace.width}px`,
+  marginLeft: `${countryNameWidth.value + formulaConfig.upperBrace.leftOffset}px`,
+  transform: `translateY(${formulaConfig.upperBrace.yOffset}px)`,
+}))
+
+const lowerCellStyle = computed(() => ({
+  marginLeft: `${countryNameWidth.value + formulaConfig.lowerCell.leftOffset}px`,
+  transform: `translateY(${formulaConfig.lowerCell.yOffset}px)`,
+}))
+
+const upperCellStyle = computed(() => ({
+  marginLeft: `${countryNameWidth.value + formulaConfig.upperCell.leftOffset}px`,
+  transform: `translateY(${formulaConfig.upperCell.yOffset}px)`,
+}))
 
 function showElectricityTooltip(event, svgX, svgY) {
   tooltipVisible.value = true
@@ -213,10 +254,42 @@ const chartData = computed(() => {
         name: fuelDisplayNames[key] || formatKey(key),
         overall: value.overall,
         thirdCountries: value.third_countries,
+        gaeShare: value.gae_share ?? null,
         isOverall: false,
         isSubcategory: subcategoriesNoThirdCountries.includes(key),
         isElectricity: electricityKeys.includes(key),
         isGroupStarter: groupStarters.includes(key)
+      })
+    }
+  }
+
+  // Check subcategory groups for "Other" remainder
+  const coalKeys = ['anthracite', 'coking_coal', 'other_bituminous_coal', 'sub_bituminous_coal', 'lignite']
+  const oilKeys = ['crude_oil', 'ngl']
+
+  for (const [groupName, groupKeys] of [['coal', coalKeys], ['oil', oilKeys]]) {
+    let totalGae = 0
+    let lastIdx = -1
+
+    for (let i = 0; i < data.length; i++) {
+      if (groupKeys.includes(data[i].key)) {
+        totalGae += (data[i].gaeShare ?? 0)
+        lastIdx = i
+      }
+    }
+
+    if (lastIdx >= 0 && totalGae < 99.5) {
+      data.splice(lastIdx + 1, 0, {
+        key: `${groupName}_other`,
+        name: 'Other',
+        overall: null,
+        thirdCountries: null,
+        gaeShare: Math.max(0, 100 - totalGae),
+        isOverall: false,
+        isSubcategory: true,
+        isOtherRemainder: true,
+        isElectricity: false,
+        isGroupStarter: false
       })
     }
   }
@@ -245,12 +318,67 @@ function renderChart() {
 
   const barHeight = 30
   const barGap = 4
-  const numBars = chartData.value.length
-  const maxWidth = Math.min(containerWidth, 500)
-  const margin = { top: 20, right: 45, bottom: 10, left: 100 }
+  const groupGap = 24
+  const maxWidth = Math.min(containerWidth, 565)
+  const margin = { top: 20, right: 110, bottom: 10, left: 100 }
   const width = maxWidth - margin.left - margin.right
-  const height = numBars * (barHeight + barGap)
-  const subcategoryOffset = 45 // Pixels to offset subcategory bars from the left
+
+  // Calculate y positions with group spacing
+  const yPositions = []
+  let currentY = 0
+  chartData.value.forEach((d, i) => {
+    if (i > 0) {
+      currentY += (d.isGroupStarter || d.isElectricity) ? groupGap : barGap
+    }
+    yPositions.push(currentY)
+    currentY += d.isOtherRemainder ? otherRowHeight : barHeight
+  })
+  const height = currentY
+
+  // Helper: determine subcategory group
+  const getSubcatGroup = (key) =>
+    key.includes('coal') || key.includes('anthracite') || key.includes('coking') || key.includes('bituminous') || key.includes('lignite') ? 'coal' : 'oil'
+
+  // First pass: compute total GAE per group so we can clamp to 100%
+  const groupGaeTotals = {}
+  chartData.value.forEach(d => {
+    if (!d.isSubcategory) return
+    const group = getSubcatGroup(d.key)
+    groupGaeTotals[group] = (groupGaeTotals[group] ?? 0) + (d.gaeShare ?? 0)
+  })
+
+  // Normalized GAE shares: scale down proportionally if group total > 100
+  const normalizedGae = []
+  chartData.value.forEach((d, i) => {
+    if (d.isSubcategory) {
+      const group = getSubcatGroup(d.key)
+      const total = groupGaeTotals[group] ?? 0
+      const raw = d.gaeShare ?? 0
+      normalizedGae[i] = total > 100 ? (raw / total) * 100 : raw
+    } else {
+      normalizedGae[i] = 0
+    }
+  })
+
+  // Pre-compute subcategory x-offsets using normalized shares
+  const subcatXOffset = []
+  let cumulativeOffset = 0
+  let lastParentGroup = null
+  chartData.value.forEach((d, i) => {
+    if (d.isSubcategory) {
+      const group = getSubcatGroup(d.key)
+      if (group !== lastParentGroup) {
+        cumulativeOffset = 0
+        lastParentGroup = group
+      }
+      subcatXOffset[i] = cumulativeOffset
+      cumulativeOffset += Math.min(normalizedGae[i], 100)
+    } else {
+      subcatXOffset[i] = 0
+      lastParentGroup = null
+      cumulativeOffset = 0
+    }
+  })
 
   const svg = d3.select(chartRef.value)
     .append('svg')
@@ -261,7 +389,7 @@ function renderChart() {
 
   // Calculate maximum value for dynamic scale
   const maxOverall = Math.max(100, ...chartData.value.map(d => d.overall ?? 0))
-  const scaleMax = Math.ceil(maxOverall / 10) * 10 // Round up to nearest 10
+  const scaleMax = Math.ceil(maxOverall / 10) * 10
 
   // Scales
   const x = d3.scaleLinear()
@@ -297,7 +425,7 @@ function renderChart() {
   const colors = {
     third: { normal: '#c44536', soft: '#d4847a' },
     eu: { normal: '#e8a87c', soft: '#f0c9b0' },
-    domestic: { normal: '#81b29a', soft: '#aed0be' },
+    domestic: { normal: '#d9d9d9', soft: '#e8e8e8' },
     reserve: { normal: '#8b2500', soft: '#b86347' },
     noneu: { normal: '#333', soft: '#555' },
     exporter: { normal: '#7b68ee', soft: '#a99cf3' }
@@ -319,15 +447,118 @@ function renderChart() {
     .attr('stroke', colors['noneu'].normal)
     .attr('stroke-width', 2)
 
-  // Draw horizontal bars for each fuel type
-  chartData.value.forEach(d => {
-    const yPos = y(d.name)
-    const barH = y.bandwidth()
-    const isSubcat = d.isSubcategory
-    const barOffset = isSubcat ? subcategoryOffset : 0
+  // Draw 100% reference line if scale exceeds 100
+  if (scaleMax > 100) {
+    svg.append('line')
+      .attr('x1', x(100))
+      .attr('x2', x(100))
+      .attr('y1', 0)
+      .attr('y2', height)
+      .attr('stroke', '#666')
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', '4,2')
 
-    // Get appropriate colors based on whether this is a subcategory
-    const getColor = (colorKey) => isSubcat ? colors[colorKey].soft : colors[colorKey].normal
+    svg.append('text')
+      .attr('x', x(100))
+      .attr('y', -4)
+      .attr('text-anchor', 'middle')
+      .attr('fill', '#666')
+      .attr('font-size', '9px')
+      .text('100%')
+  }
+
+  // Draw alternating group backgrounds and overall outline
+  const groupBounds = {}
+  const groupOrder = []
+  chartData.value.forEach((d, i) => {
+    let group = null
+    if (d.isOverall) {
+      group = 'overall'
+    } else {
+      for (const [gName, gKeys] of Object.entries(fuelGroups)) {
+        if (gKeys.includes(d.key)) { group = gName; break }
+      }
+      if (!group && d.key.endsWith('_other')) group = d.key.replace('_other', '')
+    }
+    if (!group) return
+    const rowH = d.isOtherRemainder ? otherRowHeight : barHeight
+    if (!groupBounds[group]) {
+      groupBounds[group] = { minY: yPositions[i], maxY: yPositions[i] + rowH }
+      groupOrder.push(group)
+    } else {
+      groupBounds[group].minY = Math.min(groupBounds[group].minY, yPositions[i])
+      groupBounds[group].maxY = Math.max(groupBounds[group].maxY, yPositions[i] + rowH)
+    }
+  })
+
+  const groupPad = { x: 8, y: 5 }
+  const groupFills = ['rgba(0, 0, 0, 0.06)', 'rgba(0, 0, 0, 0)']
+  groupOrder.forEach((gName, gi) => {
+    const bounds = groupBounds[gName]
+    svg.append('rect')
+      .attr('class', 'group-bg')
+      .attr('x', -margin.left + groupPad.x)
+      .attr('y', bounds.minY - groupPad.y)
+      .attr('width', maxWidth - groupPad.x * 2)
+      .attr('height', bounds.maxY - bounds.minY + groupPad.y * 2)
+      .attr('fill', groupFills[gi % 2])
+      .attr('stroke', 'none')
+  })
+
+  // Overall outline around all groups
+  const allMinY = Math.min(...groupOrder.map(g => groupBounds[g].minY))
+  const allMaxY = Math.max(...groupOrder.map(g => groupBounds[g].maxY))
+  svg.append('rect')
+    .attr('class', 'chart-outline')
+    .attr('x', -margin.left + groupPad.x)
+    .attr('y', allMinY - groupPad.y)
+    .attr('width', maxWidth - groupPad.x * 2)
+    .attr('height', allMaxY - allMinY + groupPad.y * 2)
+    .attr('fill', 'none')
+    .attr('stroke', 'rgba(0, 0, 0, 0.2)')
+    .attr('stroke-width', 1)
+    .attr('rx', 6)
+
+  // Draw horizontal bars for each fuel type
+  chartData.value.forEach((d, i) => {
+    const yPos = yPositions[i]
+    const barH = d.isOtherRemainder ? otherRowHeight : barHeight
+    const isSubcat = d.isSubcategory
+
+    // "Other" remainder line: thin bar right-aligned to 100%
+    if (d.isOtherRemainder) {
+      const barFullWidth = x(100)
+      const otherW = barFullWidth * (Math.min(normalizedGae[i], 100) / 100)
+      const otherX = barFullWidth * (subcatXOffset[i] / 100)
+      const lineH = 4
+      const lineY = yPos + (barH - lineH) / 2
+
+      svg.append('rect')
+        .attr('x', otherX)
+        .attr('y', lineY)
+        .attr('width', otherW)
+        .attr('height', lineH)
+        .attr('fill', '#bbb')
+        .attr('rx', 2)
+
+      return
+    }
+
+    // Subcategories with near-zero GAE share: show "not used" at left edge (no offset)
+    if (isSubcat && d.gaeShare != null && d.gaeShare < 0.5) {
+      svg.append('text')
+        .attr('x', 4)
+        .attr('y', yPos + barH / 2)
+        .attr('dy', '0.35em')
+        .attr('text-anchor', 'start')
+        .attr('fill', '#888')
+        .attr('font-size', '9px')
+        .attr('font-style', 'italic')
+        .text('not used')
+      return
+    }
+
+    const getColor = (colorKey) => colors[colorKey].normal
 
     // For electricity, use third_countries as the overall value
     const effectiveOverall = d.isElectricity && d.overall == null && d.thirdCountries != null
@@ -378,74 +609,174 @@ function renderChart() {
         // Reserve draw (imports exceeding consumption) when overall > 100%
         const reserveDrawPct = overallPct > 100 ? overallPct - 100 : 0
 
-        // Draw import portion as a single bar (up to 100%)
-        if (overallPct > 0) {
-          const importBelow100 = Math.min(overallPct, 100)
-          const importWidth = x(importBelow100) - barOffset
-          svg.append('rect')
-            .attr('class', 'bar-import')
-            .attr('x', barOffset)
-            .attr('y', yPos)
-            .attr('width', importWidth)
-            .attr('height', barH)
-            .attr('fill', getColor('eu'))
-        }
-
-        // Portion above 100% (reserve draw)
-        if (reserveDrawPct > 0) {
-          const reserveWidth = x(overallPct) - x(100)
-          svg.append('rect')
-            .attr('class', 'bar-reserve')
-            .attr('x', x(100))
-            .attr('y', yPos)
-            .attr('width', reserveWidth)
-            .attr('height', barH)
-            .attr('fill', getColor('reserve'))
-            .attr('opacity', 0.85)
-        }
-
-        // Domestic portion (right, green) - only if below 100%
-        if (domesticPct > 0) {
-          // For subcategories with 0% imports, domestic starts at offset
-          const domesticStartX = Math.max(barOffset, x(overallPct))
-          const domesticWidth = x(100) - domesticStartX
+      if (isNetExporter) {
+        if (isSubcat && barW != null && barW > 0) {
+          // Subcategory net exporter: grey background + exporter overlay
           svg.append('rect')
             .attr('class', 'bar-domestic')
-            .attr('x', domesticStartX)
+            .attr('x', barXStart)
             .attr('y', yPos)
-            .attr('width', domesticWidth)
+            .attr('width', barW)
             .attr('height', barH)
             .attr('fill', getColor('domestic'))
+
+          svg.append('rect')
+            .attr('class', 'bar-exporter')
+            .attr('x', barXStart)
+            .attr('y', yPos)
+            .attr('width', barW)
+            .attr('height', barH)
+            .attr('fill', getColor('exporter'))
+
+          svg.append('text')
+            .attr('x', barXStart + barW + 4)
+            .attr('y', yPos + barH / 2)
+            .attr('dy', '0.35em')
+            .attr('text-anchor', 'start')
+            .attr('fill', '#7ab3e8')
+            .attr('font-size', '9px')
+            .attr('font-weight', '700')
+            .text(`${rawOverall.toFixed(0)}%`)
+
+        } else {
+          // Non-subcategory net exporter: full-width bar
+          svg.append('rect')
+            .attr('class', 'bar-exporter')
+            .attr('x', 0)
+            .attr('y', yPos)
+            .attr('width', barFullWidth)
+            .attr('height', barH)
+            .attr('fill', getColor('exporter'))
+
+          if (barFullWidth > 50) {
+            svg.append('text')
+              .attr('x', barFullWidth / 2)
+              .attr('y', yPos + barH / 2)
+              .attr('dy', '0.35em')
+              .attr('text-anchor', 'middle')
+              .attr('fill', '#fff')
+              .attr('font-size', '9px')
+              .attr('font-weight', '600')
+              .text('Net Exporter')
+          }
+
+          svg.append('text')
+            .attr('x', barFullWidth + 4)
+            .attr('y', yPos + barH / 2)
+            .attr('dy', '0.35em')
+            .attr('text-anchor', 'start')
+            .attr('fill', '#3a7bc8')
+            .attr('font-size', '9px')
+            .attr('font-weight', '700')
+            .text(`${rawOverall.toFixed(0)}%`)
         }
 
-        // Add non-EU crosshatch overlay on left portion of bar if third_countries data exists
-        // (but not for electricity since we're using third_countries as the overall)
-        if (thirdCountriesPct != null && thirdCountriesPct > 0 && !d.isElectricity && !isSubcat) {
-          const nonEuWidth = x(thirdCountriesPct) - barOffset
+      } else {
+        // Normal case: import dependency >= 0
+        const domesticPct = overallPct < 100 ? 100 - overallPct : 0
+        const reserveDrawPct = overallPct > 100 ? overallPct - 100 : 0
 
-          // Overlay crosshatch pattern on the non-EU portion (left side of bar)
+        if (isSubcat && barW != null) {
+          // Subcategory: grey background at full proportional width, import fill at correct %
+          if (barW > 0) {
+            // Grey domestic background spanning full proportional width
+            svg.append('rect')
+              .attr('class', 'bar-domestic')
+              .attr('x', barXStart)
+              .attr('y', yPos)
+              .attr('width', barW)
+              .attr('height', barH)
+              .attr('fill', getColor('domestic'))
+
+            // Import portion: overallPct% of the proportional width
+            if (overallPct > 0) {
+              const importW = barW * (Math.min(overallPct, 100) / 100)
+              svg.append('rect')
+                .attr('class', 'bar-import')
+                .attr('x', barXStart)
+                .attr('y', yPos)
+                .attr('width', importW)
+                .attr('height', barH)
+                .attr('fill', getColor('eu'))
+            }
+
+            // Reserve draw: portion above 100% extends beyond the grey background
+            if (reserveDrawPct > 0) {
+              const reserveW = barW * (reserveDrawPct / 100)
+              svg.append('rect')
+                .attr('class', 'bar-reserve')
+                .attr('x', barXStart + barW)
+                .attr('y', yPos)
+                .attr('width', reserveW)
+                .attr('height', barH)
+                .attr('fill', getColor('reserve'))
+                .attr('opacity', 0.85)
+            }
+          }
+
+        } else {
+          // Non-subcategory: full-width bar as before
+          if (overallPct > 0) {
+            const importBelow100 = Math.min(overallPct, 100)
+            svg.append('rect')
+              .attr('class', 'bar-import')
+              .attr('x', 0)
+              .attr('y', yPos)
+              .attr('width', x(importBelow100))
+              .attr('height', barH)
+              .attr('fill', getColor('eu'))
+          }
+
+          // Portion above 100% (reserve draw)
+          if (reserveDrawPct > 0) {
+            const reserveWidth = x(overallPct) - x(100)
+            svg.append('rect')
+              .attr('class', 'bar-reserve')
+              .attr('x', x(100))
+              .attr('y', yPos)
+              .attr('width', reserveWidth)
+              .attr('height', barH)
+              .attr('fill', getColor('reserve'))
+              .attr('opacity', 0.85)
+          }
+
+          // Domestic portion
+          if (domesticPct > 0) {
+            svg.append('rect')
+              .attr('class', 'bar-domestic')
+              .attr('x', x(overallPct))
+              .attr('y', yPos)
+              .attr('width', x(100) - x(overallPct))
+              .attr('height', barH)
+              .attr('fill', getColor('domestic'))
+          }
+        }
+
+        // Non-EU crosshatch overlay (capped at overall import bar width)
+        if (thirdCountriesPct != null && thirdCountriesPct > 0 && !d.isElectricity && !isSubcat) {
+          const clampedThirdPct = Math.min(thirdCountriesPct, overallPct)
+          const nonEuWidth = x(clampedThirdPct)
+
           if (nonEuWidth > 0) {
             svg.append('rect')
-              .attr('x', barOffset)
+              .attr('x', 0)
               .attr('y', yPos)
               .attr('width', nonEuWidth)
               .attr('height', barH)
               .attr('fill', 'url(#crosshatch)')
               .attr('opacity', 0.4)
 
-            // Add vertical line at the boundary between non-EU and EU
             svg.append('line')
-              .attr('x1', x(thirdCountriesPct))
+              .attr('x1', x(clampedThirdPct))
               .attr('y1', yPos)
-              .attr('x2', x(thirdCountriesPct))
+              .attr('x2', x(clampedThirdPct))
               .attr('y2', yPos + barH)
               .attr('stroke', getColor('noneu'))
               .attr('stroke-width', 2)
 
-            // Add "non-EU" label inside the crosshatched area if wide enough
             if (nonEuWidth >= 35) {
               svg.append('text')
-                .attr('x', barOffset + nonEuWidth / 2)
+                .attr('x', nonEuWidth / 2)
                 .attr('y', yPos + barH / 2)
                 .attr('dy', '0.35em')
                 .attr('text-anchor', 'middle')
@@ -457,8 +788,11 @@ function renderChart() {
           }
         }
 
-        // Labels showing actual percentage at end of bar
-        const labelX = x(Math.max(overallPct, domesticPct > 0 ? 100 : overallPct)) + 4
+        // Percentage label after the bar (including reserve draw tip if present)
+        const subcatReserveW = (isSubcat && reserveDrawPct > 0) ? barW * (reserveDrawPct / 100) : 0
+        const labelX = isSubcat
+          ? barXStart + barW + subcatReserveW + 4
+          : x(overallPct) + 4
         const pctLabel = svg.append('text')
           .attr('x', labelX)
           .attr('y', yPos + barH / 2)
@@ -467,26 +801,23 @@ function renderChart() {
           .attr('fill', overallPct > 100 ? (isSubcat ? '#b86347' : '#8b2500') : '#666')
           .attr('font-size', '10px')
           .attr('font-weight', overallPct > 100 ? '700' : '500')
-          .text(`${overallPct.toFixed(0)}%`)
+          .text(`${overallPct.toFixed(0)}%${overallPct > 100 ? ' (reserve draw)' : ''}`)
 
-        // Add red circle with exclamation mark after percentage for electricity
+        // Electricity warning icon
         if (d.isElectricity) {
           const pctWidth = pctLabel.node().getBBox().width
           const warningX = labelX + pctWidth + 10
 
-          // Group for hover effect
           const warningGroup = svg.append('g')
             .attr('class', 'electricity-warning-group')
             .style('cursor', 'help')
 
-          // Red circle background
           warningGroup.append('circle')
             .attr('cx', warningX)
             .attr('cy', yPos + barH / 2)
             .attr('r', 6)
             .attr('fill', '#c44536')
 
-          // White exclamation mark
           warningGroup.append('text')
             .attr('x', warningX)
             .attr('y', yPos + barH / 2)
@@ -498,7 +829,6 @@ function renderChart() {
             .style('pointer-events', 'none')
             .text('!')
 
-          // Invisible larger circle for easier hover target
           warningGroup.append('circle')
             .attr('cx', warningX)
             .attr('cy', yPos + barH / 2)
@@ -511,27 +841,33 @@ function renderChart() {
         }
       }
     } else {
-      // No data - grey bar (stops at 100% mark)
+      // No data (same proportional width and offset as normal bars)
+      const barFullWidth = x(100)
+      const noDataShare = isSubcat ? Math.min(normalizedGae[i], 100) : 100
+      const noDataW = isSubcat ? barFullWidth * (noDataShare / 100) : barFullWidth
+      const noDataX = isSubcat ? barFullWidth * (subcatXOffset[i] / 100) : 0
+
       svg.append('rect')
         .attr('class', 'bar-nodata')
-        .attr('x', barOffset)
+        .attr('x', noDataX)
         .attr('y', yPos)
-        .attr('width', x(100) - barOffset)
+        .attr('width', noDataW)
         .attr('height', barH)
-        .attr('fill', isSubcat ? '#f0f0f0' : '#e8e8e8')
+        .attr('fill', isSubcat ? '#e4e4e4' : '#d9d9d9')
         .attr('rx', 3)
 
-      svg.append('text')
-        .attr('class', 'no-data-label')
-        .attr('x', barOffset + (x(100) - barOffset) / 2)
-        .attr('y', yPos + barH / 2)
-        .attr('dy', '0.35em')
-        .attr('text-anchor', 'middle')
-        .attr('fill', '#999')
-        .attr('font-size', '10px')
-        .text('No data')
+      if (noDataW > 30) {
+        svg.append('text')
+          .attr('class', 'no-data-label')
+          .attr('x', noDataX + noDataW / 2)
+          .attr('y', yPos + barH / 2)
+          .attr('dy', '0.35em')
+          .attr('text-anchor', 'middle')
+          .attr('fill', '#777')
+          .attr('font-size', '10px')
+          .text('No data')
+      }
 
-      // Add electricity warning even for no-data case
       if (d.isElectricity) {
         const warningX = x(100) + 14
 
@@ -567,50 +903,40 @@ function renderChart() {
           .on('mouseleave', hideElectricityTooltip)
       }
     }
-
   })
 
-  // Y axis (fuel type labels) - with offset for subcategories
-  const yAxis = svg.append('g')
-    .call(d3.axisLeft(y))
+  // Y axis labels (manually positioned to match group spacing)
+  chartData.value.forEach((d, i) => {
+    const isSubcat = d.isSubcategory
+    const rowH = d.isOtherRemainder ? otherRowHeight : barHeight
+    svg.append('text')
+      .attr('x', -8)
+      .attr('y', yPositions[i] + rowH / 2)
+      .attr('dy', '0.35em')
+      .attr('text-anchor', 'end')
+      .attr('fill', d.isOtherRemainder ? '#777' : (isSubcat ? '#555' : '#222'))
+      .attr('font-size', d.isOtherRemainder ? '9px' : '11px')
+      .attr('font-style', (isSubcat || d.isOtherRemainder) ? 'italic' : 'normal')
+      .text(d.name)
+  })
 
-  // Get subcategory display names for matching
-  const subcatDisplayNames = subcategoriesNoThirdCountries.map(key => fuelDisplayNames[key] || formatKey(key))
-
-  yAxis.selectAll('.tick')
-    .each(function(d) {
-      const isSubcat = subcatDisplayNames.includes(d)
-      const text = d3.select(this).select('text')
-      text
-        .attr('fill', isSubcat ? '#666' : '#333')
-        .attr('font-size', '11px')
-        .attr('font-style', isSubcat ? 'italic' : 'normal')
-      if (isSubcat) {
-        // Offset the entire tick group to the right
-        d3.select(this).attr('transform', function() {
-          const currentTransform = d3.select(this).attr('transform') || ''
-          const match = currentTransform.match(/translate\(([^,]*),([^)]*)\)/)
-          if (match) {
-            return `translate(${parseFloat(match[1]) + 45},${match[2]})`
-          }
-          return currentTransform
-        })
-      }
-    })
-
-  svg.selectAll('.domain').remove()
-  svg.selectAll('.tick line').remove()
 }
 
 watch(() => [props.dependencyData, props.year], () => {
   renderChart()
 }, { deep: true })
 
+watch(() => props.countryName, () => {
+  nextTick(measureCountryName)
+})
+
 onMounted(() => {
   renderChart()
+  nextTick(measureCountryName)
 
   resizeObserver = new ResizeObserver(() => {
     renderChart()
+    measureCountryName()
   })
 
   if (chartRef.value) {
@@ -670,6 +996,50 @@ onUnmounted(() => {
 
 .chart-svg :deep(svg) {
   display: block;
+}
+
+.chart-heading {
+  text-align: center;
+}
+
+.chart-heading h3 {
+  margin: 0 0 0.25rem 0;
+}
+
+.heading-link {
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 400;
+  font-size: 1rem;
+}
+
+.formula-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.formula {
+  display: block;
+  background: rgba(0, 0, 0, 0.06);
+  padding: 0.3em 0.5em;
+  border-radius: 3px;
+}
+
+.curly-brace {
+  height: 12px;
+  margin: 2px 0;
+}
+
+.highlight-value {
+  font-weight: 800;
+  color: var(--text-color-dark-green, #2d3a0e);
+  background: rgba(172, 194, 120, 0.25);
+  padding: 0.05em 0.3em;
+  border-radius: 4px;
+}
+
+.highlight-import {
+  color: #e8a87c;
 }
 
 .electricity-tooltip {

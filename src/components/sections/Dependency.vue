@@ -1,18 +1,13 @@
 <template>
   <section id="dependency" class="page-section">
     <div class="chart-header">
-      <h2>Fuel by Fuel: Measuring Our Energy Import Dependence</h2>
+      <h2>Fuel by Fuel: Measuring The Energy Import Dependence</h2>
     </div>
     <div class="section-container">
       <div v-if="store.isLoading" class="loading">Loading energy data...</div>
       <div v-else-if="store.error" class="error">{{ store.error }}</div>
       <div v-if="store.dependencyData" class="charts-container">
-        <!-- TODO - Matteo: Verbessern
-          - 100% balken vereinhaltlichen
-          - gruppieren/ abstand 
-          - prozente links/ orange
-        -->
-        <DependencyChart :dependencyData="store.dependencyData" :year="store.selectedYear" />
+        <DependencyChart :dependencyData="store.dependencyData" :year="store.selectedYear" :countryName="store.selectedCountry?.name || ''" />
       </div>
       <div class="text-container">
         <!-- Electricity: Non-EU dependency varies by geography (2022): Moldova (68%), Georgia (30%), Lithuania (25%) rely on non-EU sources; Western Europe imports almost exclusively from EU neighbors (Germany 6%, France 2%, non-EU). France is typically a net exporter thanks to its nuclear fleet. 
@@ -54,27 +49,6 @@
           Europe’s fuel mix is shaped by a small set of major trading partners, from Norway for gas to Saudi Arabia and
           the U.S. for oil with Russia’s role sharply reduced after 2022.
         </p>
-        <p>
-          <!-- TODO - Matteo Erklärung -->
-          Share of imports vs domestic production
-          <br />
-          <code>Net Imports ÷ Gross Available Energy</code>
-          <br />
-          <br />
-          <code>
-            Net Imports = Imports − Exports · Gross Available Energy ≈ Primary production + Net imports ± Stock changes
-          </code>
-          <br />
-          <br />
-
-          <a
-            href="https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Energy_dependency_rate"
-            target="_blank"
-            rel="noopener"
-            class="source-link"
-            >https://ec.europa.eu/eurostat/statistics-explained/index.php?title=Glossary:Energy_dependency_rate</a
-          >
-        </p>
       </div>
     </div>
     <div class="chart-meta">
@@ -92,6 +66,10 @@
             Tables <code>nrg_ind_id</code> (ID, overall dependency) and <code>nrg_ind_id3cf</code> (ID3CF, third country
             dependency)
           </li>
+          <li>
+            Table <code>nrg_bal_c</code> (complete energy balances): Gross Available Energy by SIEC subcategory, used for
+            subcategory bar width proportions
+          </li>
           <li>Fuel breakdown via SIEC codes mapped to display names</li>
         </ul>
       </div>
@@ -100,7 +78,7 @@
         <ul class="meta-list">
           <li>
             Non-EU breakdown (hatched line) only available for main aggregates (Coal, Gas, Oil, Electricity).
-            Subcategories (indented, lighter colors) show total import dependency only.
+            Subcategory bar widths are proportional to their share of the parent category's Gross Available Energy (GAE).
           </li>
           <li>Non-EU (third country) import dependency data is only available from 2010 to 2023.</li>
           <li>Electricity: Eurostat does not calculate overall import dependency; showing non-EU imports only.</li>

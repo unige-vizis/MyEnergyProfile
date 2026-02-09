@@ -7,25 +7,13 @@
 
       <div class="chart-meta">
         <div class="meta-section">
-          <span class="meta-label">Data Hints</span>
-          <ul class="meta-list">
-            <li>
-              Y-axis scales differ between production and consumption rows. This is necessary because production and
-              consumption volumes can differ by orders of magnitude for most countries.
-            </li>
-          </ul>
-        </div>
-        <div class="meta-section">
           <span class="meta-label">Source</span>
           <ul class="meta-list">
             <li>
               <a href="https://github.com/owid/energy-data" target="_blank" rel="noopener"
                 >Our World in Data Energy Dataset</a
               >
-              · Fields: <code>coal_production</code>, <code>oil_production</code>, <code>gas_production</code>,
-              <code>electricity_generation</code>, <code>coal_consumption</code>, <code>oil_consumption</code>,
-              <code>gas_consumption</code>, <code>biofuel_consumption</code>, <code>electricity_demand</code> (all in
-              TWh)
+              · <code>*_production</code>, <code>*_consumption</code> fields (TWh)
             </li>
             <li>
               Underlying data compiled by the
@@ -33,6 +21,15 @@
                 >Energy Institute</a
               >
               Statistical Review of World Energy
+            </li>
+          </ul>
+        </div>
+        <div class="meta-section">
+          <span class="meta-label">Data Hints</span>
+          <ul class="meta-list">
+            <li>
+              Y-axis scales differ between production and consumption rows. This is necessary because production and
+              consumption volumes can differ by orders of magnitude for most countries.
             </li>
           </ul>
         </div>

@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { ref, computed } from "vue";
+import { ref, computed, nextTick } from "vue";
 
 export const useEnergyDataStore = defineStore("energyData", () => {
   const rawData = ref(null);
@@ -9,6 +9,7 @@ export const useEnergyDataStore = defineStore("energyData", () => {
   const selectedCountryCode = ref("IT");
   const selectedYear = ref(2023);
   const isLoading = ref(false);
+  const isYearChanging = ref(false);
   const error = ref(null);
   const pricesLoaded = computed(() => Boolean(pricesData.value));
   const ecoLoaded = computed(() => Boolean(ecoData.value));
@@ -325,7 +326,15 @@ export const useEnergyDataStore = defineStore("energyData", () => {
   }
 
   function setSelectedYear(year) {
-    selectedYear.value = year;
+    if (year === selectedYear.value) return;
+    isYearChanging.value = true;
+    // Defer the actual data change so the spinner renders first
+    requestAnimationFrame(() => {
+      selectedYear.value = year;
+      nextTick(() => {
+        isYearChanging.value = false;
+      });
+    });
   }
 
   return {
@@ -333,6 +342,7 @@ export const useEnergyDataStore = defineStore("energyData", () => {
     selectedCountryCode,
     selectedYear,
     isLoading,
+    isYearChanging,
     error,
     countries,
     selectedCountry,

@@ -173,6 +173,19 @@ ENERGY_TYPE_UNITS = {
 
 OWID_FILE = Path(__file__).parent.parent / 'raw-data' / 'energy_consumption' / 'owid-energy-data.xlsx'
 MASTERSHEET_FILE = Path(__file__).parent.parent / 'country_code_mastersheet.json'
+GAE_FILE = Path(__file__).parent.parent / 'raw-data' / 'energy_balance_eurostat' / 'gae_by_fuel.csv'
+
+# Mapping of subcategory SIEC codes to their parent category SIEC code
+# Used for calculating GAE share of each subcategory within its parent
+SUBCAT_TO_PARENT_SIEC = {
+    'O4100_TOT': 'O4000XBIO',
+    'O4200': 'O4000XBIO',
+    'C0110': 'C0000X0350-0370',
+    'C0121': 'C0000X0350-0370',
+    'C0129': 'C0000X0350-0370',
+    'C0210': 'C0000X0350-0370',
+    'C0220': 'C0000X0350-0370',
+}
 
 # OWID columns → internal energy type codes
 OWID_PRODUCTION_COLS = {
@@ -325,6 +338,41 @@ def load_dependency_data():
     phase_elapsed = time.time() - phase_start
     print(f'  Processed {len(dependency_data)} countries in {format_time(phase_elapsed)}')
     return dict(dependency_data)
+
+
+def load_gae_data():
+    """Load Gross Available Energy data for subcategory share calculations."""
+    print('  Loading GAE data for subcategory shares...')
+
+    if not GAE_FILE.exists():
+        print(f'  WARNING: GAE file not found: {GAE_FILE}')
+        print('  Run prepare_balance.py in base-data/03_Eurostat/energy_balance/ first.')
+        return {}
+
+    df = pd.read_csv(GAE_FILE)
+    print(f'  Loaded {len(df):,} GAE rows')
+
+    # Build lookup: {geo: {year: {siec: value}}}
+    gae_data = defaultdict(lambda: defaultdict(dict))
+    for _, row in df.iterrows():
+        gae_data[row['geo']][int(row['year'])][row['siec']] = row['value']
+
+    # Calculate shares: for each subcategory, compute % of parent GAE
+    # Result: {geo: {year: {fuel_name: share_pct}}}
+    gae_shares = defaultdict(lambda: defaultdict(dict))
+    for geo in gae_data:
+        for year in gae_data[geo]:
+            values = gae_data[geo][year]
+            for subcat_siec, parent_siec in SUBCAT_TO_PARENT_SIEC.items():
+                parent_val = values.get(parent_siec, 0)
+                subcat_val = values.get(subcat_siec, 0)
+                if parent_val > 0:
+                    fuel_name = SIEC_TO_FUEL.get(subcat_siec, subcat_siec)
+                    share = round(subcat_val / parent_val * 100, 2)
+                    gae_shares[geo][year][fuel_name] = share
+
+    print(f'  Computed GAE shares for {len(gae_shares)} countries')
+    return dict(gae_shares)
 
 
 # ============================================================================
@@ -635,13 +683,15 @@ def calculate_shares_and_rankings(trade_data):
 # Phase 4: Build JSON Structure
 # ============================================================================
 
-def build_json_output(dependency_data, trade_results, owid_data=None):
+def build_json_output(dependency_data, trade_results, owid_data=None, gae_shares=None):
     """Combine all data into final JSON structure."""
     print_phase_header(4, 'Building JSON output')
     phase_start = time.time()
 
     if owid_data is None:
         owid_data = {}
+    if gae_shares is None:
+        gae_shares = {}
 
     # Get all countries and years
     all_countries = set(dependency_data.keys()) | set(trade_results.keys()) | set(owid_data.keys())
@@ -680,6 +730,11 @@ def build_json_output(dependency_data, trade_results, owid_data=None):
                 }
                 if 'by_fuel' in dep_data:
                     year_entry['dependency']['by_fuel'] = dep_data['by_fuel']
+                    # Inject GAE shares into subcategory fuel entries
+                    if geo in gae_shares and year in gae_shares[geo]:
+                        for fuel_name, share in gae_shares[geo][year].items():
+                            if fuel_name in year_entry['dependency']['by_fuel']:
+                                year_entry['dependency']['by_fuel'][fuel_name]['gae_share'] = share
 
             # Add trade data
             if geo in trade_results and year in trade_results[geo]:
@@ -717,6 +772,7 @@ def build_json_output(dependency_data, trade_results, owid_data=None):
             'sources': [
                 'Eurostat energy trade (estat_nrg_ti_*, estat_nrg_te_*)',
                 'Eurostat import dependency (estat_nrg_ind_id, estat_nrg_ind_id3cf)',
+                'Eurostat energy balance (estat_nrg_bal_c) - GAE by fuel subcategory',
                 'Our World in Data - Energy Dataset (production, consumption)'
             ],
             'time_range': [all_years[0], all_years[-1]],
@@ -844,6 +900,9 @@ def main():
     # Phase 1b: Load OWID production/consumption data
     owid_data = load_owid_data()
 
+    # Phase 1c: Load GAE data for subcategory shares
+    gae_shares = load_gae_data()
+
     # Phase 2: Process trade data
     trade_data = process_trade_data(chunk_size=500_000)
 
@@ -851,7 +910,7 @@ def main():
     trade_results = calculate_shares_and_rankings(trade_data)
 
     # Phase 4: Build JSON output
-    output = build_json_output(dependency_data, trade_results, owid_data)
+    output = build_json_output(dependency_data, trade_results, owid_data, gae_shares)
 
     # Phase 5: Verify
     verify_output(output)
