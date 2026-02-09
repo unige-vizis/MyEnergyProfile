@@ -137,26 +137,28 @@ export const useEnergyDataStore = defineStore("energyData", () => {
         switch (sector) {
           case "Industry":
             Object.entries(yearData).forEach(([endUseName, endUseData]) => {
-              if (!endUseName.includes("Manufacturing")) {
-                const products = endUseData.products || {};
-                const endUseTotal = products["Total final use (PJ)"] || 0;
-                sectorChildren.push({ name: endUseName, value: endUseTotal });
-                total += endUseTotal;
-              }
+              const products = endUseData.products || {};
+              const endUseTotal = products["Total final use (PJ)"] || 0;
+              sectorChildren.push({ name: endUseName, value: endUseTotal });
+              total += endUseTotal;
             });
             break;
           case "Transport":
             Object.entries(yearData).forEach(([endUseName, endUseData]) => {
               if (
                 !endUseName.includes("Total") ||
-                endUseName === "Total trains" ||
-                endUseName === "Total airplanes" ||
-                endUseName === "Total ships"
+                ["Total trains", "Total airplanes", "Total ships"].includes(endUseName)
               ) {
                 const products = endUseData.products || {};
                 const endUseTotal = products["Total final use (PJ)"] || 0;
                 sectorChildren.push({ name: endUseName, value: endUseTotal });
                 total += endUseTotal;
+              }
+              if (total === 0) {
+                const totalTransport = yearData["Total passenger and freight transport"];
+                if (totalTransport) {
+                  total = totalTransport.products?.["Total final use (PJ)"] || 0;
+                }
               }
             });
             break;
@@ -169,9 +171,17 @@ export const useEnergyDataStore = defineStore("energyData", () => {
                 total += endUseTotal;
               }
             });
+            if (total == 0) {
+              Object.entries(yearData).forEach(([endUseName, endUseData]) => {
+                if ((endUseName = "Total residential" || endUseName == "Total services")) {
+                  const products = endUseData.products || {};
+                  const endUseTotal = products["Total final use (PJ)"] || 0;
+                  total += endUseTotal;
+                }
+              });
+            }
             break;
         }
-
         return {
           name: sector,
           value: total,
@@ -222,15 +232,14 @@ export const useEnergyDataStore = defineStore("energyData", () => {
       const epc = country.emissions_per_capita;
       if (!epc) continue;
 
-      const total = (epc.residential || 0) + (epc.services || 0)
-                  + (epc.transport || 0) + (epc.industry || 0);
+      const total = (epc.residential || 0) + (epc.services || 0) + (epc.transport || 0) + (epc.industry || 0);
 
       if (total > 0) {
         ranking.push({
           code,
           name: country.name,
           value: Math.round(total * 100) / 100,
-          year: epc.year
+          year: epc.year,
         });
       }
     }

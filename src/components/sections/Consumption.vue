@@ -4,7 +4,6 @@ import { ref, computed } from 'vue'
 import SunburstChart from '../charts/SunburstChart.vue'
 
 const store = useEnergyDataStore()
-const selectedSector = ref('Residential')
 const hasData = computed(() => {
   return store.sunburstData.name?.length > 0 && store.pieChartData[0]
 })
@@ -25,18 +24,29 @@ const hasData = computed(() => {
         <SunburstChart :data="store.sunburstData" :year="store.selectedYear" :country="store.selectedCountry" />
       </div>
       <div class="text-container">
-        <!-- TODO - Petula -->
         <p>
-          Have you ever wondered what sectors consume the most energy in your country? Energy consumption differs across
-          <strong>households, services, transport, and industry</strong> because each sector uses energy for
-          fundamentally different purposes. Industry consumes the most energy due to energy-intensive production
-          processes and high-temperature heat requirements. The transport sector is dominated by fossil fuels and
-          internal combustion engines, which are inherently inefficient and driven by growing mobility demand. Household
-          energy use is mainly shaped by space heating, building characteristics, and everyday behavior. The service
-          sector consumes energy primarily for heating, lighting, cooling, and IT in large buildings with long operating
-          hours. Overall, sectoral differences in energy consumption are driven more by structural and technical factors
-          than by individual efficiency or waste. This interactive sunburst diagram shows how total energy consumption
-          is distributed across the four major sectors and how it is further broken down into specific activities.
+          Have you ever wondered which sectors actually consume the most energy across countries? Energy use varies
+          greatly between <strong>households, services, transport, and industry</strong>. We often assume industry
+          dominates because energy-intensive production processes requires large amounts of heat and power. But as you
+          can see with this sunburst chart, many countries consume nearly as much or sometimes more energy in the
+          transport and residential sectors as in industry.
+        </p>
+        <p>
+          But still the largest energy use by sector comes mostly from industry. The biggest industrial slice is often
+          Manufacturing, which combines food production, textiles, machinery, electronics, and more.
+        </p>
+        <p>
+          Transport accounts only slightly behind industry. It is dominated by cars and trucks, which is always the
+          largest share of transport demand.
+        </p>
+        <p>
+          Within households, space heating is almost always the dominant end‑use. Kosovo and Estonia appears with
+          unusual high residential energy use not because households consume an unusually large amount of energy, but
+          because its transport and industrial energy use are very small.
+        </p>
+        <p>
+          Most countries have relatively low energy demand in the service sector, but some service-intensive economies
+          such as Malta have a high share of energy demand in the service sector due to their tourism-driven economy.
         </p>
       </div>
     </div>

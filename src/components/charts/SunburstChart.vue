@@ -67,7 +67,9 @@ function drawChart() {
     .outerRadius(d => d.y1);
 
   // Convert data to hierarchy
-  const root = d3.hierarchy(props.data)
+  const cleanData = pruneZeroChildren(props.data);
+
+  const root = d3.hierarchy(cleanData)
     .sum(d => d.children ? 0 : d.value)
     .sort((a, b) => b.value - a.value);
 
@@ -134,6 +136,23 @@ function drawChart() {
   .style('fill', '#333')
   .style('font-weight', 'bold')
   .text(d => d.data.name.length > 15 ? d.data.name.substring(0, 12) + '...' : d.data.name);
+}
+
+function pruneZeroChildren(node) {
+  if (!node.children) return node;
+
+  const childrenWithValue = node.children
+    .map(pruneZeroChildren)
+    .filter(c => {
+      if (!c.children) return (c.value ?? 0) > 0;
+      return d3.sum(c.children, d => d.value ?? 0) > 0;
+    });
+
+  if (childrenWithValue.length === 0) {
+    return { name: node.name, value: node.value };
+  }
+
+  return { ...node, children: childrenWithValue };
 }
 
 onMounted(() => {
