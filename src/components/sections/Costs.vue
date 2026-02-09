@@ -25,16 +25,6 @@
             activeSeries="electricity"
             @update:focusYear="onFocusYear"
           />
-          <div class="chart-footer">
-            <small
-              >Source: IMF/Eurostat <code>energycpiq.csv</code>. Columns: <code>country</code>, <code>year</code>,
-              <code>quarter</code>, CPI series <code>CPI0450</code> (Electricity, gas &amp; fuels),
-              <code>CPI0451</code> (Electricity), <code>CPI0452</code> (Gas), <code>CPI0453</code> (Liquid fuels),
-              <code>CPI0454</code> (Solid fuels), <code>CPI0722</code> (Transport fuels). World Bank
-              <code>Electric-Prices-by-Country.csv</code>. Columns: <code>Country Name</code>, <code>Time</code>,
-              electricity price (US cents/kWh). Missing years are shown explicitly.</small
-            >
-          </div>
         </div>
       </template>
       <p class="text-container">
@@ -43,6 +33,33 @@
         households evolves across years, reflecting broader economic and market conditions. Electricity prices are
         influenced by fuel costs, energy mix, infrastructure, and regulation.
       </p>
+    </div>
+    <div class="chart-meta">
+      <div class="meta-section">
+        <span class="meta-label">Source</span>
+        <ul class="meta-list">
+          <li>
+            <strong>EnergyCPI</strong>
+            <a href="https://github.com/MilesIParker/EnergyCPI" target="_blank" rel="noopener">
+              Global Energy Consumer Price Index
+            </a>
+            (IMF/Eurostat). Series: <code>CPI0450</code> (Electricity, gas &amp; fuels).
+          </li>
+          <li>
+            <strong>World Bank</strong>
+            <a href="https://databank.worldbank.org/embed/Electric-Prices-by-Country/id/7b12e700" target="_blank" rel="noopener">
+              Electric Prices by Country
+            </a>
+            . Electricity price (US cents/kWh).
+          </li>
+        </ul>
+      </div>
+      <div class="meta-section">
+        <span class="meta-label">Data Hints</span>
+        <ul class="meta-list">
+          <li>World Bank electricity prices are only available for 2014 to 2019.</li>
+        </ul>
+      </div>
     </div>
   </section>
 </template>
@@ -80,11 +97,6 @@ function onFocusYear(year) {
 }
 
 .kpi-sub {
-  color: var(--text-color-gray);
-}
-
-.chart-footer {
-  margin-top:0.5rem;
   color: var(--text-color-gray);
 }
 

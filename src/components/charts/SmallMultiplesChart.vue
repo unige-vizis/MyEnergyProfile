@@ -7,15 +7,6 @@
 
       <div class="chart-meta">
         <div class="meta-section">
-          <span class="meta-label">Data Hints</span>
-          <ul class="meta-list">
-            <li>
-              Y-axis scales differ between production and consumption rows. This is necessary because production and
-              consumption volumes can differ by orders of magnitude for most countries.
-            </li>
-          </ul>
-        </div>
-        <div class="meta-section">
           <span class="meta-label">Source</span>
           <ul class="meta-list">
             <li>
@@ -30,6 +21,15 @@
                 >Energy Institute</a
               >
               Statistical Review of World Energy
+            </li>
+          </ul>
+        </div>
+        <div class="meta-section">
+          <span class="meta-label">Data Hints</span>
+          <ul class="meta-list">
+            <li>
+              Y-axis scales differ between production and consumption rows. This is necessary because production and
+              consumption volumes can differ by orders of magnitude for most countries.
             </li>
           </ul>
         </div>

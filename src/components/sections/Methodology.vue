@@ -3,140 +3,59 @@
     <h2>Methodology</h2>
 
     <h3>Data Sources</h3>
-    <p>
-      This application combines data from four primary sources to provide a comprehensive picture of European energy systems.
+    <p class="methodology-hint">
+      The website focuses on 41 EU/EEA countries where Eurostat provides the richest and most granular data available.
+      Other sources supplement with global coverage where possible.
+      Specific table codes and indicators are listed in the "Source" section below each visualization.
     </p>
     <ul>
-      <li>
-        <strong>Eurostat</strong> &mdash; The EU's statistical office provides the core trade and dependency data.
-        Energy trade volumes (imports and exports by partner country) come from 10 datasets covering five energy types:
-        solid fossil fuels, oil, natural gas, biofuels, and electricity
-        (<code>estat_nrg_ti_sff</code>, <code>estat_nrg_te_sff</code>, etc.).
-        Import dependency indicators come from four datasets
-        (<code>estat_nrg_ind_id</code>, <code>estat_nrg_ind_id3cf</code>, <code>estat_nrg_ind_idogas</code>, <code>estat_nrg_ind_idooil</code>).
-        Sector-level consumption data comes from household, industry, services, and transport datasets
-        (<code>estat_nrg_d_hhq</code>, <code>estat_nrg_d_indq_n</code>, <code>estat_nrg_d_serq_n</code>, <code>estat_nrg_d_traq</code>).
-        Coverage: 41 EU/EEA countries, 1990&ndash;2024.
-      </li>
-      <li>
-        <strong>Our World in Data (OWID)</strong> &mdash; Provides global energy production and consumption figures (in TWh)
-        for coal, oil, gas, biofuels, and electricity, as well as carbon intensity of electricity generation (gCO<sub>2</sub>/kWh)
-        and population data. OWID aggregates from the Energy Institute, Ember, and the US Energy Information Administration.
-        Coverage: 200+ countries, 1900&ndash;2024.
-      </li>
-      <li>
-        <strong>International Energy Agency (IEA)</strong> &mdash; The Energy End-uses and Efficiency Indicators Database provides
-        sector-level consumption breakdowns (by end-use and fuel product), per-capita CO<sub>2</sub> emissions, and total emissions
-        by sector (industry, residential, transport, services).
-        Coverage: 50+ countries, 2000&ndash;2023.
-      </li>
-      <li>
-        <strong>EnergyCPI</strong> &mdash; A global database for energy consumer prices, providing quarterly Consumer Price Index
-        values for energy sub-categories (electricity, gas, liquid fuels, solid fuels, district heating, transport fuels).
-        Supplemented by World Bank electricity price data (US cents/kWh).
-        Coverage: 102 countries, 1996&ndash;2024.
-      </li>
+      <li><strong>Eurostat</strong>: Trade volumes, import dependency, sector consumption. 41 EU/EEA countries, 1990&ndash;2024.</li>
+      <li><strong>Our World in Data (OWID)</strong>: Production, consumption (TWh), carbon intensity, population. 200+ countries, 1900&ndash;2024.</li>
+      <li><strong>International Energy Agency (IEA)</strong>: Sector-level consumption breakdowns, CO<sub>2</sub> emissions by sector. 50+ countries, 2000&ndash;2023.</li>
+      <li><strong>EnergyCPI</strong>: Quarterly energy CPI indices by sub-category, supplemented by World Bank electricity prices. 102 countries, 1996&ndash;2024.</li>
     </ul>
 
-    <h3>Data cleaning and imputation</h3>
+    <h3>Data Preparation</h3>
     <p>
-      Raw Eurostat data is distributed as TSV files with comma-separated dimension codes packed into the first column.
-      These are parsed and pivoted from wide format (one column per year) to long format (one row per observation).
-      Statistical flags appended to values (e.g. <code>p</code> for provisional, <code>e</code> for estimated, <code>b</code> for break in series)
-      are stripped and the underlying numeric values retained.
-      Missing value markers (<code>:</code> in Eurostat, <code>..</code> in IEA data) are converted to <code>null</code>.
-    </p>
-    <p>
-      Country codes are normalized to ISO 3166-1 alpha-2 using a central mapping table.
-      Eurostat uses non-standard codes for Greece (<code>EL</code> instead of <code>GR</code>) and
-      the United Kingdom (<code>UK</code> instead of <code>GB</code>), which are corrected during processing.
-      IEA data uses full country names, matched to ISO codes via fuzzy matching with the <code>pycountry</code> library.
-    </p>
-    <p>
-      No imputation is applied &mdash; missing values remain as <code>null</code> in the final datasets
-      and are handled at the visualization level. The only derived value is industry emissions per capita,
-      which is calculated from total industry emissions divided by OWID population figures where both are available.
+      All data processing lives in the <code>data-processing/</code> folder and follows a three-stage pipeline:
     </p>
 
-    <h3>Data processing and analysis</h3>
+    <h4>1. Raw Data (<code>raw-data/</code>)</h4>
+    <ul>
+      <li>Raw downloads from Eurostat (TSV), IEA (CSV/XLSX), OWID (CSV), and EnergyCPI, organized by source</li>
+      <li>Eurostat alone spans 18+ separate tables across trade, dependency, consumption, and indicator datasets</li>
+    </ul>
+
+    <h4>2. Base Data (<code>base-data/</code>)</h4>
+    <ul>
+      <li>Eurostat's raw tables use a non-standard format (comma-packed dimension codes, statistical flags, wide year columns) that requires dedicated parsing</li>
+      <li><code>base-data/03_Eurostat/combine_data.py</code> cleans and merges the many Eurostat tables into a unified base dataset</li>
+      <li>Statistical flags (<code>p</code>, <code>e</code>, <code>b</code>) are stripped, missing markers (<code>:</code>, <code>..</code>) converted to <code>null</code></li>
+      <li>Each source uses different identifiers: Eurostat uses non-standard 2-letter codes (<code>EL</code> for Greece, <code>UK</code> for United Kingdom), OWID uses ISO 3-letter codes, and IEA uses full country names. A central <code>country_code_mastersheet.json</code> maps between all formats, normalizing everything to ISO 3166-1 alpha-2.</li>
+      <li>Other base-data subfolders organize OWID, IEA, and consumption data into clean intermediate formats</li>
+    </ul>
+
+    <h4>3. Processing Scripts (<code>processing scripts/</code>)</h4>
     <p>
-      The main dataset (<code>energy_mix.json</code>) is built in a multi-phase pipeline.
-      First, over 140 SIEC fuel codes from Eurostat are mapped to five main energy categories:
-      coal (solid fossil fuels), oil, gas, biofuels, and electricity.
-      Nuclear fuels and renewable fuel codes are excluded from the dependency analysis.
+      Each script reads from <code>base-data/</code> and produces a reduced, section-specific JSON in <code>prepared-sets/</code> containing only the information needed for that part of the website:
     </p>
+    <ul>
+      <li><code>create_imports_exports_json.py</code> &rarr; <code>energy_mix.json</code>: trade flows, dependency, production/consumption. 140+ SIEC fuel codes mapped to five categories. Bilateral flows only (aggregates removed).</li>
+      <li><code>augment_with_owid.py</code> &rarr; augments <code>energy_mix.json</code> with OWID production/consumption (TWh) and carbon intensity</li>
+      <li><code>create_consumptions_by_sector_json.py</code> &rarr; <code>energy_consumptions_by_sector.json</code>: IEA sector breakdowns by end-use and fuel</li>
+      <li><code>create_eco_data_json.py</code> &rarr; <code>eco_data.json</code>: emissions and carbon intensity from OWID + IEA</li>
+      <li><code>create_energy_prices_json.py</code> &rarr; <code>energy_prices.json</code>: CPI indices and electricity prices</li>
+    </ul>
     <p>
-      Trade data (31.8 million rows) is read in 500,000-row chunks for memory efficiency.
-      Regional aggregates (EU27, EA20) and non-specific partners (TOTAL, THRD, NSP) are filtered out
-      so that only bilateral country-to-country flows remain.
-      Import and export volumes are aggregated by reporting country, year, energy type, and partner.
-      Partner shares are then calculated as a percentage of total trade volume per energy type and ranked.
-    </p>
-    <p>
-      Dependency metrics are sourced directly from Eurostat's published indicators:
-      overall import dependency (ID) measures <code>(Imports &minus; Exports) / (Gross Inland Consumption + Bunkers)</code>,
-      while third-country dependency (ID3CF) measures the share of imports originating from non-EU countries.
-      Both are provided at the total and individual fuel level.
-    </p>
-    <p>
-      OWID production and consumption data (in TWh) is merged into the Eurostat structure by matching
-      Eurostat ISO-2 codes to OWID ISO-3 codes via the country code mastersheet.
-      Sector consumption data from IEA is organized hierarchically: sector, end-use category, and fuel product (in PJ).
-      Emissions data combines OWID carbon intensity with IEA per-sector emissions.
-      Energy price indices are structured at quarterly granularity with annual electricity prices.
-    </p>
-    <p>
-      All processing scripts include verification steps that spot-check sample countries
-      and validate value ranges before writing output.
-      Four JSON files are produced: <code>energy_mix.json</code> (trade, dependency, production/consumption),
-      <code>energy_consumptions_by_sector.json</code> (sector breakdowns),
-      <code>eco_data.json</code> (emissions and carbon intensity),
-      and <code>energy_prices.json</code> (CPI indices and electricity prices).
+      No imputation is applied. Missing values remain, and are to be expected with this sort of data. They are handled and clearly indicated at the visualization level.
     </p>
 
     <h3>Limitations</h3>
     <ul>
-      <li>
-        <strong>Geographic scope</strong> &mdash; Trade and dependency data covers 41 EU/EEA countries only.
-        Global coverage (OWID, IEA) is available for production, consumption, and emissions metrics,
-        but not for bilateral trade flows.
-      </li>
-      <li>
-        <strong>Temporal coverage varies by sector</strong> &mdash; Household consumption data is available from 2010,
-        industry from 2017, and services and transport only from 2020.
-        Third-country dependency (ID3CF) is only available from 2010 onward.
-      </li>
-      <li>
-        <strong>No electricity dependency rate</strong> &mdash; Eurostat does not publish an overall import dependency
-        indicator for electricity. Cross-border electricity trade within the interconnected European grid
-        is treated as internal balancing rather than external dependency.
-        Only third-country electricity dependency is available.
-      </li>
-      <li>
-        <strong>Non-comparable trade units</strong> &mdash; Different energy types use different units:
-        thousand tonnes for coal, oil, and biofuels; terajoules for gas; gigawatt-hours for electricity.
-        Aggregate partner rankings sum these numeric values across types,
-        meaning gas (large TJ values) may dominate the overall ranking.
-      </li>
-      <li>
-        <strong>Dependency edge cases</strong> &mdash; Dependency values can be negative (for net exporters)
-        or exceed 100% (due to stock changes or re-exports). These are correct per Eurostat's formula
-        and are not clamped.
-      </li>
-      <li>
-        <strong>Missing countries</strong> &mdash; Kosovo (XK) has no official ISO code and is absent from OWID.
-        Liechtenstein (LI) is also not covered by OWID. These countries may lack production, consumption,
-        or emissions data.
-      </li>
-      <li>
-        <strong>Price data is index-based</strong> &mdash; Energy price series are CPI indices (rebased, not absolute prices),
-        suitable for tracking trends over time but not for comparing price levels across countries.
-        The exception is electricity prices, reported in US cents/kWh.
-      </li>
-      <li>
-        <strong>IEA data gaps</strong> &mdash; The energy efficiency indicator from Eurostat has approximately 88% missing values.
-        IEA sector data coverage varies by country and may not be available for all 41 EU/EEA countries.
-      </li>
+      <li>Trade/dependency covers 41 EU/EEA countries only. Global metrics (OWID, IEA) have broader coverage.</li>
+      <li>Eurostat does not publish overall electricity import dependency. Only third-country electricity dependency is available.</li>
+      <li>Kosovo (XK) and Liechtenstein (LI) lack OWID coverage.</li>
+      <li>Only the freely available Highlights Data from the IEA End-uses and Efficiency Indicators database was used, which has incomplete country coverage. EU countries are still included.</li>
     </ul>
   </section>
 </template>

@@ -40,6 +40,21 @@ const hasData = computed(() => {
         </p>
       </div>
     </div>
+    <div class="chart-meta">
+      <div class="meta-section">
+        <span class="meta-label">Source</span>
+        <ul class="meta-list">
+          <li>
+            <strong>IEA</strong>
+            <a href="https://www.iea.org/data-and-statistics/data-product/energy-efficiency-indicators-highlights" target="_blank" rel="noopener">
+              Energy End-Uses &amp; Efficiency Indicators
+            </a>
+            (sector-level consumption by end-use category).
+            Columns: <code>Country</code>, <code>End use</code>, <code>Product</code>.
+          </li>
+        </ul>
+      </div>
+    </div>
   </section>
 </template>
 

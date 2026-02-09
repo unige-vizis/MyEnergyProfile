@@ -86,6 +86,14 @@ const hasData = computed(() => {
         </p>
       </div>
     </div>
+    <div class="chart-meta">
+      <div class="meta-section">
+        <span class="meta-label">Source</span>
+        <ul class="meta-list">
+          <li>Same table as above.</li>
+        </ul>
+      </div>
+    </div>
   </section>
 </template>
 
