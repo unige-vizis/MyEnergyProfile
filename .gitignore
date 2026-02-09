@@ -14,6 +14,11 @@ data-processing/raw-data/**/*.xlsb
 data-processing/raw-data/**/*.tsv
 data-processing/raw-data/**/*.tsv.gz
 
+# Base data - large source files not for git
+data-processing/base-data/03_Eurostat/energy_balance/
+data-processing/base-data/05_Energy-Imports-Exports/energy_trade_eurostat/
+data-processing/base-data/05_Energy-Imports-Exports/import_dependency_eurostat/
+
 # Logs
 logs
 *.log
