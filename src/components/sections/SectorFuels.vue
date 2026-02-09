@@ -73,16 +73,30 @@ const hasData = computed(() => {
         />
       </div>
       <div class="text-container">
-        <!-- TODO - Petula -->
         <p>
-          High consumption values should be interpreted in context: differences between countries and years are often
-          driven by climate, infrastructure, economic activity, and access to energy services rather than individual
-          behavior alone.
+          This visualization shows how different sectors rely on different types of energy sources. Although the exact
+          shares change from country to country and over time, some broad patterns appear consistently across the
+          dataset.
         </p>
         <p>
-          This visualization shows which energy sources are most commonly used in each sector. Different sectors rely on
-          distinct energy carriers depending on their technical requirements: transport tends to depend on oil-based
-          fuels, while residential and service sectors use a higher share of electricity and heat.
+          <strong>Residential</strong> energy use is mixed. Households tend to combine several energy carriers, commonly
+          electricity, gas, biofuels, or district heat, depending on climate conditions, building types, and heating
+          technologies. In many countries electricity and gas form the core of household consumption.
+        </p>
+        <p>
+          <strong>Transport</strong> relies primarily on oil‑based fuels. Across almost all countries and years, road,
+          air, and freight transport are dominated by gasoline, diesel, jet fuel, and other oil products. Alternative
+          fuels such as electricity or gas are present but remain small compared to oil.
+        </p>
+        <p>
+          <strong>Services</strong> rely heavily on electricity. Hotels, offices, public buildings, and commercial
+          activities typically use electricity as their main energy source, with gas or heat sometimes contributing
+          depending on the country. Oil and coal appear only as small shares in most cases.
+        </p>
+        <p>
+          <strong>Industry</strong> uses a varied mix. Manufacturing and industrial processes draw on electricity, gas,
+          coal, bioenergy, and oil to different extents. This reflects the diverse technical needs of industrial
+          production, from high‑temperature heat to mechanical power.
         </p>
       </div>
     </div>

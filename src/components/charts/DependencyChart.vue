@@ -316,8 +316,7 @@ function renderChart() {
   const container = chartRef.value
   const containerWidth = container.clientWidth || 600
 
-  const barHeight = 20
-  const otherRowHeight = 10
+  const barHeight = 30
   const barGap = 4
   const groupGap = 24
   const maxWidth = Math.min(containerWidth, 565)
@@ -397,14 +396,39 @@ function renderChart() {
     .domain([0, scaleMax])
     .range([0, width])
 
-  // Color definitions
+  const y = d3.scaleBand()
+    .domain(chartData.value.map(d => d.name))
+    .range([0, height])
+    .padding(0.2)
+
+  // Draw 100% reference line if scale exceeds 100
+  if (scaleMax > 100) {
+    svg.append('line')
+      .attr('x1', x(100))
+      .attr('x2', x(100))
+      .attr('y1', 0)
+      .attr('y2', height)
+      .attr('stroke', '#666')
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', '4,2')
+
+    svg.append('text')
+      .attr('x', x(100))
+      .attr('y', -4)
+      .attr('text-anchor', 'middle')
+      .attr('fill', '#666')
+      .attr('font-size', '10px')
+      .text('100%')
+  }
+
+  // Color definitions - normal and softened versions for subcategories
   const colors = {
     third: { normal: '#c44536', soft: '#d4847a' },
     eu: { normal: '#e8a87c', soft: '#f0c9b0' },
     domestic: { normal: '#d9d9d9', soft: '#e8e8e8' },
     reserve: { normal: '#8b2500', soft: '#b86347' },
-    reserveEu: { normal: '#b86b3a', soft: '#d4a07a' },
-    exporter: { normal: '#4a90d9', soft: '#7ab3e8' }
+    noneu: { normal: '#333', soft: '#555' },
+    exporter: { normal: '#7b68ee', soft: '#a99cf3' }
   }
 
   // Define crosshatch pattern for non-EU marker
@@ -420,7 +444,7 @@ function renderChart() {
     .attr('y1', 0)
     .attr('x2', 0)
     .attr('y2', 4)
-    .attr('stroke', '#c44536')
+    .attr('stroke', colors['noneu'].normal)
     .attr('stroke-width', 2)
 
   // Draw 100% reference line if scale exceeds 100
@@ -547,11 +571,43 @@ function renderChart() {
       const overallPct = Math.max(0, rawOverall)
       const thirdCountriesPct = d.thirdCountries != null ? Math.max(0, d.thirdCountries) : null
 
-      // Common subcategory geometry
-      const barFullWidth = x(100)
-      const subcatShare = isSubcat ? Math.min(normalizedGae[i], 100) : 100
-      const barW = isSubcat ? barFullWidth * (subcatShare / 100) : null
-      const barXStart = isSubcat ? barFullWidth * (subcatXOffset[i] / 100) : 0
+      if (isNetExporter) {
+        // Net exporter: show full bar in purple
+        svg.append('rect')
+          .attr('class', 'bar-exporter')
+          .attr('x', barOffset)
+          .attr('y', yPos)
+          .attr('width', x(100) - barOffset)
+          .attr('height', barH)
+          .attr('fill', getColor('exporter'))
+
+        // Label inside bar showing "Net Exporter"
+        svg.append('text')
+          .attr('x', barOffset + (x(100) - barOffset) / 2)
+          .attr('y', yPos + barH / 2)
+          .attr('dy', '0.35em')
+          .attr('text-anchor', 'middle')
+          .attr('fill', '#fff')
+          .attr('font-size', '10px')
+          .attr('font-weight', '600')
+          .text('Net Exporter')
+
+        // Label showing negative percentage at end
+        svg.append('text')
+          .attr('x', x(100) + 4)
+          .attr('y', yPos + barH / 2)
+          .attr('dy', '0.35em')
+          .attr('text-anchor', 'start')
+          .attr('fill', isSubcat ? '#8a7fd4' : '#5a4fcf')
+          .attr('font-size', '10px')
+          .attr('font-weight', '700')
+          .text(`${rawOverall.toFixed(0)}%`)
+      } else {
+        // Normal case: import dependency >= 0
+        // Domestic only exists when overall is below 100%
+        const domesticPct = overallPct < 100 ? 100 - overallPct : 0
+        // Reserve draw (imports exceeding consumption) when overall > 100%
+        const reserveDrawPct = overallPct > 100 ? overallPct - 100 : 0
 
       if (isNetExporter) {
         if (isSubcat && barW != null && barW > 0) {
@@ -715,7 +771,7 @@ function renderChart() {
               .attr('y1', yPos)
               .attr('x2', x(clampedThirdPct))
               .attr('y2', yPos + barH)
-              .attr('stroke', '#8b2500')
+              .attr('stroke', getColor('noneu'))
               .attr('stroke-width', 2)
 
             if (nonEuWidth >= 35) {
@@ -724,8 +780,8 @@ function renderChart() {
                 .attr('y', yPos + barH / 2)
                 .attr('dy', '0.35em')
                 .attr('text-anchor', 'middle')
-                .attr('fill', '#8b2500')
-                .attr('font-size', '7px')
+                .attr('fill', getColor('noneu'))
+                .attr('font-size', '10px')
                 .attr('font-weight', '700')
                 .text('non-EU')
             }
@@ -742,8 +798,8 @@ function renderChart() {
           .attr('y', yPos + barH / 2)
           .attr('dy', '0.35em')
           .attr('text-anchor', 'start')
-          .attr('fill', overallPct > 100 ? (isSubcat ? '#b86347' : '#8b2500') : '#444')
-          .attr('font-size', '9px')
+          .attr('fill', overallPct > 100 ? (isSubcat ? '#b86347' : '#8b2500') : '#666')
+          .attr('font-size', '10px')
           .attr('font-weight', overallPct > 100 ? '700' : '500')
           .text(`${overallPct.toFixed(0)}%${overallPct > 100 ? ' (reserve draw)' : ''}`)
 
@@ -768,7 +824,7 @@ function renderChart() {
             .attr('dy', '0.35em')
             .attr('text-anchor', 'middle')
             .attr('fill', '#fff')
-            .attr('font-size', '9px')
+            .attr('font-size', '10px')
             .attr('font-weight', '700')
             .style('pointer-events', 'none')
             .text('!')
@@ -831,7 +887,7 @@ function renderChart() {
           .attr('dy', '0.35em')
           .attr('text-anchor', 'middle')
           .attr('fill', '#fff')
-          .attr('font-size', '9px')
+          .attr('font-size', '10px')
           .attr('font-weight', '700')
           .style('pointer-events', 'none')
           .text('!')
@@ -1032,4 +1088,18 @@ onUnmounted(() => {
   font-weight: 600;
 }
 
+.chart-legend {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  color: #666;
+}
 </style>

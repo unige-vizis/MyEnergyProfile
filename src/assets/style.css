@@ -10,7 +10,7 @@
   --text-color-red: #e53935;
   --text-color-gray: #666;
   --placeholder-color: #a4a4a4;
-  --border-hover-color: #becfb6;
+  --border-hover-color: #b8b086;
 
   --sidebar-width: 300px;
 }
@@ -107,6 +107,12 @@ main {
 .chart-header h3 {
   text-align: center;
   padding-bottom: 1rem;
+}
+
+.legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 3px;
 }
 
 .chart-header p {
@@ -340,6 +346,42 @@ code {
   background: #999;
 }
 
+.methodology-button {
+  margin-left: auto;
+  width: 42px;
+  height: 42px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--primary-color); /* ✅ weißer Kreis */
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 999px;
+  padding: 0;
+
+  color: rgba(0, 0, 0, 0.75);
+  cursor: pointer;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12); /* wie Sidebar-Icon */
+  transition:
+    transform 0.15s ease,
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.methodology-button:hover {
+  transform: translateY(-1px);
+  background: white;
+}
+
+/* aktiv (wenn /info): z.B. dunkler Kreis + weißes Icon */
+.methodology-button.active {
+  background: rgba(0, 0, 0, 0.25);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.25);
+}
+
 /* tablet-version */
 @media (max-width: 1024px) {
   .timeline-sidebar {
@@ -460,5 +502,13 @@ code {
   }
   .stat-cards-grid {
     display: grid !important;
+  }
+  .methodology-button {
+    display: none;
+  }
+  .footer-right {
+    margin-top: 1rem;
+    justify-content: space-between;
+    display: flex;
   }
 }

@@ -30,14 +30,14 @@
           </div>
         </template>
         <div class="text-container">
-          <h4 v-if="totalEmissionsPerCapita != null">
+          <h3 v-if="totalEmissionsPerCapita != null">
             Where are the
             <span class="highlight-value">{{ totalEmissionsPerCapita }} tCO&#x2082;</span>
             emissions in
             <span class="highlight-value">{{ store.selectedCountry?.name }}</span>
             emitted?
-          </h4>
-          <h4 v-else>Where are the emissions in your country emitted?</h4>
+          </h3>
+          <h3 v-else>Where are the emissions in your country emitted?</h3>
           <p>
             The chart below breaks down how much CO2 each person causes through four major sectors: residential energy
             use (heating, appliances), services (commercial buildings, offices), transport (cars, trucks), and industry
@@ -114,14 +114,14 @@
           </div>
         </template>
         <div class="text-container">
-          <h4 v-if="store.carbonIntensity?.latest_value != null">
+          <h3 v-if="store.carbonIntensity?.latest_value != null">
             What does a carbon intensity of
             <span class="highlight-value">{{ Math.round(store.carbonIntensity.latest_value) }} gCO&#x2082;/kWh</span>
             for
             <span class="highlight-value">{{ store.selectedCountry?.name }}</span>
             mean in practice?
-          </h4>
-          <h4 v-else>What does your grid intensity mean in practice?</h4>
+          </h3>
+          <h3 v-else>What does your grid intensity mean in practice?</h3>
           <p>
             Most people are familiar with electrification as a fundamental part of decarbonization, where processes
             directly reliant on fossil fuels, if they cannot be done without, are replaced by electric alternatives. The

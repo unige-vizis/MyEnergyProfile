@@ -6,10 +6,11 @@
   <div v-else class="chart-wrapper">
     <h3>Carbon Intensity of the Energy Grid - Europe Comparison</h3>
     <p>
-      Average CO2 emitted per kilowatt-hour of electricity generated from all sources, indicating how clean the power
-      grid is in terms of emissions. Heavy reliance on nuclear power contributes to low carbon intensity levels for
-      electricity, as in the case of France for example, but referring to it as "clean energy" remains a topic of
-      discussion.
+      Now lets look through the lens of carbon intensity, which relates electricity to carbon emissions. The chart below
+      shows the average CO2 emitted per kilowatt-hour of electricity generated from all sources, indicating how clean
+      the power grid is in terms of emissions. Heavy reliance on nuclear power contributes to low carbon intensity
+      levels for electricity, as in the case of France for example, but referring to it as "clean energy" remains a
+      topic of discussion.
     </p>
     <div class="chart-container scroll-container">
       <div v-if="thresholdLeft != null" class="threshold-label" :style="{ left: thresholdLeft + 'px' }">

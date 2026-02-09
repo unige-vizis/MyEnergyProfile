@@ -1,22 +1,20 @@
 <template>
   <div class="prices-focus-chart" ref="containerRef" style="width:100%;">
-    <div class="chart-header">
-      <div class="kpi">
-        <!-- show KPI for the currently selected series; do not fall back to the other series' value -->
-        <div v-if="focusedPoint && props.activeSeries === 'electricity'">
-          <h3 v-if="focusedPoint.electricity != null">
-            {{ focusedPoint.electricity }} <span class="unit">US¢/kWh</span>
-          </h3>
-          <h3 v-else>No electricity data for this year</h3>
-        </div>
-
-        <div v-else-if="focusedPoint && props.activeSeries === 'energy'">
-          <h3 v-if="mean(focusedPoint.CPI0450) != null">Energy CPI: {{ mean(focusedPoint.CPI0450).toFixed(1) }}</h3>
-          <h3 class="kpi-value" v-else>No CPI data</h3>
-        </div>
-
-        <div class="kpi-sub" v-if="focusedPoint">{{ props.focusYear || focusedPoint.year }}</div>
+    <div class="kpi">
+      <!-- show KPI for the currently selected series; do not fall back to the other series' value -->
+      <div v-if="focusedPoint && props.activeSeries === 'electricity'">
+        <h3 v-if="focusedPoint.electricity != null">
+          {{ focusedPoint.electricity }} <span class="unit">US¢/kWh</span>
+        </h3>
+        <h3 v-else>No electricity data for this year</h3>
       </div>
+
+      <div v-else-if="focusedPoint && props.activeSeries === 'energy'">
+        <h3 v-if="mean(focusedPoint.CPI0450) != null">Energy CPI: {{ mean(focusedPoint.CPI0450).toFixed(1) }}</h3>
+        <h3 class="kpi-value" v-else>No CPI data</h3>
+      </div>
+
+      <div class="kpi-sub" v-if="focusedPoint">{{ props.focusYear || focusedPoint.year }}</div>
     </div>
 
     <div class="chart-area" ref="chartRef" tabindex="0" role="img" :aria-label="ariaLabel"></div>
@@ -554,7 +552,7 @@ onMounted(() => {
     const rect = containerRef.value ? containerRef.value.getBoundingClientRect() : { width: 500, height: 500 }
     const size = Math.max(200, Math.min(rect.width, 500))
     svgWidth.value = size
-    svgHeight.value = size
+    svgHeight.value = size / 2
 
     // observe container resize
     const ro = new ResizeObserver(entries => {
@@ -562,7 +560,7 @@ onMounted(() => {
         const r = entry.contentRect
         const s = Math.max(200, Math.min(r.width, 500))
         svgWidth.value = s
-        svgHeight.value = s
+        svgHeight.value = s / 2
         nextTick(() => draw())
       }
     })
